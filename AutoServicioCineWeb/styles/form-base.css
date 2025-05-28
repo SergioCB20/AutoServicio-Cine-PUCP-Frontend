@@ -1,0 +1,210 @@
+/* form-base.css */
+
+.bold {
+    font-weight: bold;
+}
+
+.compra-entradas-container {
+    display: flex;
+    padding: 20px;
+    gap: 30px;
+    max-width: 1200px; /* Ajusta según necesites */
+    margin: 110px auto 0;
+}
+
+.left-section {
+    width: 200px;
+}
+
+.volver {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: var(--color-primario);
+}
+
+.volver svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 10px;
+    border-left: 2px solid #ccc;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #777;
+}
+
+.step.active {
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+.step .icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.right-section {
+    width: 300px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.detalle-compra h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--color-gris-oscuro);
+}
+
+.pelicula-detalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pelicula-detalle img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.cine-info h4 {
+    font-size: 16px;
+    color: var(--color-primario);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.cine-info p {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.fecha-hora {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.fecha-hora p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.fecha-hora span {
+    font-weight: bold;
+    color: var(--color-gris-oscuro);
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-gris-oscuro);
+    margin-bottom: 20px;
+}
+
+.botones-finales {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.botones-finales .button {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.botones-finales .button.primary {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.botones-finales .button.primary:hover {
+    background-color: #116a7a;
+}
+
+.botones-finales .button.secondary {
+    background-color: var(--color-gris-claro);
+    color: var(--color-gris-oscuro);
+    border: 1px solid var(--color-gris-borde);
+}
+
+.botones-finales .button.secondary:hover {
+    background-color: var(--color-gris-hover);
+}
+
+@media (max-width: 768px) {
+    .compra-entradas-container {
+        flex-direction: column;
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .left-section {
+        width: 100%;
+    }
+
+    .steps {
+        flex-direction: row;
+        border-left: none;
+        padding-left: 0;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .right-section {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .pelicula-detalle {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .pelicula-detalle img {
+        width: 100px;
+    }
+
+    .cine-info, .fecha-hora {
+        text-align: left;
+    }
+}

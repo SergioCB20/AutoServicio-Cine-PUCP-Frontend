@@ -1,0 +1,51 @@
+/* base.css */
+
+:root {
+  --color-gris-claro: #f2f2f2;
+  --color-gris-oscuro: #333333;
+  --color-blanco: #ffffff;
+  --color-primario: #15889b;
+  --color-rojo-transparente: rgba(220, 0, 0, 0.8);
+  --color-gris-medio: #555;
+  --color-gris-borde: #dcdcdc;
+  --color-gris-hover: #e0e0e0;
+  --color-azul-claro: aliceblue; /* Nuevo color */
+  --color-azul-secundario: #29c3dc; /* Nuevo color */
+  --color-azul-hover: #1aa3b5; /* Nuevo color */
+}
+
+/* Estilos base para todos los elementos */
+* {
+  box-sizing: border-box; /* Para que padding y border no afecten el ancho/alto */
+  margin: 0; /* Resetear márgenes por defecto */
+  padding: 0; /* Resetear paddings por defecto */
+}
+
+/* Estilos para el body */
+body {
+  background-color: var(--color-gris-claro);
+  color: var(--color-gris-oscuro);
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  min-height: 100vh;
+}
+
+/* Estilos para el contenedor principal */
+.container {
+  background-color: var(--color-blanco);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  position: relative;
+}
+
+form {
+    width:100vw;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}

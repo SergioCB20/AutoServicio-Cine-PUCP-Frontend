@@ -1,0 +1,190 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Form.master.cs" Inherits="AutoServicioCineWeb.Form" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder> - Cine Pucp</title>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/form-base.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-left">
+                    <div class="logo-navbar">
+                        <img src="./images/logo.png" alt="Logo del cine" class="logo" />
+                    </div>
+                    <div class="secciones-navbar">
+                        <span class="seccion-pagina active">Películas</span>
+                        <span class="seccion-pagina">Comida</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="cart-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                            />
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <div class="user-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                        </svg>
+                        <span>Sergio</span>
+                    </div>
+                    <div class="logout-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container compra-entradas-container">
+            <div class="left-section">
+                <div class="volver">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M10.828 12l4.95-4.95L14.14 5.64 9.192 10.59l-.002.003a.999.999 0 0 0 0 1.414l.002.003 4.948 4.95-1.328 1.328-4.95-4.95z"
+                        ></path>
+                    </svg>
+                    <span>Volver</span>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20 6h-4V4c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v2H2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-6 0h-4V4h4v2z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <span>Tickets</span>
+                    </div>
+                    <div class="step">
+                        <div class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 21h12.2L20 13M16 13h4M21 21H3"
+                                ></path>
+                            </svg>
+                        </div>
+                        <span>Butacas</span>
+                    </div>
+                    <div class="step">
+                        <div class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path
+                                    d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"
+                                ></path>
+                            </svg>
+                        </div>
+                        <span>Chocolatería</span>
+                    </div>
+                    <div class="step">
+                        <div class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect x="2" y="3" width="20" height="16" rx="2" ry="2"></rect>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                        </div>
+                        <span>Pago</span>
+                    </div>
+                </div>
+            </div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <div class="right-section">
+                <div class="detalle-compra">
+                    <h3>Detalle de la compra</h3>
+                    <div class="pelicula-detalle">
+                        <img
+                            src="../../images/thunderbolts.png"
+                            alt="Póster de la película"
+                        />
+                        <div class="fecha-hora">
+                            <p>Fecha</p>
+                            <span>18/05/25</span>
+                            <p>Hora</p>
+                            <span>3:20 PM</span>
+                        </div>
+                    </div>
+                    <div class="cantidad-entradas-resumen">
+                        <p class="bold">Cantidad y tipo de entradas</p>
+                        <span><asp:ContentPlaceHolder ID="TicketsSummary" runat="server"></asp:ContentPlaceHolder></span>
+                    </div>
+                    <div class="total">
+                        <p>Total</p>
+                        <span><asp:ContentPlaceHolder ID="TotalAmount" runat="server"></asp:ContentPlaceHolder></span>
+                    </div>
+                    <div class="botones-finales">
+                        <asp:ContentPlaceHolder ID="ActionButtons" runat="server">
+                            <a href="../butacas/index.html" class="button primary continuar">Continuar</a>
+                            <button class="button secondary cancelar">Cancelar compra</button>
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

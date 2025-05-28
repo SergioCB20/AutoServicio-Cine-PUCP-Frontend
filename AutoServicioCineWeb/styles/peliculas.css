@@ -1,0 +1,159 @@
+/* peliculas.css */
+
+.main-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  margin-top:110px;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-blanco);
+  border-radius: 8px;
+  border: 1px solid var(--color-gris-borde);
+  overflow: hidden;
+  width: 80%;
+  max-width: 600px;
+}
+
+.search-bar input[type="text"] {
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  flex-grow: 1;
+  outline: none;
+}
+
+.search-bar button {
+  background-color: var(--color-gris-claro);
+  color: var(--color-gris-oscuro);
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: var(--color-gris-hover);
+}
+
+.search-bar button .hero-icon.search-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 0.5fr));
+  gap: 15px;
+}
+
+.pelicula {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  position: relative; /* Necesario para posicionar el botón absolutamente */
+}
+
+.pelicula:hover {
+  transform: scale(1.03);
+}
+
+.pelicula-info {
+  position: relative; /* Para que el botón se posicione dentro */
+  height: 100%;
+}
+
+.pelicula img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.boton-comprar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-rojo-transparente);
+  color: var(--color-blanco);
+  border: none;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0; /* Inicialmente oculto */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.pelicula:hover .boton-comprar {
+  opacity: 1; /* Se muestra al hacer hover en la película */
+}
+
+/* Media Queries para hacerlo responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .navbar-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .secciones-navbar {
+    gap: 20px;
+  }
+
+  .peliculas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .search-bar-container {
+    padding: 0 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-bar input[type="text"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .search-bar button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .hero-icon {
+    width: 20px;
+    height: 20px;
+  }
+}

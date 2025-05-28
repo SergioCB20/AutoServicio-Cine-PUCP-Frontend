@@ -1,0 +1,108 @@
+/* form-butacas.css */
+
+.middle-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    background-color: var(--color-blanco);
+}
+
+.middle-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--color-gris-oscuro);
+    font-weight: bold;
+    text-align: center;
+}
+
+.leyenda {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.leyenda span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.leyenda .disponible {
+    background-color: #ddd;
+}
+
+.leyenda .ocupado {
+    background-color: #dc3545;
+}
+
+.leyenda .seleccionado {
+    background-color: var(--color-primario);
+}
+
+.sala {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.pantalla {
+    background-color: #333;
+    color: var(--color-blanco);
+    padding: 10px 20px;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.filas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fila {
+    display: flex;
+    gap: 5px;
+}
+
+.butaca {
+    width: 20px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.butaca.ocupado {
+    background-color: #dc3545;
+    cursor: not-allowed;
+}
+
+.butaca.seleccionado {
+    background-color: var(--color-primario);
+}
+
+.butacas-seleccionadas {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.butacas-seleccionadas span {
+    font-weight: bold;
+    color: var(--color-primario);
+}

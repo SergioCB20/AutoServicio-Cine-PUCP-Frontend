@@ -1,0 +1,134 @@
+/* hero.css */
+
+.hero {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.imagen-principal {
+  flex: 1;
+}
+
+.imagen-principal img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+.logo img {
+  max-width: 120px;
+  height: auto;
+}
+
+.titulo-pregunta {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.opciones {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 30px 0 ;
+}
+
+.opcion-1,
+.opcion-2 {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  background-color: var(--color-azul-claro); /* Reemplazado */
+}
+
+.opcion-1:hover,
+.opcion-2:hover {
+  transform: scale(1.05);
+}
+
+.opcion-1 img,
+.opcion-2 img {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.botones-acceso {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: 15px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.boton-sesion {
+    background-color: var(--color-azul-secundario); /* Reemplazado */
+    color: var(--color-blanco);
+}
+
+.boton-invitado {
+    background-color: var(--color-gris-claro);
+    color: var(--color-gris-oscuro);
+}
+
+.boton-sesion,
+.boton-invitado {
+  border: none;
+  border-radius: 5px;
+  padding: 15px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-sesion:hover{
+    background-color: var(--color-azul-hover); /* Reemplazado */
+}
+
+.boton-invitado:hover{
+    background-color: var(--color-gris-hover);
+}
+
+@media (max-width: 768px) {
+  main.container {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .imagen-principal {
+    order: -1;
+    margin-bottom: 30px;
+  }
+
+  .hero {
+    padding: 20px;
+  }
+
+  .opciones {
+    justify-content: center;
+  }
+
+  .opcion-1 img,
+  .opcion-2 img {
+    width: 120px;
+  }
+
+  .botones-acceso {
+    width: 90%;
+    max-width: none;
+  }
+}

@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="AutoServicioCineWeb.Admin" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine Pucp - Panel de Control - <asp:ContentPlaceHolder ID="PageTitle" runat="server"></asp:ContentPlaceHolder></title>
+    <link rel="stylesheet" href="./styles/admin.css">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="admin-container">
+            <aside class="sidebar">
+                <div class="logo-container">
+                    <img src="./images/logo.png" class="logo"/>
+                    <span>Administration</span>
+                </div>
+                <ul>
+                    <li><a href="~/Admin/GestionAsientos.aspx">Gestión de Asientos</a></li>
+                    <li><a href="~/Admin/GestionSalas.aspx">Gestión de Salas</a></li>
+                    <li><a href="~/Admin/GestionCupones.aspx">Gestión de Cupones</a></li>
+                    <li><a href="~/Admin/GestionUsuarios.aspx">Gestión de Usuarios</a></li>
+                </ul>
+            </aside>
+            <main class="main-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+            </main>
+        </div>
+    </form>
+</body>
+</html>
