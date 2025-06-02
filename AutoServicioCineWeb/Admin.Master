@@ -11,6 +11,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Scripts>
+            </Scripts>
+        </asp:ScriptManager>
         <div class="admin-container">
             <aside class="sidebar">
                 <div class="logo-container">

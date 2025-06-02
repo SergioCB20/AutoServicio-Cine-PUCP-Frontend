@@ -6,20 +6,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seleccionar Película - Autoservicio Cine</title>
-    <%-- Rutas de CSS: Usamos ResolveUrl("~/") para asegurar que funcionen desde la raíz de la aplicación --%>
     <link rel="stylesheet" href="<%= ResolveUrl("~/styles/base.css") %>" />
     <link rel="stylesheet" href="<%= ResolveUrl("~/styles/navbar.css") %>" />
     <link rel="stylesheet" href="<%= ResolveUrl("~/styles/peliculas.css") %>" />
 </head>
 <body>
-    <%-- La etiqueta <form runat="server"> es NECESARIA en ASP.NET Web Forms si quieres usar controles de servidor o manejar eventos.
-         Envuelve todo el contenido que pueda necesitar procesamiento del lado del servidor. --%>
     <form id="form1" runat="server">
         <header class="header">
             <nav class="navbar">
                 <div class="navbar-left">
                     <div class="logo-navbar">
-                        <%-- Ruta del logo en la Master Page --%>
                         <img src="<%= ResolveUrl("~/images/logo.png") %>" alt="Logo del cine" />
                     </div>
                     <div class="secciones-navbar">
@@ -97,54 +93,37 @@
                     </div>
                 </div>
                 <section class="peliculas-grid">
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/minecraft-pelicula.png") %>"
-                                alt="Póster de minecraft-pelicula" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/ochi-pelicula.png") %>"
-                                alt="Póster de ochi-pelicula" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/thunderbolts.png") %>"
-                                alt="Póster de thunderbolts" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/destino-final-pelicula.png") %>"
-                                alt="Póster de destino-final-pelicula" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/armagedon-pelicula.png") %>"
-                                alt="Póster de armagedon-pelicula" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="pelicula">
-                        <div class="pelicula-info">
-                            <img
-                                src="<%= ResolveUrl("~/images/soltera-casada-pelicula.png") %>"
-                                alt="Póster de soltera-casada-pelicula" />
-                            <button class="boton-comprar">Comprar</button>
-                        </div>
-                    </div>
+                    <%-- REPEATER PARA MOSTRAR LAS PELÍCULAS DINÁMICAMENTE --%>
+                    <asp:Repeater ID="rptPeliculas" runat="server">
+                        <ItemTemplate>
+                            <div class="pelicula">
+                                <div class="pelicula-info">
+                                    <%-- Muestra la imagen de la película --%>
+                                    <img src='<%# Eval("imagenUrl") %>' alt='<%# Eval("tituloEs") %>' />
+                                    <%-- Botón Comprar, podrías pasar el ID de la película como CommandArgument --%>
+                                    <asp:Button ID="btnComprar" runat="server" CssClass="boton-comprar" Text="Comprar"
+                                        CommandName="Comprar" CommandArgument='<%# Eval("peliculaId") %>' OnClick="btnComprar_Click" />
+                                </div>
+                                <%-- Opcional: Mostrar el título de la película u otra info --%>
+                                <div class="pelicula-titulo">
+                                    <h3><%# Eval("tituloEs") %></h3>
+                                    <p><%# Eval("duracionMin") %> min</p>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                        <SeparatorTemplate>
+                            <%-- No se necesita separador visual para una cuadrícula, pero puedes poner un <br /> si quieres --%>
+                        </SeparatorTemplate>
+                        <FooterTemplate>
+                            <%-- Opcional: Mostrar un mensaje si no hay películas --%>
+                           <asp:Literal ID="litNoPeliculas" runat="server" Text="No hay películas disponibles." Visible="false"></asp:Literal>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    <%-- FIN DEL REPEATER --%>
+
+                    <%-- Aquí podrías añadir un Literal para mensajes de error si los hubiera --%>
+                    <asp:Literal ID="litMensaje" runat="server"></asp:Literal>
+
                 </section>
             </main>
         </div>

@@ -50,6 +50,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -100,8 +102,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Butacas.aspx" />
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.actualizarPeliculaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.buscarPeliculaPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.eliminarPeliculaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.listarPeliculasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.pelicula.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.registrarPeliculaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\PeliculaWebService\configuration91.svcinfo" />
+    <None Include="Connected Services\PeliculaWebService\configuration.svcinfo" />
+    <None Include="Connected Services\PeliculaWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="GestionCupones.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="GestionPeliculas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Admin.Master" />
     <Content Include="Form.Master" />
@@ -115,6 +142,10 @@
     <Content Include="images\soltera-casada-pelicula.webp" />
     <Content Include="images\thunderbolts.webp" />
     <Content Include="images\ticket-inicio.webp" />
+    <None Include="Connected Services\PeliculaWebService\PeliculaWS.wsdl" />
+    <None Include="Connected Services\PeliculaWebService\PeliculaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Inicio.aspx" />
     <Content Include="Peliculas.aspx" />
@@ -172,6 +203,11 @@
     <Compile Include="Butacas.aspx.designer.cs">
       <DependentUpon>Butacas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PeliculaWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Form.Master.cs">
       <DependentUpon>Form.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -188,6 +224,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="GestionPeliculas.aspx.cs">
+      <DependentUpon>GestionPeliculas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionPeliculas.aspx.designer.cs">
+      <DependentUpon>GestionPeliculas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +277,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\PeliculaWebService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
