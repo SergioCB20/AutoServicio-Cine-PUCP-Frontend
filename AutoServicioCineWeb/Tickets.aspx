@@ -28,11 +28,11 @@
                     <span>ADULTO</span>
                 </div>
                 <div class="tarifa-precio">
-                    <span>S/ 8.50</span>
+                    <span id="precioAdulto">S/ 8.50</span>
                     <div class="cantidad-selector">
-                        <button class="cantidad-button minus">-</button>
-                        <span class="cantidad">0</span>
-                        <button class="cantidad-button plus">+</button>
+                        <button class="cantidad-button minus" type="button" onclick="decrementar('adulto')">-</button>
+                        <span id="CantidadAdulto" class="cantidad">0</span>
+                        <button class="cantidad-button plus" type="button" onclick="incrementar('adulto')">+</button>
                     </div>
                 </div>
             </div>
@@ -46,11 +46,11 @@
                     <span>INFANTIL DE 2-8</span>
                 </div>
                 <div class="tarifa-precio">
-                    <span>S/ 7.00</span>
+                    <span id="precioInfantil">S/ 7.00</span>
                     <div class="cantidad-selector">
-                        <button class="cantidad-button minus">-</button>
-                        <span class="cantidad">0</span>
-                        <button class="cantidad-button plus">+</button>
+                        <button class="cantidad-button minus" type="button" onclick="decrementar('infantil')">-</button>
+                        <span id="CantidadInfantil" class="cantidad">0</span>
+                        <button class="cantidad-button plus" type="button" onclick="incrementar('infantil')">+</button>
                     </div>
                 </div>
             </div>
@@ -64,11 +64,11 @@
                     <span>AD. MAYOR +60</span>
                 </div>
                 <div class="tarifa-precio">
-                    <span>S/ 7.00</span>
+                    <span id="precioMayor">S/ 7.00</span>
                     <div class="cantidad-selector">
-                        <button class="cantidad-button minus">-</button>
-                        <span class="cantidad">0</span>
-                        <button class="cantidad-button plus">+</button>
+                        <button type="button" class="cantidad-button" onclick="decrementar('mayor')">-</button>
+                        <span id="CantidadMayor" class="cantidad">0</span>
+                        <button type="button" class="cantidad-button" onclick="incrementar('mayor')">+</button>
                     </div>
                 </div>
             </div>
@@ -76,12 +76,79 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="TicketsSummary" runat="server">
-    <%-- Este contenido se llenaría dinámicamente con la cantidad de entradas seleccionadas --%>
+    <p id="entradasAdultoTexto"></p>
+    <p id="entradasInfantilTexto"></p>
+    <p id="entradasMayorTexto"></p>
+    <asp:HiddenField ID="hfEntradasAdulto" runat="server" />
+    <asp:HiddenField ID="hfEntradasInfantil" runat="server" />
+    <asp:HiddenField ID="hfEntradasMayor" runat="server" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="TotalAmount" runat="server">
-    S/ 0.00
+    <asp:HiddenField ID="hfTotal" runat="server" />
+    <span id="totalResumen">S/ 0.00</span>
+    <script type="text/javascript">
+        let total = 0.00;
+        let adulto = 0.00;
+        let infantil = 0.00;
+        let mayor = 0.00;
+        let cadenaMayor = " ";
+        let cadenaInfantil = " ";
+        let cadenaAdulto = " ";
+        function incrementar(tipoTicket) {
+            if (tipoTicket === "mayor") {
+                mayor += 1;
+                document.getElementById("CantidadMayor").textContent = mayor;
+            }
+            if (tipoTicket === "adulto") {
+                adulto += 1;
+                document.getElementById("CantidadAdulto").textContent = adulto;
+            }
+            if (tipoTicket === "infantil") {
+                infantil += 1;
+                document.getElementById("CantidadInfantil").textContent = infantil;
+            }
+            actualizarDatos();
+        }
+
+        function decrementar(tipoTicket) {
+            if (tipoTicket === "mayor" && mayor>0) {
+                mayor -= 1;
+                document.getElementById("CantidadMayor").textContent = mayor;
+            }
+            if (tipoTicket === "adulto" && adulto>0) {
+                adulto -= 1;
+                document.getElementById("CantidadAdulto").textContent = adulto;
+            }
+            if (tipoTicket === "infantil" && infantil>0) {
+                infantil -= 1;
+                document.getElementById("CantidadInfantil").textContent = infantil;
+            }
+            actualizarDatos();
+        }
+
+        function actualizarDatos() {
+            if (mayor == 1) { cadenaMayor = "1 Adulto Mayor" }
+            if (mayor == 0) { cadenaMayor = "" }
+            if (mayor > 1) { cadenaMayor = mayor + " Adultos Mayores" }
+            if (infantil == 1) { cadenaInfantil = "1 Infantil" }
+            if (infantil == 0) { cadenaInfantil = "" }
+            if (infantil > 1) { cadenaInfantil = infantil + " Infantiles" }
+            if (adulto == 1) { cadenaAdulto = "1 Adulto" }
+            if (adulto == 0) { cadenaAdulto = "" }
+            if (adulto > 1) { cadenaAdulto = adulto + " Adultos" }
+            total = mayor * 7.00 + infantil * 7.00 + adulto * 8.50;
+            document.getElementById("entradasAdultoTexto").textContent = cadenaAdulto;
+            document.getElementById("entradasInfantilTexto").textContent = cadenaInfantil;
+            document.getElementById("entradasMayorTexto").textContent = cadenaMayor;
+            document.getElementById('<%= hfEntradasAdulto.ClientID %>').value = cadenaAdulto;
+            document.getElementById('<%= hfEntradasInfantil.ClientID %>').value = cadenaInfantil;
+            document.getElementById('<%= hfEntradasMayor.ClientID %>').value = cadenaMayor;
+            document.getElementById("totalResumen").textContent = "S/ " + total.toFixed(2);
+            document.getElementById('<%= hfTotal.ClientID %>').value = "S/ " + total.toFixed(2);
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
-    <a href="Butacas.aspx" class="button primary continuar">Continuar</a>
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
     <button class="button secondary cancelar">Cancelar compra</button>
 </asp:Content>

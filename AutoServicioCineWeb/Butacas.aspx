@@ -23,11 +23,12 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="TicketsSummary" runat="server">
-    <span>2 Adultos</span>
-    <span>1 Infantil</span>
+    <p id="entradasAdulto" runat="server"></p>
+    <p id="entradasInfantil" runat="server"></p>
+    <p id="entradasMayor" runat="server"></p>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="TotalAmount" runat="server">
-    S/ 0.00
+    <span id="totalText" runat="server"></span>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
     <a href="../chocolateria/index.html" class="button primary continuar">Continuar</a>
@@ -37,10 +38,8 @@
         // o ser referenciado desde un archivo .js externo.
         // Para ASP.NET, este script aún sería de lado del cliente.
         const salaDiv = document.querySelector('.sala .filas');
-        const cantidadEntradas = 8; // Ejemplo: Obtener del paso anterior
+        const cantidadEntradas = 8;
         let butacasSeleccionadas = [];
-        const butacasSeleccionadasSpan = document.querySelector('.butacas-seleccionadas span');
-        const totalSpan = document.querySelector('.total span');
 
         function generarSala(filas = 10, columnas = 12) {
             for (let i = 0; i < filas; i++) {
@@ -79,18 +78,9 @@
                 } else {
                     alert(`Solo puedes seleccionar ${cantidadEntradas} butacas.`);
                 }
-                actualizarResumen();
             }
         }
 
-        function actualizarResumen() {
-            if (butacasSeleccionadasSpan) { // Verificar si el elemento existe
-                butacasSeleccionadasSpan.textContent = butacasSeleccionadas.join(', ');
-            }
-            if (totalSpan) { // Verificar si el elemento existe
-                totalSpan.textContent = `S/ ${cantidadEntradas * 8.50}`; // Ejemplo de precio único
-            }
-        }
 
         generarSala();
     </script>

@@ -11,7 +11,17 @@ namespace AutoServicioCineWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                var resumen = Session["ResumenCompra"] as ResumenCompra;
+                if (resumen != null)
+                {
+                    entradasAdulto.InnerText = resumen.AdultoTicket;
+                    entradasInfantil.InnerText = resumen.InfantilTicket;
+                    entradasMayor.InnerText = resumen.MayorTicket;
+                    totalText.InnerText = resumen.TotalTicket;
+                }
+            }
         }
     }
 }
