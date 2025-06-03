@@ -170,11 +170,28 @@
                     </div>
                     <div class="cantidad-entradas-resumen">
                         <p class="bold">Cantidad y tipo de entradas</p>
-                        <span><asp:ContentPlaceHolder ID="TicketsSummary" runat="server"></asp:ContentPlaceHolder></span>
+                        <asp:ContentPlaceHolder ID="TicketsSummary" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <div id="resumenCompra">
+                            <!-- Campos visibles que muestran el texto -->
+                            <p id="entradasAdultoTexto" runat="server" ClientIDMode="Static"></p>
+                            <p id="entradasInfantilTexto" runat="server" ClientIDMode="Static"></p>
+                            <p id="entradasMayorTexto" runat="server" ClientIDMode="Static"></p>
+    
+                            <!-- Campos ocultos para pasarlos al servidor -->
+                            <asp:HiddenField ID="hfEntradasAdulto" runat="server" ClientIDMode="Static"/>
+                            <asp:HiddenField ID="hfEntradasInfantil" runat="server" ClientIDMode="Static"/>
+                            <asp:HiddenField ID="hfEntradasMayor" runat="server" ClientIDMode="Static"/>
+                        </div>
                     </div>
                     <div class="total">
                         <p>Total</p>
-                        <span><asp:ContentPlaceHolder ID="TotalAmount" runat="server"></asp:ContentPlaceHolder></span>
+                        <span><asp:ContentPlaceHolder ID="TotalAmount" runat="server">
+                              </asp:ContentPlaceHolder></span>
+                            <!-- Campo visible que muestran el texto -->
+                            <span id="totalResumen" runat="server" ClientIDMode="Static">S/ 0.00</span>
+                            <!-- Campo oculto para pasarlo al servidor -->
+                            <asp:HiddenField ID="hfTotal" runat="server" ClientIDMode="Static"/>
                     </div>
                     <div class="botones-finales">
                         <asp:ContentPlaceHolder ID="ActionButtons" runat="server">
@@ -186,5 +203,6 @@
             </div>
         </div>
     </form>
+    <asp:ContentPlaceHolder ID="Script" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

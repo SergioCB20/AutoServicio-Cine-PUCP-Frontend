@@ -75,17 +75,11 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="TicketsSummary" runat="server">
-    <p id="entradasAdultoTexto"></p>
-    <p id="entradasInfantilTexto"></p>
-    <p id="entradasMayorTexto"></p>
-    <asp:HiddenField ID="hfEntradasAdulto" runat="server" />
-    <asp:HiddenField ID="hfEntradasInfantil" runat="server" />
-    <asp:HiddenField ID="hfEntradasMayor" runat="server" />
+<asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
+    <button class="button secondary cancelar">Cancelar compra</button>
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="TotalAmount" runat="server">
-    <asp:HiddenField ID="hfTotal" runat="server" />
-    <span id="totalResumen">S/ 0.00</span>
+<asp:Content ID="Content7" ContentPlaceHolderID="Script" runat="server">
     <script type="text/javascript">
         let total = 0.00;
         let adulto = 0.00;
@@ -111,15 +105,15 @@
         }
 
         function decrementar(tipoTicket) {
-            if (tipoTicket === "mayor" && mayor>0) {
+            if (tipoTicket === "mayor" && mayor > 0) {
                 mayor -= 1;
                 document.getElementById("CantidadMayor").textContent = mayor;
             }
-            if (tipoTicket === "adulto" && adulto>0) {
+            if (tipoTicket === "adulto" && adulto > 0) {
                 adulto -= 1;
                 document.getElementById("CantidadAdulto").textContent = adulto;
             }
-            if (tipoTicket === "infantil" && infantil>0) {
+            if (tipoTicket === "infantil" && infantil > 0) {
                 infantil -= 1;
                 document.getElementById("CantidadInfantil").textContent = infantil;
             }
@@ -140,15 +134,11 @@
             document.getElementById("entradasAdultoTexto").textContent = cadenaAdulto;
             document.getElementById("entradasInfantilTexto").textContent = cadenaInfantil;
             document.getElementById("entradasMayorTexto").textContent = cadenaMayor;
-            document.getElementById('<%= hfEntradasAdulto.ClientID %>').value = cadenaAdulto;
-            document.getElementById('<%= hfEntradasInfantil.ClientID %>').value = cadenaInfantil;
-            document.getElementById('<%= hfEntradasMayor.ClientID %>').value = cadenaMayor;
+            document.getElementById("hfEntradasAdulto").value = cadenaAdulto;
+            document.getElementById("hfEntradasInfantil").value = cadenaInfantil;
+            document.getElementById("hfEntradasMayor").value = cadenaMayor;
             document.getElementById("totalResumen").textContent = "S/ " + total.toFixed(2);
-            document.getElementById('<%= hfTotal.ClientID %>').value = "S/ " + total.toFixed(2);
+            document.getElementById("hfTotal").value = "S/ " + total.toFixed(2);
         }
     </script>
-</asp:Content>
-<asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
-    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
-    <button class="button secondary cancelar">Cancelar compra</button>
-</asp:Content>
+    </asp:Content>

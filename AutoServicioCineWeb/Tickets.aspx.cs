@@ -24,12 +24,18 @@ namespace AutoServicioCineWeb
 
         protected void btnContinuar_Click(object sender, EventArgs e)
         {
+            //Esta parte es para enviar los valores que fueron modificados a la siguiente vista (Butacas.aspx)
+            HiddenField hfAdulto = (HiddenField)Master.FindControl("hfEntradasAdulto");
+            HiddenField hfInfantil = (HiddenField)Master.FindControl("hfEntradasInfantil");
+            HiddenField hfMayor = (HiddenField)Master.FindControl("hfEntradasMayor");
+            HiddenField hfTotal = (HiddenField)Master.FindControl("hfTotal");
+
             var resumen = new ResumenCompra
             {
-                AdultoTicket = hfEntradasAdulto.Value,
-                InfantilTicket = hfEntradasInfantil.Value,
-                MayorTicket = hfEntradasMayor.Value,
-                TotalTicket = hfTotal.Value,
+                AdultoTicket = hfAdulto.Value,
+                InfantilTicket = hfInfantil.Value,
+                MayorTicket = hfMayor.Value,
+                TotalTicket = hfTotal.Value
             };
 
             Session["ResumenCompra"] = resumen;

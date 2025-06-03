@@ -60,6 +60,60 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.ContentPlaceHolder TicketsSummary;
 
         /// <summary>
+        /// Control entradasAdultoTexto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl entradasAdultoTexto;
+
+        /// <summary>
+        /// Control entradasInfantilTexto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl entradasInfantilTexto;
+
+        /// <summary>
+        /// Control entradasMayorTexto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl entradasMayorTexto;
+
+        /// <summary>
+        /// Control hfEntradasAdulto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEntradasAdulto;
+
+        /// <summary>
+        /// Control hfEntradasInfantil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEntradasInfantil;
+
+        /// <summary>
+        /// Control hfEntradasMayor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEntradasMayor;
+
+        /// <summary>
         /// Control TotalAmount.
         /// </summary>
         /// <remarks>
@@ -69,6 +123,24 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.ContentPlaceHolder TotalAmount;
 
         /// <summary>
+        /// Control totalResumen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl totalResumen;
+
+        /// <summary>
+        /// Control hfTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTotal;
+
+        /// <summary>
         /// Control ActionButtons.
         /// </summary>
         /// <remarks>
@@ -76,5 +148,14 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ActionButtons;
+
+        /// <summary>
+        /// Control Script.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Script;
     }
 }

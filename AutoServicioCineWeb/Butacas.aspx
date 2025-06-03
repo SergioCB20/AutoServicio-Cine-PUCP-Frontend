@@ -22,14 +22,6 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="TicketsSummary" runat="server">
-    <p id="entradasAdulto" runat="server"></p>
-    <p id="entradasInfantil" runat="server"></p>
-    <p id="entradasMayor" runat="server"></p>
-</asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="TotalAmount" runat="server">
-    <span id="totalText" runat="server"></span>
-</asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
     <a href="../chocolateria/index.html" class="button primary continuar">Continuar</a>
     <button class="button secondary cancelar">Cancelar compra</button>

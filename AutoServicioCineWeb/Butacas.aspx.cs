@@ -13,13 +13,18 @@ namespace AutoServicioCineWeb
         {
             if (!IsPostBack)
             {
-                var resumen = Session["ResumenCompra"] as ResumenCompra;
+                var resumen = Session["ResumenCompra"] as ResumenCompra; //Carga los valores que vinieron de la vista Tickets
                 if (resumen != null)
                 {
-                    entradasAdulto.InnerText = resumen.AdultoTicket;
-                    entradasInfantil.InnerText = resumen.InfantilTicket;
-                    entradasMayor.InnerText = resumen.MayorTicket;
-                    totalText.InnerText = resumen.TotalTicket;
+                    var master = this.Master as Form; //Para usar el texto que está definido en el Form.Master
+
+                    if (master != null)
+                    {
+                        master.EntradasAdultoTexto.InnerText = resumen.AdultoTicket;
+                        master.EntradasInfantilTexto.InnerText = resumen.InfantilTicket;
+                        master.EntradasMayorTexto.InnerText = resumen.MayorTicket;
+                        master.TotalResumen.InnerText = resumen.TotalTicket;
+                    }
                 }
             }
         }
