@@ -103,55 +103,86 @@
   <ItemGroup>
     <Content Include="Butacas.aspx" />
     <Content Include="Comida.aspx" />
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.actualizaComidaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.buscarComidaPorIdResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarPeliculaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.listarComidasResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarProductoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.producto.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarSalaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.registrarComidaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.eliminarComidaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ComidaWS\configuration91.svcinfo" />
-    <None Include="Connected Services\ComidaWS\configuration.svcinfo" />
-    <None Include="Connected Services\ComidaWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.actualizarPeliculaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.buscarPeliculaPorIdResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.buscarSalaPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.eliminarPeliculaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.comboItem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.listarPeliculasResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarComboItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.pelicula.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.registrarPeliculaResponse.datasource">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarProductoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ComidaWS\ComidaWS.wsdl" />
-    <None Include="Connected Services\ComidaWS\ComidaWS.xsd">
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarComboItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarProductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.pelicula.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.producto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarComboItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarPeliculaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarSalaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.sala.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\AutoservicioCineWS\ProductoWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PeliculaWebService\configuration91.svcinfo" />
-    <None Include="Connected Services\PeliculaWebService\configuration.svcinfo" />
-    <None Include="Connected Services\PeliculaWebService\Reference.svcmap">
+    <None Include="Connected Services\AutoservicioCineWS\SalaWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\servicios.disco" />
+    <None Include="Connected Services\AutoservicioCineWS\configuration91.svcinfo" />
+    <None Include="Connected Services\AutoservicioCineWS\configuration.svcinfo" />
+    <None Include="Connected Services\AutoservicioCineWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -172,8 +203,16 @@
     <Content Include="images\soltera-casada-pelicula.webp" />
     <Content Include="images\thunderbolts.webp" />
     <Content Include="images\ticket-inicio.webp" />
-    <None Include="Connected Services\PeliculaWebService\PeliculaWS.wsdl" />
-    <None Include="Connected Services\PeliculaWebService\PeliculaWS.xsd">
+    <None Include="Connected Services\AutoservicioCineWS\ComboItemWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\ComboItemWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\PeliculaWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\PeliculaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\ProductoWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\SalaWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -210,6 +249,7 @@
     <Content Include="styles\form-base.css" />
     <Content Include="styles\form-butacas.css" />
     <Content Include="styles\form-tickets.css" />
+    <Content Include="styles\gestionPeliculas.css" />
     <Content Include="styles\inicio.css" />
     <Content Include="styles\navbar.css" />
     <Content Include="styles\peliculas.css" />
@@ -241,12 +281,7 @@
     <Compile Include="Comida.aspx.designer.cs">
       <DependentUpon>Comida.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ComidaWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\PeliculaWebService\Reference.cs">
+    <Compile Include="Connected Services\AutoservicioCineWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -331,8 +366,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ComidaWS\" />
-    <WCFMetadataStorage Include="Connected Services\PeliculaWebService\" />
+    <WCFMetadataStorage Include="Connected Services\AutoservicioCineWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

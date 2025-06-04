@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AutoServicioCineWeb.ComidaWS; // Make sure this namespace is correct for your service reference
+using AutoServicioCineWeb.AutoservicioCineWS; // Make sure this namespace is correct for your service reference
 
 namespace AutoServicioCineWeb
 {
     public partial class GestionComidas : System.Web.UI.Page
     {
         // Declare the SOAP client proxy
-        private readonly ComidaWSClient comidaServiceClient;
+        private readonly ProductoWSClient comidaServiceClient;
 
         public GestionComidas()
         {
             // Initialize the SOAP client
-            comidaServiceClient = new ComidaWSClient();
+            comidaServiceClient = new ProductoWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace AutoServicioCineWeb
             try
             {
                 // Call the SOAP service to get the comida details
-                producto producto = comidaServiceClient.buscarComidaPorId(comidaId);
+                producto producto = comidaServiceClient.buscarProductoPorId(comidaId);
                 if (producto != null)
                 {
                     txtNombre.Text = producto.nombre;
@@ -98,7 +98,7 @@ namespace AutoServicioCineWeb
             try
             {
                 // Call the SOAP service to get the list of comidas
-                List<producto> productos = comidaServiceClient.listarComidas().ToList();
+                List<producto> productos = comidaServiceClient.listarProductos().ToList();
                 gvComidas.DataSource = productos;
                 gvComidas.DataBind();
             }
