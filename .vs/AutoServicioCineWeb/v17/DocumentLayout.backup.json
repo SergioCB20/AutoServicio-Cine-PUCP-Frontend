@@ -74,6 +74,31 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GestionPeliculas.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "ToolTip": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA+wBwAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T04:23:16.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "gestionPeliculas.css",
+              "DocumentMoniker": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "ToolTip": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "RelativeToolTip": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "ViewState": "AgIAAD4CAAAAAAAAAAAswFcCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-04T04:51:55.651Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "gestionPeliculas.css",
               "DocumentMoniker": "C:\\Users\\Amira\\Documents\\2025.1\\PROG3\\TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
@@ -92,7 +117,7 @@
               "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
               "ToolTip": "C:\\Users\\Amira\\Documents\\2025.1\\PROG3\\TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
               "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAgwBAAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T06:32:23.421Z",
               "EditorCaption": ""
