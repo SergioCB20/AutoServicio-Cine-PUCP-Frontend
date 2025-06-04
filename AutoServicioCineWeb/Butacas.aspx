@@ -30,7 +30,7 @@
         // o ser referenciado desde un archivo .js externo.
         // Para ASP.NET, este script aún sería de lado del cliente.
         const salaDiv = document.querySelector('.sala .filas');
-        const cantidadEntradas = 8;
+        let cantidadEntradas = 0;
         let butacasSeleccionadas = [];
 
         function generarSala(filas = 10, columnas = 12) {
@@ -73,7 +73,28 @@
             }
         }
 
+        document.addEventListener("DOMContentLoaded", function () {
+            calcularCantEntradas();
+        });
+
+        function calcularCantEntradas() {
+            const cadenaAdulto = document.getElementById("entradasAdultoTexto").textContent;
+            const cadenaInfantil = document.getElementById("entradasInfantilTexto").textContent;
+            const cadenaMayor = document.getElementById("entradasMayorTexto").textContent;
+
+            const numAdulto = extraerNumero(cadenaAdulto);
+            const numInfantil = extraerNumero(cadenaInfantil);
+            const numMayor = extraerNumero(cadenaMayor);
+
+            cantidadEntradas = numAdulto + numInfantil + numMayor;
+        }
+
+        function extraerNumero(cadena) {
+            const match = cadena.trim().match(/^(\d+)/);
+            return match ? parseInt(match[1]) : 0;
+        }
 
         generarSala();
+        
     </script>
 </asp:Content>
