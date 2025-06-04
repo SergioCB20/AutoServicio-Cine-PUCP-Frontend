@@ -5,11 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" namespace="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/" />
     </xsd:schema>
   </types>
-  <message name="buscarPeliculaPorId">
-    <part name="parameters" element="tns:buscarPeliculaPorId" />
+  <message name="eliminarPelicula">
+    <part name="parameters" element="tns:eliminarPelicula" />
   </message>
-  <message name="buscarPeliculaPorIdResponse">
-    <part name="parameters" element="tns:buscarPeliculaPorIdResponse" />
+  <message name="eliminarPeliculaResponse">
+    <part name="parameters" element="tns:eliminarPeliculaResponse" />
+  </message>
+  <message name="registrarPelicula">
+    <part name="parameters" element="tns:registrarPelicula" />
+  </message>
+  <message name="registrarPeliculaResponse">
+    <part name="parameters" element="tns:registrarPeliculaResponse" />
   </message>
   <message name="actualizarPelicula">
     <part name="parameters" element="tns:actualizarPelicula" />
@@ -23,22 +29,20 @@
   <message name="listarPeliculasResponse">
     <part name="parameters" element="tns:listarPeliculasResponse" />
   </message>
-  <message name="eliminarPelicula">
-    <part name="parameters" element="tns:eliminarPelicula" />
+  <message name="buscarPeliculaPorId">
+    <part name="parameters" element="tns:buscarPeliculaPorId" />
   </message>
-  <message name="eliminarPeliculaResponse">
-    <part name="parameters" element="tns:eliminarPeliculaResponse" />
-  </message>
-  <message name="registrarPelicula">
-    <part name="parameters" element="tns:registrarPelicula" />
-  </message>
-  <message name="registrarPeliculaResponse">
-    <part name="parameters" element="tns:registrarPeliculaResponse" />
+  <message name="buscarPeliculaPorIdResponse">
+    <part name="parameters" element="tns:buscarPeliculaPorIdResponse" />
   </message>
   <portType name="PeliculaWS">
-    <operation name="buscarPeliculaPorId">
-      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/buscarPeliculaPorIdRequest" message="tns:buscarPeliculaPorId" />
-      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/buscarPeliculaPorIdResponse" message="tns:buscarPeliculaPorIdResponse" />
+    <operation name="eliminarPelicula">
+      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/eliminarPeliculaRequest" message="tns:eliminarPelicula" />
+      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/eliminarPeliculaResponse" message="tns:eliminarPeliculaResponse" />
+    </operation>
+    <operation name="registrarPelicula">
+      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/registrarPeliculaRequest" message="tns:registrarPelicula" />
+      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/registrarPeliculaResponse" message="tns:registrarPeliculaResponse" />
     </operation>
     <operation name="actualizarPelicula">
       <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/actualizarPeliculaRequest" message="tns:actualizarPelicula" />
@@ -48,18 +52,23 @@
       <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/listarPeliculasRequest" message="tns:listarPeliculas" />
       <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/listarPeliculasResponse" message="tns:listarPeliculasResponse" />
     </operation>
-    <operation name="eliminarPelicula">
-      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/eliminarPeliculaRequest" message="tns:eliminarPelicula" />
-      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/eliminarPeliculaResponse" message="tns:eliminarPeliculaResponse" />
-    </operation>
-    <operation name="registrarPelicula">
-      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/registrarPeliculaRequest" message="tns:registrarPelicula" />
-      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/registrarPeliculaResponse" message="tns:registrarPeliculaResponse" />
+    <operation name="buscarPeliculaPorId">
+      <input wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/buscarPeliculaPorIdRequest" message="tns:buscarPeliculaPorId" />
+      <output wsam:Action="http://autoserviciopucpwsbl.autoservicio.cinepucp.com.pe/PeliculaWS/buscarPeliculaPorIdResponse" message="tns:buscarPeliculaPorIdResponse" />
     </operation>
   </portType>
   <binding name="PeliculaWSPortBinding" type="tns:PeliculaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="buscarPeliculaPorId">
+    <operation name="eliminarPelicula">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registrarPelicula">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -86,16 +95,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarPelicula">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="registrarPelicula">
+    <operation name="buscarPeliculaPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

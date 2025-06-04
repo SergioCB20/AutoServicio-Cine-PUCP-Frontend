@@ -102,6 +102,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Butacas.aspx" />
+    <Content Include="Comida.aspx" />
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.actualizaComidaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.buscarComidaPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.listarComidasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.producto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.registrarComidaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ComidaWS\AutoServicioCineWeb.ComidaWS.eliminarComidaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ComidaWS\configuration91.svcinfo" />
+    <None Include="Connected Services\ComidaWS\configuration.svcinfo" />
+    <None Include="Connected Services\ComidaWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.actualizarPeliculaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -120,12 +145,17 @@
     <Content Include="Connected Services\PeliculaWebService\AutoServicioCineWeb.PeliculaWebService.registrarPeliculaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ComidaWS\ComidaWS.wsdl" />
+    <None Include="Connected Services\ComidaWS\ComidaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PeliculaWebService\configuration91.svcinfo" />
     <None Include="Connected Services\PeliculaWebService\configuration.svcinfo" />
     <None Include="Connected Services\PeliculaWebService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="GestionComidas.aspx" />
     <Content Include="GestionCupones.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="GestionPeliculas.aspx" />
@@ -183,6 +213,7 @@
     <Content Include="styles\inicio.css" />
     <Content Include="styles\navbar.css" />
     <Content Include="styles\peliculas.css" />
+    <Content Include="styles\GestionComida.css" />
     <Content Include="Tickets.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -203,6 +234,18 @@
     <Compile Include="Butacas.aspx.designer.cs">
       <DependentUpon>Butacas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Comida.aspx.cs">
+      <DependentUpon>Comida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Comida.aspx.designer.cs">
+      <DependentUpon>Comida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ComidaWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\PeliculaWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,6 +257,13 @@
     </Compile>
     <Compile Include="Form.Master.designer.cs">
       <DependentUpon>Form.Master</DependentUpon>
+    </Compile>
+    <Compile Include="GestionComidas.aspx.cs">
+      <DependentUpon>GestionComidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionComidas.aspx.designer.cs">
+      <DependentUpon>GestionComidas.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionCupones.aspx.cs">
       <DependentUpon>GestionCupones.aspx</DependentUpon>
@@ -251,7 +301,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tickets.aspx.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Tickets.aspx.designer.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>
@@ -282,6 +331,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ComidaWS\" />
     <WCFMetadataStorage Include="Connected Services\PeliculaWebService\" />
   </ItemGroup>
   <PropertyGroup>

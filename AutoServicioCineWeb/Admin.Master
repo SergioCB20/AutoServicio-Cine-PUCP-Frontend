@@ -7,32 +7,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cine Pucp - Panel de Control - <asp:ContentPlaceHolder ID="PageTitle" runat="server"></asp:ContentPlaceHolder></title>
     <link rel="stylesheet" href="./styles/admin.css">
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <form id="form2" runat="server">
+        
+        <asp:ScriptManager ID="ScriptManager2" runat="server">
             <Scripts>
             </Scripts>
         </asp:ScriptManager>
+        
         <div class="admin-container">
+            <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="logo-container">
-                    <img src="./images/logo.png" class="logo"/>
-                    <span>Administration</span>
+                    <img src="./images/logo.png" class="logo" />
+                    <div>
+                        <div class="logo-text">Cine PUCP</div>
+                        <div class="logo-subtitle">Administración</div>
+                    </div>
                 </div>
-                <ul>
-                    <li><a href="~/Admin/GestionAsientos.aspx">Gestión de Asientos</a></li>
-                    <li><a href="~/Admin/GestionSalas.aspx">Gestión de Salas</a></li>
-                    <li><a href="~/Admin/GestionCupones.aspx">Gestión de Cupones</a></li>
-                    <li><a href="~/Admin/GestionUsuarios.aspx">Gestión de Usuarios</a></li>
+        
+                <ul class="navigation">
+                    <li class="nav-item"><a href="./GestionSalas.aspx" class="nav-link">🪑 Gestión de Salas</a></li>
+                    <li class="nav-item"><a href="./GestionPeliculas.aspx" class="nav-link">🎭 Gestión de Películas</a></li>
+                    <li class="nav-item"><a href="./GestionCupones.aspx" class="nav-link">🎫 Gestión de Cupones</a></li>
+                    <li class="nav-item"><a href="./GestionUsuarios.aspx" class="nav-link">👥 Gestión de Usuarios</a></li>
+                    <li class="nav-item"><a href="./GestionComidas.aspx" class="nav-link">🍿 Gestión de Comidas</a></li>
                 </ul>
             </aside>
+
+            <!-- Main Content -->
             <main class="main-content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <div class="content-header">
+                    <div class="page-title-section">
+                        <h1><asp:ContentPlaceHolder ID="PageTitleContent" runat="server">Página de Administración</asp:ContentPlaceHolder></h1>
+                        <p class="page-subtitle">
+                            <asp:ContentPlaceHolder ID="PageSubtitle" runat="server">Gestiona tu sistema de cine</asp:ContentPlaceHolder>
+                        </p>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <div class="user-info">
+                            <div class="user-avatar">A</div>
+                            <span>Admin</span>
+                        </div>
+                        <asp:ContentPlaceHolder ID="HeaderActions" runat="server">
+                            <a href="#" class="btn btn-primary">
+                                ⚙️ Configuración
+                            </a>
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+
+                <div class="page-content fade-in">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        <!-- Contenido principal de la página -->
                     </asp:ContentPlaceHolder>
+                </div>
             </main>
         </div>
+
+        <!-- Notification Container -->
+        <div id="notificationContainer"></div>
+
+        <script>
+            // Función para mostrar notificaciones
+            function showNotification(message, type = 'success') {
+                const container = document.getElementById('notificationContainer');
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+
+                container.appendChild(notification);
+
+                // Mostrar notificación
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100);
+
+                // Ocultar y remover notificación
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        container.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+
+            // Función para marcar el enlace activo en la navegación
+            function setActiveNavLink() {
+                const currentPath = window.location.pathname;
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') && currentPath.includes(link.getAttribute('href'))) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Ejecutar cuando la página cargue
+            document.addEventListener('DOMContentLoaded', function () {
+                setActiveNavLink();
+
+                // Animación de entrada para el contenido
+                const content = document.querySelector('.page-content');
+                if (content) {
+                    content.classList.add('fade-in');
+                }
+            });
+
+            // Función para confirmar eliminaciones
+            function confirmDelete(message = '¿Estás seguro de que deseas eliminar este elemento?') {
+                return confirm(message);
+            }
+
+            // Función para validar formularios
+            function validateForm(formId) {
+                const form = document.getElementById(formId);
+                if (!form) return false;
+
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#e74c3c';
+                        isValid = false;
+                    } else {
+                        field.style.borderColor = '#ddd';
+                    }
+                });
+
+                if (!isValid) {
+                    showNotification('Por favor, completa todos los campos requeridos.', 'warning');
+                }
+
+                return isValid;
+            }
+        </script>
+        
+        <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
+        </asp:ContentPlaceHolder>
     </form>
 </body>
 </html>

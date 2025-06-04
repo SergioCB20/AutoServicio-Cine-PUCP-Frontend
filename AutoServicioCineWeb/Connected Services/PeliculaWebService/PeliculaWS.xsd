@@ -18,14 +18,12 @@
   <xs:complexType name="eliminarPeliculaResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="buscarPeliculaPorId">
-    <xs:sequence>
-      <xs:element name="arg0" type="xs:int" />
-    </xs:sequence>
+  <xs:complexType name="listarPeliculas">
+    <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="buscarPeliculaPorIdResponse">
+  <xs:complexType name="listarPeliculasResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:pelicula" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="pelicula">
@@ -127,12 +125,14 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="peliculas" nillable="true" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listarPeliculas">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarPeliculasResponse">
+  <xs:complexType name="buscarPeliculaPorId">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPeliculaPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="actualizarPelicula">
