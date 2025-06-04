@@ -21,8 +21,8 @@ Inherits="AutoServicioCineWeb.GestionComidas" %>
 </asp:Content>
 
 <asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server">
-    <button class="btn btn-primary" onclick="openModal()">
-        ➕ Agregar Nueva Comida
+    <button type="button" class="btn btn-primary" onclick="openModal(); return false;">
+        ➕ Agregar Nuevo Producto
     </button>
 </asp:Content>
 
@@ -54,10 +54,9 @@ Inherits="AutoServicioCineWeb.GestionComidas" %>
             <asp:DropDownList ID="ddlCategoryFilter" runat="server" CssClass="filter-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoryFilter_SelectedIndexChanged">
                 <asp:ListItem Value="">Todas las categorías</asp:ListItem>
                 <%-- Los valores aquí deben coincidir con los del enum TipoProducto --%>
-                <asp:ListItem Value="Snacks">Snacks</asp:ListItem>
-                <asp:ListItem Value="Bebidas">Bebidas</asp:ListItem>
-                <asp:ListItem Value="Dulces">Dulces</asp:ListItem>
-                <asp:ListItem Value="Combos">Combos</asp:ListItem>
+                <asp:ListItem Value="BEBIDA">Bebidas</asp:ListItem>
+                <asp:ListItem Value="SNACK">Snack</asp:ListItem>
+                <asp:ListItem Value="COMBO">Combo</asp:ListItem>
             </asp:DropDownList>
             
             <%-- <asp:Button ID="btnApplyFilters" runat="server" Text="Aplicar Filtros" OnClick="btnApplyFilters_Click" /> --%>
@@ -101,77 +100,89 @@ Inherits="AutoServicioCineWeb.GestionComidas" %>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+        <div class="table-messages">
+    <asp:Literal ID="litMensajeTabla" runat="server"></asp:Literal>
+</div>
 </div>
     <div class="modal" id="foodModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">
-                    <asp:Literal ID="litModalTitle" runat="server" Text=""></asp:Literal>Agregar nueva Comida
-                    <label for="<%=txtNombre.ClientID %>">Nombre:</label>
-                    <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox><br />
-
-                    <label for="<%=txtTipo.ClientID %>">Tipo:</label>
-                    <asp:TextBox ID="txtTipo" runat="server"></asp:TextBox><br />
-
-                    <label for="<%=txtPrecio.ClientID %>">Precio:</label>
-                    <asp:TextBox ID="txtPrecio" runat="server"></asp:TextBox><br />
-
-                    <label for="<%=txtDescripcion.ClientID %>">Descripción:</label>
-                    <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox><br />
-
-                    <asp:CheckBox ID="chkActivo" runat="server" Text="Activo"></asp:CheckBox><br />
-
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
-                      
-                </h2>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <asp:Literal ID="litModalTitle" runat="server" Text="Agregar Nueva Comida"></asp:Literal>
+            </h2>
+        </div>
+        
+        <div id="foodForm">
+            <div class="form-group">
+                <label class="form-label">Nombre del producto</label>
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-input" placeholder="Ej: Palomitas Grandes"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvNombre" runat="server" 
+                    ControlToValidate="txtNombre" 
+                    ValidationGroup="ComidaValidation"
+                    ErrorMessage="El nombre es requerido" 
+                    CssClass="error-message" Display="Dynamic"></asp:RequiredFieldValidator>
             </div>
             
-            <div id="foodForm">
-                <div class="form-group">
-                    <label class="form-label">Nombre del producto</label>
-                    <input type="text" class="form-input" id="productName" placeholder="Ej: Palomitas Grandes" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Categoría</label>
-                    <select class="form-input" id="productCategory" required>
-                        <option value="">Seleccionar categoría</option>
-                        <%-- Los valores aquí deben coincidir con los del enum TipoProducto --%>
-                        <option value="Snacks">Snacks</option>
-                        <option value="Bebidas">Bebidas</option>
-                        <option value="Dulces">Dulces</option>
-                        <option value="Combos">Combos</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Previsualización:</label>
-                    <asp:Image ID="imgPreview" runat="server" style="max-width: 150px; max-height: 150px; display: none; border: 1px solid #ddd; padding: 5px;" />
-                    <asp:HiddenField ID="hdnExistingImageUrl" runat="server" /> 
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Precio (S/)</label>
-                    <input type="number" class="form-input" id="productPrice" step="0.10" min="0" placeholder="0.00" required>
-                </div>
-                <asp:Literal ID="litMensajeModal" runat="server" ></asp:Literal>
-                <%-- Eliminado el campo Stock, ya que no está en la clase Producto --%>
-                
-                <div class="form-group">
-                    <label class="form-label">URL de imagen</label>
-                    <input type="url" class="form-input" id="productImage" placeholder="https://ejemplo.com/imagen.jpg">
-                </div>
+            <div class="form-group">
+                <label class="form-label">Categoría</label>
+                <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-input">
+                    <asp:ListItem Value="">Seleccionar categoría</asp:ListItem>
+                    <asp:ListItem Value="SNACK">SNACK</asp:ListItem>
+                    <asp:ListItem Value="BEBIDA">BEBIDA</asp:ListItem>
+                    <asp:ListItem Value="COMBO">COMBO</asp:ListItem>
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvTipo" runat="server" 
+                    ControlToValidate="ddlTipo" 
+                    ValidationGroup="ComidaValidation"
+                    ErrorMessage="La categoría es requerida" 
+                    CssClass="error-message" Display="Dynamic"></asp:RequiredFieldValidator>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label">Estado</label>
-                    <input type="checkbox" id="productActive"> Activo
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
-                    <button type="button" class="btn-primary" onclick="submitForm()">Guardar Producto</button>
-                </div>
+            <div class="form-group">
+                <label class="form-label">Precio (S/)</label>
+                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-input" placeholder="0.00"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvPrecio" runat="server" 
+                    ControlToValidate="txtPrecio" 
+                    ValidationGroup="ComidaValidation"
+                    ErrorMessage="El precio es requerido" 
+                    CssClass="error-message" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RangeValidator ID="rvPrecio" runat="server" 
+                    ControlToValidate="txtPrecio" 
+                    ValidationGroup="ComidaValidation"
+                    Type="Double" MinimumValue="0.01" MaximumValue="999.99"
+                    ErrorMessage="El precio debe ser mayor a 0" 
+                    CssClass="error-message" Display="Dynamic"></asp:RangeValidator>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Descripción (URL de imagen)</label>
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input" placeholder="https://ejemplo.com/imagen.jpg"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Previsualización:</label>
+                <asp:Image ID="imgPreview" runat="server" 
+                    style="max-width: 150px; max-height: 150px; display: none; border: 1px solid #ddd; padding: 5px; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" CssClass="form-checkbox" />
+            </div>
+
+            <div class="form-group">
+                <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn-primary" 
+                    OnClick="btnGuardar_Click" ValidationGroup="ComidaValidation" />
             </div>
         </div>
     </div>
+</div>
+
+<asp:HiddenField ID="HiddenField1" runat="server" />
      <div id="loadingIndicator" style="display: none;">
         <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
             <div style="background: white; padding: 20px; border-radius: 5px;">
@@ -385,6 +396,39 @@ Inherits="AutoServicioCineWeb.GestionComidas" %>
                 closeModal();
             }
         }
+        function previewImage() {
+            const urlInput = document.getElementById('<%= txtDescripcion.ClientID %>');
+            const preview = document.getElementById('<%= imgPreview.ClientID %>');
+
+            if (urlInput.value && isValidUrl(urlInput.value)) {
+                preview.src = urlInput.value;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Agregar evento al campo de descripción para previsualización automática
+        document.addEventListener('DOMContentLoaded', function () {
+            const descInput = document.getElementById('<%= txtDescripcion.ClientID %>');
+    if (descInput) {
+        descInput.addEventListener('blur', previewImage);
+        descInput.addEventListener('input', function () {
+            // Debounce para evitar muchas llamadas
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(previewImage, 500);
+        });
+    }
+});
     </script>
     <asp:HiddenField ID="hdnComidaId" runat="server" />
 </asp:Content>
