@@ -10,6 +10,8 @@ namespace AutoServicioCineWeb
 {
     public partial class Form : System.Web.UI.MasterPage
     {
+        public HtmlGenericControl TituloSpan => tituloSpan;
+        public HtmlImage ImgPoster => imgPoster;
         public HtmlGenericControl EntradasAdultoTexto => entradasAdultoTexto;
         public HtmlGenericControl EntradasInfantilTexto => entradasInfantilTexto;
         public HtmlGenericControl EntradasMayorTexto => entradasMayorTexto;

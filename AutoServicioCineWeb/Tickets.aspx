@@ -8,7 +8,9 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="middle-section">
-        <h2 class="pelicula-titulo">Thunderbolts</h2>
+        <h2 class="pelicula-titulo">
+            <span id="tituloPelicula" runat="server"></span>
+        </h2>
         <div class="codigo-promocional">
             <label for="codigo">¿Tienes un código promocional?</label>
             <div class="input-group">

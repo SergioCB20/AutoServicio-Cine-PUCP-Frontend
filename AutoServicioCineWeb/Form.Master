@@ -157,11 +157,12 @@
                 <div class="detalle-compra">
                     <h3>Detalle de la compra</h3>
                     <div class="pelicula-detalle">
-                        <img
-                            src="../../images/thunderbolts.png"
-                            alt="Póster de la película"
-                        />
+                        <img id="imgPoster" runat="server" alt="Póster de la película" />
                         <div class="fecha-hora">
+                            <p>Título</p>
+                            <span id="tituloSpan" runat="server"></span>
+
+                            <!-- Esta parte será dinámica cuando haya función específica de la película-->
                             <p>Fecha</p>
                             <span>18/05/25</span>
                             <p>Hora</p>

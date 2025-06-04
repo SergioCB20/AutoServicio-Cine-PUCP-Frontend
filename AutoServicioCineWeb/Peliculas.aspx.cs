@@ -70,7 +70,8 @@ namespace AutoServicioCineWeb
 
             // Aquí puedes redirigir al usuario a una página de selección de funciones/horarios
             // o añadir la película al carrito de compras, etc.
-            Response.Redirect($"SeleccionarFunciones.aspx?peliculaId={peliculaId}");
+            //Response.Redirect($"SeleccionarFunciones.aspx?peliculaId={peliculaId}");
+            Response.Redirect($"Tickets.aspx?peliculaId={peliculaId}");
         }
 
         // NOTA: Si tenías otros métodos como PageIndexChanging o eventos de GridView en esta página,

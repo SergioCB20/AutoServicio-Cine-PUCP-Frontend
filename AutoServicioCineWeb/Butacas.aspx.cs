@@ -24,6 +24,8 @@ namespace AutoServicioCineWeb
                         master.EntradasInfantilTexto.InnerText = resumen.InfantilTicket;
                         master.EntradasMayorTexto.InnerText = resumen.MayorTicket;
                         master.TotalResumen.InnerText = resumen.TotalTicket;
+                        master.ImgPoster.Src = resumen.ImagenUrl;
+                        master.TituloSpan.InnerText = resumen.TituloDePelicula;
                     }
                 }
             }
