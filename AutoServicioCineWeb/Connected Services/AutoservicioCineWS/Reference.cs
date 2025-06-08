@@ -15,6 +15,14 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", ConfigurationName="AutoservicioCineWS.ProductoWS")]
     public interface ProductoWS {
         
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request);
+        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -23,15 +31,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarProductosResponse> listarProductosAsync(AutoServicioCineWeb.AutoservicioCineWS.listarProductosRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse buscarProductoPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> buscarProductoPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request);
         
         // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoResponse")]
@@ -49,13 +48,14 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarProductoResponse> actualizarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarProductoRequest request);
         
-        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse")]
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse buscarProductoPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> buscarProductoPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request);
     }
     
     /// <remarks/>
@@ -188,6 +188,478 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         /// <remarks/>
         COMBO,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
+    public partial class cupon : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private bool activoField;
+        
+        private string codigoField;
+        
+        private usuario creadoPorField;
+        
+        private int cuponIdField;
+        
+        private bool cuponIdFieldSpecified;
+        
+        private string descripcionEnField;
+        
+        private string descripcionEsField;
+        
+        private tipoDescuento descuentoTipoField;
+        
+        private bool descuentoTipoFieldSpecified;
+        
+        private double descuentoValorField;
+        
+        private bool descuentoValorFieldSpecified;
+        
+        private localDate fechaFinField;
+        
+        private localDate fechaInicioField;
+        
+        private localDate fechaModificacionField;
+        
+        private int maxUsosField;
+        
+        private bool maxUsosFieldSpecified;
+        
+        private int usosActualesField;
+        
+        private bool usosActualesFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool activo {
+            get {
+                return this.activoField;
+            }
+            set {
+                this.activoField = value;
+                this.RaisePropertyChanged("activo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string codigo {
+            get {
+                return this.codigoField;
+            }
+            set {
+                this.codigoField = value;
+                this.RaisePropertyChanged("codigo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public usuario creadoPor {
+            get {
+                return this.creadoPorField;
+            }
+            set {
+                this.creadoPorField = value;
+                this.RaisePropertyChanged("creadoPor");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public int cuponId {
+            get {
+                return this.cuponIdField;
+            }
+            set {
+                this.cuponIdField = value;
+                this.RaisePropertyChanged("cuponId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cuponIdSpecified {
+            get {
+                return this.cuponIdFieldSpecified;
+            }
+            set {
+                this.cuponIdFieldSpecified = value;
+                this.RaisePropertyChanged("cuponIdSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string descripcionEn {
+            get {
+                return this.descripcionEnField;
+            }
+            set {
+                this.descripcionEnField = value;
+                this.RaisePropertyChanged("descripcionEn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string descripcionEs {
+            get {
+                return this.descripcionEsField;
+            }
+            set {
+                this.descripcionEsField = value;
+                this.RaisePropertyChanged("descripcionEs");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public tipoDescuento descuentoTipo {
+            get {
+                return this.descuentoTipoField;
+            }
+            set {
+                this.descuentoTipoField = value;
+                this.RaisePropertyChanged("descuentoTipo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descuentoTipoSpecified {
+            get {
+                return this.descuentoTipoFieldSpecified;
+            }
+            set {
+                this.descuentoTipoFieldSpecified = value;
+                this.RaisePropertyChanged("descuentoTipoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public double descuentoValor {
+            get {
+                return this.descuentoValorField;
+            }
+            set {
+                this.descuentoValorField = value;
+                this.RaisePropertyChanged("descuentoValor");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descuentoValorSpecified {
+            get {
+                return this.descuentoValorFieldSpecified;
+            }
+            set {
+                this.descuentoValorFieldSpecified = value;
+                this.RaisePropertyChanged("descuentoValorSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public localDate fechaFin {
+            get {
+                return this.fechaFinField;
+            }
+            set {
+                this.fechaFinField = value;
+                this.RaisePropertyChanged("fechaFin");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public localDate fechaInicio {
+            get {
+                return this.fechaInicioField;
+            }
+            set {
+                this.fechaInicioField = value;
+                this.RaisePropertyChanged("fechaInicio");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public localDate fechaModificacion {
+            get {
+                return this.fechaModificacionField;
+            }
+            set {
+                this.fechaModificacionField = value;
+                this.RaisePropertyChanged("fechaModificacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public int maxUsos {
+            get {
+                return this.maxUsosField;
+            }
+            set {
+                this.maxUsosField = value;
+                this.RaisePropertyChanged("maxUsos");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool maxUsosSpecified {
+            get {
+                return this.maxUsosFieldSpecified;
+            }
+            set {
+                this.maxUsosFieldSpecified = value;
+                this.RaisePropertyChanged("maxUsosSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public int usosActuales {
+            get {
+                return this.usosActualesField;
+            }
+            set {
+                this.usosActualesField = value;
+                this.RaisePropertyChanged("usosActuales");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool usosActualesSpecified {
+            get {
+                return this.usosActualesFieldSpecified;
+            }
+            set {
+                this.usosActualesFieldSpecified = value;
+                this.RaisePropertyChanged("usosActualesSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
+    public partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string emailField;
+        
+        private bool estaActivoField;
+        
+        private localDate fechaRegistroField;
+        
+        private int idField;
+        
+        private string idiomaPreferidoField;
+        
+        private string nombreField;
+        
+        private string passwordField;
+        
+        private string telefonoField;
+        
+        private tipoUsuario tipoUsuarioField;
+        
+        private bool tipoUsuarioFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+                this.RaisePropertyChanged("email");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public bool estaActivo {
+            get {
+                return this.estaActivoField;
+            }
+            set {
+                this.estaActivoField = value;
+                this.RaisePropertyChanged("estaActivo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public localDate fechaRegistro {
+            get {
+                return this.fechaRegistroField;
+            }
+            set {
+                this.fechaRegistroField = value;
+                this.RaisePropertyChanged("fechaRegistro");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string idiomaPreferido {
+            get {
+                return this.idiomaPreferidoField;
+            }
+            set {
+                this.idiomaPreferidoField = value;
+                this.RaisePropertyChanged("idiomaPreferido");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string telefono {
+            get {
+                return this.telefonoField;
+            }
+            set {
+                this.telefonoField = value;
+                this.RaisePropertyChanged("telefono");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public tipoUsuario tipoUsuario {
+            get {
+                return this.tipoUsuarioField;
+            }
+            set {
+                this.tipoUsuarioField = value;
+                this.RaisePropertyChanged("tipoUsuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool tipoUsuarioSpecified {
+            get {
+                return this.tipoUsuarioFieldSpecified;
+            }
+            set {
+                this.tipoUsuarioFieldSpecified = value;
+                this.RaisePropertyChanged("tipoUsuarioSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
+    public partial class localDate : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
+    public enum tipoUsuario {
+        
+        /// <remarks/>
+        CLIENTE,
+        
+        /// <remarks/>
+        ADMIN,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
+    public enum tipoDescuento {
+        
+        /// <remarks/>
+        PORCENTAJE,
+        
+        /// <remarks/>
+        MONTO_FIJO,
     }
     
     /// <remarks/>
@@ -1182,195 +1654,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
-    public partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string emailField;
-        
-        private bool estaActivoField;
-        
-        private localDate fechaRegistroField;
-        
-        private int idField;
-        
-        private string idiomaPreferidoField;
-        
-        private string nombreField;
-        
-        private string passwordField;
-        
-        private string telefonoField;
-        
-        private tipoUsuario tipoUsuarioField;
-        
-        private bool tipoUsuarioFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-                this.RaisePropertyChanged("email");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public bool estaActivo {
-            get {
-                return this.estaActivoField;
-            }
-            set {
-                this.estaActivoField = value;
-                this.RaisePropertyChanged("estaActivo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public localDate fechaRegistro {
-            get {
-                return this.fechaRegistroField;
-            }
-            set {
-                this.fechaRegistroField = value;
-                this.RaisePropertyChanged("fechaRegistro");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-                this.RaisePropertyChanged("id");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string idiomaPreferido {
-            get {
-                return this.idiomaPreferidoField;
-            }
-            set {
-                this.idiomaPreferidoField = value;
-                this.RaisePropertyChanged("idiomaPreferido");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-                this.RaisePropertyChanged("password");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public string telefono {
-            get {
-                return this.telefonoField;
-            }
-            set {
-                this.telefonoField = value;
-                this.RaisePropertyChanged("telefono");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public tipoUsuario tipoUsuario {
-            get {
-                return this.tipoUsuarioField;
-            }
-            set {
-                this.tipoUsuarioField = value;
-                this.RaisePropertyChanged("tipoUsuario");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool tipoUsuarioSpecified {
-            get {
-                return this.tipoUsuarioFieldSpecified;
-            }
-            set {
-                this.tipoUsuarioFieldSpecified = value;
-                this.RaisePropertyChanged("tipoUsuarioSpecified");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
-    public partial class localDate : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
-    public enum tipoUsuario {
-        
-        /// <remarks/>
-        CLIENTE,
-        
-        /// <remarks/>
-        ADMIN,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/")]
     public partial class sala : object, System.ComponentModel.INotifyPropertyChanged {
         
         private bool activaField;
@@ -1635,6 +1918,34 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarProducto", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarProductoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.producto arg0;
+        
+        public registrarProductoRequest() {
+        }
+        
+        public registrarProductoRequest(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarProductoResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarProductoResponse {
+        
+        public registrarProductoResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="listarProductos", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
     public partial class listarProductosRequest {
         
@@ -1656,42 +1967,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
         
         public listarProductosResponse(AutoServicioCineWeb.AutoservicioCineWS.producto[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarProductoPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarProductoPorIdRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public buscarProductoPorIdRequest() {
-        }
-        
-        public buscarProductoPorIdRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarProductoPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarProductoPorIdResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.producto @return;
-        
-        public buscarProductoPorIdResponse() {
-        }
-        
-        public buscarProductoPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.producto @return) {
             this.@return = @return;
         }
     }
@@ -1755,17 +2030,17 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarProducto", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class registrarProductoRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarProductoPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarProductoPorIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.producto arg0;
+        public int arg0;
         
-        public registrarProductoRequest() {
+        public buscarProductoPorIdRequest() {
         }
         
-        public registrarProductoRequest(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
+        public buscarProductoPorIdRequest(int arg0) {
             this.arg0 = arg0;
         }
     }
@@ -1773,10 +2048,18 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarProductoResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class registrarProductoResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarProductoPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarProductoPorIdResponse {
         
-        public registrarProductoResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.producto @return;
+        
+        public buscarProductoPorIdResponse() {
+        }
+        
+        public buscarProductoPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.producto @return) {
+            this.@return = @return;
         }
     }
     
@@ -1808,6 +2091,28 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request) {
+            return base.Channel.registrarProducto(request);
+        }
+        
+        public void registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).registrarProducto(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request) {
+            return base.Channel.registrarProductoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).registrarProductoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         AutoServicioCineWeb.AutoservicioCineWS.listarProductosResponse AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.listarProductos(AutoServicioCineWeb.AutoservicioCineWS.listarProductosRequest request) {
             return base.Channel.listarProductos(request);
         }
@@ -1826,29 +2131,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarProductosResponse> listarProductosAsync() {
             AutoServicioCineWeb.AutoservicioCineWS.listarProductosRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarProductosRequest();
             return ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).listarProductosAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.buscarProductoPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request) {
-            return base.Channel.buscarProductoPorId(request);
-        }
-        
-        public AutoServicioCineWeb.AutoservicioCineWS.producto buscarProductoPorId(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).buscarProductoPorId(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.buscarProductoPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request) {
-            return base.Channel.buscarProductoPorIdAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> buscarProductoPorIdAsync(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).buscarProductoPorIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1896,57 +2178,32 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request) {
-            return base.Channel.registrarProducto(request);
+        AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.buscarProductoPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request) {
+            return base.Channel.buscarProductoPorId(request);
         }
         
-        public void registrarProducto(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest();
+        public AutoServicioCineWeb.AutoservicioCineWS.producto buscarProductoPorId(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest();
             inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).registrarProducto(inValue);
+            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).buscarProductoPorId(inValue);
+            return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest request) {
-            return base.Channel.registrarProductoAsync(request);
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.ProductoWS.buscarProductoPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest request) {
+            return base.Channel.buscarProductoPorIdAsync(request);
         }
         
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarProductoResponse> registrarProductoAsync(AutoServicioCineWeb.AutoservicioCineWS.producto arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarProductoRequest();
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdResponse> buscarProductoPorIdAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarProductoPorIdRequest();
             inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).registrarProductoAsync(inValue);
+            return ((AutoServicioCineWeb.AutoservicioCineWS.ProductoWS)(this)).buscarProductoPorIdAsync(inValue);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", ConfigurationName="AutoservicioCineWS.PeliculaWS")]
     public interface PeliculaWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse buscarPeliculaPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> buscarPeliculaPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse listarPeliculas(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> listarPeliculasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request);
-        
-        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse eliminarPelicula(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> eliminarPeliculaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request);
         
         // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaResponse")]
@@ -1963,98 +2220,32 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/actualizarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/actualizarPeliculaResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarPeliculaResponse> actualizarPeliculaAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarPeliculaRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPeliculaPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarPeliculaPorIdRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse eliminarPelicula(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request);
         
-        public buscarPeliculaPorIdRequest() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> eliminarPeliculaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request);
         
-        public buscarPeliculaPorIdRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPeliculaPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarPeliculaPorIdResponse {
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse listarPeliculas(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.pelicula @return;
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> listarPeliculasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request);
         
-        public buscarPeliculaPorIdResponse() {
-        }
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse buscarPeliculaPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request);
         
-        public buscarPeliculaPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.pelicula @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarPeliculas", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarPeliculasRequest {
-        
-        public listarPeliculasRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarPeliculasResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarPeliculasResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.pelicula[] @return;
-        
-        public listarPeliculasResponse() {
-        }
-        
-        public listarPeliculasResponse(AutoServicioCineWeb.AutoservicioCineWS.pelicula[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarPelicula", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarPeliculaRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public eliminarPeliculaRequest() {
-        }
-        
-        public eliminarPeliculaRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarPeliculaResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarPeliculaResponse {
-        
-        public eliminarPeliculaResponse() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> buscarPeliculaPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2113,6 +2304,98 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarPelicula", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarPeliculaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public eliminarPeliculaRequest() {
+        }
+        
+        public eliminarPeliculaRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarPeliculaResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarPeliculaResponse {
+        
+        public eliminarPeliculaResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarPeliculas", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarPeliculasRequest {
+        
+        public listarPeliculasRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarPeliculasResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarPeliculasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.pelicula[] @return;
+        
+        public listarPeliculasResponse() {
+        }
+        
+        public listarPeliculasResponse(AutoServicioCineWeb.AutoservicioCineWS.pelicula[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPeliculaPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarPeliculaPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public buscarPeliculaPorIdRequest() {
+        }
+        
+        public buscarPeliculaPorIdRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPeliculaPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarPeliculaPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.pelicula @return;
+        
+        public buscarPeliculaPorIdResponse() {
+        }
+        
+        public buscarPeliculaPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.pelicula @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface PeliculaWSChannel : AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS, System.ServiceModel.IClientChannel {
     }
@@ -2138,72 +2421,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         public PeliculaWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.buscarPeliculaPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request) {
-            return base.Channel.buscarPeliculaPorId(request);
-        }
-        
-        public AutoServicioCineWeb.AutoservicioCineWS.pelicula buscarPeliculaPorId(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).buscarPeliculaPorId(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.buscarPeliculaPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request) {
-            return base.Channel.buscarPeliculaPorIdAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> buscarPeliculaPorIdAsync(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).buscarPeliculaPorIdAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.listarPeliculas(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request) {
-            return base.Channel.listarPeliculas(request);
-        }
-        
-        public AutoServicioCineWeb.AutoservicioCineWS.pelicula[] listarPeliculas() {
-            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest();
-            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).listarPeliculas(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.listarPeliculasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request) {
-            return base.Channel.listarPeliculasAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> listarPeliculasAsync() {
-            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest();
-            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).listarPeliculasAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.eliminarPelicula(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request) {
-            return base.Channel.eliminarPelicula(request);
-        }
-        
-        public void eliminarPelicula(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).eliminarPelicula(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.eliminarPeliculaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request) {
-            return base.Channel.eliminarPeliculaAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> eliminarPeliculaAsync(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).eliminarPeliculaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2249,28 +2466,77 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
             inValue.arg0 = arg0;
             return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).actualizarPeliculaAsync(inValue);
         }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.eliminarPelicula(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request) {
+            return base.Channel.eliminarPelicula(request);
+        }
+        
+        public void eliminarPelicula(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).eliminarPelicula(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.eliminarPeliculaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest request) {
+            return base.Channel.eliminarPeliculaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaResponse> eliminarPeliculaAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarPeliculaRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).eliminarPeliculaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.listarPeliculas(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request) {
+            return base.Channel.listarPeliculas(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.pelicula[] listarPeliculas() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest();
+            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).listarPeliculas(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.listarPeliculasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest request) {
+            return base.Channel.listarPeliculasAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasResponse> listarPeliculasAsync() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarPeliculasRequest();
+            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).listarPeliculasAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.buscarPeliculaPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request) {
+            return base.Channel.buscarPeliculaPorId(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.pelicula buscarPeliculaPorId(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).buscarPeliculaPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS.buscarPeliculaPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest request) {
+            return base.Channel.buscarPeliculaPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdResponse> buscarPeliculaPorIdAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarPeliculaPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.PeliculaWS)(this)).buscarPeliculaPorIdAsync(inValue);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", ConfigurationName="AutoservicioCineWS.ComboItemWS")]
     public interface ComboItemWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse buscarComboItemPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> buscarComboItemPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request);
-        
-        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsResponse")]
@@ -2296,70 +2562,23 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarComboItemResponse> registrarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarComboItemRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarComboItemPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarComboItemPorIdRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request);
         
-        public buscarComboItemPorIdRequest() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request);
         
-        public buscarComboItemPorIdRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarComboItemPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarComboItemPorIdResponse {
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse buscarComboItemPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.comboItem @return;
-        
-        public buscarComboItemPorIdResponse() {
-        }
-        
-        public buscarComboItemPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.comboItem @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarComboItem", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class actualizarComboItemRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0;
-        
-        public actualizarComboItemRequest() {
-        }
-        
-        public actualizarComboItemRequest(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarComboItemResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class actualizarComboItemResponse {
-        
-        public actualizarComboItemResponse() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> buscarComboItemPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2446,6 +2665,70 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarComboItem", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class actualizarComboItemRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0;
+        
+        public actualizarComboItemRequest() {
+        }
+        
+        public actualizarComboItemRequest(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarComboItemResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class actualizarComboItemResponse {
+        
+        public actualizarComboItemResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarComboItemPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarComboItemPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public buscarComboItemPorIdRequest() {
+        }
+        
+        public buscarComboItemPorIdRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarComboItemPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarComboItemPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.comboItem @return;
+        
+        public buscarComboItemPorIdResponse() {
+        }
+        
+        public buscarComboItemPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.comboItem @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ComboItemWSChannel : AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS, System.ServiceModel.IClientChannel {
     }
@@ -2471,51 +2754,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         public ComboItemWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.buscarComboItemPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request) {
-            return base.Channel.buscarComboItemPorId(request);
-        }
-        
-        public AutoServicioCineWeb.AutoservicioCineWS.comboItem buscarComboItemPorId(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).buscarComboItemPorId(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.buscarComboItemPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request) {
-            return base.Channel.buscarComboItemPorIdAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> buscarComboItemPorIdAsync(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).buscarComboItemPorIdAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request) {
-            return base.Channel.actualizarComboItem(request);
-        }
-        
-        public void actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).actualizarComboItem(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request) {
-            return base.Channel.actualizarComboItemAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).actualizarComboItemAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2582,19 +2820,389 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
             inValue.arg0 = arg0;
             return ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).registrarComboItemAsync(inValue);
         }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request) {
+            return base.Channel.actualizarComboItem(request);
+        }
+        
+        public void actualizarComboItem(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).actualizarComboItem(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest request) {
+            return base.Channel.actualizarComboItemAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemResponse> actualizarComboItemAsync(AutoServicioCineWeb.AutoservicioCineWS.comboItem arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarComboItemRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).actualizarComboItemAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.buscarComboItemPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request) {
+            return base.Channel.buscarComboItemPorId(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.comboItem buscarComboItemPorId(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).buscarComboItemPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS.buscarComboItemPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest request) {
+            return base.Channel.buscarComboItemPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdResponse> buscarComboItemPorIdAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarComboItemPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.ComboItemWS)(this)).buscarComboItemPorIdAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", ConfigurationName="AutoservicioCineWS.CuponWS")]
+    public interface CuponWS {
+        
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse registrarCupon(AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse> registrarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse buscarCuponPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse> buscarCuponPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse listarCupones(AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse> listarCuponesAsync(AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest request);
+        
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse eliminarCupon(AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse> eliminarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest request);
+        
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse actualizarCupon(AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse> actualizarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarCupon", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarCuponRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon arg0;
+        
+        public registrarCuponRequest() {
+        }
+        
+        public registrarCuponRequest(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarCuponResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarCuponResponse {
+        
+        public registrarCuponResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarCuponPorId", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarCuponPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public buscarCuponPorIdRequest() {
+        }
+        
+        public buscarCuponPorIdRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarCuponPorIdResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarCuponPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon @return;
+        
+        public buscarCuponPorIdResponse() {
+        }
+        
+        public buscarCuponPorIdResponse(AutoServicioCineWeb.AutoservicioCineWS.cupon @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarCupones", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarCuponesRequest {
+        
+        public listarCuponesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarCuponesResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarCuponesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon[] @return;
+        
+        public listarCuponesResponse() {
+        }
+        
+        public listarCuponesResponse(AutoServicioCineWeb.AutoservicioCineWS.cupon[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarCupon", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarCuponRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public eliminarCuponRequest() {
+        }
+        
+        public eliminarCuponRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarCuponResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarCuponResponse {
+        
+        public eliminarCuponResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarCupon", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class actualizarCuponRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon arg0;
+        
+        public actualizarCuponRequest() {
+        }
+        
+        public actualizarCuponRequest(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="actualizarCuponResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class actualizarCuponResponse {
+        
+        public actualizarCuponResponse() {
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface CuponWSChannel : AutoServicioCineWeb.AutoservicioCineWS.CuponWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CuponWSClient : System.ServiceModel.ClientBase<AutoServicioCineWeb.AutoservicioCineWS.CuponWS>, AutoServicioCineWeb.AutoservicioCineWS.CuponWS {
+        
+        public CuponWSClient() {
+        }
+        
+        public CuponWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CuponWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CuponWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CuponWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse AutoServicioCineWeb.AutoservicioCineWS.CuponWS.registrarCupon(AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest request) {
+            return base.Channel.registrarCupon(request);
+        }
+        
+        public void registrarCupon(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).registrarCupon(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse> AutoServicioCineWeb.AutoservicioCineWS.CuponWS.registrarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest request) {
+            return base.Channel.registrarCuponAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse> registrarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.registrarCuponRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).registrarCuponAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse AutoServicioCineWeb.AutoservicioCineWS.CuponWS.buscarCuponPorId(AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest request) {
+            return base.Channel.buscarCuponPorId(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon buscarCuponPorId(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).buscarCuponPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse> AutoServicioCineWeb.AutoservicioCineWS.CuponWS.buscarCuponPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest request) {
+            return base.Channel.buscarCuponPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse> buscarCuponPorIdAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).buscarCuponPorIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse AutoServicioCineWeb.AutoservicioCineWS.CuponWS.listarCupones(AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest request) {
+            return base.Channel.listarCupones(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.cupon[] listarCupones() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest();
+            AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).listarCupones(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse> AutoServicioCineWeb.AutoservicioCineWS.CuponWS.listarCuponesAsync(AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest request) {
+            return base.Channel.listarCuponesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse> listarCuponesAsync() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarCuponesRequest();
+            return ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).listarCuponesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse AutoServicioCineWeb.AutoservicioCineWS.CuponWS.eliminarCupon(AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest request) {
+            return base.Channel.eliminarCupon(request);
+        }
+        
+        public void eliminarCupon(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).eliminarCupon(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse> AutoServicioCineWeb.AutoservicioCineWS.CuponWS.eliminarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest request) {
+            return base.Channel.eliminarCuponAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse> eliminarCuponAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).eliminarCuponAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse AutoServicioCineWeb.AutoservicioCineWS.CuponWS.actualizarCupon(AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest request) {
+            return base.Channel.actualizarCupon(request);
+        }
+        
+        public void actualizarCupon(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).actualizarCupon(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse> AutoServicioCineWeb.AutoservicioCineWS.CuponWS.actualizarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest request) {
+            return base.Channel.actualizarCuponAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse> actualizarCuponAsync(AutoServicioCineWeb.AutoservicioCineWS.cupon arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.CuponWS)(this)).actualizarCuponAsync(inValue);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", ConfigurationName="AutoservicioCineWS.SalaWS")]
     public interface SalaWS {
-        
-        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse eliminarSala(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> eliminarSalaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request);
         
         // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse")]
@@ -2604,14 +3212,13 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.registrarSalaResponse> registrarSalaAsync(AutoServicioCineWeb.AutoservicioCineWS.registrarSalaRequest request);
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse")]
+        // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse listarSalas(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request);
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse eliminarSala(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse")]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> listarSalasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> eliminarSalaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request);
         
         // CODEGEN: El parámetro 'arg0' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaResponse")]
@@ -2629,34 +3236,15 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdResponse")]
         System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.buscarSalaPorIdResponse> buscarSalaPorIdAsync(AutoServicioCineWeb.AutoservicioCineWS.buscarSalaPorIdRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarSala", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarSalaRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse listarSalas(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request);
         
-        public eliminarSalaRequest() {
-        }
-        
-        public eliminarSalaRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarSalaResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarSalaResponse {
-        
-        public eliminarSalaResponse() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest", ReplyAction="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse")]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> listarSalasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2690,28 +3278,28 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarSalas", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarSalasRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarSala", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarSalaRequest {
         
-        public listarSalasRequest() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public eliminarSalaRequest() {
+        }
+        
+        public eliminarSalaRequest(int arg0) {
+            this.arg0 = arg0;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarSalasResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarSalasResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarSalaResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarSalaResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AutoServicioCineWeb.AutoservicioCineWS.sala[] @return;
-        
-        public listarSalasResponse() {
-        }
-        
-        public listarSalasResponse(AutoServicioCineWeb.AutoservicioCineWS.sala[] @return) {
-            this.@return = @return;
+        public eliminarSalaResponse() {
         }
     }
     
@@ -2779,6 +3367,34 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarSalas", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarSalasRequest {
+        
+        public listarSalasRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarSalasResponse", WrapperNamespace="http://services.AutoCine.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarSalasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.AutoCine.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AutoServicioCineWeb.AutoservicioCineWS.sala[] @return;
+        
+        public listarSalasResponse() {
+        }
+        
+        public listarSalasResponse(AutoServicioCineWeb.AutoservicioCineWS.sala[] @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SalaWSChannel : AutoServicioCineWeb.AutoservicioCineWS.SalaWS, System.ServiceModel.IClientChannel {
     }
@@ -2807,28 +3423,6 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse AutoServicioCineWeb.AutoservicioCineWS.SalaWS.eliminarSala(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request) {
-            return base.Channel.eliminarSala(request);
-        }
-        
-        public void eliminarSala(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest();
-            inValue.arg0 = arg0;
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).eliminarSala(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> AutoServicioCineWeb.AutoservicioCineWS.SalaWS.eliminarSalaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request) {
-            return base.Channel.eliminarSalaAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> eliminarSalaAsync(int arg0) {
-            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest();
-            inValue.arg0 = arg0;
-            return ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).eliminarSalaAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         AutoServicioCineWeb.AutoservicioCineWS.registrarSalaResponse AutoServicioCineWeb.AutoservicioCineWS.SalaWS.registrarSala(AutoServicioCineWeb.AutoservicioCineWS.registrarSalaRequest request) {
             return base.Channel.registrarSala(request);
         }
@@ -2851,24 +3445,25 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse AutoServicioCineWeb.AutoservicioCineWS.SalaWS.listarSalas(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request) {
-            return base.Channel.listarSalas(request);
+        AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse AutoServicioCineWeb.AutoservicioCineWS.SalaWS.eliminarSala(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request) {
+            return base.Channel.eliminarSala(request);
         }
         
-        public AutoServicioCineWeb.AutoservicioCineWS.sala[] listarSalas() {
-            AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest();
-            AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).listarSalas(inValue);
-            return retVal.@return;
+        public void eliminarSala(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest();
+            inValue.arg0 = arg0;
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).eliminarSala(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> AutoServicioCineWeb.AutoservicioCineWS.SalaWS.listarSalasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request) {
-            return base.Channel.listarSalasAsync(request);
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> AutoServicioCineWeb.AutoservicioCineWS.SalaWS.eliminarSalaAsync(AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest request) {
+            return base.Channel.eliminarSalaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> listarSalasAsync() {
-            AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest();
-            return ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).listarSalasAsync(inValue);
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaResponse> eliminarSalaAsync(int arg0) {
+            AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.eliminarSalaRequest();
+            inValue.arg0 = arg0;
+            return ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).eliminarSalaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2914,6 +3509,27 @@ namespace AutoServicioCineWeb.AutoservicioCineWS {
             AutoServicioCineWeb.AutoservicioCineWS.buscarSalaPorIdRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.buscarSalaPorIdRequest();
             inValue.arg0 = arg0;
             return ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).buscarSalaPorIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse AutoServicioCineWeb.AutoservicioCineWS.SalaWS.listarSalas(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request) {
+            return base.Channel.listarSalas(request);
+        }
+        
+        public AutoServicioCineWeb.AutoservicioCineWS.sala[] listarSalas() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest();
+            AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse retVal = ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).listarSalas(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> AutoServicioCineWeb.AutoservicioCineWS.SalaWS.listarSalasAsync(AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest request) {
+            return base.Channel.listarSalasAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<AutoServicioCineWeb.AutoservicioCineWS.listarSalasResponse> listarSalasAsync() {
+            AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest inValue = new AutoServicioCineWeb.AutoservicioCineWS.listarSalasRequest();
+            return ((AutoServicioCineWeb.AutoservicioCineWS.SalaWS)(this)).listarSalasAsync(inValue);
         }
     }
 }

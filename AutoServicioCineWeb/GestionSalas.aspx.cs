@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AutoServicioCineWeb.SalaWS;
+using AutoServicioCineWeb.AutoservicioCineWS;
 
 namespace AutoServicioCineWeb
 {

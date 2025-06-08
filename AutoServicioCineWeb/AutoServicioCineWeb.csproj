@@ -175,6 +175,28 @@
     <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.sala.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.buscarCuponPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.cupon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarCuponesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\AutoservicioCineWS\CuponWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\CuponWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\ProductoWS.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -190,6 +212,7 @@
     <Content Include="GestionCupones.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="GestionPeliculas.aspx" />
+    <Content Include="GestionSalas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Admin.Master" />
     <Content Include="Form.Master" />
@@ -315,6 +338,13 @@
     </Compile>
     <Compile Include="GestionPeliculas.aspx.designer.cs">
       <DependentUpon>GestionPeliculas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionSalas.aspx.cs">
+      <DependentUpon>GestionSalas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionSalas.aspx.designer.cs">
+      <DependentUpon>GestionSalas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -1,7 +1,4 @@
-﻿<%@ Page Title="Gestión de Salas" Language="C#" 
-    MasterPageFile="~/Admin.Master" AutoEventWireup="true" 
-    CodeBehind="GestionSalas.aspx.cs" 
-    Inherits="AutoServicioCineWeb.GestionSalas" %>
+﻿<%@ Page Title="Gestión de Salas" Language="C#"  MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="GestionSalas.aspx.cs" Inherits="AutoServicioCineWeb.GestionSalas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Gestión de Salas

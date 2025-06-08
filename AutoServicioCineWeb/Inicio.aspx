@@ -23,7 +23,7 @@
                 <h1 class="titulo-pregunta">¿Qué desea comprar?</h1>
                 <div class="opciones">
                     <%-- Ajusta los href a las URLs reales de tus páginas .aspx (o HTML estáticas) --%>
-                    <a href="<%= ResolveUrl("~/Tickets.aspx") %>" class="opcion-1">
+                    <a href="<%= ResolveUrl("~/Peliculas.aspx") %>" class="opcion-1">
                         <img src="<%= ResolveUrl("~/images/ticket-inicio.png") %>" alt="Comprar entradas" />
                     </a>
                     <a href="<%= ResolveUrl("~/Comida.aspx") %>" class="opcion-2"> <%-- Cambia a la URL de tu página de comida --%>

@@ -5,17 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="registrarProducto">
+    <part name="parameters" element="tns:registrarProducto" />
+  </message>
+  <message name="registrarProductoResponse">
+    <part name="parameters" element="tns:registrarProductoResponse" />
+  </message>
   <message name="listarProductos">
     <part name="parameters" element="tns:listarProductos" />
   </message>
   <message name="listarProductosResponse">
     <part name="parameters" element="tns:listarProductosResponse" />
-  </message>
-  <message name="buscarProductoPorId">
-    <part name="parameters" element="tns:buscarProductoPorId" />
-  </message>
-  <message name="buscarProductoPorIdResponse">
-    <part name="parameters" element="tns:buscarProductoPorIdResponse" />
   </message>
   <message name="eliminarProducto">
     <part name="parameters" element="tns:eliminarProducto" />
@@ -29,20 +29,20 @@
   <message name="actualizarProductoResponse">
     <part name="parameters" element="tns:actualizarProductoResponse" />
   </message>
-  <message name="registrarProducto">
-    <part name="parameters" element="tns:registrarProducto" />
+  <message name="buscarProductoPorId">
+    <part name="parameters" element="tns:buscarProductoPorId" />
   </message>
-  <message name="registrarProductoResponse">
-    <part name="parameters" element="tns:registrarProductoResponse" />
+  <message name="buscarProductoPorIdResponse">
+    <part name="parameters" element="tns:buscarProductoPorIdResponse" />
   </message>
   <portType name="ProductoWS">
+    <operation name="registrarProducto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest" message="tns:registrarProducto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse" message="tns:registrarProductoResponse" />
+    </operation>
     <operation name="listarProductos">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
-    </operation>
-    <operation name="buscarProductoPorId">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest" message="tns:buscarProductoPorId" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse" message="tns:buscarProductoPorIdResponse" />
     </operation>
     <operation name="eliminarProducto">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoRequest" message="tns:eliminarProducto" />
@@ -52,14 +52,14 @@
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoRequest" message="tns:actualizarProducto" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoResponse" message="tns:actualizarProductoResponse" />
     </operation>
-    <operation name="registrarProducto">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest" message="tns:registrarProducto" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse" message="tns:registrarProductoResponse" />
+    <operation name="buscarProductoPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest" message="tns:buscarProductoPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse" message="tns:buscarProductoPorIdResponse" />
     </operation>
   </portType>
   <binding name="ProductoWSPortBinding" type="tns:ProductoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarProductos">
+    <operation name="registrarProducto">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -68,7 +68,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="buscarProductoPorId">
+    <operation name="listarProductos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -95,7 +95,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="registrarProducto">
+    <operation name="buscarProductoPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

@@ -10,12 +10,9 @@
   <xs:element name="listarProductosResponse" type="tns:listarProductosResponse" />
   <xs:element name="registrarProducto" type="tns:registrarProducto" />
   <xs:element name="registrarProductoResponse" type="tns:registrarProductoResponse" />
-  <xs:complexType name="listarProductos">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarProductosResponse">
+  <xs:complexType name="registrarProducto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+      <xs:element minOccurs="0" name="arg0" type="tns:producto" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="producto">
@@ -28,13 +25,16 @@
       <xs:element minOccurs="0" name="tipo" type="tns:tipoProducto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="registrarProducto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:producto" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="registrarProductoResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarProductos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarProductosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarProducto">
     <xs:sequence>
@@ -42,6 +42,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarProductoResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="actualizarProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarProductoResponse">
     <xs:sequence />
   </xs:complexType>
   <xs:complexType name="buscarProductoPorId">
@@ -53,14 +61,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:producto" />
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="actualizarProducto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:producto" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="actualizarProductoResponse">
-    <xs:sequence />
   </xs:complexType>
   <xs:simpleType name="tipoProducto">
     <xs:restriction base="xs:string">

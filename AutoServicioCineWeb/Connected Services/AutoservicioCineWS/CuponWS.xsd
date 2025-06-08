@@ -22,6 +22,7 @@
   </xs:complexType>
   <xs:complexType name="cupon">
     <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
       <xs:element minOccurs="0" name="codigo" type="xs:string" />
       <xs:element minOccurs="0" name="creadoPor" type="tns:usuario" />
       <xs:element minOccurs="0" name="cuponId" type="xs:int" />

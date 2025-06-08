@@ -125,6 +125,14 @@
   <xs:complexType name="eliminarPeliculaResponse">
     <xs:sequence />
   </xs:complexType>
+  <xs:complexType name="listarPeliculas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarPeliculasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="buscarPeliculaPorId">
     <xs:sequence>
       <xs:element name="arg0" type="xs:int" />
@@ -133,14 +141,6 @@
   <xs:complexType name="buscarPeliculaPorIdResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:pelicula" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarPeliculas">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarPeliculasResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="registrarPelicula">

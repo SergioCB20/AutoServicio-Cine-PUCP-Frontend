@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="eliminarCupon">
-    <part name="parameters" element="tns:eliminarCupon" />
+  <message name="registrarCupon">
+    <part name="parameters" element="tns:registrarCupon" />
   </message>
-  <message name="eliminarCuponResponse">
-    <part name="parameters" element="tns:eliminarCuponResponse" />
+  <message name="registrarCuponResponse">
+    <part name="parameters" element="tns:registrarCuponResponse" />
   </message>
   <message name="buscarCuponPorId">
     <part name="parameters" element="tns:buscarCuponPorId" />
@@ -17,17 +17,17 @@
   <message name="buscarCuponPorIdResponse">
     <part name="parameters" element="tns:buscarCuponPorIdResponse" />
   </message>
-  <message name="registrarCupon">
-    <part name="parameters" element="tns:registrarCupon" />
-  </message>
-  <message name="registrarCuponResponse">
-    <part name="parameters" element="tns:registrarCuponResponse" />
-  </message>
   <message name="listarCupones">
     <part name="parameters" element="tns:listarCupones" />
   </message>
   <message name="listarCuponesResponse">
     <part name="parameters" element="tns:listarCuponesResponse" />
+  </message>
+  <message name="eliminarCupon">
+    <part name="parameters" element="tns:eliminarCupon" />
+  </message>
+  <message name="eliminarCuponResponse">
+    <part name="parameters" element="tns:eliminarCuponResponse" />
   </message>
   <message name="actualizarCupon">
     <part name="parameters" element="tns:actualizarCupon" />
@@ -36,21 +36,21 @@
     <part name="parameters" element="tns:actualizarCuponResponse" />
   </message>
   <portType name="CuponWS">
-    <operation name="eliminarCupon">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponRequest" message="tns:eliminarCupon" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponResponse" message="tns:eliminarCuponResponse" />
+    <operation name="registrarCupon">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponRequest" message="tns:registrarCupon" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponResponse" message="tns:registrarCuponResponse" />
     </operation>
     <operation name="buscarCuponPorId">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdRequest" message="tns:buscarCuponPorId" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdResponse" message="tns:buscarCuponPorIdResponse" />
     </operation>
-    <operation name="registrarCupon">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponRequest" message="tns:registrarCupon" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/registrarCuponResponse" message="tns:registrarCuponResponse" />
-    </operation>
     <operation name="listarCupones">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
+    </operation>
+    <operation name="eliminarCupon">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponRequest" message="tns:eliminarCupon" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/eliminarCuponResponse" message="tns:eliminarCuponResponse" />
     </operation>
     <operation name="actualizarCupon">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponRequest" message="tns:actualizarCupon" />
@@ -59,7 +59,7 @@
   </portType>
   <binding name="CuponWSPortBinding" type="tns:CuponWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarCupon">
+    <operation name="registrarCupon">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -77,7 +77,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="registrarCupon">
+    <operation name="listarCupones">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -86,7 +86,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarCupones">
+    <operation name="eliminarCupon">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

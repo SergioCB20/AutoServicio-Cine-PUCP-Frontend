@@ -25,11 +25,13 @@
     <MetadataFile FileName="ComboItemWS.xsd" MetadataType="Schema" ID="628e9213-453e-414b-b615-375725e8fc0b" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" />
     <MetadataFile FileName="PeliculaWS.xsd" MetadataType="Schema" ID="7fb7849c-5f58-442e-8238-06144fc978bc" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" />
     <MetadataFile FileName="ProductoWS.wsdl" MetadataType="Wsdl" ID="38b465e6-4106-4835-bb64-4325041565d2" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?wsdl" />
+    <MetadataFile FileName="CuponWS.xsd" MetadataType="Schema" ID="7aca7e6c-15b5-4c13-80c0-7b48b22ae40e" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=1" />
     <MetadataFile FileName="PeliculaWS.wsdl" MetadataType="Wsdl" ID="71f0e5c2-4a03-40a1-bff8-e49a8f2b0e2f" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?wsdl" />
     <MetadataFile FileName="ComboItemWS.wsdl" MetadataType="Wsdl" ID="76fd6c0c-445c-4659-b430-bd31ad556fbb" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?wsdl" />
     <MetadataFile FileName="SalaWS.xsd" MetadataType="Schema" ID="a65ea7da-22d8-47a9-b211-80291a4f4213" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" />
-    <MetadataFile FileName="servicios.disco" MetadataType="Disco" ID="c5cc547c-9c78-4495-8798-99999e36bb93" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/servicios.disco" />
     <MetadataFile FileName="ProductoWS.xsd" MetadataType="Schema" ID="e955c7e7-89fc-4d19-89ef-21e2a52a1847" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=1" />
+    <MetadataFile FileName="servicios.disco" MetadataType="Disco" ID="c5cc547c-9c78-4495-8798-99999e36bb93" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/servicios.disco" />
+    <MetadataFile FileName="CuponWS.wsdl" MetadataType="Wsdl" ID="281a5848-3af0-4746-91ee-8d0d3bfa5602" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?wsdl" />
     <MetadataFile FileName="SalaWS.wsdl" MetadataType="Wsdl" ID="bd3d04b9-753a-4896-bf41-11228fc0d886" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?wsdl" />
   </Metadata>
   <Extensions>

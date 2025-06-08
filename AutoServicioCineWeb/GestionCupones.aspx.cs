@@ -1,4 +1,4 @@
-﻿using AutoServicioCineWeb.CuponWS;
+﻿using AutoServicioCineWeb.AutoservicioCineWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,8 +142,8 @@ namespace AutoServicioCineWeb
                 codigo = txtCodigo.Text.Trim().ToUpper(),
                 descripcionEn = txtDescripcion.Text.Trim(),
                 descuentoValor = Convert.ToInt32(txtPorcentajeDescuento.Text),
-                descuentoTipo = (AutoServicioCineWeb.CuponWS.tipoDescuento)Enum.Parse(
-                                    typeof(AutoServicioCineWeb.CuponWS.tipoDescuento),
+                descuentoTipo = (AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento)Enum.Parse(
+                                    typeof(AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento),
                                     ddlDescuentoTipo.SelectedValue,
                                     true // Ignorar mayúsculas/minúsculas
                                 ),
