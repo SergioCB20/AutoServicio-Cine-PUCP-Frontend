@@ -1,88 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-// Make sure this namespace is correct for your service reference
 using AutoServicioCineWeb.AutoservicioCineWS;
 
 namespace AutoServicioCineWeb
 {
     public partial class GestionPeliculas : System.Web.UI.Page
     {
-        // Declare the SOAP client proxy
-        // Use a lazy initialization or create in Page_Load if you prefer
         private readonly PeliculaWSClient peliculaServiceClient;
+        // Cachear la lista de películas para las estadísticas y filtrado
+        private List<pelicula> _cachedPeliculas;
 
         public GestionPeliculas()
         {
-            // Initialize the SOAP client
             peliculaServiceClient = new PeliculaWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) // Only execute on the initial page load, not on postbacks
+            if (!IsPostBack)
             {
                 CargarPeliculas();
             }
-        }
-
-        // New helper method to load movie data into the modal for editing
-        private void CargarDatosPeliculaParaEdicion(int peliculaId)
-        {
-            try
-            {
-                // Use the SOAP client to find movie by ID
-                pelicula peli = peliculaServiceClient.buscarPeliculaPorId(peliculaId);
-
-                if (peli != null)
-                {
-                    txtTituloEs.Text = peli.tituloEs;
-                    txtTituloEn.Text = peli.tituloEn;
-                    txtDuracionMin.Text = peli.duracionMin.ToString();
-                    ddlClasificacion.SelectedValue = peli.clasificacion; // Set dropdown selected value
-                    txtSinopsisEs.Text = peli.sinopsisEs;
-                    txtSinopsisEn.Text = peli.sinopsisEn;
-                    chkEstaActiva.Checked = peli.estaActiva;
-                    txtImagenUrl.Text = peli.imagenUrl;
-                    hdnExistingImageUrl.Value = peli.imagenUrl; // Store for client-side preview re-application
-
-                    // Register script to show the modal and populate image preview
-                    string script = $"showEditPeliculaModal({peli.peliculaId}, '{peli.tituloEs.Replace("'", "\\'")}', '{peli.tituloEn.Replace("'", "\\'")}', '{peli.sinopsisEs.Replace("'", "\\'")}', '{peli.sinopsisEn.Replace("'", "\\'")}', {peli.duracionMin}, '{peli.clasificacion}', '{peli.imagenUrl.Replace("'", "\\'")}', {peli.estaActiva.ToString().ToLower()});";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowEditModal", script, true);
-                }
-                else
-                {
-                    litMensajeModal.Text = "Película no encontrada para edición.";
-                    // Optionally, redirect if movie not found
-                    // Response.Redirect("GestionPeliculas.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-                litMensajeModal.Text = "Error al cargar datos de película para edición: " + ex.Message;
-                System.Diagnostics.Debug.WriteLine("Error al cargar datos de película para edición: " + ex.ToString());
-            }
+            // Después de cualquier postback, asegurarnos de que la previsualización de imagen funcione
+            // Si hay una URL en el campo de texto, llama a previewImage.
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ReapplyImagePreview",
+                "const txtImageUrlElement = document.getElementById('" + txtImagenUrl.ClientID + "'); if (txtImageUrlElement && txtImageUrlElement.value) { previewImage(txtImageUrlElement); }", true);
         }
 
         private void CargarPeliculas()
         {
             try
             {
-                List<pelicula> peliculas = peliculaServiceClient.listarPeliculas().ToList();
+                // Solo cargar de la BD si no está cacheado (o si es el primer postback relevante)
+                _cachedPeliculas = peliculaServiceClient.listarPeliculas().ToList();
 
-                // Apply filters
-                peliculas = FiltrarPeliculas(peliculas);
+                // Aplicar filtros a la lista cacheada
+                List<pelicula> peliculasFiltradas = FiltrarPeliculas(_cachedPeliculas);
 
-                gvPeliculas.DataSource = peliculas;
+                gvPeliculas.DataSource = peliculasFiltradas;
                 gvPeliculas.DataBind();
             }
             catch (Exception ex)
             {
-                // Ensure litMensajeModal is visible or use a different mechanism for error display
+                // Asegúrate de que litMensajeModal sea visible al usuario si no está en el modal
+                // O usa un control de mensaje en la página principal
                 litMensajeModal.Text = "Error al cargar películas: " + ex.Message;
                 System.Diagnostics.Debug.WriteLine("Error al cargar películas: " + ex.ToString());
             }
@@ -90,7 +54,6 @@ namespace AutoServicioCineWeb
 
         private List<pelicula> FiltrarPeliculas(List<pelicula> peliculas)
         {
-            // Filter by search text
             if (!string.IsNullOrWhiteSpace(txtSearchPeliculas.Text))
             {
                 string searchTerm = txtSearchPeliculas.Text.Trim().ToLower();
@@ -102,7 +65,6 @@ namespace AutoServicioCineWeb
                 ).ToList();
             }
 
-            // Filter by classification
             if (!string.IsNullOrEmpty(ddlClasificacionFilter.SelectedValue))
             {
                 string classificationFilter = ddlClasificacionFilter.SelectedValue;
@@ -123,21 +85,20 @@ namespace AutoServicioCineWeb
 
             if (e.CommandName == "EditPelicula")
             {
-                hdnPeliculaId.Value = peliculaId.ToString(); // Set the hidden field ID for the modal form
+                hdnPeliculaId.Value = peliculaId.ToString();
                 litModalTitle.Text = "Editar Película";
-                CargarDatosPeliculaParaEdicion(peliculaId); // Reuse the loading logic
+                CargarDatosPeliculaParaEdicion(peliculaId);
+                MostrarModal(); // Abre el modal después de cargar los datos
             }
             else if (e.CommandName == "DeletePelicula")
             {
                 try
                 {
-                    // Call the delete method from your SOAP client
-                    peliculaServiceClient.eliminarPelicula(peliculaId); // Assuming 'eliminarPelicula' exists
-
+                    peliculaServiceClient.eliminarPelicula(peliculaId);
                     litMensajeModal.Text = "Película eliminada exitosamente.";
-                    CargarPeliculas(); // Reload the GridView
-                    // Clear message after a short delay or after next postback if it's for user feedback
-                    // ScriptManager.RegisterStartupScript(this, this.GetType(), "ClearMessage", "setTimeout(function(){ document.getElementById('" + litMensajeModal.ClientID + "').innerHTML = ''; }, 3000);", true);
+                    // Recargar la lista completa después de eliminar para actualizar estadísticas y GridView
+                    _cachedPeliculas = null; // Invalida la caché para que se vuelva a cargar
+                    CargarPeliculas();
                 }
                 catch (Exception ex)
                 {
@@ -147,6 +108,39 @@ namespace AutoServicioCineWeb
             }
         }
 
+        private void CargarDatosPeliculaParaEdicion(int peliculaId)
+        {
+            try
+            {
+                pelicula peli = peliculaServiceClient.buscarPeliculaPorId(peliculaId);
+
+                if (peli != null)
+                {
+                    txtTituloEs.Text = peli.tituloEs;
+                    txtTituloEn.Text = peli.tituloEn;
+                    txtDuracionMin.Text = peli.duracionMin.ToString();
+                    ddlClasificacion.SelectedValue = peli.clasificacion;
+                    txtSinopsisEs.Text = peli.sinopsisEs;
+                    txtSinopsisEn.Text = peli.sinopsisEn;
+                    chkEstaActiva.Checked = peli.estaActiva;
+                    txtImagenUrl.Text = peli.imagenUrl;
+                    hdnExistingImageUrl.Value = peli.imagenUrl; // Guarda la URL original
+
+                    // Llama a la función JS para previsualizar la imagen si existe
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
+                        "previewImage(document.getElementById('" + txtImagenUrl.ClientID + "'));", true);
+                }
+                else
+                {
+                    litMensajeModal.Text = "Película no encontrada para edición.";
+                }
+            }
+            catch (Exception ex)
+            {
+                litMensajeModal.Text = "Error al cargar datos de película para edición: " + ex.Message;
+                System.Diagnostics.Debug.WriteLine("Error al cargar datos de película para edición: " + ex.ToString());
+            }
+        }
 
         protected void btnGuardarPelicula_Click(object sender, EventArgs e)
         {
@@ -155,69 +149,83 @@ namespace AutoServicioCineWeb
             if (!Page.IsValid)
             {
                 litMensajeModal.Text = "Por favor, corrige los errores en el formulario.";
-                // Re-show the modal if validation fails
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "openPeliculaModal();", true);
+                MostrarModal(); // Vuelve a mostrar el modal con los errores de validación
                 return;
             }
 
             pelicula peli = new pelicula
             {
                 peliculaId = Convert.ToInt32(hdnPeliculaId.Value),
-                peliculaIdSpecified = true, // Must be true when sending an explicit ID (even 0 for new)
+                peliculaIdSpecified = true,
 
                 tituloEs = txtTituloEs.Text,
                 tituloEn = txtTituloEn.Text,
                 duracionMin = Convert.ToInt32(txtDuracionMin.Text),
-                clasificacion = ddlClasificacion.SelectedValue, // Get value from DropDownList
+                clasificacion = ddlClasificacion.SelectedValue,
                 sinopsisEs = txtSinopsisEs.Text,
                 sinopsisEn = txtSinopsisEn.Text,
                 estaActiva = chkEstaActiva.Checked,
                 imagenUrl = txtImagenUrl.Text.Trim(),
-
-                usuarioModificacion = 4 // Your fixed user ID
+                usuarioModificacion = 4, // Your fixed user ID
+                usuarioModificacionSpecified = true
             };
-            // Ensure this is set to true for userModificacion to be sent
-            peli.usuarioModificacionSpecified = true;
-
-
-            // Debug output in Visual Studio's Output window
-            System.Diagnostics.Debug.WriteLine("--- C# Pelicula object before sending ---");
-            System.Diagnostics.Debug.WriteLine($"peliculaId: {peli.peliculaId}");
-            System.Diagnostics.Debug.WriteLine($"peliculaIdSpecified: {peli.peliculaIdSpecified}");
-            System.Diagnostics.Debug.WriteLine($"tituloEs: {peli.tituloEs}");
-            System.Diagnostics.Debug.WriteLine($"duracionMin: {peli.duracionMin}");
-            System.Diagnostics.Debug.WriteLine($"estaActiva: {peli.estaActiva}");
-            System.Diagnostics.Debug.WriteLine($"usuarioModificacion: {peli.usuarioModificacion}");
-            System.Diagnostics.Debug.WriteLine($"usuarioModificacionSpecified: {peli.usuarioModificacionSpecified}");
-            System.Diagnostics.Debug.WriteLine("-----------------------------------------");
 
             try
             {
                 if (peli.peliculaId == 0)
                 {
-                    // Call registrarPelicula which will handle setting fecha_modificacion in DB
                     peliculaServiceClient.registrarPelicula(peli);
                     litMensajeModal.Text = "Película agregada exitosamente.";
                 }
                 else
                 {
-                    // Call actualizarPelicula
                     peliculaServiceClient.actualizarPelicula(peli);
                     litMensajeModal.Text = "Película actualizada exitosamente.";
                 }
 
-                CargarPeliculas(); // Reload the GridView to show updated data
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "HideModal", "closePeliculaModal();", true);
+                _cachedPeliculas = null; // Invalida la caché para que se vuelva a cargar
+                CargarPeliculas(); // Recarga el GridView y las estadísticas
+                OcultarModal(); // Cierra el modal
             }
             catch (Exception ex)
             {
                 litMensajeModal.Text = $"Error al guardar la película: {ex.Message}";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "openPeliculaModal();", true);
+                MostrarModal(); // Si hay error, mantener el modal abierto para que el usuario vea el mensaje
                 System.Diagnostics.Debug.WriteLine("Error al guardar película: " + ex.ToString());
             }
         }
 
+        // --- Nuevos métodos para manejar el modal desde el CodeBehind ---
+        private void MostrarModal()
+        {
+            peliculaModal.Style["display"] = "flex"; // Establece display: flex para mostrar el modal
+        }
 
+        private void OcultarModal()
+        {
+            peliculaModal.Style["display"] = "none"; // Oculta el modal
+            litMensajeModal.Text = ""; // Limpia el mensaje del modal al cerrarlo
+        }
+
+        protected void btnOpenAddModal_Click(object sender, EventArgs e)
+        {
+            hdnPeliculaId.Value = "0"; // Reinicia el ID para indicar nueva película
+            litModalTitle.Text = "Agregar Nueva ";
+            LimpiarCamposModal(); // Limpia los campos del formulario
+            // Llama a la función JS para limpiar validadores client-side
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ClearValidators", "clearModalValidators();", true);
+            MostrarModal(); // Muestra el modal
+        }
+
+        protected void btnCancelModal_Click(object sender, EventArgs e)
+        {
+            OcultarModal(); // Cierra el modal
+        }
+
+        protected void btnCloseModal_Click(object sender, EventArgs e)
+        {
+            OcultarModal(); // Cierra el modal
+        }
 
         private void LimpiarCamposModal()
         {
@@ -226,81 +234,67 @@ namespace AutoServicioCineWeb
             txtSinopsisEs.Text = "";
             txtSinopsisEn.Text = "";
             txtDuracionMin.Text = "";
-            ddlClasificacion.SelectedValue = ""; // Clear dropdown selection
+            ddlClasificacion.SelectedValue = ""; // Limpia la selección del dropdown
             txtImagenUrl.Text = "";
-            chkEstaActiva.Checked = true; // Default to active
-            litMensajeModal.Text = ""; // Clear any previous messages
+            chkEstaActiva.Checked = true; // Valor predeterminado a activa
 
-            // Ensure image preview is hidden
+            // Oculta la previsualización de imagen
             imgPreview.ImageUrl = "";
             imgPreview.Style["display"] = "none";
-            hdnExistingImageUrl.Value = ""; // Clear hidden field for image URL
+            hdnExistingImageUrl.Value = "";
         }
 
-        // --- Métodos para estadísticas (llamados desde el script JS) ---
+        // --- Métodos para estadísticas (optimizados para usar la caché) ---
+        // Asegurarse de que _cachedPeliculas no sea null antes de usarlo
+        private List<pelicula> GetCachedPeliculas()
+        {
+            if (_cachedPeliculas == null)
+            {
+                // Si la caché es nula, la recargamos. Esto asegura que los métodos de estadísticas
+                // siempre tengan datos, incluso si no se ha llamado a CargarPeliculas() directamente.
+                try
+                {
+                    _cachedPeliculas = peliculaServiceClient.listarPeliculas().ToList();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al obtener películas para estadísticas: " + ex.ToString());
+                    _cachedPeliculas = new List<pelicula>(); // Retorna una lista vacía para evitar NullReferenceException
+                }
+            }
+            return _cachedPeliculas;
+        }
+
         public int GetTotalPeliculas()
         {
-            try
-            {
-                return peliculaServiceClient.listarPeliculas().Length;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error al obtener total de películas: " + ex.ToString());
-                return 0;
-            }
+            return GetCachedPeliculas().Count;
         }
 
         public int GetPeliculasActivas()
         {
-            try
-            {
-                // Assuming listarPeliculas returns all movies, then filter them
-                return peliculaServiceClient.listarPeliculas().Count(p => p.estaActiva);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error al obtener películas activas: " + ex.ToString());
-                return 0;
-            }
+            return GetCachedPeliculas().Count(p => p.estaActiva);
         }
 
         public int GetPeliculasInactivas()
         {
-            try
-            {
-                return peliculaServiceClient.listarPeliculas().Count(p => !p.estaActiva);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error al obtener películas inactivas: " + ex.ToString());
-                return 0;
-            }
+            return GetCachedPeliculas().Count(p => !p.estaActiva);
         }
 
         public int GetClasificacionesUnicas()
         {
-            try
-            {
-                return peliculaServiceClient.listarPeliculas().Select(p => p.clasificacion).Distinct().Count();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error al obtener clasificaciones únicas: " + ex.ToString());
-                return 0;
-            }
+            return GetCachedPeliculas().Select(p => p.clasificacion).Distinct().Count();
         }
 
         protected void txtSearchPeliculas_TextChanged(object sender, EventArgs e)
         {
             gvPeliculas.PageIndex = 0; // Reset pagination when searching
-            CargarPeliculas();
+            CargarPeliculas(); // Recarga aplicando el filtro
         }
 
         protected void ddlClasificacionFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             gvPeliculas.PageIndex = 0; // Reset pagination when filtering
-            CargarPeliculas();
+            CargarPeliculas(); // Recarga aplicando el filtro
         }
     }
 }

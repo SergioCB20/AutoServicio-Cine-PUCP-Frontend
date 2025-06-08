@@ -5,12 +5,6 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="registrarPelicula">
-    <part name="parameters" element="tns:registrarPelicula" />
-  </message>
-  <message name="registrarPeliculaResponse">
-    <part name="parameters" element="tns:registrarPeliculaResponse" />
-  </message>
   <message name="actualizarPelicula">
     <part name="parameters" element="tns:actualizarPelicula" />
   </message>
@@ -29,6 +23,12 @@
   <message name="listarPeliculasResponse">
     <part name="parameters" element="tns:listarPeliculasResponse" />
   </message>
+  <message name="registrarPelicula">
+    <part name="parameters" element="tns:registrarPelicula" />
+  </message>
+  <message name="registrarPeliculaResponse">
+    <part name="parameters" element="tns:registrarPeliculaResponse" />
+  </message>
   <message name="buscarPeliculaPorId">
     <part name="parameters" element="tns:buscarPeliculaPorId" />
   </message>
@@ -36,10 +36,6 @@
     <part name="parameters" element="tns:buscarPeliculaPorIdResponse" />
   </message>
   <portType name="PeliculaWS">
-    <operation name="registrarPelicula">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaRequest" message="tns:registrarPelicula" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaResponse" message="tns:registrarPeliculaResponse" />
-    </operation>
     <operation name="actualizarPelicula">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/actualizarPeliculaRequest" message="tns:actualizarPelicula" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/actualizarPeliculaResponse" message="tns:actualizarPeliculaResponse" />
@@ -52,6 +48,10 @@
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest" message="tns:listarPeliculas" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse" message="tns:listarPeliculasResponse" />
     </operation>
+    <operation name="registrarPelicula">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaRequest" message="tns:registrarPelicula" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaResponse" message="tns:registrarPeliculaResponse" />
+    </operation>
     <operation name="buscarPeliculaPorId">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdRequest" message="tns:buscarPeliculaPorId" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/buscarPeliculaPorIdResponse" message="tns:buscarPeliculaPorIdResponse" />
@@ -59,15 +59,6 @@
   </portType>
   <binding name="PeliculaWSPortBinding" type="tns:PeliculaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="registrarPelicula">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="actualizarPelicula">
       <soap:operation soapAction="" />
       <input>
@@ -87,6 +78,15 @@
       </output>
     </operation>
     <operation name="listarPeliculas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registrarPelicula">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

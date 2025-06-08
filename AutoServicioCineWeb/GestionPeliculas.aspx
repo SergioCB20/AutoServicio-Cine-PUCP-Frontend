@@ -10,7 +10,7 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="./styles/GestionPeliculas.css">
     <script type="text/javascript">
-        // Función para previsualizar la imagen seleccionada desde la URL
+        // Función para previsualizar la imagen seleccionada desde la URL (SE MANTIENE)
         function previewImage(input) {
             const imageUrl = input.value;
             const imgPreviewElement = document.getElementById('<%= imgPreview.ClientID %>');
@@ -24,10 +24,10 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
             }
         }
 
-        // Script para activar el elemento del menú de navegación (si usas un sidebar)
+        // Script para activar el elemento del menú de navegación (se mantiene)
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.sidebar ul li a'); // Asumiendo que tu sidebar tiene esta estructura
+            const navLinks = document.querySelectorAll('.sidebar ul li a');
             navLinks.forEach(link => {
                 if (link.href && link.href.includes(currentPath)) {
                     link.parentElement.classList.add('active');
@@ -36,6 +36,22 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
                 }
             });
         });
+
+        // Función para limpiar validadores (se mantiene, llamada desde el CodeBehind)
+        function clearModalValidators() {
+            if (typeof (Page_Validators) !== 'undefined') {
+                for (var i = 0; i < Page_Validators.length; i++) {
+                    if (Page_Validators[i].validationGroup === "PeliculaValidation") {
+                        ValidatorHookupControlID(Page_Validators[i].controltovalidate, Page_Validators[i]);
+                        ValidatorUpdateDisplay(Page_Validators[i]);
+                        Page_Validators[i].isvalid = true;
+                        if (Page_Validators[i].style.display !== "none") {
+                            Page_Validators[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
     </script>
 </asp:Content>
 
@@ -48,27 +64,26 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 </asp:Content>
 
 <asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server">
-    <button type="button" class="btn btn-primary" onclick="openPeliculaModal()">
-        ➕ Agregar Nueva Película
-    </button>
+    <%-- El botón ahora provoca un PostBack para que el CodeBehind abra el modal --%>
+    <asp:Button ID="btnOpenAddModal" runat="server" Text="➕ Agregar Nueva Película" CssClass="btn btn-primary" OnClick="btnOpenAddModal_Click" />
 </asp:Content>
 
 <asp:Content ID="ContentMain" ContentPlaceHolderID="MainContent" runat="server">
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number" id="totalPeliculas">0</div>
+            <div class="stat-number" id="totalPeliculas"><%= GetTotalPeliculas() %></div>
             <div class="stat-label">Total Películas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasActivas">0</div>
+            <div class="stat-number" id="peliculasActivas"><%= GetPeliculasActivas() %></div>
             <div class="stat-label">Activas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasInactivas">0</div>
+            <div class="stat-number" id="peliculasInactivas"><%= GetPeliculasInactivas() %></div>
             <div class="stat-label">Inactivas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="totalClasificaciones">0</div>
+            <div class="stat-number" id="totalClasificaciones"><%= GetClasificacionesUnicas() %></div>
             <div class="stat-label">Clasificaciones Únicas</div>
         </div>
     </div>
@@ -113,7 +128,7 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
                         </span>
                     </ItemTemplate>
                 </asp:TemplateField>
-                   <asp:TemplateField HeaderText="Estado">
+                <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate>
                         <span class="status-badge status-<%# Eval("EstaActiva").ToString().ToLower() == "true" ? "activa" : "inactiva" %>">
                             <%# Eval("EstaActiva").ToString().ToLower() == "true" ? "Activa" : "Inactiva" %>
@@ -142,13 +157,14 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
     </div>
 
     <%-- Modal para Agregar/Editar Película --%>
-    <div class="modal" id="peliculaModal">
+    <div class="modal" id="peliculaModal" runat="server"> <%-- Agregamos runat="server" --%>
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">
                     <asp:Literal ID="litModalTitle" runat="server" Text=""></asp:Literal> Película
                 </h2>
-                <span class="close-button" onclick="closePeliculaModal()">&times;</span>
+                <%-- El botón de cerrar ahora provoca un PostBack con un CommandName específico --%>
+                <asp:LinkButton ID="btnCloseModal" runat="server" CssClass="close-button" OnClick="btnCloseModal_Click">&times;</asp:LinkButton>
             </div>
 
             <div class="form-grid">
@@ -181,12 +197,12 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
                 <div class="form-group">
                     <label for="<%= ddlClasificacion.ClientID %>" class="form-label">Clasificación:</label>
                     <asp:DropDownList ID="ddlClasificacion" runat="server" CssClass="form-control">
-                           <asp:ListItem Value="">Seleccionar</asp:ListItem>
-                           <asp:ListItem Value="G">G</asp:ListItem>
-                           <asp:ListItem Value="PG">PG</asp:ListItem>
-                           <asp:ListItem Value="PG-13">PG-13</asp:ListItem>
-                           <asp:ListItem Value="R">R</asp:ListItem>
-                           <asp:ListItem Value="NC-17">NC-17</asp:ListItem>
+                        <asp:ListItem Value="">Seleccionar</asp:ListItem>
+                        <asp:ListItem Value="G">G</asp:ListItem>
+                        <asp:ListItem Value="PG">PG</asp:ListItem>
+                        <asp:ListItem Value="PG-13">PG-13</asp:ListItem>
+                        <asp:ListItem Value="R">R</asp:ListItem>
+                        <asp:ListItem Value="NC-17">NC-17</asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvClasificacionModal" runat="server" ControlToValidate="ddlClasificacion" InitialValue="" ErrorMessage="La clasificación es requerida." Display="Dynamic" ForeColor="Red" ValidationGroup="PeliculaValidation"></asp:RequiredFieldValidator>
                 </div>
@@ -213,7 +229,8 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 
             <div class="form-actions">
                 <asp:HiddenField ID="hdnPeliculaId" runat="server" Value="0" />
-                <button type="button" class="btn btn-secondary" onclick="closePeliculaModal()">Cancelar</button>
+                <%-- El botón Cancelar ahora provoca un PostBack para que el CodeBehind cierre el modal --%>
+                <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelModal_Click" CausesValidation="false" />
                 <asp:Button ID="btnGuardarPelicula" runat="server" Text="Guardar Película" CssClass="btn btn-primary" OnClick="btnGuardarPelicula_Click" ValidationGroup="PeliculaValidation" />
             </div>
             <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
@@ -230,109 +247,6 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 </asp:Content>
 
 <asp:Content ID="ContentScript" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script type="text/javascript">
-        function openPeliculaModal() {
-            document.getElementById('peliculaModal').style.display = 'flex';
-            document.getElementById('<%= litModalTitle.ClientID %>').textContent = 'Agregar Nueva ';
-            // Clear form fields and validation messages
-            document.getElementById('<%= hdnPeliculaId.ClientID %>').value = '0';
-            document.getElementById('<%= txtTituloEs.ClientID %>').value = '';
-            document.getElementById('<%= txtTituloEn.ClientID %>').value = '';
-            document.getElementById('<%= txtSinopsisEs.ClientID %>').value = '';
-            document.getElementById('<%= txtSinopsisEn.ClientID %>').value = '';
-            document.getElementById('<%= txtDuracionMin.ClientID %>').value = '';
-            document.getElementById('<%= ddlClasificacion.ClientID %>').value = ''; // Clear dropdown selection
-            document.getElementById('<%= txtImagenUrl.ClientID %>').value = '';
-            document.getElementById('<%= chkEstaActiva.ClientID %>').checked = true; // Default to active
-
-            // Hide image preview
-            document.getElementById('<%= imgPreview.ClientID %>').src = '';
-            document.getElementById('<%= imgPreview.ClientID %>').style.display = 'none';
-            document.getElementById('<%= hdnExistingImageUrl.ClientID %>').value = '';
-
-
-            // Clear client-side validation messages
-            if (typeof (Page_Validators) !== 'undefined') {
-                for (var i = 0; i < Page_Validators.length; i++) {
-                    if (Page_Validators[i].validationGroup === "PeliculaValidation") {
-                        // Re-hookup validator to control and update display
-                        ValidatorHookupControlID(Page_Validators[i].controltovalidate, Page_Validators[i]);
-                        ValidatorUpdateDisplay(Page_Validators[i]);
-                        Page_Validators[i].isvalid = true;
-                        if (Page_Validators[i].style.display !== "none") {
-                            Page_Validators[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        }
-
-        function closePeliculaModal() {
-            document.getElementById('peliculaModal').style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function (event) {
-            const modal = document.getElementById('peliculaModal');
-            if (event.target === modal) {
-                closePeliculaModal();
-            }
-        }
-
-        // Function to set up the modal for editing
-        // This function would be called from the CodeBehind after data is loaded
-        function showEditPeliculaModal(peliculaId, tituloEs, tituloEn, sinopsisEs, sinopsisEn, duracionMin, clasificacion, imagenUrl, estaActiva) {
-            document.getElementById('<%= litModalTitle.ClientID %>').textContent = 'Editar ';
-            document.getElementById('<%= hdnPeliculaId.ClientID %>').value = peliculaId;
-            document.getElementById('<%= txtTituloEs.ClientID %>').value = tituloEs;
-            document.getElementById('<%= txtTituloEn.ClientID %>').value = tituloEn;
-            document.getElementById('<%= txtSinopsisEs.ClientID %>').value = sinopsisEs;
-            document.getElementById('<%= txtSinopsisEn.ClientID %>').value = sinopsisEn;
-            document.getElementById('<%= txtDuracionMin.ClientID %>').value = duracionMin;
-            document.getElementById('<%= ddlClasificacion.ClientID %>').value = clasificacion;
-            document.getElementById('<%= txtImagenUrl.ClientID %>').value = imagenUrl;
-            document.getElementById('<%= chkEstaActiva.ClientID %>').checked = estaActiva;
-            document.getElementById('<%= hdnExistingImageUrl.ClientID %>').value = imagenUrl; // Store original URL
-
-            // Show image preview
-            const imgPreviewElement = document.getElementById('<%= imgPreview.ClientID %>');
-            if (imagenUrl) {
-                imgPreviewElement.src = imagenUrl;
-                imgPreviewElement.style.display = 'block';
-            } else {
-                imgPreviewElement.src = '';
-                imgPreviewElement.style.display = 'none';
-            }
-            openPeliculaModal(); // Re-use the open modal function
-        }
-
-        // Client-side statistics update (for demonstration, would be server-side in real app)
-        function updatePeliculaStats(total, activas, inactivas, clasificacionesUnicas) {
-            document.getElementById('totalPeliculas').textContent = total;
-            document.getElementById('peliculasActivas').textContent = activas;
-            document.getElementById('peliculasInactivas').textContent = inactivas;
-            document.getElementById('totalClasificaciones').textContent = clasificacionesUnicas;
-        }
-
-        function populateAndRenderPeliculaStats() {
-            // Aquí es donde ASP.NET Web Forms inyecta los valores calculados en el servidor
-            const total = <%= ((AutoServicioCineWeb.GestionPeliculas)this).GetTotalPeliculas() %>;
-            const activas = <%= ((AutoServicioCineWeb.GestionPeliculas)this).GetPeliculasActivas() %>;
-            const inactivas = <%= ((AutoServicioCineWeb.GestionPeliculas)this).GetPeliculasInactivas() %>;
-            const clasificaciones = <%= ((AutoServicioCineWeb.GestionPeliculas)this).GetClasificacionesUnicas() %>;
-
-            // ¡Esta es la llamada que faltaba!
-            updatePeliculaStats(total, activas, inactivas, clasificaciones);
-        }
-
-        // Call this when the page loads (after ASP.NET controls are rendered)
-        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (sender, args) {
-            populateAndRenderPeliculaStats();
-            // Re-apply previewImage on edit if the image URL field is populated
-            const txtImageUrlElement = document.getElementById('<%= txtImagenUrl.ClientID %>');
-            if (txtImageUrlElement && txtImageUrlElement.value) {
-                previewImage(txtImageUrlElement);
-            }
-        });
-    </script>
+    <%-- Script para previsualización de imagen se mantuvo en ContentHead --%>
+    <%-- No hay scripts adicionales necesarios aquí ya que el CodeBehind maneja el modal --%>
 </asp:Content>

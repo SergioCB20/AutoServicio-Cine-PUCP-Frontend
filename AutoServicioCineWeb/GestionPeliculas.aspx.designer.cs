@@ -15,6 +15,15 @@ namespace AutoServicioCineWeb
     {
 
         /// <summary>
+        /// Control btnOpenAddModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOpenAddModal;
+
+        /// <summary>
         /// Control txtSearchPeliculas.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.GridView gvPeliculas;
 
         /// <summary>
+        /// Control peliculaModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl peliculaModal;
+
+        /// <summary>
         /// Control litModalTitle.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litModalTitle;
+
+        /// <summary>
+        /// Control btnCloseModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseModal;
 
         /// <summary>
         /// Control txtTituloEs.
@@ -229,6 +256,15 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnPeliculaId;
+
+        /// <summary>
+        /// Control btnCancelModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelModal;
 
         /// <summary>
         /// Control btnGuardarPelicula.

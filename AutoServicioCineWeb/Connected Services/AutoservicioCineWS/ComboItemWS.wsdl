@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarComboItems">
-    <part name="parameters" element="tns:listarComboItems" />
+  <message name="registrarComboItem">
+    <part name="parameters" element="tns:registrarComboItem" />
   </message>
-  <message name="listarComboItemsResponse">
-    <part name="parameters" element="tns:listarComboItemsResponse" />
+  <message name="registrarComboItemResponse">
+    <part name="parameters" element="tns:registrarComboItemResponse" />
   </message>
   <message name="eliminarComboItem">
     <part name="parameters" element="tns:eliminarComboItem" />
@@ -17,11 +17,11 @@
   <message name="eliminarComboItemResponse">
     <part name="parameters" element="tns:eliminarComboItemResponse" />
   </message>
-  <message name="registrarComboItem">
-    <part name="parameters" element="tns:registrarComboItem" />
+  <message name="listarComboItems">
+    <part name="parameters" element="tns:listarComboItems" />
   </message>
-  <message name="registrarComboItemResponse">
-    <part name="parameters" element="tns:registrarComboItemResponse" />
+  <message name="listarComboItemsResponse">
+    <part name="parameters" element="tns:listarComboItemsResponse" />
   </message>
   <message name="actualizarComboItem">
     <part name="parameters" element="tns:actualizarComboItem" />
@@ -36,17 +36,17 @@
     <part name="parameters" element="tns:buscarComboItemPorIdResponse" />
   </message>
   <portType name="ComboItemWS">
-    <operation name="listarComboItems">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsRequest" message="tns:listarComboItems" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsResponse" message="tns:listarComboItemsResponse" />
+    <operation name="registrarComboItem">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemRequest" message="tns:registrarComboItem" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemResponse" message="tns:registrarComboItemResponse" />
     </operation>
     <operation name="eliminarComboItem">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/eliminarComboItemRequest" message="tns:eliminarComboItem" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/eliminarComboItemResponse" message="tns:eliminarComboItemResponse" />
     </operation>
-    <operation name="registrarComboItem">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemRequest" message="tns:registrarComboItem" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemResponse" message="tns:registrarComboItemResponse" />
+    <operation name="listarComboItems">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsRequest" message="tns:listarComboItems" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsResponse" message="tns:listarComboItemsResponse" />
     </operation>
     <operation name="actualizarComboItem">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest" message="tns:actualizarComboItem" />
@@ -59,7 +59,7 @@
   </portType>
   <binding name="ComboItemWSPortBinding" type="tns:ComboItemWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarComboItems">
+    <operation name="registrarComboItem">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -77,7 +77,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="registrarComboItem">
+    <operation name="listarComboItems">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
