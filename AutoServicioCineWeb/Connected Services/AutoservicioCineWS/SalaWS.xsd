@@ -56,14 +56,6 @@
   <xs:complexType name="actualizarSalaResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="eliminarSala">
-    <xs:sequence>
-      <xs:element name="arg0" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarSalaResponse">
-    <xs:sequence />
-  </xs:complexType>
   <xs:complexType name="listarSalas">
     <xs:sequence />
   </xs:complexType>
@@ -71,6 +63,14 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:sala" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarSala">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarSalaResponse">
+    <xs:sequence />
   </xs:complexType>
   <xs:simpleType name="tipoAsiento">
     <xs:restriction base="xs:string">

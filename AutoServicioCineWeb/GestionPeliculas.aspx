@@ -52,6 +52,14 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
                 }
             }
         }
+
+        // NUEVA FUNCIÓN para el botón de ayuda del CSV
+        function toggleCsvHelp() {
+            const csvHelpBox = document.getElementById('csvHelpBox');
+            if (csvHelpBox) {
+                csvHelpBox.classList.toggle('visible');
+            }
+        }
     </script>
 </asp:Content>
 
@@ -64,8 +72,10 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 </asp:Content>
 
 <asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server">
-    <%-- El botón ahora provoca un PostBack para que el CodeBehind abra el modal --%>
+    <%-- Botón para agregar nueva película --%>
     <asp:Button ID="btnOpenAddModal" runat="server" Text="➕ Agregar Nueva Película" CssClass="btn btn-primary" OnClick="btnOpenAddModal_Click" />
+    <%-- NUEVO Botón para importar CSV --%>
+    <asp:Button ID="btnOpenCsvImportModal" runat="server" Text="📤 Ingresar datos con CSV" CssClass="btn btn-secondary" BackColor="ForestGreen" OnClick="btnOpenCsvImportModal_Click" />
 </asp:Content>
 
 <asp:Content ID="ContentMain" ContentPlaceHolderID="MainContent" runat="server">
@@ -157,13 +167,12 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
     </div>
 
     <%-- Modal para Agregar/Editar Película --%>
-    <div class="modal" id="peliculaModal" runat="server"> <%-- Agregamos runat="server" --%>
+    <div class="modal" id="peliculaModal" runat="server" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">
                     <asp:Literal ID="litModalTitle" runat="server" Text=""></asp:Literal> Película
                 </h2>
-                <%-- El botón de cerrar ahora provoca un PostBack con un CommandName específico --%>
                 <asp:LinkButton ID="btnCloseModal" runat="server" CssClass="close-button" OnClick="btnCloseModal_Click">&times;</asp:LinkButton>
             </div>
 
@@ -229,13 +238,58 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 
             <div class="form-actions">
                 <asp:HiddenField ID="hdnPeliculaId" runat="server" Value="0" />
-                <%-- El botón Cancelar ahora provoca un PostBack para que el CodeBehind cierre el modal --%>
                 <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelModal_Click" CausesValidation="false" />
                 <asp:Button ID="btnGuardarPelicula" runat="server" Text="Guardar Película" CssClass="btn btn-primary" OnClick="btnGuardarPelicula_Click" ValidationGroup="PeliculaValidation" />
             </div>
             <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
         </div>
     </div>
+
+    <%-- NUEVO Modal para Carga de CSV --%>
+    <div class="modal" id="csvUploadModal" runat="server" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Cargar Películas desde CSV</h2>
+                <asp:LinkButton ID="btnCloseCsvModal" runat="server" CssClass="close-button" OnClick="btnCloseCsvModal_Click">&times;</asp:LinkButton>
+            </div>
+            <div class="form-group" style="padding:20px;">
+                <div class="csv-upload-header"> <%-- Contenedor para el label y el botón de ayuda --%>
+                    <label for="<%= FileUploadCsv.ClientID %>" class="form-label">
+                        Selecciona un archivo CSV:
+                        <button type="button" class="help-button" onclick="toggleCsvHelp();">?</button>
+                    </label>
+                </div>
+                <asp:FileUpload ID="FileUploadCsv" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvFileUploadCsv" runat="server" ControlToValidate="FileUploadCsv" ErrorMessage="Por favor, selecciona un archivo CSV." Display="Dynamic" ForeColor="Red" ValidationGroup="CsvUploadValidation"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="cvCsvFileExtension" runat="server" ControlToValidate="FileUploadCsv"
+                    ErrorMessage="El archivo debe ser un CSV (.csv)." OnServerValidate="cvCsvFileExtension_ServerValidate"
+                    Display="Dynamic" ForeColor="Red" ValidationGroup="CsvUploadValidation"></asp:CustomValidator>
+            </div>
+            <div id="csvHelpBox" class="csv-help-box">
+                <p class="mb-2">El archivo CSV debe tener las siguientes columnas (el orden no importa):</p>
+                <ul class="csv-column-list">
+                    <li>`TituloEs`</li>
+                    <li>`TituloEn`</li>
+                    <li>`DuracionMin`</li>
+                    <li>`Clasificacion`</li>
+                    <li>`SinopsisEs`</li>
+                    <li>`SinopsisEn`</li>
+                    <li>`EstaActiva` (TRUE/FALSE o 1/0)</li>
+                    <li>`ImagenUrl`</li>
+                </ul>
+                <p class="small text-muted">Asegúrate de que los valores booleanos para `EstaActiva` sean `TRUE` o `FALSE`, o `1` o `0`.</p>
+                <p class="small text-muted">Las URLs de imagen deben ser válidas y apuntar a imágenes en línea.</p>
+            </div>
+
+
+            <div class="form-actions">
+                <asp:Button ID="btnCancelCsvModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelCsvModal_Click" CausesValidation="false" />
+                <asp:Button ID="btnUploadCsv" runat="server" Text="Subir CSV" CssClass="btn btn-primary" OnClick="btnUploadCsv_Click" ValidationGroup="CsvUploadValidation" />
+            </div>
+            <asp:Literal ID="litMensajeCsvModal" runat="server"></asp:Literal>
+        </div>
+    </div>
+
 
     <div id="loadingIndicator" style="display: none;">
         <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
@@ -247,6 +301,4 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 </asp:Content>
 
 <asp:Content ID="ContentScript" ContentPlaceHolderID="ScriptContent" runat="server">
-    <%-- Script para previsualización de imagen se mantuvo en ContentHead --%>
-    <%-- No hay scripts adicionales necesarios aquí ya que el CodeBehind maneja el modal --%>
 </asp:Content>

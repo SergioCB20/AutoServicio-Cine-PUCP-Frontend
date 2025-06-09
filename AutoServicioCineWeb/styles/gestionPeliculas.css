@@ -367,7 +367,6 @@ body {
 
 .modal-content {
     background: white;
-    padding: 0;
     border-radius: 20px;
     width: 90%;
     max-width: 650px; /* Un poco más ancho para el formulario de película */
@@ -444,7 +443,8 @@ body {
     }
 
 .form-label {
-    display: block;
+    display: flex;
+    gap: 4px;
     margin-bottom: 8px;
     font-weight: 600;
     color: #2c3e50;
@@ -522,6 +522,82 @@ span[role="alert"] {
         color: #2c3e50;
     }
 
+.csv-help-box {
+    background-color: #eaf6ff; /* Fondo azul claro */
+    border: 1px solid #b3e0ff; /* Borde azul */
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    /* Animación y estado oculto */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out, margin-top 0.4s ease-out;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
+    .csv-help-box.visible {
+        max-height: 200px; /* Suficiente para mostrar el contenido. Ajusta si es necesario. */
+        opacity: 1;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-top: 15px;
+    }
+
+.csv-column-list {
+    list-style: disc; /* Vuelve a usar viñetas para la lista */
+    padding-left: 20px; /* Sangría para las viñetas */
+    margin-bottom: 10px;
+}
+
+    .csv-column-list li {
+        margin-bottom: 5px;
+        font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para los nombres de columna */
+        font-weight: bold;
+        color: #0056b3; /* Un poco más oscuro */
+    }
+
+/* Estilos para el texto pequeño dentro de la caja de ayuda */
+.csv-help-box p.small {
+    font-size: 0.8em; /* Más pequeño para los tips adicionales */
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Colores para mensajes de validación */
+span[role="alert"] {
+    display: block;
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+.help-button {
+    background-color: #007bff; /* Color azul */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Hace que sea circular */
+    width: 20px; /* Tamaño del botón */
+    height: 20px; /* Tamaño del botón */
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+    .help-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
 
 /* Responsive Design */
 @media (max-width: 992px) { /* Tabletas grandes */

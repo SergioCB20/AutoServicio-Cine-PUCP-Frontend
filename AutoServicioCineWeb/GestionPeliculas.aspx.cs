@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AutoServicioCineWeb.AutoservicioCineWS;
+using System.IO; // Necesario para FileStream, StreamReader
+using System.Text.RegularExpressions; // Opcional, para validación avanzada
 
 namespace AutoServicioCineWeb
 {
     public partial class GestionPeliculas : System.Web.UI.Page
     {
         private readonly PeliculaWSClient peliculaServiceClient;
-        // Cachear la lista de películas para las estadísticas y filtrado
         private List<pelicula> _cachedPeliculas;
 
         public GestionPeliculas()
@@ -25,7 +26,6 @@ namespace AutoServicioCineWeb
                 CargarPeliculas();
             }
             // Después de cualquier postback, asegurarnos de que la previsualización de imagen funcione
-            // Si hay una URL en el campo de texto, llama a previewImage.
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ReapplyImagePreview",
                 "const txtImageUrlElement = document.getElementById('" + txtImagenUrl.ClientID + "'); if (txtImageUrlElement && txtImageUrlElement.value) { previewImage(txtImageUrlElement); }", true);
         }
@@ -34,10 +34,7 @@ namespace AutoServicioCineWeb
         {
             try
             {
-                // Solo cargar de la BD si no está cacheado (o si es el primer postback relevante)
                 _cachedPeliculas = peliculaServiceClient.listarPeliculas().ToList();
-
-                // Aplicar filtros a la lista cacheada
                 List<pelicula> peliculasFiltradas = FiltrarPeliculas(_cachedPeliculas);
 
                 gvPeliculas.DataSource = peliculasFiltradas;
@@ -45,8 +42,8 @@ namespace AutoServicioCineWeb
             }
             catch (Exception ex)
             {
-                // Asegúrate de que litMensajeModal sea visible al usuario si no está en el modal
-                // O usa un control de mensaje en la página principal
+                // Este mensaje se mostrará en litMensajeModal, que está en el modal de edición/registro.
+                // Podrías considerar un Literal en la página principal para errores globales.
                 litMensajeModal.Text = "Error al cargar películas: " + ex.Message;
                 System.Diagnostics.Debug.WriteLine("Error al cargar películas: " + ex.ToString());
             }
@@ -88,21 +85,24 @@ namespace AutoServicioCineWeb
                 hdnPeliculaId.Value = peliculaId.ToString();
                 litModalTitle.Text = "Editar Película";
                 CargarDatosPeliculaParaEdicion(peliculaId);
-                MostrarModal(); // Abre el modal después de cargar los datos
+                MostrarModalPelicula(); // Abre el modal de película
             }
             else if (e.CommandName == "DeletePelicula")
             {
                 try
                 {
                     peliculaServiceClient.eliminarPelicula(peliculaId);
-                    litMensajeModal.Text = "Película eliminada exitosamente.";
-                    // Recargar la lista completa después de eliminar para actualizar estadísticas y GridView
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionSuccess", "alert('Película eliminada exitosamente.');", true);
+
+
                     _cachedPeliculas = null; // Invalida la caché para que se vuelva a cargar
                     CargarPeliculas();
                 }
                 catch (Exception ex)
                 {
+                    // Similar al comentario anterior, este mensaje solo se verá si el modal de edición está abierto.
                     litMensajeModal.Text = $"Error al eliminar la película: {ex.Message}";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionError", "alert('Error al eliminar la película: " + ex.Message.Replace("'", "\\'") + "');", true);
                     System.Diagnostics.Debug.WriteLine("Error al eliminar película: " + ex.ToString());
                 }
             }
@@ -124,9 +124,8 @@ namespace AutoServicioCineWeb
                     txtSinopsisEn.Text = peli.sinopsisEn;
                     chkEstaActiva.Checked = peli.estaActiva;
                     txtImagenUrl.Text = peli.imagenUrl;
-                    hdnExistingImageUrl.Value = peli.imagenUrl; // Guarda la URL original
+                    hdnExistingImageUrl.Value = peli.imagenUrl;
 
-                    // Llama a la función JS para previsualizar la imagen si existe
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
                         "previewImage(document.getElementById('" + txtImagenUrl.ClientID + "'));", true);
                 }
@@ -149,7 +148,7 @@ namespace AutoServicioCineWeb
             if (!Page.IsValid)
             {
                 litMensajeModal.Text = "Por favor, corrige los errores en el formulario.";
-                MostrarModal(); // Vuelve a mostrar el modal con los errores de validación
+                MostrarModalPelicula();
                 return;
             }
 
@@ -157,7 +156,6 @@ namespace AutoServicioCineWeb
             {
                 peliculaId = Convert.ToInt32(hdnPeliculaId.Value),
                 peliculaIdSpecified = true,
-
                 tituloEs = txtTituloEs.Text,
                 tituloEn = txtTituloEn.Text,
                 duracionMin = Convert.ToInt32(txtDuracionMin.Text),
@@ -166,7 +164,7 @@ namespace AutoServicioCineWeb
                 sinopsisEn = txtSinopsisEn.Text,
                 estaActiva = chkEstaActiva.Checked,
                 imagenUrl = txtImagenUrl.Text.Trim(),
-                usuarioModificacion = 4, // Your fixed user ID
+                usuarioModificacion = 4,
                 usuarioModificacionSpecified = true
             };
 
@@ -183,75 +181,267 @@ namespace AutoServicioCineWeb
                     litMensajeModal.Text = "Película actualizada exitosamente.";
                 }
 
-                _cachedPeliculas = null; // Invalida la caché para que se vuelva a cargar
-                CargarPeliculas(); // Recarga el GridView y las estadísticas
-                OcultarModal(); // Cierra el modal
+                _cachedPeliculas = null;
+                CargarPeliculas();
+                OcultarModalPelicula();
             }
             catch (Exception ex)
             {
                 litMensajeModal.Text = $"Error al guardar la película: {ex.Message}";
-                MostrarModal(); // Si hay error, mantener el modal abierto para que el usuario vea el mensaje
+                MostrarModalPelicula();
                 System.Diagnostics.Debug.WriteLine("Error al guardar película: " + ex.ToString());
             }
         }
 
-        // --- Nuevos métodos para manejar el modal desde el CodeBehind ---
-        private void MostrarModal()
+        // --- Métodos para manejar el modal de Película ---
+        private void MostrarModalPelicula()
         {
-            peliculaModal.Style["display"] = "flex"; // Establece display: flex para mostrar el modal
+            peliculaModal.Style["display"] = "flex";
         }
 
-        private void OcultarModal()
+        private void OcultarModalPelicula()
         {
-            peliculaModal.Style["display"] = "none"; // Oculta el modal
-            litMensajeModal.Text = ""; // Limpia el mensaje del modal al cerrarlo
+            peliculaModal.Style["display"] = "none";
+            litMensajeModal.Text = "";
         }
 
         protected void btnOpenAddModal_Click(object sender, EventArgs e)
         {
-            hdnPeliculaId.Value = "0"; // Reinicia el ID para indicar nueva película
+            hdnPeliculaId.Value = "0";
             litModalTitle.Text = "Agregar Nueva ";
-            LimpiarCamposModal(); // Limpia los campos del formulario
-            // Llama a la función JS para limpiar validadores client-side
+            LimpiarCamposModalPelicula();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ClearValidators", "clearModalValidators();", true);
-            MostrarModal(); // Muestra el modal
+            MostrarModalPelicula();
         }
 
         protected void btnCancelModal_Click(object sender, EventArgs e)
         {
-            OcultarModal(); // Cierra el modal
+            OcultarModalPelicula();
         }
 
         protected void btnCloseModal_Click(object sender, EventArgs e)
         {
-            OcultarModal(); // Cierra el modal
+            OcultarModalPelicula();
         }
 
-        private void LimpiarCamposModal()
+        private void LimpiarCamposModalPelicula()
         {
             txtTituloEs.Text = "";
             txtTituloEn.Text = "";
             txtSinopsisEs.Text = "";
             txtSinopsisEn.Text = "";
             txtDuracionMin.Text = "";
-            ddlClasificacion.SelectedValue = ""; // Limpia la selección del dropdown
+            ddlClasificacion.SelectedValue = "";
             txtImagenUrl.Text = "";
-            chkEstaActiva.Checked = true; // Valor predeterminado a activa
+            chkEstaActiva.Checked = true;
 
-            // Oculta la previsualización de imagen
             imgPreview.ImageUrl = "";
             imgPreview.Style["display"] = "none";
             hdnExistingImageUrl.Value = "";
         }
 
+
+        // --- NUEVOS Métodos para Carga de CSV ---
+        private void MostrarModalCsv()
+        {
+            csvUploadModal.Style["display"] = "flex";
+            litMensajeCsvModal.Text = ""; // Limpiar mensajes previos al abrir
+        }
+
+        private void OcultarModalCsv()
+        {
+            csvUploadModal.Style["display"] = "none";
+            litMensajeCsvModal.Text = ""; // Limpiar mensajes al cerrar
+            FileUploadCsv.Attributes.Remove("value"); // Limpiar el nombre del archivo seleccionado en el control FileUpload
+        }
+
+        protected void btnOpenCsvImportModal_Click(object sender, EventArgs e)
+        {
+            MostrarModalCsv();
+        }
+
+        protected void btnCloseCsvModal_Click(object sender, EventArgs e)
+        {
+            OcultarModalCsv();
+        }
+
+        protected void btnCancelCsvModal_Click(object sender, EventArgs e)
+        {
+            OcultarModalCsv();
+        }
+
+        // Validación personalizada del tipo de archivo
+        protected void cvCsvFileExtension_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (FileUploadCsv.HasFile)
+            {
+                string fileExtension = Path.GetExtension(FileUploadCsv.FileName).ToLower();
+                args.IsValid = (fileExtension == ".csv");
+            }
+            else
+            {
+                args.IsValid = false; // El RequiredFieldValidator ya debería manejar esto, pero por seguridad
+            }
+        }
+
+        protected void btnUploadCsv_Click(object sender, EventArgs e)
+        {
+            Page.Validate("CsvUploadValidation"); // Validar solo el grupo del CSV
+
+            if (!Page.IsValid)
+            {
+                litMensajeCsvModal.Text = "Por favor, corrige los errores en el formulario de carga CSV.";
+                MostrarModalCsv(); // Mantener modal abierto con errores
+                return;
+            }
+
+            if (!FileUploadCsv.HasFile)
+            {
+                litMensajeCsvModal.Text = "Por favor, selecciona un archivo CSV para subir.";
+                MostrarModalCsv();
+                return;
+            }
+
+            // Asegurarse de que sea un archivo CSV (ya validado por cvCsvFileExtension_ServerValidate, pero doble chequeo)
+            string fileExtension = Path.GetExtension(FileUploadCsv.FileName).ToLower();
+            if (fileExtension != ".csv")
+            {
+                litMensajeCsvModal.Text = "Formato de archivo no válido. Por favor, sube un archivo CSV.";
+                MostrarModalCsv();
+                return;
+            }
+
+            int peliculasAgregadas = 0;
+            int peliculasActualizadas = 0;
+            int errores = 0;
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(FileUploadCsv.PostedFile.InputStream))
+                {
+                    string headerLine = reader.ReadLine(); // Leer la primera línea (cabecera)
+                    if (string.IsNullOrWhiteSpace(headerLine))
+                    {
+                        litMensajeCsvModal.Text = "El archivo CSV está vacío o no tiene cabecera.";
+                        MostrarModalCsv();
+                        return;
+                    }
+
+                    // Convertir la cabecera a un diccionario para mapear nombres a índices
+                    var headers = headerLine.Split(',').Select(h => h.Trim()).ToList();
+                    var headerMap = new Dictionary<string, int>();
+                    for (int i = 0; i < headers.Count; i++)
+                    {
+                        headerMap[headers[i]] = i;
+                    }
+
+                    // Verificar que las columnas mínimas existan
+                    string[] requiredColumns = { "TituloEs", "TituloEn", "DuracionMin", "Clasificacion", "SinopsisEs", "SinopsisEn", "EstaActiva", "ImagenUrl" };
+                    foreach (var col in requiredColumns)
+                    {
+                        if (!headerMap.ContainsKey(col))
+                        {
+                            litMensajeCsvModal.Text = $"Error: La columna '{col}' es requerida en el CSV.";
+                            MostrarModalCsv();
+                            return;
+                        }
+                    }
+
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue; // Saltar líneas vacías
+
+                        string[] data = line.Split(',');
+
+                        pelicula peli = new pelicula();
+
+                        try
+                        {
+
+                            peli.tituloEs = GetCsvValue(data, headerMap, "TituloEs");
+                            peli.tituloEn = GetCsvValue(data, headerMap, "TituloEn");
+
+                            int duracion;
+                            if (int.TryParse(GetCsvValue(data, headerMap, "DuracionMin"), out duracion))
+                            {
+                                peli.duracionMin = duracion;
+                            }
+                            else
+                            {
+                                throw new FormatException("Duración (DuracionMin) no es un número válido.");
+                            }
+
+                            peli.clasificacion = GetCsvValue(data, headerMap, "Clasificacion");
+                            peli.sinopsisEs = GetCsvValue(data, headerMap, "SinopsisEs");
+                            peli.sinopsisEn = GetCsvValue(data, headerMap, "SinopsisEn");
+
+                            bool estaActiva;
+                            if (bool.TryParse(GetCsvValue(data, headerMap, "EstaActiva"), out estaActiva))
+                            {
+                                peli.estaActiva = estaActiva;
+                            }
+                            else
+                            {
+                                // Intentar parsear "TRUE"/"FALSE" o "1"/"0" si bool.TryParse falla directamente
+                                string activeString = GetCsvValue(data, headerMap, "EstaActiva").ToLower().Trim();
+                                if (activeString == "true" || activeString == "1") peli.estaActiva = true;
+                                else if (activeString == "false" || activeString == "0") peli.estaActiva = false;
+                                else throw new FormatException("EstaActiva no es un valor booleano válido (TRUE/FALSE, 1/0).");
+                            }
+
+                            peli.imagenUrl = GetCsvValue(data, headerMap, "ImagenUrl");
+                            peli.usuarioModificacion = 4; // Usuario fijo para la carga
+                            peli.usuarioModificacionSpecified = true;
+
+                            if (peli.peliculaId == 0)
+                            {
+                                peliculaServiceClient.registrarPelicula(peli);
+                                peliculasAgregadas++;
+                            }
+                            else
+                            {
+                                peliculaServiceClient.actualizarPelicula(peli);
+                                peliculasActualizadas++;
+                            }
+                        }
+                        catch (Exception exLinea)
+                        {
+                            errores++;
+                            System.Diagnostics.Debug.WriteLine($"Error procesando línea CSV: {line}. Error: {exLinea.Message}");
+                        }
+                    }
+                }
+
+                _cachedPeliculas = null; // Invalida la caché
+                CargarPeliculas(); // Recargar la tabla y estadísticas
+
+                litMensajeCsvModal.Text = $"Carga CSV completada: {peliculasAgregadas} agregadas, {peliculasActualizadas} actualizadas, {errores} con errores.";
+                OcultarModalCsv(); // Cerrar el modal después de la carga exitosa (o con resumen de errores)
+            }
+            catch (Exception ex)
+            {
+                litMensajeCsvModal.Text = $"Error general al procesar el archivo CSV: {ex.Message}";
+                System.Diagnostics.Debug.WriteLine("Error al procesar CSV: " + ex.ToString());
+                MostrarModalCsv(); // Mantener el modal abierto si hay un error grave
+            }
+        }
+
+        // Helper para obtener valor de CSV por nombre de columna
+        private string GetCsvValue(string[] data, Dictionary<string, int> headerMap, string columnName)
+        {
+            if (headerMap.ContainsKey(columnName) && headerMap[columnName] < data.Length)
+            {
+                return data[headerMap[columnName]].Trim();
+            }
+            return string.Empty;
+        }
+
         // --- Métodos para estadísticas (optimizados para usar la caché) ---
-        // Asegurarse de que _cachedPeliculas no sea null antes de usarlo
         private List<pelicula> GetCachedPeliculas()
         {
             if (_cachedPeliculas == null)
             {
-                // Si la caché es nula, la recargamos. Esto asegura que los métodos de estadísticas
-                // siempre tengan datos, incluso si no se ha llamado a CargarPeliculas() directamente.
                 try
                 {
                     _cachedPeliculas = peliculaServiceClient.listarPeliculas().ToList();
@@ -259,7 +449,7 @@ namespace AutoServicioCineWeb
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("Error al obtener películas para estadísticas: " + ex.ToString());
-                    _cachedPeliculas = new List<pelicula>(); // Retorna una lista vacía para evitar NullReferenceException
+                    _cachedPeliculas = new List<pelicula>();
                 }
             }
             return _cachedPeliculas;
@@ -287,14 +477,14 @@ namespace AutoServicioCineWeb
 
         protected void txtSearchPeliculas_TextChanged(object sender, EventArgs e)
         {
-            gvPeliculas.PageIndex = 0; // Reset pagination when searching
-            CargarPeliculas(); // Recarga aplicando el filtro
+            gvPeliculas.PageIndex = 0;
+            CargarPeliculas();
         }
 
         protected void ddlClasificacionFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gvPeliculas.PageIndex = 0; // Reset pagination when filtering
-            CargarPeliculas(); // Recarga aplicando el filtro
+            gvPeliculas.PageIndex = 0;
+            CargarPeliculas();
         }
     }
 }

@@ -5,29 +5,29 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="eliminarSala">
-    <part name="parameters" element="tns:eliminarSala" />
-  </message>
-  <message name="eliminarSalaResponse">
-    <part name="parameters" element="tns:eliminarSalaResponse" />
-  </message>
   <message name="listarSalas">
     <part name="parameters" element="tns:listarSalas" />
   </message>
   <message name="listarSalasResponse">
     <part name="parameters" element="tns:listarSalasResponse" />
   </message>
-  <message name="actualizarSala">
-    <part name="parameters" element="tns:actualizarSala" />
+  <message name="eliminarSala">
+    <part name="parameters" element="tns:eliminarSala" />
   </message>
-  <message name="actualizarSalaResponse">
-    <part name="parameters" element="tns:actualizarSalaResponse" />
+  <message name="eliminarSalaResponse">
+    <part name="parameters" element="tns:eliminarSalaResponse" />
   </message>
   <message name="registrarSala">
     <part name="parameters" element="tns:registrarSala" />
   </message>
   <message name="registrarSalaResponse">
     <part name="parameters" element="tns:registrarSalaResponse" />
+  </message>
+  <message name="actualizarSala">
+    <part name="parameters" element="tns:actualizarSala" />
+  </message>
+  <message name="actualizarSalaResponse">
+    <part name="parameters" element="tns:actualizarSalaResponse" />
   </message>
   <message name="buscarSalaPorId">
     <part name="parameters" element="tns:buscarSalaPorId" />
@@ -36,21 +36,21 @@
     <part name="parameters" element="tns:buscarSalaPorIdResponse" />
   </message>
   <portType name="SalaWS">
-    <operation name="eliminarSala">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest" message="tns:eliminarSala" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse" message="tns:eliminarSalaResponse" />
-    </operation>
     <operation name="listarSalas">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest" message="tns:listarSalas" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse" message="tns:listarSalasResponse" />
     </operation>
-    <operation name="actualizarSala">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaRequest" message="tns:actualizarSala" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaResponse" message="tns:actualizarSalaResponse" />
+    <operation name="eliminarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest" message="tns:eliminarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse" message="tns:eliminarSalaResponse" />
     </operation>
     <operation name="registrarSala">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest" message="tns:registrarSala" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse" message="tns:registrarSalaResponse" />
+    </operation>
+    <operation name="actualizarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaRequest" message="tns:actualizarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaResponse" message="tns:actualizarSalaResponse" />
     </operation>
     <operation name="buscarSalaPorId">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdRequest" message="tns:buscarSalaPorId" />
@@ -59,15 +59,6 @@
   </portType>
   <binding name="SalaWSPortBinding" type="tns:SalaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarSala">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="listarSalas">
       <soap:operation soapAction="" />
       <input>
@@ -77,7 +68,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="actualizarSala">
+    <operation name="eliminarSala">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -87,6 +78,15 @@
       </output>
     </operation>
     <operation name="registrarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="actualizarSala">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

@@ -53,14 +53,6 @@
   <xs:complexType name="localDate" final="extension restriction">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="listarCupones">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarCuponesResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cupon" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="registrarCupon">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:cupon" />
@@ -68,6 +60,14 @@
   </xs:complexType>
   <xs:complexType name="registrarCuponResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarCupones">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarCuponesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cupon" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarCupon">
     <xs:sequence>

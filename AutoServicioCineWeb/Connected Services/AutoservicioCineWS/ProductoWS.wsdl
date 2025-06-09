@@ -11,12 +11,6 @@
   <message name="registrarProductoResponse">
     <part name="parameters" element="tns:registrarProductoResponse" />
   </message>
-  <message name="listarProductos">
-    <part name="parameters" element="tns:listarProductos" />
-  </message>
-  <message name="listarProductosResponse">
-    <part name="parameters" element="tns:listarProductosResponse" />
-  </message>
   <message name="actualizarProducto">
     <part name="parameters" element="tns:actualizarProducto" />
   </message>
@@ -29,6 +23,12 @@
   <message name="eliminarProductoResponse">
     <part name="parameters" element="tns:eliminarProductoResponse" />
   </message>
+  <message name="listarProductos">
+    <part name="parameters" element="tns:listarProductos" />
+  </message>
+  <message name="listarProductosResponse">
+    <part name="parameters" element="tns:listarProductosResponse" />
+  </message>
   <message name="buscarProductoPorId">
     <part name="parameters" element="tns:buscarProductoPorId" />
   </message>
@@ -40,10 +40,6 @@
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest" message="tns:registrarProducto" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse" message="tns:registrarProductoResponse" />
     </operation>
-    <operation name="listarProductos">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
-    </operation>
     <operation name="actualizarProducto">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoRequest" message="tns:actualizarProducto" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/actualizarProductoResponse" message="tns:actualizarProductoResponse" />
@@ -51,6 +47,10 @@
     <operation name="eliminarProducto">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoRequest" message="tns:eliminarProducto" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoResponse" message="tns:eliminarProductoResponse" />
+    </operation>
+    <operation name="listarProductos">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
     </operation>
     <operation name="buscarProductoPorId">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdRequest" message="tns:buscarProductoPorId" />
@@ -68,15 +68,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarProductos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="actualizarProducto">
       <soap:operation soapAction="" />
       <input>
@@ -87,6 +78,15 @@
       </output>
     </operation>
     <operation name="eliminarProducto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarProductos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
