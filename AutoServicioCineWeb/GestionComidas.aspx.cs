@@ -86,7 +86,7 @@ namespace AutoServicioCineWeb
                     litMensajeModal.Text = "Comida no encontrada.";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeModal.Text = "Error al cargar los datos de la comida: " + ex.Message;
                 System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
@@ -102,7 +102,7 @@ namespace AutoServicioCineWeb
                 gvComidas.DataSource = productos;
                 gvComidas.DataBind();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeModal.Text = "Error al cargar las comidas: " + ex.Message;
                 System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);

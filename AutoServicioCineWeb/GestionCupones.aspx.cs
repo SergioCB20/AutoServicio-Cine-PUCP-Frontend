@@ -30,7 +30,7 @@ namespace AutoServicioCineWeb
                 rptCupones.DataSource = cupones;
                 rptCupones.DataBind();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MostrarMensaje("Error al cargar cupones: " + ex.Message, "error");
             }
@@ -74,7 +74,7 @@ namespace AutoServicioCineWeb
                     formContainer.Visible = false;
                     CargarCupones();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MostrarMensaje("Error al guardar cupón: " + ex.Message, "error");
                 }
@@ -115,7 +115,7 @@ namespace AutoServicioCineWeb
                     formContainer.Visible = true;
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MostrarMensaje("Error al cargar cupón: " + ex.Message, "error");
             }
@@ -129,7 +129,7 @@ namespace AutoServicioCineWeb
                 MostrarMensaje("Cupón eliminado exitosamente", "success");
                 CargarCupones();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MostrarMensaje("Error al eliminar cupón: " + ex.Message, "error");
             }

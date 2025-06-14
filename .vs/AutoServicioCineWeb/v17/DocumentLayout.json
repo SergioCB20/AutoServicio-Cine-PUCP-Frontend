@@ -1,18 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\",
+  "WorkspaceRootPath": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\sergio\\onedrive\\documentos\\ciclo 2025-1\\prog3\\ta\\autoserviciocineweb\\autoserviciocineweb\\gestionpeliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionpeliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestionsalas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionsalas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\autoserviciocineweb\\gestionpeliculas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestioncupones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestioncupones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestionsalas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionsalas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\autoserviciocineweb\\gestionpeliculas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionpeliculas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\sergio\\onedrive\\documentos\\ciclo 2025-1\\prog3\\ta\\autoserviciocineweb\\autoserviciocineweb\\styles\\gestionpeliculas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\autoserviciocineweb\\styles\\gestionpeliculas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\styles\\gestionpeliculas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\peliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\peliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestionpeliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionpeliculas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestioncomidas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestioncomidas.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|c:\\users\\public\\documentos\\prog3ta\\autoservicio-cine-pucp-frontend\\autoserviciocineweb\\gestionsalas.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F300757-248A-41AD-AEA6-7A1F095CB599}|AutoServicioCineWeb\\AutoServicioCineWeb.csproj|solutionrelative:autoserviciocineweb\\gestionsalas.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,49 +46,127 @@
       "DocumentGroups": [
         {
           "DockedWidth": 248,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "gestionPeliculas.css",
-              "DocumentMoniker": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
-              "RelativeDocumentMoniker": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
-              "ToolTip": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
-              "RelativeToolTip": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
-              "ViewState": "AgIAAJ8BAAAAAAAAAAAuwK4BAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-09T13:51:32.304Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GestionPeliculas.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
-              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
-              "ToolTip": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
-              "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
-              "ViewState": "AgIAAGQBAAAAAAAAAAAkwHYBAABfAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "GestionSalas.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionSalas.aspx.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionSalas.aspx.cs",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAqwLwBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T01:25:35.566Z",
+              "WhenOpened": "2025-06-14T18:30:09.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GestionPeliculas.aspx",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionPeliculas.aspx",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionPeliculas.aspx",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-06-08T00:29:24.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "gestionPeliculas.css",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "RelativeToolTip": "AutoServicioCineWeb\\styles\\gestionPeliculas.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK4BAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-09T13:51:32.304Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GestionPeliculas.aspx",
-              "DocumentMoniker": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx",
-              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx",
-              "ToolTip": "C:\\Users\\Sergio\\OneDrive\\Documentos\\Ciclo 2025-1\\prog3\\TA\\AutoServicioCineWeb\\AutoServicioCineWeb\\GestionPeliculas.aspx",
-              "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx",
+              "Title": "GestionCupones.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionCupones.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionCupones.aspx.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionCupones.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionCupones.aspx.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAASwHUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:34:09.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GestionSalas.aspx",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionSalas.aspx",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionSalas.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-06-08T00:29:24.813Z",
+              "WhenOpened": "2025-06-14T18:29:35.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GestionComidas.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionComidas.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionComidas.aspx.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionComidas.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionComidas.aspx.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAEwGgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:33:53.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Peliculas.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\Peliculas.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\Peliculas.aspx.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\Peliculas.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\Peliculas.aspx.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAASwDcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:34:57.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GestionSalas.aspx.designer.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx.designer.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionSalas.aspx.designer.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionSalas.aspx.designer.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionSalas.aspx.designer.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T18:30:05.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GestionPeliculas.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "RelativeDocumentMoniker": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "ToolTip": "C:\\Users\\Public\\Documentos\\Prog3TA\\AutoServicio-Cine-PUCP-Frontend\\AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "RelativeToolTip": "AutoServicioCineWeb\\GestionPeliculas.aspx.cs",
+              "ViewState": "AgIAALUBAAAAAAAAAAAEwMABAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T01:25:35.566Z",
               "EditorCaption": ""
             }
           ]

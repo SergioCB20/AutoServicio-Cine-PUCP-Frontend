@@ -53,7 +53,7 @@ namespace AutoServicioCineWeb
                 }
 
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensaje.Text = "Error al cargar las películas: " + ex.Message;
                 litMensaje.Visible = true;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
   <xs:element name="actualizarPelicula" type="tns:actualizarPelicula" />
   <xs:element name="actualizarPeliculaResponse" type="tns:actualizarPeliculaResponse" />
   <xs:element name="buscarPeliculaPorId" type="tns:buscarPeliculaPorId" />
@@ -12,7 +13,7 @@
   <xs:element name="registrarPeliculaResponse" type="tns:registrarPeliculaResponse" />
   <xs:complexType name="actualizarPelicula">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:pelicula" />
+      <xs:element minOccurs="0" name="pelicula" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="pelicula">
@@ -117,13 +118,28 @@
   <xs:complexType name="actualizarPeliculaResponse">
     <xs:sequence />
   </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="eliminarPelicula">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:int" />
+      <xs:element name="id" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarPeliculaResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="buscarPeliculaPorId">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPeliculaPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:pelicula" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarPeliculas">
     <xs:sequence />
@@ -133,19 +149,9 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="buscarPeliculaPorId">
-    <xs:sequence>
-      <xs:element name="arg0" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="buscarPeliculaPorIdResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:pelicula" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="registrarPelicula">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:pelicula" />
+      <xs:element minOccurs="0" name="pelicula" type="tns:pelicula" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="registrarPeliculaResponse">

@@ -40,7 +40,7 @@ namespace AutoServicioCineWeb
                 gvPeliculas.DataSource = peliculasFiltradas;
                 gvPeliculas.DataBind();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 // Este mensaje se mostrará en litMensajeModal, que está en el modal de edición/registro.
                 // Podrías considerar un Literal en la página principal para errores globales.
@@ -98,7 +98,7 @@ namespace AutoServicioCineWeb
                     _cachedPeliculas = null; // Invalida la caché para que se vuelva a cargar
                     CargarPeliculas();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     // Similar al comentario anterior, este mensaje solo se verá si el modal de edición está abierto.
                     litMensajeModal.Text = $"Error al eliminar la película: {ex.Message}";
@@ -134,7 +134,7 @@ namespace AutoServicioCineWeb
                     litMensajeModal.Text = "Película no encontrada para edición.";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeModal.Text = "Error al cargar datos de película para edición: " + ex.Message;
                 System.Diagnostics.Debug.WriteLine("Error al cargar datos de película para edición: " + ex.ToString());
@@ -185,7 +185,7 @@ namespace AutoServicioCineWeb
                 CargarPeliculas();
                 OcultarModalPelicula();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeModal.Text = $"Error al guardar la película: {ex.Message}";
                 MostrarModalPelicula();
@@ -405,7 +405,7 @@ namespace AutoServicioCineWeb
                                 peliculasActualizadas++;
                             }
                         }
-                        catch (Exception exLinea)
+                        catch (System.Exception exLinea)
                         {
                             errores++;
                             System.Diagnostics.Debug.WriteLine($"Error procesando línea CSV: {line}. Error: {exLinea.Message}");
@@ -419,7 +419,7 @@ namespace AutoServicioCineWeb
                 litMensajeCsvModal.Text = $"Carga CSV completada: {peliculasAgregadas} agregadas, {peliculasActualizadas} actualizadas, {errores} con errores.";
                 OcultarModalCsv(); // Cerrar el modal después de la carga exitosa (o con resumen de errores)
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeCsvModal.Text = $"Error general al procesar el archivo CSV: {ex.Message}";
                 System.Diagnostics.Debug.WriteLine("Error al procesar CSV: " + ex.ToString());
@@ -446,7 +446,7 @@ namespace AutoServicioCineWeb
                 {
                     _cachedPeliculas = peliculaServiceClient.listarPeliculas().ToList();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("Error al obtener películas para estadísticas: " + ex.ToString());
                     _cachedPeliculas = new List<pelicula>();
