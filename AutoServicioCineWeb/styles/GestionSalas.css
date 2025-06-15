@@ -211,34 +211,28 @@ body {
 }
 
 /* Colores para clasificaciones comunes */
-.classification-g { /* General Audiences */
+.classification-estandar { /* General Audiences */
     background: rgba(39, 174, 96, 0.1); /* Verde */
     color: #27ae60;
     border: 1px solid rgba(39, 174, 96, 0.3);
 }
 
-.classification-pg { /* Parental Guidance Suggested */
+.classification-3D { /* Parental Guidance Suggested */
     background: rgba(52, 152, 219, 0.1); /* Azul */
     color: #3498db;
     border: 1px solid rgba(52, 152, 219, 0.3);
 }
 
-.classification-pg13 { /* Parents Strongly Cautioned */
+.classification-premium { /* Parents Strongly Cautioned */
     background: rgba(241, 196, 15, 0.1); /* Amarillo/Naranja */
     color: #f39c12;
     border: 1px solid rgba(241, 196, 15, 0.3);
 }
 
-.classification-r { /* Restricted */
+.classification-4DX { /* Restricted */
     background: rgba(231, 76, 60, 0.1); /* Rojo */
     color: #e74c3c;
     border: 1px solid rgba(231, 76, 60, 0.3);
-}
-
-.classification-nc17 { /* Adults Only */
-    background: rgba(155, 89, 182, 0.1); /* Púrpura */
-    color: #9b59b6;
-    border: 1px solid rgba(155, 89, 182, 0.3);
 }
 
 /* Status Badges (adaptado para activa/inactiva) */

@@ -85,10 +85,10 @@
 
             <asp:DropDownList ID="ddlTipoFilter" runat="server" CssClass="filter-select" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoFilter_SelectedIndexChanged">
                 <asp:ListItem Value="">Todas las clasificaciones</asp:ListItem>
-                <asp:ListItem Value="estándar">estándar</asp:ListItem>
-                <asp:ListItem Value="3D">3D</asp:ListItem>
-                <asp:ListItem Value="premium">premium</asp:ListItem>
-                <asp:ListItem Value="4D">4D</asp:ListItem>
+                <asp:ListItem Value="ESTANDAR">estándar</asp:ListItem>
+                <asp:ListItem Value="TRES_D">3D</asp:ListItem>
+                <asp:ListItem Value="PREMIUM">premium</asp:ListItem>
+                <asp:ListItem Value="CUATRO_DX">4DX</asp:ListItem>
             </asp:DropDownList>
         </div>
     </div>
@@ -105,13 +105,9 @@
             <asp:BoundField DataField="Capacidad" HeaderText="Capacidad " SortExpression="Capacidad" />
             <asp:TemplateField HeaderText="TipoSala">
                 <ItemTemplate>
-                    <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-input">
-                        <asp:ListItem Text="Seleccionar" Value="" />
-                        <asp:ListItem Text="Estandar" Value="Estandar" />
-                        <asp:ListItem Text="3D" Value="3D" />
-                        <asp:ListItem Text="Premium" Value="Premium" />
-                        <asp:ListItem Text="4DX" Value="4DX" />
-                    </asp:DropDownList>
+                    <span class="classification-badge classification-<%# Eval("TipoSala").ToString() %>">
+                        <%# Eval("TipoSala") %>
+                    </span>
                 </ItemTemplate>
             </asp:TemplateField>
             
@@ -165,24 +161,15 @@
                  <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="Capacidad" MinimumValue="20" MaximumValue="400" Type="Integer" ErrorMessage="La capacidad debe ser un número positivo (20-400)." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RangeValidator>
              </div>
              <div class="form-group">
-                <label for="<%= ddlTipoSala.ClientID %>" class="form-label">Tipo de Sala:</label>
-                <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-control">
-                    <asp:ListItem Text="-- Seleccione --" Value="" />
-                    <asp:ListItem Text="Estándar" Value="estandar" />
-                    <asp:ListItem Text="3D" Value="3D" />
-                    <asp:ListItem Text="Premium" Value="premium" />
-                    <asp:ListItem Text="4D" Value="4D" />
-                </asp:DropDownList>
-                <asp:RequiredFieldValidator 
-                    ID="rfvTipoSala" 
-                    runat="server" 
-                    ControlToValidate="ddlTipoSala" 
-                    InitialValue="" 
-                    ErrorMessage="Debe seleccionar un tipo de sala." 
-                    Display="Dynamic" 
-                    ForeColor="Red" 
-                    ValidationGroup="PeliculaValidation">
-                </asp:RequiredFieldValidator>
+                 <label for="<%= ddlTipoSala.ClientID %>" class="form-label">Tipo de Sala:</label>
+                 <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-control">
+                     <asp:ListItem Value="">Seleccionar</asp:ListItem>
+                     <asp:ListItem Value="ESTANDAR">Estándar</asp:ListItem>
+                     <asp:ListItem Value="TRES_D">3D</asp:ListItem>
+                     <asp:ListItem Value="PREMIUM">Premium</asp:ListItem>
+                     <asp:ListItem Value="CUATRO_DX">4D</asp:ListItem>                    
+                 </asp:DropDownList>
+                 <asp:RequiredFieldValidator ID="rfvTipoSala" runat="server" ControlToValidate="ddlTipoSala" InitialValue="" ErrorMessage="Debe seleccionar un tipo de sala." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RequiredFieldValidator>
             </div>                      
 
              <div class="form-group form-check">
