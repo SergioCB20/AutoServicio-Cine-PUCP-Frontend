@@ -8,7 +8,7 @@
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="./styles/GestionSalas.css">
     <script type="text/javascript">      
-
+    
         // Script para activar el elemento del menú de navegación (se mantiene)
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
@@ -65,15 +65,15 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="MainContent" runat="server">
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number" id="totalPeliculas"><%= GetTotalSalas() %></div>
-            <div class="stat-label">Total Películas</div>
+            <div class="stat-number" id="totalSalas"><%= GetTotalSalas() %></div>
+            <div class="stat-label">Total Salas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasActivas"><%= GetSalasActivas() %></div>
+            <div class="stat-number" id="salasActivas"><%= GetSalasActivas() %></div>
             <div class="stat-label">Activas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasInactivas"><%= GetSalasInactivas() %></div>
+            <div class="stat-number" id="salasInactivas"><%= GetSalasInactivas() %></div>
             <div class="stat-label">Inactivas</div>
         </div>
     </div>
@@ -98,9 +98,9 @@
                   RowStyle-CssClass="data-table-row"
                   AlternatingRowStyle-CssClass="data-table-row-alt"
                   AllowPaging="True" PageSize="10" OnPageIndexChanging="gvSalas_PageIndexChanging"
-                  DataKeyNames="SalaId" OnRowCommand="gvSalas_RowCommand">
+                  DataKeyNames="Id" OnRowCommand="gvSalas_RowCommand">
         <Columns>
-            <asp:BoundField DataField="SalaId" HeaderText="ID" SortExpression="SalaId" />
+            <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
             <asp:BoundField DataField="Capacidad" HeaderText="Capacidad " SortExpression="Capacidad" />
             <asp:TemplateField HeaderText="TipoSala">
@@ -117,8 +117,8 @@
             
             <asp:TemplateField HeaderText="Estado">
                 <ItemTemplate>
-                    <span class="status-badge status-<%# Eval("EstaActiva").ToString().ToLower() == "true" ? "activa" : "inactiva" %>">
-                        <%# Eval("EstaActiva").ToString().ToLower() == "true" ? "Activa" : "Inactiva" %>
+                    <span class="status-badge status-<%# Eval("Activa").ToString().ToLower() == "true" ? "activa" : "inactiva" %>">
+                        <%# Eval("Activa").ToString().ToLower() == "true" ? "Activa" : "Inactiva" %>
                     </span>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -126,10 +126,10 @@
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <div class="action-buttons">
-                        <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditSala" CommandArgument='<%# Eval("SalaId") %>'>
+                        <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditSala" CommandArgument='<%# Eval("Id") %>'>
                             <i class="fas fa-edit"></i> Editar
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("SalaId") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </asp:LinkButton>
                     </div>

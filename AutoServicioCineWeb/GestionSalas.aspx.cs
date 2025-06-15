@@ -54,7 +54,7 @@ namespace AutoServicioCineWeb
             {
                 string searchTerm = txtSearchSalas.Text.Trim().ToLower();
                 salas = salas.Where(p =>
-                    p.nombre.ToLower().Contains(searchTerm)
+                    p.nombre.ToLower().Contains(searchTerm)                    
                 ).ToList();
             }
 
@@ -82,7 +82,7 @@ namespace AutoServicioCineWeb
                 CargarDatosSalaParaEdicion(SalaId);
                 MostrarModalSala(); // Abre el modal de película
             }
-            else if (e.CommandName == "DeletePelicula")
+            else if (e.CommandName == "DeleteSala")
             {
                 try
                 {
@@ -110,12 +110,12 @@ namespace AutoServicioCineWeb
 
                 if (sala != null)
                 {
-                    /* txtNombreSala.Text = sala.nombre;
-                     txtCapacidad.Text = sala.capacidad.ToString();
+                     Nombre.Text = sala.nombre;
+                     Capacidad.Text = sala.capacidad.ToString();
                      ddlTipoSala.SelectedValue = sala.tipoSala.ToString();
-                     chkActiva.Checked = sala.activa;
+                    chkEstaActiva.Checked = sala.activa;
 
-                     ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
+                     /*ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
                          "previewImage(document.getElementById('" + txtImagenUrl.ClientID + "'));", true);*/
                 }
                 else
@@ -142,10 +142,10 @@ namespace AutoServicioCineWeb
 
             sala sala = new sala
             {
-                /* nombre = txtNombreSala.Text,
-                 capacidad = int.Parse(txtCapacidad.Text),
+                 nombre = Nombre.Text,
+                 capacidad = int.Parse(Capacidad.Text),
                  tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue),
-                 activa = chkActiva.Checked*/
+                 activa = chkEstaActiva.Checked
             };
 
             try
@@ -203,10 +203,10 @@ namespace AutoServicioCineWeb
 
         private void LimpiarCamposModalSala()
         {
-            /*txtNombreSala.Text = string.Empty;
-            txtCapacidad.Text = string.Empty;
+            Nombre.Text = string.Empty;
+            Capacidad.Text = string.Empty;
             ddlTipoSala.SelectedIndex = 0;
-            chkActiva.Checked = false;   */
+            chkEstaActiva.Checked = false;   
         }
         // --- NUEVOS Métodos para Carga de CSV ---
         private void MostrarModalCsv()
@@ -325,7 +325,7 @@ namespace AutoServicioCineWeb
                         {
                             sala.nombre = GetCsvValue(data, headerMap, "Nombre");
                             int capacidad;
-                            if (int.TryParse(GetCsvValue(data, headerMap, "DuracionMin"), out capacidad))
+                            if (int.TryParse(GetCsvValue(data, headerMap, "Capacidad"), out capacidad))
                             {
                                 sala.capacidad = capacidad;
                                 ;
@@ -403,7 +403,7 @@ namespace AutoServicioCineWeb
                 }
                 catch (System.Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error al obtener slas para estadísticas: " + ex.ToString());
+                    System.Diagnostics.Debug.WriteLine("Error al obtener salas para estadísticas: " + ex.ToString());
                     _cachedSalas = new List<sala>();
                 }
             }

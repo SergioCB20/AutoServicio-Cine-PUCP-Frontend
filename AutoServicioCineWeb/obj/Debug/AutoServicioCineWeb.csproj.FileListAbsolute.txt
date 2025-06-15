@@ -294,10 +294,6 @@ C:\Users\Sergio\OneDrive\Documentos\Ciclo 2025-1\prog3\TA\AutoServicioCineWeb\Au
 C:\Users\Sergio\OneDrive\Documentos\Ciclo 2025-1\prog3\TA\AutoServicioCineWeb\AutoServicioCineWeb\obj\Debug\AutoServ.4170CA70.Up2Date
 C:\Users\Sergio\OneDrive\Documentos\Ciclo 2025-1\prog3\TA\AutoServicioCineWeb\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.dll
 C:\Users\Sergio\OneDrive\Documentos\Ciclo 2025-1\prog3\TA\AutoServicioCineWeb\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.pdb
-C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.AssemblyReference.cache
-C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.CoreCompileInputs.cache
-C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.dll
-C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.pdb
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.dll.config
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.dll
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.pdb
@@ -367,4 +363,8 @@ C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioC
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\es\System.Web.Optimization.resources.dll
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.AssemblyReference.cache
+C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.CoreCompileInputs.cache
 C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServ.4170CA70.Up2Date
+C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.dll
+C:\Users\Public\Documentos\Prog3TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.pdb
