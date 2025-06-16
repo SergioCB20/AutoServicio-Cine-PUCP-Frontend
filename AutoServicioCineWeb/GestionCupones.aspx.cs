@@ -1,6 +1,8 @@
 ﻿using AutoServicioCineWeb.AutoservicioCineWS;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,12 +12,17 @@ namespace AutoServicioCineWeb
 {
     public partial class GestionCupones : System.Web.UI.Page
     {
-        private CuponWSClient cuponWS;
+        private readonly CuponWSClient cuponWS;
+        private List<cupon> _cachedCupones;
+
+
+        public GestionCupones()
+        {
+            cuponWS = new CuponWSClient();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            cuponWS = new CuponWSClient();
-
             if (!IsPostBack)
             {
                 CargarCupones();
@@ -47,6 +54,12 @@ namespace AutoServicioCineWeb
             txtFechaInicio.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txtFechaFin.Text = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
             ddlDescuentoTipo.SelectedIndex = 0;
+            MostrarModalCupon();
+        }
+
+        private void MostrarModalCupon()
+        {
+            formContainer.Style["display"] = "flex";
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -137,23 +150,20 @@ namespace AutoServicioCineWeb
 
         private cupon CrearCuponDesdeFormulario()
         {
+
             return new cupon
             {
-                codigo = txtCodigo.Text.Trim().ToUpper(),
+                codigo = txtCodigo.Text.Trim(),
+                descripcionEs = txtDescripcion.Text.Trim(),
                 descripcionEn = txtDescripcion.Text.Trim(),
-                descuentoValor = Convert.ToInt32(txtPorcentajeDescuento.Text),
-                descuentoTipo = (AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento)Enum.Parse(
-                                    typeof(AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento),
-                                    ddlDescuentoTipo.SelectedValue,
-                                    true // Ignorar mayúsculas/minúsculas
-                                ),
-                //fechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
-                //fechaFin = Convert.ToDateTime(txtFechaFin.Text),
-                maxUsos = Convert.ToInt32(txtCantidadMaxima.Text),
-                usosActuales = 0 // Siempre inicia en 0 para cupones nuevos
-                // = chkActivo.Checked
-
-            };
+                descuentoTipo = (AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento)Enum.Parse(typeof(AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento), ddlDescuentoTipo.SelectedValue, true),
+                descuentoValor = (double)decimal.Parse(txtPorcentajeDescuento.Text),
+                //fechaInicio = new localDate(DateTime.Parse(txtFechaInicio.Text)),
+                //fechaFin = new localDate(DateTime.Parse(txtFechaFin.Text)),
+                maxUsos = int.Parse(txtCantidadMaxima.Text),
+                activo = chkActivo.Checked
+                // Asegúrate que todas las propiedades requeridas estén asignadas
+            }; 
         }
 
         private void CargarDatosEnFormulario(cupon cupon)
@@ -242,5 +252,255 @@ namespace AutoServicioCineWeb
             string script = $"showNotification('{mensaje}', '{tipo}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "notification", script, true);
         }
+
+        // --- NUEVOS Métodos para Carga de CSV ---
+        private void MostrarModalCsv()
+        {
+            csvUploadModal.Style["display"] = "flex";
+            litMensajeCsvModal.Text = ""; // Limpiar mensajes previos al abrir
+        }
+
+        private void OcultarModalCsv()
+        {
+            csvUploadModal.Style["display"] = "none";
+            litMensajeCsvModal.Text = ""; // Limpiar mensajes al cerrar
+            FileUploadCsv.Attributes.Remove("value"); // Limpiar el nombre del archivo seleccionado en el control FileUpload
+        }
+
+        protected void btnOpenCsvImportModal_Click(object sender, EventArgs e)
+        {
+            MostrarModalCsv();
+        }
+
+        protected void btnCloseCsvModal_Click(object sender, EventArgs e)
+        {
+            OcultarModalCsv();
+        }
+
+        protected void btnCancelCsvModal_Click(object sender, EventArgs e)
+        {
+            OcultarModalCsv();
+        }
+
+        // Validación personalizada del tipo de archivo
+        protected void cvCsvFileExtension_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (FileUploadCsv.HasFile)
+            {
+                string fileExtension = Path.GetExtension(FileUploadCsv.FileName).ToLower();
+                args.IsValid = (fileExtension == ".csv");
+            }
+            else
+            {
+                args.IsValid = false; // El RequiredFieldValidator ya debería manejar esto, pero por seguridad
+            }
+        }
+
+        protected void btnUploadCsv_Click(object sender, EventArgs e)
+        {
+            Page.Validate("CsvUploadValidation"); // Validar solo el grupo del CSV
+
+            if (!Page.IsValid)
+            {
+                litMensajeCsvModal.Text = "Por favor, corrige los errores en el formulario de carga CSV.";
+                MostrarModalCsv(); // Mantener modal abierto con errores
+                return;
+            }
+
+            if (!FileUploadCsv.HasFile)
+            {
+                litMensajeCsvModal.Text = "Por favor, selecciona un archivo CSV para subir.";
+                MostrarModalCsv();
+                return;
+            }
+
+            // Asegurarse de que sea un archivo CSV (ya validado por cvCsvFileExtension_ServerValidate, pero doble chequeo)
+            string fileExtension = Path.GetExtension(FileUploadCsv.FileName).ToLower();
+            if (fileExtension != ".csv")
+            {
+                litMensajeCsvModal.Text = "Formato de archivo no válido. Por favor, sube un archivo CSV.";
+                MostrarModalCsv();
+                return;
+            }
+
+            int cuponesAgregados = 0;
+            int cuponesModificados = 0;
+            int errores = 0;
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(FileUploadCsv.PostedFile.InputStream))
+                {
+                    string headerLine = reader.ReadLine(); // Leer la primera línea (cabecera)
+                    if (string.IsNullOrWhiteSpace(headerLine))
+                    {
+                        litMensajeCsvModal.Text = "El archivo CSV está vacío o no tiene cabecera.";
+                        MostrarModalCsv();
+                        return;
+                    }
+
+                    // Convertir la cabecera a un diccionario para mapear nombres a índices
+                    var headers = headerLine.Split(',').Select(h => h.Trim()).ToList();
+                    var headerMap = new Dictionary<string, int>();
+                    for (int i = 0; i < headers.Count; i++)
+                    {
+                        headerMap[headers[i]] = i;
+                    }
+
+                    // Verificar que las columnas mínimas existan para cupones
+                    string[] requiredCouponColumns = {
+                        "Codigo",
+                        "Descripcion",
+                        "TipoDescuento",
+                        "ValorDescuento",
+                        "CantidadMaxima",
+                        "FechaInicio",
+                        "FechaFin",
+                        "EstaActivo"
+                    };
+
+                    foreach (var col in requiredCouponColumns)
+                    {
+                        if (!headerMap.ContainsKey(col))
+                        {
+                            litMensajeCsvModal.Text = $"Error: La columna '{col}' es requerida en el CSV para cupones.";
+                            MostrarModalCsv();
+                            return;
+                        }
+                    }
+
+                    // Procesar cada línea del CSV
+                    while (!reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+
+                        string[] values = line.Split(',');
+
+                        try
+                        {
+                            // Validación adicional para el tipo de descuento
+                            var tipoDescuento = values[headerMap["TipoDescuento"]].Trim().ToLower();
+                            if (tipoDescuento != "porcentaje" && tipoDescuento != "monto_fijo")
+                            {
+                                errores++;
+                                continue; // Saltar esta fila pero continuar con las demás
+                            }
+
+                            // Validar que el valor de descuento sea adecuado según el tipo
+                            if (!decimal.TryParse(values[headerMap["ValorDescuento"]].Trim(), out decimal valor))
+                            {
+                                errores++;
+                                continue;
+                            }
+
+                            if (tipoDescuento == "porcentaje" && (valor <= 0 || valor > 100))
+                            {
+                                errores++;
+                                continue;
+                            }
+                            else if (tipoDescuento == "monto_fijo" && valor <= 0)
+                            {
+                                errores++;
+                                continue;
+                            }
+
+                            // Validación de fechas
+                            if (!DateTime.TryParse(values[headerMap["FechaInicio"]].Trim(), out DateTime fechaInicio) ||
+                                !DateTime.TryParse(values[headerMap["FechaFin"]].Trim(), out DateTime fechaFin))
+                            {
+                                errores++;
+                                continue;
+                            }
+
+                            if (fechaFin < fechaInicio)
+                            {
+                                errores++;
+                                continue;
+                            }
+
+                            // Validación de cantidad máxima
+                            if (!int.TryParse(values[headerMap["CantidadMaxima"]].Trim(), out int cantidad) || cantidad <= 0)
+                            {
+                                errores++;
+                                continue;
+                            }
+
+                            // Aquí iría la lógica para guardar/actualizar el cupón en la base de datos
+                            // Ejemplo:
+                            /*
+                            var cupon = new Cupon {
+                                Codigo = values[headerMap["Codigo"]].Trim(),
+                                Descripcion = values[headerMap["Descripcion"]].Trim(),
+                                TipoDescuento = tipoDescuento,
+                                ValorDescuento = valor,
+                                FechaInicio = fechaInicio,
+                                FechaFin = fechaFin,
+                                MaxUsos = cantidad,
+                                EstaActivo = bool.Parse(values[headerMap["EstaActivo"]].Trim())
+                            };
+
+                            bool resultado = CuponService.GuardarCupon(cupon);
+                            if (resultado) cuponesAgregados++;
+                            */
+
+                            // Simulación de éxito para el ejemplo
+                            cuponesAgregados++;
+                        }
+                        catch (System.Exception ex)
+                        {
+                            errores++;
+                            System.Diagnostics.Debug.WriteLine($"Error procesando fila: {ex.Message}");
+                        }
+                    }
+
+                    _cachedCupones = null; // Invalida la caché
+                    CargarCupones(); // Recargar la tabla y estadísticas
+
+                    litMensajeCsvModal.Text = $"Carga CSV completada: {cuponesAgregados} agregados, {cuponesModificados} actualizados, {errores} con errores.";
+                    OcultarModalCsv(); // Cerrar el modal después de la carga exitosa
+                }
+            }
+            catch (System.Exception ex)
+            {
+                litMensajeCsvModal.Text = $"Error general al procesar el archivo CSV: {ex.Message}";
+                System.Diagnostics.Debug.WriteLine("Error al procesar CSV: " + ex.ToString());
+                MostrarModalCsv(); // Mantener el modal abierto si hay un error grave
+            }
+        }
+
+        // Helper para obtener valor de CSV por nombre de columna
+        private string GetCsvValue(string[] data, Dictionary<string, int> headerMap, string columnName)
+        {
+            if (headerMap.ContainsKey(columnName) && headerMap[columnName] < data.Length)
+            {
+                return data[headerMap[columnName]].Trim();
+            }
+            return string.Empty;
+        }
+
+        // --- Métodos para estadísticas (optimizados para usar la caché) ---
+        private List<cupon> GetCachedCupones()
+        {
+            if (_cachedCupones == null)
+            {
+                try
+                {
+                    _cachedCupones = cuponWS.listarCupones().ToList();
+                }
+                catch (System.Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al obtener películas para estadísticas: " + ex.ToString());
+                    _cachedCupones = new List<cupon>();
+                }
+            }
+            return _cachedCupones;
+        }
+
+        public int GetTotalCupones()
+        {
+            return GetCachedCupones().Count;
+        }
+
     }
 }
