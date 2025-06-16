@@ -5,7 +5,7 @@ using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AutoServicioCineWeb.PeliculaWebService;
+using AutoServicioCineWeb.AutoservicioCineWS;
 
 public class ResumenCompra
 {

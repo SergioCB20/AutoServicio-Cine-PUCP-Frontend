@@ -9,7 +9,7 @@ Inherits="AutoServicioCineWeb.GestionComidas" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
       <%-- Modal para Agregar/Editar Película --%>
-     <link rel="stylesheet" href="./styles/GestionComida.css">
+     <link rel="stylesheet" href="./styles/GestionCupones.css">
 </asp:Content>
 
 <asp:Content ID="ContentPageTitle" ContentPlaceHolderID="PageTitleContent" runat="server">

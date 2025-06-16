@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
+  <xs:element name="actualizarProducto" type="tns:actualizarProducto" />
+  <xs:element name="actualizarProductoResponse" type="tns:actualizarProductoResponse" />
+  <xs:element name="buscarProductoPorId" type="tns:buscarProductoPorId" />
+  <xs:element name="buscarProductoPorIdResponse" type="tns:buscarProductoPorIdResponse" />
+  <xs:element name="eliminarProducto" type="tns:eliminarProducto" />
+  <xs:element name="eliminarProductoResponse" type="tns:eliminarProductoResponse" />
+  <xs:element name="listarProductos" type="tns:listarProductos" />
+  <xs:element name="listarProductosResponse" type="tns:listarProductosResponse" />
+  <xs:element name="registrarProducto" type="tns:registrarProducto" />
+  <xs:element name="registrarProductoResponse" type="tns:registrarProductoResponse" />
+  <xs:complexType name="registrarProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="prod" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="producto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="estaActivo" type="xs:boolean" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element name="precio" type="xs:double" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipoProducto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarProductoResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarProductos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarProductosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProducto">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProductoResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="actualizarProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="prod" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarProductoResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="buscarProductoPorId">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarProductoPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoProducto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BEBIDA" />
+      <xs:enumeration value="SNACK" />
+      <xs:enumeration value="COMBO" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

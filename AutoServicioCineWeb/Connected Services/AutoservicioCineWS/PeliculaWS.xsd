@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
+  <xs:element name="actualizarPelicula" type="tns:actualizarPelicula" />
+  <xs:element name="actualizarPeliculaResponse" type="tns:actualizarPeliculaResponse" />
+  <xs:element name="buscarPeliculaPorId" type="tns:buscarPeliculaPorId" />
+  <xs:element name="buscarPeliculaPorIdResponse" type="tns:buscarPeliculaPorIdResponse" />
+  <xs:element name="eliminarPelicula" type="tns:eliminarPelicula" />
+  <xs:element name="eliminarPeliculaResponse" type="tns:eliminarPeliculaResponse" />
+  <xs:element name="listarPeliculas" type="tns:listarPeliculas" />
+  <xs:element name="listarPeliculasResponse" type="tns:listarPeliculasResponse" />
+  <xs:element name="registrarPelicula" type="tns:registrarPelicula" />
+  <xs:element name="registrarPeliculaResponse" type="tns:registrarPeliculaResponse" />
+  <xs:complexType name="actualizarPelicula">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pelicula" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pelicula">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clasificacion" type="xs:string" />
+      <xs:element name="duracionMin" type="xs:int" />
+      <xs:element name="estaActiva" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="funciones" nillable="true" type="tns:funcion" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="generos" nillable="true" type="tns:genero" />
+      <xs:element minOccurs="0" name="imagenUrl" type="xs:string" />
+      <xs:element minOccurs="0" name="peliculaId" type="xs:int" />
+      <xs:element minOccurs="0" name="sinopsisEn" type="xs:string" />
+      <xs:element minOccurs="0" name="sinopsisEs" type="xs:string" />
+      <xs:element minOccurs="0" name="tituloEn" type="xs:string" />
+      <xs:element minOccurs="0" name="tituloEs" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="funcion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="boletos" nillable="true" type="tns:boleto" />
+      <xs:element name="estaActiva" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaHora" type="tns:localDateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:localDateTime" />
+      <xs:element minOccurs="0" name="formatoProyeccion" type="xs:string" />
+      <xs:element minOccurs="0" name="funcionId" type="xs:int" />
+      <xs:element minOccurs="0" name="idioma" type="xs:string" />
+      <xs:element minOccurs="0" name="pelicula" type="tns:pelicula" />
+      <xs:element minOccurs="0" name="sala" type="tns:sala" />
+      <xs:element minOccurs="0" name="subtitulos" type="xs:boolean" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="boleto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="boletoId" type="xs:int" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoBoleto" />
+      <xs:element minOccurs="0" name="funcion" type="tns:funcion" />
+      <xs:element minOccurs="0" name="venta" type="tns:venta" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="venta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estado" type="tns:estadoVenta" />
+      <xs:element minOccurs="0" name="fechaHora" type="tns:localDateTime" />
+      <xs:element minOccurs="0" name="impuestos" type="xs:double" />
+      <xs:element minOccurs="0" name="metodoPago" type="tns:metodoPago" />
+      <xs:element minOccurs="0" name="subtotal" type="xs:double" />
+      <xs:element minOccurs="0" name="total" type="xs:double" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
+      <xs:element minOccurs="0" name="ventaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDateTime" final="extension restriction">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="usuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element name="estaActivo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="tns:localDate" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idiomaPreferido" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoUsuario" type="tns:tipoUsuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDate" final="extension restriction">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="sala">
+    <xs:sequence>
+      <xs:element name="activa" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="asientos" nillable="true" type="tns:asiento" />
+      <xs:element minOccurs="0" name="capacidad" type="xs:int" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoSala" type="tns:tipoSala" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asiento">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element name="fila" type="xs:unsignedShort" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element name="numero" type="xs:int" />
+      <xs:element minOccurs="0" name="sala" type="tns:sala" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipoAsiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="genero">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="generoId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombreEn" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreEs" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="peliculas" nillable="true" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarPeliculaResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarPelicula">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarPeliculaResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarPeliculas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarPeliculasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPeliculaPorId">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPeliculaPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarPelicula">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pelicula" type="tns:pelicula" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarPeliculaResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:simpleType name="estadoBoleto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VALIDO" />
+      <xs:enumeration value="USADO" />
+      <xs:enumeration value="ANULADO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estadoVenta">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PENDIENTE" />
+      <xs:enumeration value="COMPLETADA" />
+      <xs:enumeration value="CANCELADA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="metodoPago">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QR" />
+      <xs:enumeration value="TARJETA" />
+      <xs:enumeration value="EFECTIVO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoUsuario">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLIENTE" />
+      <xs:enumeration value="ADMIN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoAsiento">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NORMAL" />
+      <xs:enumeration value="VIP" />
+      <xs:enumeration value="DISCAPACITADO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoSala">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ESTANDAR" />
+      <xs:enumeration value="TRES_D" />
+      <xs:enumeration value="PREMIUM" />
+      <xs:enumeration value="CUATRO_DX" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

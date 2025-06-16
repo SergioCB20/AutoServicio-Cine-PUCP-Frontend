@@ -11,13 +11,7 @@
         <h2 class="pelicula-titulo">
             <span id="tituloPelicula" runat="server"></span>
         </h2>
-        <div class="codigo-promocional">
-            <label for="codigo">¿Tienes un código promocional?</label>
-            <div class="input-group">
-                <input type="text" id="codigo" placeholder="Código promocional" />
-                <button class="button">Validar</button>
-            </div>
-        </div>
+        
         <div class="tarifas-disponibles">
             <h3>Tarifas Disponibles:</h3>
             <div class="tarifa">

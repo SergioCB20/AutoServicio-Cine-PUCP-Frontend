@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls; // Necesario para el Repeater y Button
 
 // Asegúrate de que este namespace sea correcto para tu referencia de servicio
-using AutoServicioCineWeb.PeliculaWebService;
+using AutoServicioCineWeb.AutoservicioCineWS;
 
 namespace AutoServicioCineWeb
 {
@@ -53,7 +53,7 @@ namespace AutoServicioCineWeb
                 }
 
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensaje.Text = "Error al cargar las películas: " + ex.Message;
                 litMensaje.Visible = true;

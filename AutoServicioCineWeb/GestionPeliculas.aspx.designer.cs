@@ -15,13 +15,40 @@ namespace AutoServicioCineWeb
     {
 
         /// <summary>
-        /// Control btnAgregarPelicula.
+        /// Control btnOpenAddModal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarPelicula;
+        protected global::System.Web.UI.WebControls.Button btnOpenAddModal;
+
+        /// <summary>
+        /// Control btnOpenCsvImportModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOpenCsvImportModal;
+
+        /// <summary>
+        /// Control txtSearchPeliculas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchPeliculas;
+
+        /// <summary>
+        /// Control ddlClasificacionFilter.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlClasificacionFilter;
 
         /// <summary>
         /// Control gvPeliculas.
@@ -33,6 +60,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.GridView gvPeliculas;
 
         /// <summary>
+        /// Control peliculaModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl peliculaModal;
+
+        /// <summary>
         /// Control litModalTitle.
         /// </summary>
         /// <remarks>
@@ -40,6 +76,15 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litModalTitle;
+
+        /// <summary>
+        /// Control btnCloseModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseModal;
 
         /// <summary>
         /// Control txtTituloEs.
@@ -78,51 +123,6 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTituloEn;
 
         /// <summary>
-        /// Control txtDuracionMin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDuracionMin;
-
-        /// <summary>
-        /// Control rfvDuracionMin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDuracionMin;
-
-        /// <summary>
-        /// Control rvDuracionMin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rvDuracionMin;
-
-        /// <summary>
-        /// Control txtClasificacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtClasificacion;
-
-        /// <summary>
-        /// Control rfvClasificacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClasificacion;
-
-        /// <summary>
         /// Control txtSinopsisEs.
         /// </summary>
         /// <remarks>
@@ -157,6 +157,51 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSinopsisEn;
+
+        /// <summary>
+        /// Control txtDuracionMin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDuracionMin;
+
+        /// <summary>
+        /// Control rfvDuracionMin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDuracionMin;
+
+        /// <summary>
+        /// Control rvDuracionMin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvDuracionMin;
+
+        /// <summary>
+        /// Control ddlClasificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlClasificacion;
+
+        /// <summary>
+        /// Control rfvClasificacionModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClasificacionModal;
 
         /// <summary>
         /// Control txtImagenUrl.
@@ -222,6 +267,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.HiddenField hdnPeliculaId;
 
         /// <summary>
+        /// Control btnCancelModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelModal;
+
+        /// <summary>
         /// Control btnGuardarPelicula.
         /// </summary>
         /// <remarks>
@@ -238,5 +292,77 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litMensajeModal;
+
+        /// <summary>
+        /// Control csvUploadModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl csvUploadModal;
+
+        /// <summary>
+        /// Control btnCloseCsvModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseCsvModal;
+
+        /// <summary>
+        /// Control FileUploadCsv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadCsv;
+
+        /// <summary>
+        /// Control rfvFileUploadCsv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFileUploadCsv;
+
+        /// <summary>
+        /// Control cvCsvFileExtension.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvCsvFileExtension;
+
+        /// <summary>
+        /// Control btnCancelCsvModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelCsvModal;
+
+        /// <summary>
+        /// Control btnUploadCsv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUploadCsv;
+
+        /// <summary>
+        /// Control litMensajeCsvModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litMensajeCsvModal;
     }
 }

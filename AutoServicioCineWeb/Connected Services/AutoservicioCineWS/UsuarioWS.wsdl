@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="UsuarioWS" targetNamespace="http://services.AutoCine.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+<<<<<<< HEAD
+  <message name="registrarUsuario">
+    <part name="parameters" element="tns:registrarUsuario" />
+  </message>
+  <message name="registrarUsuarioResponse">
+    <part name="parameters" element="tns:registrarUsuarioResponse" />
+=======
+  <message name="eliminarUsuario">
+    <part name="parameters" element="tns:eliminarUsuario" />
+  </message>
+  <message name="eliminarUsuarioResponse">
+    <part name="parameters" element="tns:eliminarUsuarioResponse" />
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="actualizarUsuario">
+    <part name="parameters" element="tns:actualizarUsuario" />
+  </message>
+  <message name="actualizarUsuarioResponse">
+    <part name="parameters" element="tns:actualizarUsuarioResponse" />
+  </message>
+<<<<<<< HEAD
+  <message name="buscarUsuarioPorId">
+    <part name="parameters" element="tns:buscarUsuarioPorId" />
+  </message>
+  <message name="buscarUsuarioPorIdResponse">
+    <part name="parameters" element="tns:buscarUsuarioPorIdResponse" />
+  </message>
+  <message name="eliminarUsuario">
+    <part name="parameters" element="tns:eliminarUsuario" />
+  </message>
+  <message name="eliminarUsuarioResponse">
+    <part name="parameters" element="tns:eliminarUsuarioResponse" />
+=======
+  <message name="registrarUsuario">
+    <part name="parameters" element="tns:registrarUsuario" />
+  </message>
+  <message name="registrarUsuarioResponse">
+    <part name="parameters" element="tns:registrarUsuarioResponse" />
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+  </message>
+  <message name="listarUsuario">
+    <part name="parameters" element="tns:listarUsuario" />
+  </message>
+  <message name="listarUsuarioResponse">
+    <part name="parameters" element="tns:listarUsuarioResponse" />
+  </message>
+<<<<<<< HEAD
+  <portType name="UsuarioWS">
+    <operation name="registrarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioRequest" message="tns:registrarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioResponse" message="tns:registrarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+=======
+  <message name="buscarUsuarioPorId">
+    <part name="parameters" element="tns:buscarUsuarioPorId" />
+  </message>
+  <message name="buscarUsuarioPorIdResponse">
+    <part name="parameters" element="tns:buscarUsuarioPorIdResponse" />
+  </message>
+  <portType name="UsuarioWS">
+    <operation name="eliminarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioRequest" message="tns:eliminarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioResponse" message="tns:eliminarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+    </operation>
+    <operation name="actualizarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuarioRequest" message="tns:actualizarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuarioResponse" message="tns:actualizarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+<<<<<<< HEAD
+    <operation name="buscarUsuarioPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdRequest" message="tns:buscarUsuarioPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdResponse" message="tns:buscarUsuarioPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorId/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioRequest" message="tns:eliminarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioResponse" message="tns:eliminarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+=======
+    <operation name="registrarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioRequest" message="tns:registrarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioResponse" message="tns:registrarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+    </operation>
+    <operation name="listarUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuarioRequest" message="tns:listarUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuarioResponse" message="tns:listarUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+<<<<<<< HEAD
+  </portType>
+  <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="registrarUsuario">
+=======
+    <operation name="buscarUsuarioPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdRequest" message="tns:buscarUsuarioPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdResponse" message="tns:buscarUsuarioPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorId/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+  </portType>
+  <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="eliminarUsuario">
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="actualizarUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+<<<<<<< HEAD
+    <operation name="buscarUsuarioPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarUsuario">
+=======
+    <operation name="registrarUsuario">
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+<<<<<<< HEAD
+=======
+    <operation name="buscarUsuarioPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+>>>>>>> bc7e272fe69d81a1073c95360154a01e275a4e28
+  </binding>
+  <service name="UsuarioWS">
+    <port name="UsuarioWSPort" binding="tns:UsuarioWSPortBinding">
+      <soap:address location="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS" />
+    </port>
+  </service>
+</definitions>

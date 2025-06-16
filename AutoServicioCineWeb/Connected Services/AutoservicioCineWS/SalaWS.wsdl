@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="SalaWS" targetNamespace="http://services.AutoCine.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="buscarSalaPorId">
+    <part name="parameters" element="tns:buscarSalaPorId" />
+  </message>
+  <message name="buscarSalaPorIdResponse">
+    <part name="parameters" element="tns:buscarSalaPorIdResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="registrarSala">
+    <part name="parameters" element="tns:registrarSala" />
+  </message>
+  <message name="registrarSalaResponse">
+    <part name="parameters" element="tns:registrarSalaResponse" />
+  </message>
+  <message name="actualizarSala">
+    <part name="parameters" element="tns:actualizarSala" />
+  </message>
+  <message name="actualizarSalaResponse">
+    <part name="parameters" element="tns:actualizarSalaResponse" />
+  </message>
+  <message name="eliminarSala">
+    <part name="parameters" element="tns:eliminarSala" />
+  </message>
+  <message name="eliminarSalaResponse">
+    <part name="parameters" element="tns:eliminarSalaResponse" />
+  </message>
+  <message name="listarSalas">
+    <part name="parameters" element="tns:listarSalas" />
+  </message>
+  <message name="listarSalasResponse">
+    <part name="parameters" element="tns:listarSalasResponse" />
+  </message>
+  <portType name="SalaWS">
+    <operation name="buscarSalaPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdRequest" message="tns:buscarSalaPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdResponse" message="tns:buscarSalaPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorId/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="registrarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest" message="tns:registrarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse" message="tns:registrarSalaResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSala/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="actualizarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaRequest" message="tns:actualizarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSalaResponse" message="tns:actualizarSalaResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/actualizarSala/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest" message="tns:eliminarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse" message="tns:eliminarSalaResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSala/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="listarSalas">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasRequest" message="tns:listarSalas" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse" message="tns:listarSalasResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalas/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+  </portType>
+  <binding name="SalaWSPortBinding" type="tns:SalaWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="buscarSalaPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="registrarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="actualizarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarSalas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="SalaWS">
+    <port name="SalaWSPort" binding="tns:SalaWSPortBinding">
+      <soap:address location="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS" />
+    </port>
+  </service>
+</definitions>

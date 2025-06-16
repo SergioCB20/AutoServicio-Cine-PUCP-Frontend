@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ComboItemWS" targetNamespace="http://services.AutoCine.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="actualizarComboItem">
+    <part name="parameters" element="tns:actualizarComboItem" />
+  </message>
+  <message name="actualizarComboItemResponse">
+    <part name="parameters" element="tns:actualizarComboItemResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="buscarComboItemPorId">
+    <part name="parameters" element="tns:buscarComboItemPorId" />
+  </message>
+  <message name="buscarComboItemPorIdResponse">
+    <part name="parameters" element="tns:buscarComboItemPorIdResponse" />
+  </message>
+  <message name="registrarComboItem">
+    <part name="parameters" element="tns:registrarComboItem" />
+  </message>
+  <message name="registrarComboItemResponse">
+    <part name="parameters" element="tns:registrarComboItemResponse" />
+  </message>
+  <message name="listarComboItems">
+    <part name="parameters" element="tns:listarComboItems" />
+  </message>
+  <message name="listarComboItemsResponse">
+    <part name="parameters" element="tns:listarComboItemsResponse" />
+  </message>
+  <message name="eliminarComboItem">
+    <part name="parameters" element="tns:eliminarComboItem" />
+  </message>
+  <message name="eliminarComboItemResponse">
+    <part name="parameters" element="tns:eliminarComboItemResponse" />
+  </message>
+  <portType name="ComboItemWS">
+    <operation name="actualizarComboItem">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest" message="tns:actualizarComboItem" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse" message="tns:actualizarComboItemResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItem/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="buscarComboItemPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest" message="tns:buscarComboItemPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse" message="tns:buscarComboItemPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorId/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="registrarComboItem">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemRequest" message="tns:registrarComboItem" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemResponse" message="tns:registrarComboItemResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItem/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="listarComboItems">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsRequest" message="tns:listarComboItems" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsResponse" message="tns:listarComboItemsResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItems/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarComboItem">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/eliminarComboItemRequest" message="tns:eliminarComboItem" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/eliminarComboItemResponse" message="tns:eliminarComboItemResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/eliminarComboItem/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+  </portType>
+  <binding name="ComboItemWSPortBinding" type="tns:ComboItemWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="actualizarComboItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="buscarComboItemPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="registrarComboItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarComboItems">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarComboItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ComboItemWS">
+    <port name="ComboItemWSPort" binding="tns:ComboItemWSPortBinding">
+      <soap:address location="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS" />
+    </port>
+  </service>
+</definitions>
