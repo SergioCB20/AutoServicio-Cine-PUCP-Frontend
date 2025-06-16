@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Form.Master" AutoEventWireup="true" CodeBehind="PaginaUsuario.aspx.cs" Inherits="AutoServicioCineWeb.PaginaUsuario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Form.Master" AutoEventWireup="true" CodeBehind="PaginaUsuario.aspx.cs" 
+    Inherits="AutoServicioCineWeb.PaginaUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Mi perfil
 </asp:Content>
