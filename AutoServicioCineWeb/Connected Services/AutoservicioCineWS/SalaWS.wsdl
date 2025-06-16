@@ -4,15 +4,30 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
   </types>
+  <message name="registrarSala">
+    <part name="parameters" element="tns:registrarSala" />
+  </message>
+  <message name="registrarSalaResponse">
+    <part name="parameters" element="tns:registrarSalaResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="eliminarSala">
+    <part name="parameters" element="tns:eliminarSala" />
+  </message>
+  <message name="eliminarSalaResponse">
+    <part name="parameters" element="tns:eliminarSalaResponse" />
+  </message>
   <message name="buscarSalaPorId">
     <part name="parameters" element="tns:buscarSalaPorId" />
   </message>
   <message name="buscarSalaPorIdResponse">
     <part name="parameters" element="tns:buscarSalaPorIdResponse" />
-  </message>
-  <message name="Exception">
-    <part name="fault" element="tns:Exception" />
   </message>
   <message name="actualizarSala">
     <part name="parameters" element="tns:actualizarSala" />
@@ -26,19 +41,17 @@
   <message name="listarSalasResponse">
     <part name="parameters" element="tns:listarSalasResponse" />
   </message>
-  <message name="registrarSala">
-    <part name="parameters" element="tns:registrarSala" />
-  </message>
-  <message name="registrarSalaResponse">
-    <part name="parameters" element="tns:registrarSalaResponse" />
-  </message>
-  <message name="eliminarSala">
-    <part name="parameters" element="tns:eliminarSala" />
-  </message>
-  <message name="eliminarSalaResponse">
-    <part name="parameters" element="tns:eliminarSalaResponse" />
-  </message>
   <portType name="SalaWS">
+    <operation name="registrarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest" message="tns:registrarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse" message="tns:registrarSalaResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSala/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarSala">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest" message="tns:eliminarSala" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse" message="tns:eliminarSalaResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSala/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
     <operation name="buscarSalaPorId">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdRequest" message="tns:buscarSalaPorId" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/buscarSalaPorIdResponse" message="tns:buscarSalaPorIdResponse" />
@@ -54,19 +67,33 @@
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalasResponse" message="tns:listarSalasResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/listarSalas/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="registrarSala">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaRequest" message="tns:registrarSala" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSalaResponse" message="tns:registrarSalaResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/registrarSala/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
-    <operation name="eliminarSala">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaRequest" message="tns:eliminarSala" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSalaResponse" message="tns:eliminarSalaResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/SalaWS/eliminarSala/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
   </portType>
   <binding name="SalaWSPortBinding" type="tns:SalaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="registrarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarSala">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
     <operation name="buscarSalaPorId">
       <soap:operation soapAction="" />
       <input>
@@ -92,30 +119,6 @@
       </fault>
     </operation>
     <operation name="listarSalas">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
-    <operation name="registrarSala">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminarSala">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

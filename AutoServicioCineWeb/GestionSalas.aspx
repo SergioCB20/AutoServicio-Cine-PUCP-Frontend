@@ -118,6 +118,7 @@
                     </span>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:BoundField DataField="FechaModificacion" HeaderText="Última Mod." DataFormatString="{0:yyyy-MM-dd HH:mm}" SortExpression="FechaModificacion" />
            
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>

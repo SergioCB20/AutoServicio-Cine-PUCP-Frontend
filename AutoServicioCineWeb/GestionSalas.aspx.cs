@@ -113,7 +113,8 @@ namespace AutoServicioCineWeb
                      Nombre.Text = sala.nombre;
                      Capacidad.Text = sala.capacidad.ToString();
                      ddlTipoSala.SelectedValue = sala.tipoSala.ToString();
-                    chkEstaActiva.Checked = sala.activa;
+                     chkEstaActiva.Checked = sala.activa;
+
 
                      /*ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
                          "previewImage(document.getElementById('" + txtImagenUrl.ClientID + "'));", true);*/
@@ -139,13 +140,20 @@ namespace AutoServicioCineWeb
                 MostrarModalSala();
                 return;
             }
-
+            
             sala sala = new sala
             {
+                 id = int.Parse(hdnSalaId.Value),
+                 idSpecified = true,
                  nombre = Nombre.Text,
                  capacidad = int.Parse(Capacidad.Text),
-                 tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue),
-                 activa = chkEstaActiva.Checked
+                 capacidadSpecified = true,
+                 tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue, ignoreCase: true),
+                 tipoSalaSpecified=true,
+                 activa = chkEstaActiva.Checked,
+                 usuarioModificacion = 4, // Asignar un usuario de modificación por defecto, esto debería ser dinámico en una aplicación real
+                 usuarioModificacionSpecified = true
+
             };
 
             try
@@ -349,6 +357,9 @@ namespace AutoServicioCineWeb
                                 else if (activeString == "false" || activeString == "0") sala.activa = false;
                                 else throw new FormatException("EstaActiva no es un valor booleano válido (TRUE/FALSE, 1/0).");
                             }
+                            sala.usuarioModificacion = 4; //
+                            sala.usuarioModificacionSpecified = true; 
+
                             if (sala.id == 0)
                             {
                                 salaServiceClient.registrarSala(sala);

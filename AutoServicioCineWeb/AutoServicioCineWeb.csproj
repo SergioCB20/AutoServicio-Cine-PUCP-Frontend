@@ -193,14 +193,29 @@
     <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.registrarCuponResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\AutoservicioCineWS\ComboItemWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\CuponWS.wsdl" />
     <None Include="Connected Services\AutoservicioCineWS\CuponWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\CuponWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\PeliculaWS1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\AutoservicioCineWS\ProductoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\AutoservicioCineWS\ProductoWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\SalaWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\SalaWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\servicios.disco" />
     <None Include="Connected Services\AutoservicioCineWS\configuration91.svcinfo" />
     <None Include="Connected Services\AutoservicioCineWS\configuration.svcinfo" />
