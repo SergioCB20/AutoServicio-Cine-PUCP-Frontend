@@ -54,7 +54,7 @@ namespace AutoServicioCineWeb
             {
                 string searchTerm = txtSearchSalas.Text.Trim().ToLower();
                 salas = salas.Where(p =>
-                    p.nombre.ToLower().Contains(searchTerm)
+                    p.nombre.ToLower().Contains(searchTerm)                    
                 ).ToList();
             }
 
@@ -82,7 +82,7 @@ namespace AutoServicioCineWeb
                 CargarDatosSalaParaEdicion(SalaId);
                 MostrarModalSala(); // Abre el modal de película
             }
-            else if (e.CommandName == "DeletePelicula")
+            else if (e.CommandName == "DeleteSala")
             {
                 try
                 {
@@ -110,12 +110,13 @@ namespace AutoServicioCineWeb
 
                 if (sala != null)
                 {
-                    /* txtNombreSala.Text = sala.nombre;
-                     txtCapacidad.Text = sala.capacidad.ToString();
+                     Nombre.Text = sala.nombre;
+                     Capacidad.Text = sala.capacidad.ToString();
                      ddlTipoSala.SelectedValue = sala.tipoSala.ToString();
-                     chkActiva.Checked = sala.activa;
+                     chkEstaActiva.Checked = sala.activa;
 
-                     ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
+
+                     /*ScriptManager.RegisterStartupScript(this, this.GetType(), "PreviewImageOnLoad",
                          "previewImage(document.getElementById('" + txtImagenUrl.ClientID + "'));", true);*/
                 }
                 else
@@ -139,13 +140,20 @@ namespace AutoServicioCineWeb
                 MostrarModalSala();
                 return;
             }
-
+            
             sala sala = new sala
             {
-                /* nombre = txtNombreSala.Text,
-                 capacidad = int.Parse(txtCapacidad.Text),
-                 tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue),
-                 activa = chkActiva.Checked*/
+                 id = int.Parse(hdnSalaId.Value),
+                 idSpecified = true,
+                 nombre = Nombre.Text,
+                 capacidad = int.Parse(Capacidad.Text),
+                 capacidadSpecified = true,
+                 tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue, ignoreCase: true),
+                 tipoSalaSpecified=true,
+                 activa = chkEstaActiva.Checked,
+                 usuarioModificacion = 4, // Asignar un usuario de modificación por defecto, esto debería ser dinámico en una aplicación real
+                 usuarioModificacionSpecified = true
+
             };
 
             try
@@ -203,10 +211,10 @@ namespace AutoServicioCineWeb
 
         private void LimpiarCamposModalSala()
         {
-            /*txtNombreSala.Text = string.Empty;
-            txtCapacidad.Text = string.Empty;
+            Nombre.Text = string.Empty;
+            Capacidad.Text = string.Empty;
             ddlTipoSala.SelectedIndex = 0;
-            chkActiva.Checked = false;   */
+            chkEstaActiva.Checked = false;   
         }
         // --- NUEVOS Métodos para Carga de CSV ---
         private void MostrarModalCsv()
@@ -325,7 +333,7 @@ namespace AutoServicioCineWeb
                         {
                             sala.nombre = GetCsvValue(data, headerMap, "Nombre");
                             int capacidad;
-                            if (int.TryParse(GetCsvValue(data, headerMap, "DuracionMin"), out capacidad))
+                            if (int.TryParse(GetCsvValue(data, headerMap, "Capacidad"), out capacidad))
                             {
                                 sala.capacidad = capacidad;
                                 ;
@@ -349,6 +357,9 @@ namespace AutoServicioCineWeb
                                 else if (activeString == "false" || activeString == "0") sala.activa = false;
                                 else throw new FormatException("EstaActiva no es un valor booleano válido (TRUE/FALSE, 1/0).");
                             }
+                            sala.usuarioModificacion = 4; //
+                            sala.usuarioModificacionSpecified = true; 
+
                             if (sala.id == 0)
                             {
                                 salaServiceClient.registrarSala(sala);
@@ -403,7 +414,7 @@ namespace AutoServicioCineWeb
                 }
                 catch (System.Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error al obtener slas para estadísticas: " + ex.ToString());
+                    System.Diagnostics.Debug.WriteLine("Error al obtener salas para estadísticas: " + ex.ToString());
                     _cachedSalas = new List<sala>();
                 }
             }

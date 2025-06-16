@@ -66,6 +66,7 @@
     border-radius: 5px 5px 0 0;
     margin-bottom: 10px;
     font-weight: bold;
+    transform: translateX(13px);
 }
 
 .filas {
@@ -105,4 +106,48 @@
 .butacas-seleccionadas span {
     font-weight: bold;
     color: var(--color-primario);
+}
+
+.sala-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.identificadores-filas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.identificador-fila {
+    height: 20px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.filas-contenido {
+    display: flex;
+    flex-direction: column;
+}
+
+.identificadores-columnas {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.identificador-columna {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
 }

@@ -8,7 +8,7 @@
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="./styles/GestionSalas.css">
     <script type="text/javascript">      
-
+    
         // Script para activar el elemento del menú de navegación (se mantiene)
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
@@ -65,15 +65,15 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="MainContent" runat="server">
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number" id="totalPeliculas"><%= GetTotalSalas() %></div>
-            <div class="stat-label">Total Películas</div>
+            <div class="stat-number" id="totalSalas"><%= GetTotalSalas() %></div>
+            <div class="stat-label">Total Salas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasActivas"><%= GetSalasActivas() %></div>
+            <div class="stat-number" id="salasActivas"><%= GetSalasActivas() %></div>
             <div class="stat-label">Activas</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="peliculasInactivas"><%= GetSalasInactivas() %></div>
+            <div class="stat-number" id="salasInactivas"><%= GetSalasInactivas() %></div>
             <div class="stat-label">Inactivas</div>
         </div>
     </div>
@@ -85,10 +85,10 @@
 
             <asp:DropDownList ID="ddlTipoFilter" runat="server" CssClass="filter-select" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoFilter_SelectedIndexChanged">
                 <asp:ListItem Value="">Todas las clasificaciones</asp:ListItem>
-                <asp:ListItem Value="estándar">estándar</asp:ListItem>
-                <asp:ListItem Value="3D">3D</asp:ListItem>
-                <asp:ListItem Value="premium">premium</asp:ListItem>
-                <asp:ListItem Value="4D">4D</asp:ListItem>
+                <asp:ListItem Value="ESTANDAR">estándar</asp:ListItem>
+                <asp:ListItem Value="TRES_D">3D</asp:ListItem>
+                <asp:ListItem Value="PREMIUM">premium</asp:ListItem>
+                <asp:ListItem Value="CUATRO_DX">4DX</asp:ListItem>
             </asp:DropDownList>
         </div>
     </div>
@@ -98,38 +98,35 @@
                   RowStyle-CssClass="data-table-row"
                   AlternatingRowStyle-CssClass="data-table-row-alt"
                   AllowPaging="True" PageSize="10" OnPageIndexChanging="gvSalas_PageIndexChanging"
-                  DataKeyNames="SalaId" OnRowCommand="gvSalas_RowCommand">
+                  DataKeyNames="Id" OnRowCommand="gvSalas_RowCommand">
         <Columns>
-            <asp:BoundField DataField="SalaId" HeaderText="ID" SortExpression="SalaId" />
+            <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
             <asp:BoundField DataField="Capacidad" HeaderText="Capacidad " SortExpression="Capacidad" />
             <asp:TemplateField HeaderText="TipoSala">
                 <ItemTemplate>
-                    <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-input">
-                        <asp:ListItem Text="Seleccionar" Value="" />
-                        <asp:ListItem Text="Estandar" Value="Estandar" />
-                        <asp:ListItem Text="3D" Value="3D" />
-                        <asp:ListItem Text="Premium" Value="Premium" />
-                        <asp:ListItem Text="4DX" Value="4DX" />
-                    </asp:DropDownList>
+                    <span class="classification-badge classification-<%# Eval("TipoSala").ToString() %>">
+                        <%# Eval("TipoSala") %>
+                    </span>
                 </ItemTemplate>
             </asp:TemplateField>
             
             <asp:TemplateField HeaderText="Estado">
                 <ItemTemplate>
-                    <span class="status-badge status-<%# Eval("EstaActiva").ToString().ToLower() == "true" ? "activa" : "inactiva" %>">
-                        <%# Eval("EstaActiva").ToString().ToLower() == "true" ? "Activa" : "Inactiva" %>
+                    <span class="status-badge status-<%# Eval("Activa").ToString().ToLower() == "true" ? "activa" : "inactiva" %>">
+                        <%# Eval("Activa").ToString().ToLower() == "true" ? "Activa" : "Inactiva" %>
                     </span>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:BoundField DataField="FechaModificacion" HeaderText="Última Mod." DataFormatString="{0:yyyy-MM-dd HH:mm}" SortExpression="FechaModificacion" />
            
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <div class="action-buttons">
-                        <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditSala" CommandArgument='<%# Eval("SalaId") %>'>
+                        <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditSala" CommandArgument='<%# Eval("Id") %>'>
                             <i class="fas fa-edit"></i> Editar
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("SalaId") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </asp:LinkButton>
                     </div>
@@ -165,24 +162,15 @@
                  <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="Capacidad" MinimumValue="20" MaximumValue="400" Type="Integer" ErrorMessage="La capacidad debe ser un número positivo (20-400)." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RangeValidator>
              </div>
              <div class="form-group">
-                <label for="<%= ddlTipoSala.ClientID %>" class="form-label">Tipo de Sala:</label>
-                <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-control">
-                    <asp:ListItem Text="-- Seleccione --" Value="" />
-                    <asp:ListItem Text="Estándar" Value="estandar" />
-                    <asp:ListItem Text="3D" Value="3D" />
-                    <asp:ListItem Text="Premium" Value="premium" />
-                    <asp:ListItem Text="4D" Value="4D" />
-                </asp:DropDownList>
-                <asp:RequiredFieldValidator 
-                    ID="rfvTipoSala" 
-                    runat="server" 
-                    ControlToValidate="ddlTipoSala" 
-                    InitialValue="" 
-                    ErrorMessage="Debe seleccionar un tipo de sala." 
-                    Display="Dynamic" 
-                    ForeColor="Red" 
-                    ValidationGroup="PeliculaValidation">
-                </asp:RequiredFieldValidator>
+                 <label for="<%= ddlTipoSala.ClientID %>" class="form-label">Tipo de Sala:</label>
+                 <asp:DropDownList ID="ddlTipoSala" runat="server" CssClass="form-control">
+                     <asp:ListItem Value="">Seleccionar</asp:ListItem>
+                     <asp:ListItem Value="ESTANDAR">Estándar</asp:ListItem>
+                     <asp:ListItem Value="TRES_D">3D</asp:ListItem>
+                     <asp:ListItem Value="PREMIUM">Premium</asp:ListItem>
+                     <asp:ListItem Value="CUATRO_DX">4D</asp:ListItem>                    
+                 </asp:DropDownList>
+                 <asp:RequiredFieldValidator ID="rfvTipoSala" runat="server" ControlToValidate="ddlTipoSala" InitialValue="" ErrorMessage="Debe seleccionar un tipo de sala." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RequiredFieldValidator>
             </div>                      
 
              <div class="form-group form-check">
