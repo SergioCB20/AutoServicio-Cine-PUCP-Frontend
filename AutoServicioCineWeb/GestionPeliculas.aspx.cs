@@ -165,7 +165,8 @@ namespace AutoServicioCineWeb
                 estaActiva = chkEstaActiva.Checked,
                 imagenUrl = txtImagenUrl.Text.Trim(),
                 usuarioModificacion = 4,
-                usuarioModificacionSpecified = true
+                usuarioModificacionSpecified = true,
+                fechaModificacionSpecified=true
             };
 
             try

@@ -4,30 +4,15 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
-    <xsd:schema>
-      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
-    </xsd:schema>
   </types>
-  <message name="listarProductos">
-    <part name="parameters" element="tns:listarProductos" />
-  </message>
-  <message name="listarProductosResponse">
-    <part name="parameters" element="tns:listarProductosResponse" />
-  </message>
-  <message name="Exception">
-    <part name="fault" element="tns:Exception" />
-  </message>
-  <message name="eliminarProducto">
-    <part name="parameters" element="tns:eliminarProducto" />
-  </message>
-  <message name="eliminarProductoResponse">
-    <part name="parameters" element="tns:eliminarProductoResponse" />
-  </message>
   <message name="registrarProducto">
     <part name="parameters" element="tns:registrarProducto" />
   </message>
   <message name="registrarProductoResponse">
     <part name="parameters" element="tns:registrarProductoResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
   </message>
   <message name="actualizarProducto">
     <part name="parameters" element="tns:actualizarProducto" />
@@ -41,17 +26,19 @@
   <message name="buscarProductoPorIdResponse">
     <part name="parameters" element="tns:buscarProductoPorIdResponse" />
   </message>
+  <message name="listarProductos">
+    <part name="parameters" element="tns:listarProductos" />
+  </message>
+  <message name="listarProductosResponse">
+    <part name="parameters" element="tns:listarProductosResponse" />
+  </message>
+  <message name="eliminarProducto">
+    <part name="parameters" element="tns:eliminarProducto" />
+  </message>
+  <message name="eliminarProductoResponse">
+    <part name="parameters" element="tns:eliminarProductoResponse" />
+  </message>
   <portType name="ProductoWS">
-    <operation name="listarProductos">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductos/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
-    <operation name="eliminarProducto">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoRequest" message="tns:eliminarProducto" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoResponse" message="tns:eliminarProductoResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProducto/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
     <operation name="registrarProducto">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoRequest" message="tns:registrarProducto" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/registrarProductoResponse" message="tns:registrarProductoResponse" />
@@ -67,33 +54,19 @@
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorIdResponse" message="tns:buscarProductoPorIdResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/buscarProductoPorId/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
+    <operation name="listarProductos">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/listarProductos/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarProducto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoRequest" message="tns:eliminarProducto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProductoResponse" message="tns:eliminarProductoResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ProductoWS/eliminarProducto/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
   </portType>
   <binding name="ProductoWSPortBinding" type="tns:ProductoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarProductos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminarProducto">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
     <operation name="registrarProducto">
       <soap:operation soapAction="" />
       <input>
@@ -119,6 +92,30 @@
       </fault>
     </operation>
     <operation name="buscarProductoPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarProductos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarProducto">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

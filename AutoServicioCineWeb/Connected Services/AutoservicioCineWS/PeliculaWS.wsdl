@@ -4,24 +4,21 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
-    <xsd:schema>
-      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
-    </xsd:schema>
   </types>
-  <message name="listarPeliculas">
-    <part name="parameters" element="tns:listarPeliculas" />
-  </message>
-  <message name="listarPeliculasResponse">
-    <part name="parameters" element="tns:listarPeliculasResponse" />
-  </message>
-  <message name="Exception">
-    <part name="fault" element="tns:Exception" />
-  </message>
   <message name="eliminarPelicula">
     <part name="parameters" element="tns:eliminarPelicula" />
   </message>
   <message name="eliminarPeliculaResponse">
     <part name="parameters" element="tns:eliminarPeliculaResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="listarPeliculas">
+    <part name="parameters" element="tns:listarPeliculas" />
+  </message>
+  <message name="listarPeliculasResponse">
+    <part name="parameters" element="tns:listarPeliculasResponse" />
   </message>
   <message name="registrarPelicula">
     <part name="parameters" element="tns:registrarPelicula" />
@@ -42,15 +39,15 @@
     <part name="parameters" element="tns:buscarPeliculaPorIdResponse" />
   </message>
   <portType name="PeliculaWS">
-    <operation name="listarPeliculas">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest" message="tns:listarPeliculas" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse" message="tns:listarPeliculasResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculas/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
     <operation name="eliminarPelicula">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaRequest" message="tns:eliminarPelicula" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPeliculaResponse" message="tns:eliminarPeliculaResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/eliminarPelicula/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="listarPeliculas">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasRequest" message="tns:listarPeliculas" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculasResponse" message="tns:listarPeliculasResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/listarPeliculas/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
     <operation name="registrarPelicula">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/PeliculaWS/registrarPeliculaRequest" message="tns:registrarPelicula" />
@@ -70,7 +67,7 @@
   </portType>
   <binding name="PeliculaWSPortBinding" type="tns:PeliculaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarPeliculas">
+    <operation name="eliminarPelicula">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -82,7 +79,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="eliminarPelicula">
+    <operation name="listarPeliculas">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

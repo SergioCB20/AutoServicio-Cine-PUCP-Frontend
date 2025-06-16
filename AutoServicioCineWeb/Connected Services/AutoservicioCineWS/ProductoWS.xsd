@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
-  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
   <xs:element name="actualizarProducto" type="tns:actualizarProducto" />
   <xs:element name="actualizarProductoResponse" type="tns:actualizarProductoResponse" />
   <xs:element name="buscarProductoPorId" type="tns:buscarProductoPorId" />
@@ -12,12 +11,9 @@
   <xs:element name="listarProductosResponse" type="tns:listarProductosResponse" />
   <xs:element name="registrarProducto" type="tns:registrarProducto" />
   <xs:element name="registrarProductoResponse" type="tns:registrarProductoResponse" />
-  <xs:complexType name="listarProductos">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarProductosResponse">
+  <xs:complexType name="registrarProducto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+      <xs:element minOccurs="0" name="prod" type="tns:producto" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="producto">
@@ -30,13 +26,21 @@
       <xs:element minOccurs="0" name="tipo" type="tns:tipoProducto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="registrarProducto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="prod" type="tns:producto" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="registrarProductoResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarProductos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarProductosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarProducto">
     <xs:sequence>

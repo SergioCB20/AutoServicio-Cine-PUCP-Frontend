@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
-  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
   <xs:element name="actualizarSala" type="tns:actualizarSala" />
   <xs:element name="actualizarSalaResponse" type="tns:actualizarSalaResponse" />
   <xs:element name="buscarSalaPorId" type="tns:buscarSalaPorId" />
@@ -42,6 +41,11 @@
       <xs:element name="numero" type="xs:int" />
       <xs:element minOccurs="0" name="sala" type="tns:sala" />
       <xs:element minOccurs="0" name="tipo" type="tns:tipoAsiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="registrarSala">
