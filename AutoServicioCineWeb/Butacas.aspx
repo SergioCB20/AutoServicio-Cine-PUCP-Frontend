@@ -11,8 +11,18 @@
         <h2>Selecciona tus butacas</h2>
         <div class="sala">
             <div class="pantalla">PANTALLA</div>
-            <div class="filas">
-                <%-- Contenido de las butacas generado por el script o backend --%>
+            <div class="sala-container">
+                <div class="identificadores-filas" id="identificadores-filas">
+                    <!-- Identificadores de filas generados por JavaScript -->
+                </div>
+                <div class="filas-contenido">
+                    <div class="identificadores-columnas" id="identificadores-columnas">
+                        <!-- Identificadores de columnas generados por JavaScript -->
+                    </div>
+                    <div class="filas" id="filas">
+                        <!-- Contenido de las butacas generado por JavaScript -->
+                    </div>
+                </div>
             </div>
         </div>
         <div class="leyenda">
@@ -29,11 +39,39 @@
         // El script JavaScript original para la generación de butacas puede ir aquí
         // o ser referenciado desde un archivo .js externo.
         // Para ASP.NET, este script aún sería de lado del cliente.
-        const salaDiv = document.querySelector('.sala .filas');
+        const salaDiv = document.getElementById('filas');
+        const identificadoresFilasDiv = document.getElementById('identificadores-filas');
+        const identificadoresColumnasDiv = document.getElementById('identificadores-columnas');
+
         let cantidadEntradas = 0;
         let butacasSeleccionadas = [];
 
-        function generarSala(filas = 10, columnas = 12) {
+        function generarIdentificadores(filas, columnas) {
+            // Generar identificadores de filas (A, B, C, ...)
+            identificadoresFilasDiv.innerHTML = '';
+            for (let i = 0; i < filas; i++) {
+                const identificadorDiv = document.createElement('div');
+                identificadorDiv.classList.add('identificador-fila');
+                identificadorDiv.textContent = String.fromCharCode(65 + i);
+                identificadoresFilasDiv.appendChild(identificadorDiv);
+            }
+
+            // Generar identificadores de columnas (1, 2, 3, ...)
+            identificadoresColumnasDiv.innerHTML = '';
+            for (let j = 0; j < columnas; j++) {
+                const identificadorDiv = document.createElement('div');
+                identificadorDiv.classList.add('identificador-columna');
+                identificadorDiv.textContent = j + 1;
+                identificadoresColumnasDiv.appendChild(identificadorDiv);
+            }
+        }
+
+        function generarSala(filas, columnas) {
+            // Primero generar los identificadores
+            generarIdentificadores(filas, columnas);
+
+            // Limpiar la sala existente
+            salaDiv.innerHTML = '';
             for (let i = 0; i < filas; i++) {
                 const filaDiv = document.createElement('div');
                 filaDiv.classList.add('fila');
@@ -73,8 +111,23 @@
             }
         }
 
+        //función que ajusta el tamaño de la pantalla en función a la sala
+        function ajustarPantallaDinamico() {
+            const pantalla = document.querySelector('.pantalla');
+            const filasContenido = document.querySelector('.filas-contenido');
+
+            if (pantalla && filasContenido) {
+                const anchoFilas = filasContenido.offsetWidth;
+                pantalla.style.width = `${anchoFilas}px`;
+                pantalla.style.margin = '0 auto';
+                pantalla.style.textAlign = 'center'; // centrar el texto también
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
             calcularCantEntradas();
+            generarSala(10, 12);  // valores de prueba
+            ajustarPantallaDinamico(); // ajuste dinámico en el tamaño
         });
 
         function calcularCantEntradas() {
@@ -94,7 +147,6 @@
             return match ? parseInt(match[1]) : 0;
         }
 
-        generarSala();
         
     </script>
 </asp:Content>
