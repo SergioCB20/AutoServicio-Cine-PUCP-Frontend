@@ -5,5 +5,4 @@
   <contractRef ref="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <contractRef ref="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AutoServicioCineWeb.ProductoWS; // Make sure this namespace is correct for your service reference
+using AutoServicioCineWeb.AutoservicioCineWS; // Make sure this namespace is correct for your service reference
 
 namespace AutoServicioCineWeb
 {
@@ -56,7 +56,7 @@ namespace AutoServicioCineWeb
             {
                 CargarComidas();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 // Log del error pero no mostrar en la interfaz todavía
                 System.Diagnostics.Debug.WriteLine("Error al cargar comidas en Page_Load: " + ex.Message);
@@ -107,7 +107,7 @@ namespace AutoServicioCineWeb
                     litMensajeModal.Text = "<div class='alert alert-warning'>Comida no encontrada.</div>";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeModal.Text = "<div class='alert alert-danger'>Error al cargar los datos de la comida: " + ex.Message + "</div>";
                 System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
@@ -153,7 +153,7 @@ namespace AutoServicioCineWeb
                     litMensajeModal.Text = ""; // No mostrar en modal
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 litMensajeTabla.Text = $"<div class='alert alert-danger text-center' style='margin-top: 20px;'>❌ Error al cargar productos: {ex.Message}</div>";
                 litMensajeModal.Text = ""; // No mostrar en modal
@@ -285,7 +285,7 @@ namespace AutoServicioCineWeb
                 ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal",
                     "closeModal(); showNotification('" + (esEdicion ? "Comida actualizada" : "Comida agregada") + " exitosamente', 'success');", true);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 // Mostrar información detallada del error
                 string errorDetallado = $"Error al guardar la comida: {ex.Message}";
@@ -342,7 +342,7 @@ namespace AutoServicioCineWeb
                         CargarComidas();
                         litMensajeTabla.Text = "<div class='alert alert-success text-center' style='margin-top: 20px;'>✅ Producto eliminado exitosamente.</div>";
                     }
-                    catch (Exception ex)
+                    catch (System.Exception ex)
                     {
                         litMensajeTabla.Text = $"<div class='alert alert-danger text-center' style='margin-top: 20px;'>❌ Error al eliminar: {ex.Message}</div>";
                     }
