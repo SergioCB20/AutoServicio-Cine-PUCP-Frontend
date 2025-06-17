@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Iniciar Sesión - Cine PUCP</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="~/styles/login.css" runat="server" />
+    <link rel="stylesheet" type="text/css" href="~/styles/auth.css" runat="server" />
 </head>
 <body>
     <form id="form1" runat="server">

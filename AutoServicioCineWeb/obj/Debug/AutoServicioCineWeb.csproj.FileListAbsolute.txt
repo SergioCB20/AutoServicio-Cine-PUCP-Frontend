@@ -368,8 +368,6 @@ C:\Users\Amira\Documents\2025.1\PROG3\TA\AutoServicio-Cine-PUCP-Frontend\AutoSer
 C:\Users\Amira\Documents\2025.1\PROG3\TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServ.4170CA70.Up2Date
 C:\Users\Amira\Documents\2025.1\PROG3\TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.dll
 C:\Users\Amira\Documents\2025.1\PROG3\TA\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.pdb
-C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.AssemblyReference.cache
-C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.CoreCompileInputs.cache
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.dll.config
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.dll
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\AutoServicioCineWeb.pdb
@@ -439,6 +437,8 @@ C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\Microsoft
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\es\System.Web.Optimization.resources.dll
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.AssemblyReference.cache
+C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.csproj.CoreCompileInputs.cache
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServ.4170CA70.Up2Date
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.dll
 C:\Users\Piero\AutoServicio-Cine-PUCP-Frontend\AutoServicioCineWeb\obj\Debug\AutoServicioCineWeb.pdb
