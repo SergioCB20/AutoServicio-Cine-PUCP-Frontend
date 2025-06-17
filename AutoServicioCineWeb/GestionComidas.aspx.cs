@@ -73,45 +73,45 @@ namespace AutoServicioCineWeb
 
         private void CargarDatosComidaParaEdicion(int comidaId)
         {
-            try
-            {
-                producto producto = comidaServiceClient.buscarProductoPorId(comidaId);
-                if (producto != null)
-                {
-                    txtNombre.Text = producto.nombre;
-                    txtPrecio.Text = producto.precio.ToString("F2");
-                    txtDescripcion.Text = producto.descripcion;
+            //try
+            //{
+            //    producto producto = comidaServiceClient.buscarProductoPorId(comidaId);
+            //    if (producto != null)
+            //    {
+            //        //txtNombre.Text = producto.nombre;
+            //        //txtPrecio.Text = producto.precio.ToString("F2");
+            //        //txtDescripcion.Text = producto.descripcion;
 
-                    // Asegurar que el tipo se asigne correctamente
-                    ddlTipo.SelectedValue = producto.tipo.ToString();
+            //        // Asegurar que el tipo se asigne correctamente
+            //        ddlTipo.SelectedValue = producto.tipo.ToString();
 
-                    chkActivo.Checked = producto.estaActivo;
+            //        chkActivo.Checked = producto.estaActivo;
 
-                    // Mostrar previsualización de imagen si existe
-                    if (!string.IsNullOrEmpty(producto.descripcion) && IsValidUrl(producto.descripcion))
-                    {
-                        imgPreview.ImageUrl = producto.descripcion;
-                        imgPreview.Style["display"] = "block";
-                    }
-                    else
-                    {
-                        imgPreview.Style["display"] = "none";
-                    }
+            //        // Mostrar previsualización de imagen si existe
+            //        if (!string.IsNullOrEmpty(producto.descripcion) && IsValidUrl(producto.descripcion))
+            //        {
+            //            imgPreview.ImageUrl = producto.descripcion;
+            //            imgPreview.Style["display"] = "block";
+            //        }
+            //        else
+            //        {
+            //            imgPreview.Style["display"] = "none";
+            //        }
 
-                    // Mostrar el modal automáticamente si venimos con ID en query string
-                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal",
-                        "document.getElementById('foodModal').style.display = 'flex';", true);
-                }
-                else
-                {
-                    litMensajeModal.Text = "<div class='alert alert-warning'>Comida no encontrada.</div>";
-                }
-            }
-            catch (System.Exception ex)
-            {
-                litMensajeModal.Text = "<div class='alert alert-danger'>Error al cargar los datos de la comida: " + ex.Message + "</div>";
-                System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
-            }
+            //        // Mostrar el modal automáticamente si venimos con ID en query string
+            //        ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal",
+            //            "document.getElementById('foodModal').style.display = 'flex';", true);
+            //    }
+            //    else
+            //    {
+            //        litMensajeModal.Text = "<div class='alert alert-warning'>Comida no encontrada.</div>";
+            //    }
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    litMensajeModal.Text = "<div class='alert alert-danger'>Error al cargar los datos de la comida: " + ex.Message + "</div>";
+            //    System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
+            //}
         }
 
         private void CargarComidas()
@@ -219,10 +219,10 @@ namespace AutoServicioCineWeb
             {
                 // CAMBIO PRINCIPAL: Crear el producto con una inicialización más explícita
                 producto prod = new producto();
-                prod.nombre = txtNombre.Text.Trim();
-                prod.precio = (double)precio;
-                prod.descripcion = txtDescripcion.Text.Trim();
-                prod.estaActivo = chkActivo.Checked;
+                //prod.nombre = txtNombre.Text.Trim();
+                //prod.precio = (double)precio;
+                //prod.descripcion = txtDescripcion.Text.Trim();
+                //prod.estaActivo = chkActivo.Checked;
 
                 // Asignar el enum directamente por string
                 string tipoSeleccionado = ddlTipo.SelectedValue.Trim().ToUpper();

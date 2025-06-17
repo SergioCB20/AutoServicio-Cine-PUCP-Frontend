@@ -41,6 +41,7 @@
   </xs:complexType>
   <xs:complexType name="usuario">
     <xs:sequence>
+      <xs:element name="admin" type="xs:boolean" />
       <xs:element minOccurs="0" name="email" type="xs:string" />
       <xs:element name="estaActivo" type="xs:boolean" />
       <xs:element minOccurs="0" name="fechaRegistro" type="tns:localDate" />
@@ -49,7 +50,6 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element minOccurs="0" name="password" type="xs:string" />
       <xs:element minOccurs="0" name="telefono" type="xs:string" />
-      <xs:element minOccurs="0" name="tipoUsuario" type="tns:tipoUsuario" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="localDate" final="extension restriction">
@@ -60,14 +60,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="registrarCupon">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="cupon" type="tns:cupon" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="registrarCuponResponse">
-    <xs:sequence />
-  </xs:complexType>
   <xs:complexType name="listarCupones">
     <xs:sequence />
   </xs:complexType>
@@ -75,6 +67,14 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cupon" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarCupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cupon" type="tns:cupon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarCuponResponse">
+    <xs:sequence />
   </xs:complexType>
   <xs:complexType name="eliminarCupon">
     <xs:sequence>
@@ -92,12 +92,6 @@
   <xs:complexType name="actualizarCuponResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:simpleType name="tipoUsuario">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="CLIENTE" />
-      <xs:enumeration value="ADMIN" />
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name="tipoDescuento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="PORCENTAJE" />

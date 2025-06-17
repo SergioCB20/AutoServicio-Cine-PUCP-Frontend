@@ -5,14 +5,26 @@
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="buscarComboItemPorId">
+    <part name="parameters" element="tns:buscarComboItemPorId" />
+  </message>
+  <message name="buscarComboItemPorIdResponse">
+    <part name="parameters" element="tns:buscarComboItemPorIdResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="actualizarComboItem">
+    <part name="parameters" element="tns:actualizarComboItem" />
+  </message>
+  <message name="actualizarComboItemResponse">
+    <part name="parameters" element="tns:actualizarComboItemResponse" />
+  </message>
   <message name="registrarComboItem">
     <part name="parameters" element="tns:registrarComboItem" />
   </message>
   <message name="registrarComboItemResponse">
     <part name="parameters" element="tns:registrarComboItemResponse" />
-  </message>
-  <message name="Exception">
-    <part name="fault" element="tns:Exception" />
   </message>
   <message name="eliminarComboItem">
     <part name="parameters" element="tns:eliminarComboItem" />
@@ -26,19 +38,17 @@
   <message name="listarComboItemsResponse">
     <part name="parameters" element="tns:listarComboItemsResponse" />
   </message>
-  <message name="actualizarComboItem">
-    <part name="parameters" element="tns:actualizarComboItem" />
-  </message>
-  <message name="actualizarComboItemResponse">
-    <part name="parameters" element="tns:actualizarComboItemResponse" />
-  </message>
-  <message name="buscarComboItemPorId">
-    <part name="parameters" element="tns:buscarComboItemPorId" />
-  </message>
-  <message name="buscarComboItemPorIdResponse">
-    <part name="parameters" element="tns:buscarComboItemPorIdResponse" />
-  </message>
   <portType name="ComboItemWS">
+    <operation name="buscarComboItemPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest" message="tns:buscarComboItemPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse" message="tns:buscarComboItemPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorId/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="actualizarComboItem">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest" message="tns:actualizarComboItem" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse" message="tns:actualizarComboItemResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItem/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
     <operation name="registrarComboItem">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemRequest" message="tns:registrarComboItem" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/registrarComboItemResponse" message="tns:registrarComboItemResponse" />
@@ -54,19 +64,33 @@
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItemsResponse" message="tns:listarComboItemsResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/listarComboItems/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="actualizarComboItem">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemRequest" message="tns:actualizarComboItem" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItemResponse" message="tns:actualizarComboItemResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/actualizarComboItem/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
-    <operation name="buscarComboItemPorId">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdRequest" message="tns:buscarComboItemPorId" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorIdResponse" message="tns:buscarComboItemPorIdResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/ComboItemWS/buscarComboItemPorId/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
   </portType>
   <binding name="ComboItemWSPortBinding" type="tns:ComboItemWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="buscarComboItemPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="actualizarComboItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
     <operation name="registrarComboItem">
       <soap:operation soapAction="" />
       <input>
@@ -92,30 +116,6 @@
       </fault>
     </operation>
     <operation name="listarComboItems">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
-    <operation name="actualizarComboItem">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="Exception">
-        <soap:fault use="literal" name="Exception" namespace="" />
-      </fault>
-    </operation>
-    <operation name="buscarComboItemPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
