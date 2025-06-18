@@ -156,14 +156,17 @@ namespace AutoServicioCineWeb
                 codigo = txtCodigo.Text.Trim(),
                 descripcionEs = txtDescripcion.Text.Trim(),
                 descripcionEn = txtDescripcion.Text.Trim(),
-                descuentoTipo = (AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento)Enum.Parse(typeof(AutoServicioCineWeb.AutoservicioCineWS.tipoDescuento), ddlDescuentoTipo.SelectedValue, true),
-                descuentoValor = (double)decimal.Parse(txtPorcentajeDescuento.Text),
-                //fechaInicio = new localDate(DateTime.Parse(txtFechaInicio.Text)),
-                //fechaFin = new localDate(DateTime.Parse(txtFechaFin.Text)),
+                descuentoTipo = (tipoDescuento)Enum.Parse(typeof(tipoDescuento), ddlDescuentoTipo.SelectedValue, true),
+                descuentoTipoSpecified = true,
+                descuentoValor = double.Parse(txtPorcentajeDescuento.Text),
+                descuentoValorSpecified = true,
+                fechaInicio = null,
+                fechaFin = null,
                 maxUsos = int.Parse(txtCantidadMaxima.Text),
+                maxUsosSpecified = true,
                 activo = chkActivo.Checked
-                // Asegúrate que todas las propiedades requeridas estén asignadas
             }; 
+
         }
 
         private void CargarDatosEnFormulario(cupon cupon)
