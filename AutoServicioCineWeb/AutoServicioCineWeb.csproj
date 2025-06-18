@@ -315,6 +315,8 @@
     </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Inicio.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="PaginaUsuario.aspx" />
     <Content Include="Pago.aspx" />
     <Content Include="Peliculas.aspx" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -343,6 +345,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Signup.aspx" />
     <Content Include="styles\admin.css" />
     <Content Include="styles\base.css" />
     <Content Include="styles\comida.css" />
@@ -433,6 +436,20 @@
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaginaUsuario.aspx.cs">
+      <DependentUpon>PaginaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaginaUsuario.aspx.designer.cs">
+      <DependentUpon>PaginaUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pago.aspx.cs">
       <DependentUpon>Pago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +465,13 @@
       <DependentUpon>Peliculas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Signup.aspx.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Signup.aspx.designer.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tickets.aspx.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>
     </Compile>
