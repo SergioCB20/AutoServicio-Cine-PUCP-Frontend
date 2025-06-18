@@ -164,9 +164,9 @@
 
                             <!-- Esta parte será dinámica cuando haya función específica de la película-->
                             <p>Fecha</p>
-                            <span>18/05/25</span>
+                            <asp:Literal ID="litFecha" runat="server" />
                             <p>Hora</p>
-                            <span>3:20 PM</span>
+                            <asp:Literal ID="litHora" runat="server" />
                         </div>
                     </div>
                     <div class="cantidad-entradas-resumen">
