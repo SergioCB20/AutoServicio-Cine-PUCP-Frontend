@@ -1,0 +1,180 @@
+﻿/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif; /* Usamos Montserrat como ejemplo, importa desde Google Fonts */
+    background: linear-gradient(to bottom right, #f0f2f5, #e0e2e5); /* Degradado suave de fondo */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333; /* Color de texto general */
+}
+
+/* Importar fuente de Google Fonts (agrega esto en tu HTML en la sección <head> o directamente en el CSS) */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap'); */
+
+/* Contenedor principal para login/registro */
+.login-container {
+    background-color: white;
+    padding: 40px; /* Más padding para más espacio */
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    text-align: center;
+    width: 100%;
+    max-width: 420px; /* Un poco más ancho */
+    box-sizing: border-box;
+    position: relative; /* Para posibles elementos flotantes o animaciones */
+    overflow: hidden; /* Asegura que la sombra del borde no se salga */
+}
+
+.logo {
+    margin-bottom: 30px;
+    width: 100px; /* Tamaño del logo un poco más grande */
+    height: auto;
+    display: block; /* Asegura que ocupe su propio espacio */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    color: #2c3e50; /* Color azul oscuro para el título */
+    margin-bottom: 35px; /* Más espacio debajo del título */
+    font-size: 2em; /* Título más grande */
+    font-weight: 700; /* Más negrita */
+}
+
+/* Grupos de formulario (label + input) */
+.form-group {
+    margin-bottom: 20px; /* Más espacio entre grupos */
+    text-align: left;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px; /* Más espacio entre label e input */
+        font-weight: 600; /* Un poco más de negrita para los labels */
+        color: #444; /* Color de label más oscuro */
+        font-size: 0.95em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        width: calc(100% - 24px); /* Ancho completo - padding y borde */
+        padding: 12px; /* Más padding interno */
+        border: 1px solid #c9d2d7; /* Borde más suave */
+        border-radius: 6px; /* Bordes redondeados para inputs */
+        box-sizing: border-box;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #4dcde6; /* Borde turquesa al enfocar */
+            box-shadow: 0 0 0 3px rgba(77, 205, 230, 0.3); /* Sombra azul/turquesa suave al enfocar */
+            outline: none; /* Quita el outline por defecto del navegador */
+        }
+
+/* Botón de envío */
+.btn-submit {
+    background: linear-gradient(to right, #4dcde6, #37a8c4); /* Degradado en el botón */
+    color: white;
+    padding: 14px 25px; /* Más padding */
+    border: none;
+    border-radius: 8px; /* Bordes más redondeados */
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.2em; /* Fuente más grande */
+    font-weight: 700; /* Más negrita */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 25px; /* Más espacio arriba */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra para el botón */
+    letter-spacing: 0.5px; /* Pequeño espaciado entre letras */
+}
+
+    .btn-submit:hover {
+        background: linear-gradient(to right, #37a8c4, #2d8f9f); /* Degradado más oscuro al hover */
+        transform: translateY(-2px); /* Ligero levantamiento al pasar el ratón */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-submit:active {
+        transform: translateY(0); /* Vuelve a su posición normal al hacer clic */
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+/* Estilos para enlaces de navegación */
+.form-links {
+    margin-top: 30px; /* Más espacio arriba de los enlaces */
+    font-size: 0.9em;
+}
+
+    .form-links p {
+        margin: 8px 0; /* Más espacio entre párrafos de enlaces */
+    }
+
+    .form-links a {
+        color: #4dcde6; /* Color turquesa */
+        text-decoration: none;
+        font-weight: 600; /* Negrita para los enlaces */
+        position: relative; /* Para el efecto underline */
+        padding-bottom: 2px; /* Espacio para el underline */
+    }
+
+        .form-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4dcde6;
+            transition: width 0.3s ease; /* Transición para el underline */
+        }
+
+        .form-links a:hover::after {
+            width: 100%; /* El underline aparece al pasar el ratón */
+        }
+
+
+/* Mensajes de validación o error */
+span[role="alert"] {
+    display: block;
+    color: #e74c3c; /* Un rojo un poco más oscuro y más fácil de leer */
+    font-size: 0.88em; /* Tamaño ligeramente más grande */
+    margin-top: 6px; /* Más espacio arriba del mensaje */
+    text-align: left;
+    font-weight: 500; /* Ligeramente más grueso */
+}
+
+/* Estilos para el Label de mensaje general (lblMessage) */
+.login-container .asp-message { /* Puedes añadir esta clase en tu Label ASP.NET */
+    margin-top: 20px;
+    margin-bottom: 0px; /* Para que no empuje el botón si hay uno */
+    font-size: 1em;
+    font-weight: bold;
+    color: #e74c3c; /* Rojo para errores */
+}
+
+    .login-container .asp-message.success { /* Si quieres un mensaje de éxito */
+        color: #27ae60; /* Verde para éxito */
+    }
+
+.asp-message {
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+/* Estilo para el logo en Login.aspx, si aún usas un placeholder */
+/* Si usas la imagen real del logo, puedes eliminar esto y solo dejar .logo {} */
+.login-container img[src*="Cine PUCP Logo"],
+.login-container img[alt*="Cine PUCP Logo"] {
+    /* Aquí irían estilos específicos para el placeholder si lo mantienes */
+    /* Por ejemplo, un borde o un color de fondo para que se vea mejor */
+    /* border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 10px; */
+}

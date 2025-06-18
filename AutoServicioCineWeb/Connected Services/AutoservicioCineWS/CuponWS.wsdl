@@ -4,6 +4,9 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
   </types>
   <message name="eliminarCupon">
     <part name="parameters" element="tns:eliminarCupon" />
@@ -26,17 +29,17 @@
   <message name="actualizarCuponResponse">
     <part name="parameters" element="tns:actualizarCuponResponse" />
   </message>
-  <message name="buscarCuponPorId">
-    <part name="parameters" element="tns:buscarCuponPorId" />
-  </message>
-  <message name="buscarCuponPorIdResponse">
-    <part name="parameters" element="tns:buscarCuponPorIdResponse" />
-  </message>
   <message name="listarCupones">
     <part name="parameters" element="tns:listarCupones" />
   </message>
   <message name="listarCuponesResponse">
     <part name="parameters" element="tns:listarCuponesResponse" />
+  </message>
+  <message name="buscarCuponPorId">
+    <part name="parameters" element="tns:buscarCuponPorId" />
+  </message>
+  <message name="buscarCuponPorIdResponse">
+    <part name="parameters" element="tns:buscarCuponPorIdResponse" />
   </message>
   <portType name="CuponWS">
     <operation name="eliminarCupon">
@@ -54,15 +57,15 @@
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCuponResponse" message="tns:actualizarCuponResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/actualizarCupon/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="buscarCuponPorId">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdRequest" message="tns:buscarCuponPorId" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdResponse" message="tns:buscarCuponPorIdResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorId/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
     <operation name="listarCupones">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/listarCupones/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="buscarCuponPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdRequest" message="tns:buscarCuponPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorIdResponse" message="tns:buscarCuponPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/CuponWS/buscarCuponPorId/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
   </portType>
   <binding name="CuponWSPortBinding" type="tns:CuponWS">
@@ -103,7 +106,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="buscarCuponPorId">
+    <operation name="listarCupones">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,7 +118,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="listarCupones">
+    <operation name="buscarCuponPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

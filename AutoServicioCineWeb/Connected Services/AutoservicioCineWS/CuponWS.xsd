@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Exception" type="tns:Exception" />
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
   <xs:element name="actualizarCupon" type="tns:actualizarCupon" />
   <xs:element name="actualizarCuponResponse" type="tns:actualizarCuponResponse" />
   <xs:element name="buscarCuponPorId" type="tns:buscarCuponPorId" />
@@ -41,6 +42,7 @@
   </xs:complexType>
   <xs:complexType name="usuario">
     <xs:sequence>
+      <xs:element name="admin" type="xs:boolean" />
       <xs:element minOccurs="0" name="email" type="xs:string" />
       <xs:element name="estaActivo" type="xs:boolean" />
       <xs:element minOccurs="0" name="fechaRegistro" type="tns:localDate" />
@@ -49,16 +51,10 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element minOccurs="0" name="password" type="xs:string" />
       <xs:element minOccurs="0" name="telefono" type="xs:string" />
-      <xs:element minOccurs="0" name="tipoUsuario" type="tns:tipoUsuario" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="localDate" final="extension restriction">
     <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="Exception">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="message" type="xs:string" />
-    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="registrarCupon">
     <xs:sequence>
@@ -92,12 +88,6 @@
   <xs:complexType name="actualizarCuponResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:simpleType name="tipoUsuario">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="CLIENTE" />
-      <xs:enumeration value="ADMIN" />
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name="tipoDescuento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="PORCENTAJE" />

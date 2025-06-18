@@ -1,0 +1,33 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Form.master" AutoEventWireup="true" CodeBehind="Pago.aspx.cs" Inherits="AutoServicioCineWeb.Pago" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    Pago con QR
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
+    <link rel="stylesheet" href="./styles/form-pago.css" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="middle-section">
+    <h2>Realiza tu pago</h2>
+    <div class="bg-white p-8 rounded-xl shadow-md max-w-lg mx-auto">
+        <div class="flex flex-col items-center">
+            <div class="qr-container mb-4">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CineAutoservicio-Pago-123456"
+                     alt="QR de Pago"
+                     class="w-48 h-48 block" />
+            </div>
+            <p class="text-center text-gray-600 text-sm">
+                Escanea este código QR con tu app de billetera móvil para completar el pago
+            </p>
+            <div class="flex items-center justify-center space-x-2 text-gray-600 text-sm">
+                <i class="fas fa-lock"></i>
+                <span>Pago seguro con cifrado SSL</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" runat="server" Text="Continuar"/>
+    <button class="button secondary cancelar">Cancelar compra</button>
+</asp:Content>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
+  <xs:element name="actualizarUsuario" type="tns:actualizarUsuario" />
+  <xs:element name="actualizarUsuarioResponse" type="tns:actualizarUsuarioResponse" />
+  <xs:element name="buscarUsuarioPorId" type="tns:buscarUsuarioPorId" />
+  <xs:element name="buscarUsuarioPorIdResponse" type="tns:buscarUsuarioPorIdResponse" />
+  <xs:element name="eliminarUsuario" type="tns:eliminarUsuario" />
+  <xs:element name="eliminarUsuarioResponse" type="tns:eliminarUsuarioResponse" />
+  <xs:element name="listarUsuarios" type="tns:listarUsuarios" />
+  <xs:element name="listarUsuariosResponse" type="tns:listarUsuariosResponse" />
+  <xs:element name="registrarUsuario" type="tns:registrarUsuario" />
+  <xs:element name="registrarUsuarioResponse" type="tns:registrarUsuarioResponse" />
+  <xs:complexType name="eliminarUsuario">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarUsuarioResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarUsuarios">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarUsuariosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuario">
+    <xs:sequence>
+      <xs:element name="admin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element name="estaActivo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="tns:localDate" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idiomaPreferido" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDate" final="extension restriction">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="buscarUsuarioPorId">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarUsuarioPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarUsuarioResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="registrarUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarUsuarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
