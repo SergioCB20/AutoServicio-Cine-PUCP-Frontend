@@ -1,77 +1,76 @@
-<%@ Page Language="C#" MasterPageFile="~/Form.master" AutoEventWireup="true" CodeBehind="Comida.aspx.cs" Inherits="AutoServicioCineWeb.Comida" %>
+<%@ Page Language="C#" MasterPageFile="~/Form.Master" AutoEventWireup="true" CodeBehind="Comida.aspx.cs" Inherits="AutoServicioCineWeb.Comida" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Comida
+    Selección de Comida
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="comida-container">
-        <h2>Elige tu comida</h2>
-        <div class="lista-comidas">
-            <div class="comida-item">
-                <img src="images/canchamediana.png" alt="Combo Clásico" class="comida-img" />
-                <div class="comida-detalle">
-                    <h3>Combo Clásico</h3>
-                    <p>Canchita mediana + Gaseosa 16oz</p>
-                    <span class="precio">S/ 18.00</span>
+<asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
+    <link rel="stylesheet" href="./styles/form-comida.css" />
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="middle-section">
+        <h2>Productos Disponibles</h2>
+
+        <asp:Repeater ID="rptComidas" runat="server">
+            <ItemTemplate>
+                <div class="producto">
+                    <img class="producto-img" src='<%# Eval("ImagenURL") %>' alt="Imagen del producto" />
+
+                    <div class="producto-detalle">
+                        <h3><%# Eval("Nombre_es") %> / <%# Eval("Nombre_en") %></h3>
+                        <p><strong>ES:</strong> <%# Eval("Descripcion_eS") %></p>
+                        <p><strong>EN:</strong> <%# Eval("Descripcion_en") %></p>
+                        <p class="precio">S/ <%# Eval("Precio", "{0:F2}") %></p>
+
+                        <div class="cantidad-selector">
+                            <button type="button" class="cantidad-button minus" onclick="actualizarCantidad('<%# Eval("Id") %>', -1)">-</button>
+                            <span id='cantidad_<%# Eval("Id") %>' class="cantidad">0</span>
+                            <button type="button" class="cantidad-button plus" onclick="actualizarCantidad('<%# Eval("Id") %>', 1)">+</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="comida-item">
-                <img src="images/canchagrande.png" alt="Combo Doble" class="comida-img" />
-                <div class="comida-detalle">
-                    <h3>Combo Doble</h3>
-                    <p>Canchita grande + 2 Gaseosas 22oz</p>
-                    <span class="precio">S/ 30.00</span>
-                </div>
-            </div>
-            <div class="comida-item">
-                <img src="images/hotdog.png" alt="Hot Dog" class="comida-img" />
-                <div class="comida-detalle">
-                    <h3>Hot Dog</h3>
-                    <p>Pan con salchicha y salsas a elección</p>
-                    <span class="precio">S/ 10.00</span>
-                </div>
-            </div>
-            
+            </ItemTemplate>
+        </asp:Repeater>
+        <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
+
+        <hr />
+
+        <div class="resumen-compra">
+            <h3>Total de Compra:</h3>
+            <span id="totalResumen">S/ 0.00</span>
         </div>
     </div>
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .comida-container {
-            padding: 1.5rem;
-        }
-        .lista-comidas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-        .comida-item {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-        .comida-item:hover {
-            transform: translateY(-5px);
-        }
-        .comida-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .comida-detalle {
-            padding: 1rem;
-        }
-        .comida-detalle h3 {
-            margin: 0 0 0.5rem;
-        }
-        .precio {
-            font-weight: bold;
-            color: #c00;
-        }
-    </style>
-</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="Script" runat="server">
+    <script type="text/javascript">
+        let cantidades = {};
+        let precios = {};
 
+        // Este script es inicializado desde el backend usando RegisterStartupScript si es necesario
+        function registrarPrecio(id, precio) {
+            precios[id] = precio;
+            cantidades[id] = 0;
+        }
+
+        function actualizarCantidad(id, cambio) {
+            if (!(id in cantidades)) {
+                cantidades[id] = 0;
+            }
+            cantidades[id] += cambio;
+            if (cantidades[id] < 0) cantidades[id] = 0;
+
+            document.getElementById("cantidad_" + id).textContent = cantidades[id];
+            calcularTotal();
+        }
+
+        function calcularTotal() {
+            let total = 0;
+            for (let id in cantidades) {
+                total += cantidades[id] * precios[id];
+            }
+            document.getElementById("totalResumen").textContent = "S/ " + total.toFixed(2);
+        }
+    </script>
+</asp:Content>

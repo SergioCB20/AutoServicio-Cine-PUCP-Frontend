@@ -4,6 +4,9 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
   </types>
   <message name="registrarUsuario">
     <part name="parameters" element="tns:registrarUsuario" />
@@ -14,23 +17,11 @@
   <message name="Exception">
     <part name="fault" element="tns:Exception" />
   </message>
-  <message name="buscarUsuarioPorId">
-    <part name="parameters" element="tns:buscarUsuarioPorId" />
-  </message>
-  <message name="buscarUsuarioPorIdResponse">
-    <part name="parameters" element="tns:buscarUsuarioPorIdResponse" />
-  </message>
   <message name="eliminarUsuario">
     <part name="parameters" element="tns:eliminarUsuario" />
   </message>
   <message name="eliminarUsuarioResponse">
     <part name="parameters" element="tns:eliminarUsuarioResponse" />
-  </message>
-  <message name="actualizarUsuario">
-    <part name="parameters" element="tns:actualizarUsuario" />
-  </message>
-  <message name="actualizarUsuarioResponse">
-    <part name="parameters" element="tns:actualizarUsuarioResponse" />
   </message>
   <message name="listarUsuarios">
     <part name="parameters" element="tns:listarUsuarios" />
@@ -38,31 +29,43 @@
   <message name="listarUsuariosResponse">
     <part name="parameters" element="tns:listarUsuariosResponse" />
   </message>
+  <message name="actualizarUsuario">
+    <part name="parameters" element="tns:actualizarUsuario" />
+  </message>
+  <message name="actualizarUsuarioResponse">
+    <part name="parameters" element="tns:actualizarUsuarioResponse" />
+  </message>
+  <message name="buscarUsuarioPorId">
+    <part name="parameters" element="tns:buscarUsuarioPorId" />
+  </message>
+  <message name="buscarUsuarioPorIdResponse">
+    <part name="parameters" element="tns:buscarUsuarioPorIdResponse" />
+  </message>
   <portType name="UsuarioWS">
     <operation name="registrarUsuario">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioRequest" message="tns:registrarUsuario" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuarioResponse" message="tns:registrarUsuarioResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/registrarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="buscarUsuarioPorId">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdRequest" message="tns:buscarUsuarioPorId" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdResponse" message="tns:buscarUsuarioPorIdResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorId/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
     <operation name="eliminarUsuario">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioRequest" message="tns:eliminarUsuario" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuarioResponse" message="tns:eliminarUsuarioResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/eliminarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="listarUsuarios">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuariosRequest" message="tns:listarUsuarios" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuariosResponse" message="tns:listarUsuariosResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuarios/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
     <operation name="actualizarUsuario">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuarioRequest" message="tns:actualizarUsuario" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuarioResponse" message="tns:actualizarUsuarioResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/actualizarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="listarUsuarios">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuariosRequest" message="tns:listarUsuarios" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuariosResponse" message="tns:listarUsuariosResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/listarUsuarios/Fault/Exception" name="Exception" message="tns:Exception" />
+    <operation name="buscarUsuarioPorId">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdRequest" message="tns:buscarUsuarioPorId" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorIdResponse" message="tns:buscarUsuarioPorIdResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/UsuarioWS/buscarUsuarioPorId/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
@@ -79,7 +82,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="buscarUsuarioPorId">
+    <operation name="eliminarUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -91,7 +94,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="eliminarUsuario">
+    <operation name="listarUsuarios">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,7 +118,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="listarUsuarios">
+    <operation name="buscarUsuarioPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

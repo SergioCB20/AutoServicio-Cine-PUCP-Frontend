@@ -4,37 +4,40 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
   </types>
-  <message name="loginUsuario">
-    <part name="parameters" element="tns:loginUsuario" />
-  </message>
-  <message name="loginUsuarioResponse">
-    <part name="parameters" element="tns:loginUsuarioResponse" />
-  </message>
-  <message name="Exception">
-    <part name="fault" element="tns:Exception" />
-  </message>
   <message name="registrarUsuario">
     <part name="parameters" element="tns:registrarUsuario" />
   </message>
   <message name="registrarUsuarioResponse">
     <part name="parameters" element="tns:registrarUsuarioResponse" />
   </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="loginUsuario">
+    <part name="parameters" element="tns:loginUsuario" />
+  </message>
+  <message name="loginUsuarioResponse">
+    <part name="parameters" element="tns:loginUsuarioResponse" />
+  </message>
   <portType name="AuthWS">
-    <operation name="loginUsuario">
-      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuarioRequest" message="tns:loginUsuario" />
-      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuarioResponse" message="tns:loginUsuarioResponse" />
-      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
-    </operation>
     <operation name="registrarUsuario">
       <input wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/registrarUsuarioRequest" message="tns:registrarUsuario" />
       <output wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/registrarUsuarioResponse" message="tns:registrarUsuarioResponse" />
       <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/registrarUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
+    <operation name="loginUsuario">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuarioRequest" message="tns:loginUsuario" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuarioResponse" message="tns:loginUsuarioResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/AuthWS/loginUsuario/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
   </portType>
   <binding name="AuthWSPortBinding" type="tns:AuthWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="loginUsuario">
+    <operation name="registrarUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -46,7 +49,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="registrarUsuario">
+    <operation name="loginUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

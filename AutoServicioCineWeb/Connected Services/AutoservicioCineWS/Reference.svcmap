@@ -24,19 +24,29 @@
   <Metadata>
     <MetadataFile FileName="CuponWS.wsdl" MetadataType="Wsdl" ID="2acaddcc-472d-4a5e-837f-02542ed226b2" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?wsdl" />
     <MetadataFile FileName="AuthWS.wsdl" MetadataType="Wsdl" ID="7708786a-8d73-4b18-beb4-db3a4ea4f83a" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?wsdl" />
+    <MetadataFile FileName="SalaWS.xsd" MetadataType="Schema" ID="aba29d67-a63a-446b-b39b-20a0d5eac70f" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" />
     <MetadataFile FileName="UsuarioWS.xsd" MetadataType="Schema" ID="5c1dc7bf-c2fd-4a87-9217-8c805205f125" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=1" />
     <MetadataFile FileName="SalaWS.wsdl" MetadataType="Wsdl" ID="485425a3-c27c-4185-abaa-33618cb8bc70" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?wsdl" />
+    <MetadataFile FileName="PeliculaWS.xsd" MetadataType="Schema" ID="af76b6c2-b443-482f-8133-234fe988fae8" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" />
     <MetadataFile FileName="UsuarioWS.wsdl" MetadataType="Wsdl" ID="5a380deb-2f56-4193-9301-d7dc13497da3" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?wsdl" />
-    <MetadataFile FileName="ComboItemWS.xsd" MetadataType="Schema" ID="9fb62778-4943-4650-9594-65743e0adeee" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" />
+    <MetadataFile FileName="SalaWS1.xsd" MetadataType="Schema" ID="5a340cc4-cfe4-4231-a598-a079ff847c5b" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=2" />
+    <MetadataFile FileName="PeliculaWS1.xsd" MetadataType="Schema" ID="306ce273-668a-4487-8cc8-75c87da95549" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=2" />
     <MetadataFile FileName="PeliculaWS.wsdl" MetadataType="Wsdl" ID="333fd5ec-0968-4c22-acd8-e3cbc26f5436" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?wsdl" />
     <MetadataFile FileName="ProductoWS.wsdl" MetadataType="Wsdl" ID="03dda676-eca8-4452-a739-b9a75cf4968e" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?wsdl" />
     <MetadataFile FileName="servicios.disco" MetadataType="Disco" ID="6eedfd24-870c-4657-8891-195a5a5570d9" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/servicios.disco" />
-    <MetadataFile FileName="SalaWS.xsd" MetadataType="Schema" ID="aba29d67-a63a-446b-b39b-20a0d5eac70f" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?xsd=1" />
-    <MetadataFile FileName="AuthWS.xsd" MetadataType="Schema" ID="97d12435-a13d-492a-8f58-3f28c23dcc98" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?xsd=1" />
     <MetadataFile FileName="CuponWS.xsd" MetadataType="Schema" ID="07696511-193b-4ac0-904b-f423291fbc5a" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=1" />
-    <MetadataFile FileName="PeliculaWS.xsd" MetadataType="Schema" ID="af76b6c2-b443-482f-8133-234fe988fae8" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=1" />
+    <MetadataFile FileName="ComboItemWS.xsd" MetadataType="Schema" ID="9fb62778-4943-4650-9594-65743e0adeee" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" />
+    <MetadataFile FileName="AuthWS1.xsd" MetadataType="Schema" ID="a9625983-011d-4115-8002-b8b0dc566342" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?xsd=2" />
+    <MetadataFile FileName="AuthWS.xsd" MetadataType="Schema" ID="97d12435-a13d-492a-8f58-3f28c23dcc98" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?xsd=1" />
+    <MetadataFile FileName="ComboItemWS1.xsd" MetadataType="Schema" ID="3a45f716-f8e9-43bb-9844-768d97c4f10f" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=2" />
+    <MetadataFile FileName="CuponWS1.xsd" MetadataType="Schema" ID="0ed775d5-af73-4591-940b-83640682aeb2" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=2" />
+    <MetadataFile FileName="UsuarioWS1.xsd" MetadataType="Schema" ID="ad828ff3-779b-48db-a65e-af74538e7695" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?xsd=2" />
+    <MetadataFile FileName="BoletoWS.xsd" MetadataType="Schema" ID="ef484df4-167d-4a39-82ed-41bcf0b0bb46" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?xsd=2" />
+    <MetadataFile FileName="BoletoWS1.xsd" MetadataType="Schema" ID="b89fcd68-9f70-4027-ac2c-6c15f7c39791" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?xsd=1" />
+    <MetadataFile FileName="BoletoWS.wsdl" MetadataType="Wsdl" ID="15faf023-cf4c-470d-ad00-49437e509d14" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?wsdl" />
     <MetadataFile FileName="ComboItemWS.wsdl" MetadataType="Wsdl" ID="cd0c4516-b80c-484c-93cb-c11c3ee104ba" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?wsdl" />
     <MetadataFile FileName="ProductoWS.xsd" MetadataType="Schema" ID="5f44d665-9fd3-496f-b9c1-2ea64e22eec3" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=1" />
+    <MetadataFile FileName="ProductoWS1.xsd" MetadataType="Schema" ID="41241879-0f16-4e59-ade4-4ff441f33dd5" SourceId="1" SourceUrl="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?xsd=2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

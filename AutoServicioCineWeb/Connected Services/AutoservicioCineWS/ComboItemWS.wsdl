@@ -4,6 +4,9 @@
     <xsd:schema>
       <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
     </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/ComboItemWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
   </types>
   <message name="buscarComboItemPorId">
     <part name="parameters" element="tns:buscarComboItemPorId" />

@@ -221,8 +221,48 @@
     <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.usuario.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\AutoservicioCineWS\AuthWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.actualizarBoletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.boleto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.eliminarBoletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.listarBoletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\AutoservicioCineWS\AutoServicioCineWeb.AutoservicioCineWS.obtenerBoletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\AutoservicioCineWS\BoletoWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\BoletoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\BoletoWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\ComboItemWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\CuponWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\CuponWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\PeliculaWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AutoservicioCineWS\ProductoWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\SalaWS.wsdl" />
+    <None Include="Connected Services\AutoservicioCineWS\SalaWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\AutoservicioCineWS\servicios.disco" />
     <None Include="Connected Services\AutoservicioCineWS\configuration91.svcinfo" />
     <None Include="Connected Services\AutoservicioCineWS\configuration.svcinfo" />
@@ -234,6 +274,7 @@
     <Content Include="GestionCupones.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="GestionPeliculas.aspx" />
+    <Content Include="GestionSalas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Admin.Master" />
     <Content Include="Form.Master" />
@@ -269,6 +310,9 @@
     <None Include="Connected Services\AutoservicioCineWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\AutoservicioCineWS\UsuarioWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Inicio.aspx" />
     <Content Include="Pago.aspx" />
@@ -301,6 +345,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="styles\admin.css" />
     <Content Include="styles\base.css" />
+    <Content Include="styles\comida.css" />
     <Content Include="styles\form-base.css" />
     <Content Include="styles\form-butacas.css" />
     <Content Include="styles\form-pago.css" />
@@ -370,6 +415,13 @@
     </Compile>
     <Compile Include="GestionPeliculas.aspx.designer.cs">
       <DependentUpon>GestionPeliculas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionSalas.aspx.cs">
+      <DependentUpon>GestionSalas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionSalas.aspx.designer.cs">
+      <DependentUpon>GestionSalas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

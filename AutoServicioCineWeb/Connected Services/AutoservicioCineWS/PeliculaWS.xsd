@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Exception" type="tns:Exception" />
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/PeliculaWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
   <xs:element name="actualizarPelicula" type="tns:actualizarPelicula" />
   <xs:element name="actualizarPeliculaResponse" type="tns:actualizarPeliculaResponse" />
   <xs:element name="buscarPeliculaPorId" type="tns:buscarPeliculaPorId" />
@@ -119,11 +120,6 @@
   </xs:complexType>
   <xs:complexType name="actualizarPeliculaResponse">
     <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="Exception">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="message" type="xs:string" />
-    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarPelicula">
     <xs:sequence>

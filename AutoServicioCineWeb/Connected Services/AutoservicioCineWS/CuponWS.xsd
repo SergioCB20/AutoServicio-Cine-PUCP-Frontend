@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Exception" type="tns:Exception" />
+<xs:schema xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:ns1="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" targetNamespace="http://services.AutoCine.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+  <xs:element name="Exception" nillable="true" type="ns1:Exception" />
   <xs:element name="actualizarCupon" type="tns:actualizarCupon" />
   <xs:element name="actualizarCuponResponse" type="tns:actualizarCuponResponse" />
   <xs:element name="buscarCuponPorId" type="tns:buscarCuponPorId" />
@@ -55,10 +56,13 @@
   <xs:complexType name="localDate" final="extension restriction">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="Exception">
+  <xs:complexType name="registrarCupon">
     <xs:sequence>
-      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="cupon" type="tns:cupon" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarCuponResponse">
+    <xs:sequence />
   </xs:complexType>
   <xs:complexType name="listarCupones">
     <xs:sequence />
@@ -67,14 +71,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cupon" />
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="registrarCupon">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="cupon" type="tns:cupon" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="registrarCuponResponse">
-    <xs:sequence />
   </xs:complexType>
   <xs:complexType name="eliminarCupon">
     <xs:sequence>

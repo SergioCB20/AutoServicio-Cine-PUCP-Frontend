@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.AutoCine.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="BoletoWS" targetNamespace="http://services.AutoCine.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?xsd=1" namespace="http://services.AutoCine.pucp.edu.pe/" />
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?xsd=2" namespace="http://WS.autoservicio.autoservicio.cinepucp.com.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="obtenerBoleto">
+    <part name="parameters" element="tns:obtenerBoleto" />
+  </message>
+  <message name="obtenerBoletoResponse">
+    <part name="parameters" element="tns:obtenerBoletoResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="listarBoleto">
+    <part name="parameters" element="tns:listarBoleto" />
+  </message>
+  <message name="listarBoletoResponse">
+    <part name="parameters" element="tns:listarBoletoResponse" />
+  </message>
+  <message name="eliminarBoleto">
+    <part name="parameters" element="tns:eliminarBoleto" />
+  </message>
+  <message name="eliminarBoletoResponse">
+    <part name="parameters" element="tns:eliminarBoletoResponse" />
+  </message>
+  <message name="actualizarBoleto">
+    <part name="parameters" element="tns:actualizarBoleto" />
+  </message>
+  <message name="actualizarBoletoResponse">
+    <part name="parameters" element="tns:actualizarBoletoResponse" />
+  </message>
+  <portType name="BoletoWS">
+    <operation name="obtenerBoleto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/obtenerBoletoRequest" message="tns:obtenerBoleto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/obtenerBoletoResponse" message="tns:obtenerBoletoResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/obtenerBoleto/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="listarBoleto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/listarBoletoRequest" message="tns:listarBoleto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/listarBoletoResponse" message="tns:listarBoletoResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/listarBoleto/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="eliminarBoleto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/eliminarBoletoRequest" message="tns:eliminarBoleto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/eliminarBoletoResponse" message="tns:eliminarBoletoResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/eliminarBoleto/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="actualizarBoleto">
+      <input wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/actualizarBoletoRequest" message="tns:actualizarBoleto" />
+      <output wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/actualizarBoletoResponse" message="tns:actualizarBoletoResponse" />
+      <fault wsam:Action="http://services.AutoCine.pucp.edu.pe/BoletoWS/actualizarBoleto/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+  </portType>
+  <binding name="BoletoWSPortBinding" type="tns:BoletoWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtenerBoleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarBoleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminarBoleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="actualizarBoleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="BoletoWS">
+    <port name="BoletoWSPort" binding="tns:BoletoWSPortBinding">
+      <soap:address location="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS" />
+    </port>
+  </service>
+</definitions>
