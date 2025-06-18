@@ -1,0 +1,53 @@
+﻿.middle-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    background-color: var(--color-blanco);
+}
+
+.productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Hace que los productos se acomoden horizontalmente */
+#rptComidas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Tarjeta individual */
+.producto {
+    background-color: #f3f4f6; /* gris claro */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 16px;
+    width: 210px; /* puedes ajustar esto según convenga */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.producto-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.producto-detalle {
+    text-align: center;
+    width: 100%;
+}
+

@@ -28,3 +28,9 @@
     <asp:Button id="btnContinuar" CssClass="button primary continuar" runat="server" Text="Continuar"/>
     <button class="button secondary cancelar">Cancelar compra</button>
 </asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="Script" runat="server">
+    <script>
+        let cantidadEntradas = 0;
+    </script>
+</asp:Content>
+

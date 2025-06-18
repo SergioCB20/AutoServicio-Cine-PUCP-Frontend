@@ -33,7 +33,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
-    <a href="../chocolateria/index.html" class="button primary continuar">Continuar</a>
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
     <button class="button secondary cancelar">Cancelar compra</button>
     <script>
         // El script JavaScript original para la generación de butacas puede ir aquí

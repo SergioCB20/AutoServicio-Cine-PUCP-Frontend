@@ -30,5 +30,23 @@ namespace AutoServicioCineWeb
                 }
             }
         }
+        protected void btnContinuar_Click(object sender, EventArgs e)
+        {
+            //Esta parte es para enviar los valores que fueron modificados a la siguiente vista (Comida.aspx)
+            
+            var master = this.Master as Form;
+            var resumen = new ResumenCompra
+            {
+                AdultoTicket = master.EntradasAdultoTexto.InnerText,
+                InfantilTicket = master.EntradasInfantilTexto.InnerText,
+                MayorTicket = master.EntradasMayorTexto.InnerText,
+                TotalTicket = master.TotalResumen.InnerText,
+                TituloDePelicula = master.TituloSpan.InnerText,
+                ImagenUrl = master.ImgPoster.Src
+            };
+
+            Session["ResumenCompra"] = resumen;
+            Response.Redirect("Comida.aspx");
+        }
     }
 }

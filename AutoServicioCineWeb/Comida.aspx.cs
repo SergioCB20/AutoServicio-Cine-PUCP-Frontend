@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace AutoServicioCineWeb
@@ -13,6 +14,7 @@ namespace AutoServicioCineWeb
     {
         private readonly ProductoWSClient productoServiceClient;
         private List<producto> _cachedProductos;
+        
         public Comida()
         {
             productoServiceClient = new ProductoWSClient();
@@ -23,8 +25,23 @@ namespace AutoServicioCineWeb
             if (!IsPostBack)
             {
                 cargarProductos();
-            }
+                var resumen = Session["ResumenCompra"] as ResumenCompra; //Carga los valores que vinieron de la vista Butacas
+                if (resumen != null)
+                {
+                    var master = this.Master as Form; //Para usar el texto que está definido en el Form.Master
 
+                    if (master != null)
+                    {
+                        master.EntradasAdultoTexto.InnerText = resumen.AdultoTicket;
+                        master.EntradasInfantilTexto.InnerText = resumen.InfantilTicket;
+                        master.EntradasMayorTexto.InnerText = resumen.MayorTicket;
+                        master.TotalResumen.InnerText = resumen.TotalTicket;
+                        master.ImgPoster.Src = resumen.ImagenUrl;
+                        master.TituloSpan.InnerText = resumen.TituloDePelicula;
+                        master.TotalResumen.Attributes["data-base"] = resumen.TotalTicket;
+                    }
+                }
+            }
         }
         private void cargarProductos()
         {
@@ -66,9 +83,22 @@ namespace AutoServicioCineWeb
         }
         protected void btnContinuar_Click(object sender, EventArgs e)
         {
+            //Esta parte es para enviar los valores que fueron modificados a la siguiente vista (Pago.aspx)
 
+            var master = this.Master as Form;
+            var resumen = new ResumenCompra
+            {
+                AdultoTicket = master.EntradasAdultoTexto.InnerText,
+                InfantilTicket = master.EntradasInfantilTexto.InnerText,
+                MayorTicket = master.EntradasMayorTexto.InnerText,
+                TotalTicket = master.TotalResumen.InnerText,
+                TituloDePelicula = master.TituloSpan.InnerText,
+                ImagenUrl = master.ImgPoster.Src
+            };
 
+            Session["ResumenCompra"] = resumen;
             Response.Redirect("Pago.aspx");
         }
+
     }
 }

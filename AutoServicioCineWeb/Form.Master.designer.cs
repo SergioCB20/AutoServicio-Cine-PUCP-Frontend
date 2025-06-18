@@ -96,6 +96,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.ContentPlaceHolder TicketsSummary;
 
         /// <summary>
+        /// Control resumenCompra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resumenCompra;
+
+        /// <summary>
         /// Control entradasAdultoTexto.
         /// </summary>
         /// <remarks>
@@ -150,6 +159,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.HiddenField hfEntradasMayor;
 
         /// <summary>
+        /// Control resumenCompraComida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resumenCompraComida;
+
+        /// <summary>
         /// Control TotalAmount.
         /// </summary>
         /// <remarks>
@@ -193,5 +211,14 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Script;
+
+        /// <summary>
+        /// Control modal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder modal;
     }
 }

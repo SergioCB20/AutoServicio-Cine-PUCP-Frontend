@@ -11,9 +11,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="middle-section">
         <h2>Productos Disponibles</h2>
-
-        <asp:Repeater ID="rptComidas" runat="server">
-            <ItemTemplate>
+        <div class="productos-container">
+            <asp:Repeater ID="rptComidas" runat="server">
+                <ItemTemplate>
                 <div class="producto">
                     <img class="producto-img" src='<%# Eval("ImagenURL") %>' alt="Imagen del producto" />
 
@@ -22,20 +22,21 @@
                         <p><strong>ES:</strong> <%# Eval("Descripcion_eS") %></p>
                         <p><strong>EN:</strong> <%# Eval("Descripcion_en") %></p>
                         <p class="precio">S/ <%# Eval("Precio", "{0:F2}") %></p>
-
                         <div class="cantidad-selector">
-                            <button type="button" class="cantidad-button minus" onclick="actualizarCantidad('<%# Eval("Id") %>', -1)">-</button>
-                            <span id='cantidad_<%# Eval("Id") %>' class="cantidad">0</span>
-                            <button type="button" class="cantidad-button plus" onclick="actualizarCantidad('<%# Eval("Id") %>', 1)">+</button>
+                            <button type="button" class="cantidad-button minus" 
+                                            onclick="actualizarCantidadYServidor('<%# Eval("Id") %>', '<%# Eval("Nombre_es") %>', -1)">-</button>
+                            <span id='cantidad_<%# Eval("Id") %>' class="cantidad" data-nombre='<%# Eval("Nombre_es") %>'>0</span>
+                            <button type="button" class="cantidad-button plus" 
+                                            onclick="actualizarCantidadYServidor('<%# Eval("Id") %>', '<%# Eval("Nombre_es") %>', 1)">+</button>
                         </div>
                     </div>
                 </div>
-            </ItemTemplate>
-        </asp:Repeater>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
         <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
 
-        <hr />
-        /*
+        
 <%--        <div class="resumen-compra">
             <h3>Total de Compra:</h3>
             <span id="totalResumen">S/ 0.00</span>
@@ -51,7 +52,8 @@
         let cantidades = {};
         let precios = {};
         let total = 0.00;
-        // Este script es inicializado desde el backend usando RegisterStartupScript si es necesario
+
+        // Esta función la debes llamar desde el code-behind para cada producto
         function registrarPrecio(id, precio) {
             precios[id] = precio;
             cantidades[id] = 0;
@@ -61,6 +63,7 @@
             if (!(id in cantidades)) {
                 cantidades[id] = 0;
             }
+
             cantidades[id] += cambio;
             if (cantidades[id] < 0) cantidades[id] = 0;
 
@@ -68,31 +71,86 @@
             calcularTotal();
         }
 
-        function calcularTotal() {
-            for (let id in cantidades) {
-                total += cantidades[id] * precios[id];
-            }
-            document.getElementById("hfTotal").textContent = "S/ " + total.toFixed(2);
-
-            // Mostrar fecha y hora por separado
-            const ahora = new Date();
-
-            // Formatear fecha
-            const fecha = ahora.toLocaleDateString("es-PE", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            });
-
-            // Formatear hora
-            const hora = ahora.toLocaleTimeString("es-PE", {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            });
-
-            document.getElementById("litFecha").textContent = fecha;
-            document.getElementById("litHora").textContent = hora;
+        function actualizarCantidadYServidor(id, nombre, cambio) {
+            actualizarCantidad(id, cambio);
         }
+
+        function calcularTotal() {
+            
+            total = 0.00;
+
+            const baseAttr = document.getElementById("totalResumen").getAttribute("data-base");
+            const baseClean = baseAttr.replace(/[^\d.]/g, '');
+            const base = parseFloat(baseClean) || 0;
+            console.log("alo:", baseAttr);
+            console.log("alo:", base);
+            const resumenDiv = document.getElementById("resumenCompraComida");
+            if (!resumenDiv) return;
+
+            // Limpiar solo los items agregados
+            const subtitulo = document.getElementById("subtituloComida");
+
+            resumenDiv.innerHTML = '';
+            if (subtitulo) resumenDiv.appendChild(subtitulo);
+
+            for (let id in cantidades) {
+                const cantidad = cantidades[id];
+                if (cantidad > 0) {
+                    const span = document.getElementById("cantidad_" + id);
+                    const nombre = span.dataset.nombre;
+                    const precioUnitario = precios[id];
+                    const subtotal = cantidad * precioUnitario;
+                    total += subtotal;
+
+                    const p = document.createElement("p");
+                    p.textContent = `${nombre} x ${cantidad} = S/ ${subtotal.toFixed(2)}`;
+                    resumenDiv.appendChild(p);
+                }
+            }
+
+            const nuevoTotal = base + total;
+            totalResumen.textContent = "S/ " + nuevoTotal.toFixed(2);
+        }
+        
+        
+        //function calcularTotal() {
+            //total = 0; // reiniciar el total
+            //for (let id in cantidades) {
+            //    total += cantidades[id] * precios[id];
+            //}
+
+            //// Mostrar total visible
+            //const spanTotal = document.getElementById("totalResumen");
+            //if (spanTotal) {
+            //    spanTotal.textContent = "S/ " + total.toFixed(2);
+            //}
+
+            //// Guardar en hidden field
+            //const hfTotal = document.getElementById("hfTotal");
+            //if (hfTotal) {
+            //    hfTotal.value = total.toFixed(2);
+            //}
+            //// Mostrar fecha y hora por separado
+            //const ahora = new Date();
+
+            //// Formatear fecha
+            //const fecha = ahora.toLocaleDateString("es-PE", {
+            //    day: "2-digit",
+            //    month: "2-digit",
+            //    year: "numeric"
+            //});
+
+            //// Formatear hora
+            //const hora = ahora.toLocaleTimeString("es-PE", {
+            //    hour: "2-digit",
+            //    minute: "2-digit",
+            //    hour12: false
+            //});
+
+            //document.getElementById("litFecha").textContent = fecha;
+            //document.getElementById("litHora").textContent = hora;
+        //}
+
+        
     </script>
 </asp:Content>
