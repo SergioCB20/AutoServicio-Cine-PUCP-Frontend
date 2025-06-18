@@ -1,9 +1,8 @@
 ﻿using AutoServicioCineWeb.AutoservicioCineWS;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,182 +12,135 @@ namespace AutoServicioCineWeb
 {
     public partial class PaginaUsuario : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarDatosUsuario();
-            }
-        }
-
-        private void CargarDatosUsuario()
-        {
-            try
-            {
-                // Obtener el ID del usuario de la sesión
-                int usuarioId = Convert.ToInt32(Session["UsuarioId"]);
-
-                // Crear cliente del servicio web
-                using (UsuarioWSClient cliente = new UsuarioWSClient())
+                if (Session["Usuario"] != null)
                 {
-                    // Obtener datos del usuario
-                    usuario usuario = cliente.buscarUsuarioPorId(usuarioId);
-
-                    if (usuario != null)
-                    {
-                        // Mostrar información básica
-                        nombreUsuario.InnerText = $"{usuario.nombre}";
-                        emailUsuario.InnerText = usuario.email;
-
-                        // Convertir fechaRegistro a cadena sin usar formato personalizado
-                        fechaRegistro.InnerText = usuario.fechaRegistro.ToString();
-
-                        // Llenar formulario de información personal
-                        txtNombres.Text = usuario.nombre;
-                        txtEmail.Text = usuario.email;
-                        txtTelefono.Text = usuario.telefono;
-
-                        // Cargar configuración de notificaciones
-                        //chkEmailPromociones.Checked = usuario.recibirPromociones ?? false;
-                        //chkEmailEstrenos.Checked = usuario.notificarEstrenos ?? false;
-                        //chkSMSRecordatorios.Checked = usuario.recordatoriosSMS ?? false;
-                        //chkPerfilPublico.Checked = usuario.perfilPublico ?? false;
-                        //chkCompartirHistorial.Checked = usuario.compartirHistorial ?? false;
-
-                        //// Cargar avatar si existe
-                        //if (!string.IsNullOrEmpty(usuario.avatarUrl))
-                        //{
-                        //    imgAvatar.Src = usuario.avatarUrl;
-                        //}
-                    }
+                    usuario usuario = (usuario)Session["Usuario"];
+                    CargarDatosUsuario(usuario);
+                    CargarHistorialCompras(usuario.id);
+                }
+                else
+                {
+                    // Redirigir a login si no hay sesión
+                    //Response.Redirect("~/Sigup.aspx");
                 }
             }
-            catch (System.Exception ex)
-            {
-                // Manejar error (puedes mostrar un mensaje al usuario)
-                MostrarError("Error al cargar los datos del usuario: " + ex.Message);
-            }
         }
 
-        protected void btnGuardarPerfil_Click(object sender, EventArgs e)
+        private void CargarDatosUsuario(usuario usuario)
         {
-            try
+            lblNombre.Text = usuario.nombre;
+            lblEmail.Text = usuario.email;
+            lblTelefono.Text = usuario.telefono;
+
+            // Cargar también en los campos de edición
+            txtNombreEdit.Text = usuario.nombre;
+            txtEmailEdit.Text = usuario.email;
+            txtTelefonoEdit.Text = usuario.telefono;
+        }
+
+        private void CargarHistorialCompras(int usuarioId)
+        {
+            // Obtener historial de compras del usuario
+            var historial = ObtenerHistorialCompras(usuarioId);
+
+            gvHistorial.DataSource = historial;
+            gvHistorial.DataBind();
+        }
+
+        private List<CompraHistorial> ObtenerHistorialCompras(int usuarioId)
+        {
+            // Aquí implementarías la lógica para obtener el historial de compras
+            // desde tu servicio web o base de datos
+            // Esto es un ejemplo con datos dummy
+
+            return new List<CompraHistorial>
             {
-                int usuarioId = Convert.ToInt32(Session["UsuarioId"]);
+                new CompraHistorial {
+                    Id = 1,
+                    Pelicula = "Avengers: Endgame",
+                    Fecha = DateTime.Now.AddDays(-10),
+                    Hora = "15:30",
+                    Cantidad = 2,
+                    Total = 35.00m
+                },
+                new CompraHistorial {
+                    Id = 2,
+                    Pelicula = "Spider-Man: No Way Home",
+                    Fecha = DateTime.Now.AddDays(-30),
+                    Hora = "18:45",
+                    Cantidad = 3,
+                    Total = 52.50m
+                }
+            };
+        }
 
-                using (UsuarioWSClient cliente = new UsuarioWSClient())
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            pnlEdicion.Visible = true;
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (Session["Usuario"] != null)
+            {
+                usuario usuario = (usuario)Session["Usuario"];
+
+                // Actualizar datos del usuario
+                usuario.nombre = txtNombreEdit.Text;
+                usuario.email = txtEmailEdit.Text;
+                usuario.telefono = txtTelefonoEdit.Text;
+
+                // Si se proporcionó nueva contraseña, actualizarla
+                //if (!string.IsNullOrEmpty(txtPasswordEdit.Text))
+                //{
+                //    usuario.Password = PasswordHasher.HashPassword(txtPasswordEdit.Text);
+                //}
+
+                try
                 {
-                    // Obtener usuario actual para preservar datos no editables
-                    usuario usuarioActual = cliente.buscarUsuarioPorId(usuarioId);
+                    // Llamar al servicio web para actualizar
+                    //var usuarioWS = new UsuarioWS();
+                    //usuarioWS.actualizarUsuario(usuario);
 
-                    // Actualizar datos editables
-                    usuarioActual.nombre = txtNombres.Text;
-                    usuarioActual.telefono = txtTelefono.Text;
+                    // Actualizar sesión
+                    Session["Usuario"] = usuario;
+                    CargarDatosUsuario(usuario);
 
-                    // Procesar imagen de avatar si se subió una nueva
-                    //if (fileUploadAvatar.HasFile)
-                    //{
-                    //    string extension = Path.GetExtension(fileUploadAvatar.FileName).ToLower();
-                    //    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
-                    //    {
-                    //        string nombreArchivo = $"avatar_{usuarioId}{extension}";
-                    //        string rutaGuardar = Server.MapPath($"~/images/avatars/{nombreArchivo}");
+                    // Ocultar panel de edición
+                    pnlEdicion.Visible = false;
 
-                    //        fileUploadAvatar.SaveAs(rutaGuardar);
-                    //        usuarioActual.avatarUrl = $"./images/avatars/{nombreArchivo}";
-                    //    }
-                    //}
-
-                    // Actualizar usuario en el servicio web
-                    cliente.actualizarUsuario(usuarioActual); // Cambiado: El método actualizarUsuario es de tipo void, no devuelve un bool.
-
-                    MostrarExito("Perfil actualizado correctamente.");
-                    // Actualizar la imagen del avatar si cambió
-                    //if (!string.IsNullOrEmpty(usuarioActual.avatarUrl))
-                    //{
-                    //    imgAvatar.Src = usuarioActual.avatarUrl;
-                    //}
+                    // Mostrar mensaje de éxito
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess",
+                        "alert('Perfil actualizado correctamente');", true);
+                }
+                catch (System.Exception ex)
+                {
+                    // Mostrar mensaje de error
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showError",
+                        $"alert('Error al actualizar perfil: {ex.Message}');", true);
                 }
             }
-            catch (System.Exception ex)
-            {
-                MostrarError("Error al actualizar el perfil: " + ex.Message);
-            }
         }
 
-        protected void btnGuardarConfiguracion_Click(object sender, EventArgs e)
+        protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int usuarioId = Convert.ToInt32(Session["UsuarioId"]);
-
-                using (UsuarioWSClient cliente = new UsuarioWSClient())
-                {
-                    usuario usuarioActual = cliente.buscarUsuarioPorId(usuarioId);
-
-                    // Actualizar preferencias
-                    //usuarioActual.recibirPromociones = chkEmailPromociones.Checked;
-                    //usuarioActual.notificarEstrenos = chkEmailEstrenos.Checked;
-                    //usuarioActual.recordatoriosSMS = chkSMSRecordatorios.Checked;
-                    //usuarioActual.perfilPublico = chkPerfilPublico.Checked;
-                    //usuarioActual.compartirHistorial = chkCompartirHistorial.Checked;
-
-                    cliente.actualizarUsuario(usuarioActual);
-
-                    //if (resultado)
-                    //{
-                    //    MostrarExito("Configuración guardada correctamente.");
-                    //}
-                    //else
-                    //{
-                    //    MostrarError("No se pudo guardar la configuración. Intente nuevamente.");
-                    //}
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MostrarError("Error al guardar la configuración: " + ex.Message);
-            }
+            pnlEdicion.Visible = false;
         }
+    }
 
-        private void MostrarExito(string mensaje)
-        {
-            // Implementar lógica para mostrar mensaje de éxito (puede ser un modal, alerta, etc.)
-            ScriptManager.RegisterStartupScript(this, GetType(), "exito", $"alert('{mensaje}');", true);
-        }
-
-        private void MostrarError(string mensaje)
-        {
-            // Implementar lógica para mostrar mensaje de error
-            ScriptManager.RegisterStartupScript(this, GetType(), "error", $"alert('{mensaje}');", true);
-        }
-
-        // Métodos para las acciones de la zona de peligro (implementar según necesidad)
-        private void DesactivarCuenta()
-        {
-            // Implementar lógica para desactivar cuenta
-        }
-
-        private void EliminarCuenta()
-        {
-            try
-            {
-                int usuarioId = Convert.ToInt32(Session["UsuarioId"]);
-
-                using (UsuarioWSClient cliente = new UsuarioWSClient())
-                {
-                    // El método eliminarUsuario es de tipo void, por lo que no devuelve un bool.
-                    cliente.eliminarUsuario(usuarioId);
-
-                    // Si no hay excepciones, asumimos que la operación fue exitosa.
-                    Session.Abandon();
-                    Response.Redirect("~/Default.aspx");
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MostrarError("Error al eliminar la cuenta: " + ex.Message);
-            }
-        }
+    // Clase auxiliar para el historial de compras
+    public class CompraHistorial
+    {
+        public int Id { get; set; }
+        public string Pelicula { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Hora { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Total { get; set; }
     }
 }
