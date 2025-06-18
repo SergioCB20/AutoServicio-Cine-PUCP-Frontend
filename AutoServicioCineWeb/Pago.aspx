@@ -13,18 +13,15 @@
         <div class="flex flex-col items-center">
             <div class="qr-container mb-4">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CineAutoservicio-Pago-123456"
-                     alt="QR de Pago"
-                     class="w-48 h-48 block" />
-            </div>
-            <p class="text-center text-gray-600 text-sm">
-                Escanea este código QR con tu app de billetera móvil para completar el pago
-            </p>
-            <div class="flex items-center justify-center space-x-2 text-gray-600 text-sm">
-                <i class="fas fa-lock"></i>
-                <span>Pago seguro con cifrado SSL</span>
+                alt="QR de Pago"
+                class="w-48 h-48 block items-center" />
             </div>
         </div>
     </div>
+        <div class="h-4 pb-4 mt-4"><p></p></div>
+        <p class="text-center text-gray-600 text-sm">
+            Escanea este código QR con tu app de billetera móvil para completar el pago.
+        </p>
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
