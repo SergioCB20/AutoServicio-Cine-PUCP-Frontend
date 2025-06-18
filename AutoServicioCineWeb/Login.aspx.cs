@@ -9,7 +9,6 @@ namespace AutoServicioCineWeb
     public partial class Login : Page
     {
         // Instancia del cliente del servicio SOAP de autenticación
-        // Asegúrate de que tu servicio SOAP esté configurado y disponible
         private readonly AuthWSClient authServiceClient;
 
         public Login()
@@ -38,17 +37,11 @@ namespace AutoServicioCineWeb
                     string password = txtPassword.Text;
 
                     // Llama al servicio SOAP para autenticar al usuario
-                    // El método 'loginUsuario' debe existir en tu AuthWS y en el REST API
                     authLoginResponseData loginResponse = authServiceClient.loginUsuario(email, password);
 
                     if (loginResponse != null)
                     {
-                        // Autenticación exitosa
-                        // Puedes almacenar información del usuario en la sesión o en un ticket de FormsAuthentication
-                        // para usar en otras páginas protegidas.
-
                         // Construye el userData para el ticket de FormsAuthentication
-                        // Esto te permitirá acceder al ID, email y tipo de usuario en otras partes de tu aplicación
                         string userData = $"{loginResponse.id}|{loginResponse.email}|{loginResponse.tipoUsuario}";
 
                         // Crea un ticket de FormsAuthentication
@@ -73,30 +66,35 @@ namespace AutoServicioCineWeb
                         }
                         Response.Cookies.Add(authCookie);
 
-                        Response.Redirect("Inicio.aspx");
+                        // --- LÓGICA DE REDIRECCIÓN BASADA EN EL TIPO DE USUARIO ---
+                        if (loginResponse.tipoUsuario == "ADMIN")
+                        {
+                            Response.Redirect("GestionPeliculas.aspx");
+                        }
+                        else
+                        {
+                            Response.Redirect("Inicio.aspx");
+                        }
+                        // -----------------------------------------------------------
                     }
                     else
                     {
                         // Las credenciales no son válidas
-                        // Este caso solo ocurrirá si el servicio SOAP retorna null en lugar de lanzar una excepción
                         lblMessage.Text = "Credenciales inválidas. Por favor, intente de nuevo.";
                         lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
                 }
                 catch (System.ServiceModel.FaultException faultEx)
                 {
-                    // Captura errores específicos que tu servicio SOAP pueda enviar (ej. desde el backend REST)
-                    // El mensaje de faultEx.Message debería ser el que viene de tu AuthResource
+                    // Captura errores específicos que tu servicio SOAP pueda enviar
                     lblMessage.Text = faultEx.Message;
                     lblMessage.ForeColor = System.Drawing.Color.Red;
-                    // Para depuración: System.Diagnostics.Debug.WriteLine($"Error de FaultException en Login: {faultEx.Detail?.InnerXml ?? faultEx.Message}");
                 }
                 catch (System.Exception ex)
                 {
                     // Captura cualquier otro error inesperado durante el proceso de login
                     lblMessage.Text = $"Ha ocurrido un error inesperado: {ex.Message}";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
-                    // Para depuración: System.Diagnostics.Debug.WriteLine($"Error general en Login: {ex.ToString()}");
                 }
             }
         }
