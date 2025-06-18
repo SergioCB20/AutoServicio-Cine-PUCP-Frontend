@@ -1,1 +1,50 @@
+# Archivos de Visual Studio
 .vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Compilación
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+
+# Archivos generados
+*.Designer.cs
+Generated_Code/
+
+# Archivos de paquetes
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Configuraciones temporales
+*.log
+*.tmp
+*.cache
+
+# Archivos del sistema
+Thumbs.db
+ehthumbs.db
+*.DS_Store
+*.vscode/
+.idea/
+
+# Web (si usas npm también)
+node_modules/
+.env
+
+# Publicaciones
+*.publishsettings
+*.Publish.xml
+
+# Otros innecesarios
+_ReSharper*/
+*.resharper
+*.sln.ide
