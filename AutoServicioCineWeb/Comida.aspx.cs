@@ -17,7 +17,7 @@ namespace AutoServicioCineWeb
         {
             productoServiceClient = new ProductoWSClient();
         }
-    
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,15 +26,33 @@ namespace AutoServicioCineWeb
             }
 
         }
-        private void cargarProductos() {
+        private void cargarProductos()
+        {
             try
             {
                 _cachedProductos = productoServiceClient.listarProductos().ToList();
-                List<producto> peliculasFiltradas = _cachedProductos;// FiltrarProductos(_cachedProductos);
+                List<producto> listaproductos = _cachedProductos;// FiltrarProductos(_cachedProductos);
 
-                rptComidas.DataSource = peliculasFiltradas;
+                rptComidas.DataSource = listaproductos;
                 rptComidas.DataBind();
-                
+                //string script = "";
+                //foreach (var prod in listaproductos)
+                //{
+                //    string id = prod.id.ToString();
+                //    string precio = prod.precio.ToString(CultureInfo.InvariantCulture); // Usa "." como separador decimal
+                //    script += $"registrarPrecio('{id}', {precio});";
+                //}
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "inicializarPrecios", $"<script>{script}</script>");
+                string script = "window.onload = function() {";
+                foreach (var prod in listaproductos)
+                {
+                    string id = prod.id.ToString();
+                    string precio = prod.precio.ToString(CultureInfo.InvariantCulture);
+                    script += $"registrarPrecio('{id}', {precio});";
+                }
+                script += "};";
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "initPrecios", $"<script>{script}</script>");
+
 
             }
             catch (System.Exception ex)
@@ -46,27 +64,11 @@ namespace AutoServicioCineWeb
             }
 
         }
-        /* Ignorar 
-        private List<producto> FiltrarProductos(List<producto> productos)
+        protected void btnContinuar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtSearchProductos.Text))
-            {
-                string searchTerm = txtSearchProductos.Text.Trim().ToLower();
-                productos = productos.Where(p =>
-                    p.nombre_en.ToLower().Contains(searchTerm) ||
-                    p.nombre_es.ToLower().Contains(searchTerm) ||
-                    p.descripcion_en.ToLower().Contains(searchTerm) ||
-                    p.descripcion_es.ToLower().Contains(searchTerm)
-                ).ToList();
-            }
 
-            if (!string.IsNullOrEmpty(ddlClasificacionFilter.SelectedValue))
-            {
-                string classificationFilter = ddlClasificacionFilter.SelectedValue;
-                productos = productos.Where(p => p.tipo.ToString() == classificationFilter).ToList();
-            }
-            return productos;
-        }*/
 
+            Response.Redirect("Pago.aspx");
+        }
     }
 }

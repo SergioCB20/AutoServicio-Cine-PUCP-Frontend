@@ -35,19 +35,22 @@
         <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
 
         <hr />
-
-        <div class="resumen-compra">
+        /*
+<%--        <div class="resumen-compra">
             <h3>Total de Compra:</h3>
             <span id="totalResumen">S/ 0.00</span>
-        </div>
+        </div>--%>
     </div>
 </asp:Content>
-
-<asp:Content ID="Content4" ContentPlaceHolderID="Script" runat="server">
+<asp:Content ID="Content5" ContentPlaceHolderID="ActionButtons" runat="server">
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
+    <button class="button secondary cancelar">Cancelar compra</button>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Script" runat="server">
     <script type="text/javascript">
         let cantidades = {};
         let precios = {};
-
+        let total = 0.00;
         // Este script es inicializado desde el backend usando RegisterStartupScript si es necesario
         function registrarPrecio(id, precio) {
             precios[id] = precio;
@@ -66,11 +69,30 @@
         }
 
         function calcularTotal() {
-            let total = 0;
             for (let id in cantidades) {
                 total += cantidades[id] * precios[id];
             }
-            document.getElementById("totalResumen").textContent = "S/ " + total.toFixed(2);
+            document.getElementById("hfTotal").textContent = "S/ " + total.toFixed(2);
+
+            // Mostrar fecha y hora por separado
+            const ahora = new Date();
+
+            // Formatear fecha
+            const fecha = ahora.toLocaleDateString("es-PE", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            });
+
+            // Formatear hora
+            const hora = ahora.toLocaleTimeString("es-PE", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            });
+
+            document.getElementById("litFecha").textContent = fecha;
+            document.getElementById("litHora").textContent = hora;
         }
     </script>
 </asp:Content>
