@@ -129,6 +129,9 @@
                         <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </asp:LinkButton>
+                        <asp:LinkButton ID="btnEditAsiento" runat="server" CssClass="btn_edit_asiento" CommandName="EditAsiento" CommandArgument='<%# Eval("Id") %>'>
+                            <i class="fas fa-edit"></i> EditarAsientos
+                        </asp:LinkButton>
                     </div>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -158,7 +161,7 @@
              <div class="form-group">
                  <label for="<%= Capacidad.ClientID %>" class="form-label">Capacidad:</label>
                  <asp:TextBox ID="Capacidad" runat="server" CssClass="form-control"></asp:TextBox>
-                 <asp:RequiredFieldValidator ID="rfvTituloEn" runat="server" ControlToValidate="Capacidad" ErrorMessage="La capacidad es requerida." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RequiredFieldValidator>
+                 <asp:RequiredFieldValidator ID="rfvCapacidad" runat="server" ControlToValidate="Capacidad" ErrorMessage="La capacidad es requerida." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RequiredFieldValidator>
                  <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="Capacidad" MinimumValue="20" MaximumValue="400" Type="Integer" ErrorMessage="La capacidad debe ser un número positivo (20-400)." Display="Dynamic" ForeColor="Red" ValidationGroup="SalaValidation"></asp:RangeValidator>
              </div>
              <div class="form-group">

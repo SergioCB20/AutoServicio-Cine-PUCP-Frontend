@@ -75,31 +75,39 @@ namespace AutoServicioCineWeb
         {
             int SalaId = Convert.ToInt32(e.CommandArgument);
 
-            if (e.CommandName == "EditSala")
+            switch (e.CommandName)
             {
-                hdnSalaId.Value = SalaId.ToString();
-                litModalTitle.Text = "Editar Sala";
-                CargarDatosSalaParaEdicion(SalaId);
-                MostrarModalSala(); // Abre el modal de película
-            }
-            else if (e.CommandName == "DeleteSala")
-            {
-                try
-                {
-                    salaServiceClient.eliminarSala(SalaId);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionSuccess", "alert('Sala eliminada exitosamente.');", true);
+                case "EditSala":
+                    hdnSalaId.Value = SalaId.ToString();
+                    litModalTitle.Text = "Editar Sala";
+                    CargarDatosSalaParaEdicion(SalaId);
+                    MostrarModalSala(); // Abre el modal de película
+                    break;
+                case "DeleteSala":
+                    {
+                        try
+                        {
+                            salaServiceClient.eliminarSala(SalaId);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "DeletionSuccess", "alert('Sala eliminada exitosamente.');", true);
 
 
-                    _cachedSalas = null; // Invalida la caché para que se vuelva a cargar
-                    CargarSalas();
-                }
-                catch (System.Exception ex)
-                {
-                    // Similar al comentario anterior, este mensaje solo se verá si el modal de edición está abierto.
-                    litMensajeModal.Text = $"Error al eliminar la sala: {ex.Message}";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionError", "alert('Error al eliminar la sala: " + ex.Message.Replace("'", "\\'") + "');", true);
-                    System.Diagnostics.Debug.WriteLine("Error al eliminar sala: " + ex.ToString());
-                }
+                            _cachedSalas = null; // Invalida la caché para que se vuelva a cargar
+                            CargarSalas();
+                        }
+                        catch (System.Exception ex)
+                        {
+                            // Similar al comentario anterior, este mensaje solo se verá si el modal de edición está abierto.
+                            litMensajeModal.Text = $"Error al eliminar la sala: {ex.Message}";
+                            ScriptManager.RegisterStartupScript(this, GetType(), "DeletionError", "alert('Error al eliminar la sala: " + ex.Message.Replace("'", "\\'") + "');", true);
+                            System.Diagnostics.Debug.WriteLine("Error al eliminar sala: " + ex.ToString());
+                        }
+
+                        break;
+                    }
+
+                case "EditAsiento":
+                    Response.Redirect($"GestionAsientos.aspx?SalaId={SalaId}");
+                    break;
             }
         }
         private void CargarDatosSalaParaEdicion(int salaId)
