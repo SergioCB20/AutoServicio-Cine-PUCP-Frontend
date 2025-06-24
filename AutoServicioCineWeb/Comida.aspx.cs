@@ -86,6 +86,7 @@ namespace AutoServicioCineWeb
             //Esta parte es para enviar los valores que fueron modificados a la siguiente vista (Pago.aspx)
 
             var master = this.Master as Form;
+
             var resumen = new ResumenCompra
             {
                 AdultoTicket = master.EntradasAdultoTexto.InnerText,
@@ -95,8 +96,107 @@ namespace AutoServicioCineWeb
                 TituloDePelicula = master.TituloSpan.InnerText,
                 ImagenUrl = master.ImgPoster.Src
             };
-
+            string totalTexto = Request.Form["hfTotal"];
+            if (double.TryParse(totalTexto, out double montoFinal))
+            {
+                resumen.TotalTicket = "S/ " + montoFinal.ToString("0.00");
+            }
+            string abcd = master.HfTotal.Value;
+            resumen.TotalTicket = "S/ " + abcd;
             Session["ResumenCompra"] = resumen;
+
+            //En esta parte se carga la lista de BoletoDetalle
+            var detalles = new List<boletoDetalle>();
+
+            // Aquí faltaría definir los precios con lo obtenido en ResumenCompra
+            double precioAdulto = 8.5;
+            double precioInfantil = 7.0;
+            double precioMayor = 7.0;
+            // Contador para el número de asiento (cuando se tenga una sala de la base de datos en butaca esto se cambiará)
+            int numeroAsiento = 1; //el máximo número es 10 porque hay 1-11 asientos en la base de datos (id)
+            // Procesar entrada adulto
+            if (!string.IsNullOrWhiteSpace(master.EntradasAdultoTexto.InnerText))
+            {
+                string[] partes = master.EntradasAdultoTexto.InnerText.Trim().Split(' ');
+                if (int.TryParse(partes[0], out int cantidadAdultos)) //El primer caracter que tendrán estas cadenas será la cantidad
+                {
+                    for (int i = 0; i < cantidadAdultos; i++)
+                    {
+                        var detalle = new boletoDetalle
+                        {
+                            tipo = tipoBoleto.ADULTO,
+                            precio = precioAdulto,
+                            detalleId = 0,
+                            tipoSpecified = true,
+                            detalleIdSpecified = true,
+                            precioSpecified = true,
+                            asiento = new asiento
+                            {
+                                id = numeroAsiento //se le asigna el número de asiento
+                            }
+                        };
+                        detalles.Add(detalle);
+                        numeroAsiento++;
+                    }
+                }
+            }
+
+            // Procesar entrada infantil
+            if (!string.IsNullOrWhiteSpace(master.EntradasInfantilTexto.InnerText))
+            {
+                string[] partes = master.EntradasInfantilTexto.InnerText.Trim().Split(' ');
+                if (int.TryParse(partes[0], out int cantidadInfantiles))
+                {
+                    for (int i = 0; i < cantidadInfantiles; i++)
+                    {
+                        var detalle = new boletoDetalle
+                        {
+                            tipo = tipoBoleto.NIÑO,
+                            precio = precioInfantil,
+                            detalleId = 0,
+                            detalleIdSpecified = true,
+                            precioSpecified = true,
+                            tipoSpecified = true,
+                            asiento = new asiento
+                            {
+                                id = numeroAsiento
+                            }
+                        };
+                        detalles.Add(detalle);
+                        numeroAsiento++;
+                    }
+                }
+            }
+
+            // Procesar entrada adulto mayor
+            if (!string.IsNullOrWhiteSpace(master.EntradasMayorTexto.InnerText))
+            {
+                string[] partes = master.EntradasMayorTexto.InnerText.Trim().Split(' ');
+                if (int.TryParse(partes[0], out int cantidadMayores))
+                {
+                    for (int i = 0; i < cantidadMayores; i++)
+                    {
+                        var detalle = new boletoDetalle
+                        {
+                            detalleId = 0,
+                            tipo = tipoBoleto.ADULTO_MAYOR,
+                            precio = precioMayor,
+                            detalleIdSpecified = true,
+                            precioSpecified = true,
+                            tipoSpecified = true,
+                            asiento = new asiento
+                            {
+                                id = numeroAsiento
+                            }
+                        };
+                        detalles.Add(detalle);
+                        numeroAsiento++;
+                    }
+                }
+            }
+
+            Session["ListaBoletoDetalle"] = detalles;
+
             Response.Redirect("Pago.aspx");
         }
 

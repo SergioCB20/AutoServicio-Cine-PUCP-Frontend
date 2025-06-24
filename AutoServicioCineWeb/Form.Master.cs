@@ -16,6 +16,7 @@ namespace AutoServicioCineWeb
         public HtmlGenericControl EntradasInfantilTexto => entradasInfantilTexto;
         public HtmlGenericControl EntradasMayorTexto => entradasMayorTexto;
         public HtmlGenericControl TotalResumen => totalResumen;
+        public HiddenField HfTotal => hfTotal;
         protected void Page_Load(object sender, EventArgs e)
         {
 

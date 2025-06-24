@@ -110,6 +110,7 @@
 
             const nuevoTotal = base + total;
             totalResumen.textContent = "S/ " + nuevoTotal.toFixed(2);
+            document.getElementById("hfTotal").value = nuevoTotal.toFixed(2);
         }
         
         
