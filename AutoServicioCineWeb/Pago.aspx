@@ -25,7 +25,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="ActionButtons" runat="server">
-    <asp:Button id="btnContinuar" CssClass="button primary continuar" runat="server" Text="Continuar"/>
+    <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
     <button class="button secondary cancelar">Cancelar compra</button>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="Script" runat="server">
