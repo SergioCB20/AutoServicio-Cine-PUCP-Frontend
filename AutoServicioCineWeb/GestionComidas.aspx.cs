@@ -40,9 +40,6 @@ namespace AutoServicioCineWeb
                 _cachedComidas = comidaServiceClient.listarProductos().ToList();
                 List<producto> productosFiltrados = FiltrarComidas(_cachedComidas);
 
-                // Aplicar filtros de búsqueda y categoría
-                //string searchTerm = txtSearch.Text.Trim().ToLower();
-                //string categoryFilter = ddlCategoryFilter.SelectedValue;
                 gvComidas.DataSource = productosFiltrados;
                 gvComidas.DataBind();
 
@@ -104,7 +101,7 @@ namespace AutoServicioCineWeb
                 try
                 {
                     comidaServiceClient.eliminarProducto(producto_id);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionSuccess", "alert('Película eliminada exitosamente.');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionSuccess", "alert('Producto eliminada exitosamente.');", true);
 
                     _cachedComidas = null;
                     CargarComidas(); // Recargar la tabla después de eliminar
@@ -168,12 +165,12 @@ namespace AutoServicioCineWeb
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            // 1. Validar la página. Es crucial para asegurar que los campos del formulario son válidos.
+    
             Page.Validate("ComidaValidation"); // Asegúrate de que este ValidationGroup esté configurado en tus validadores.
 
             if (!Page.IsValid)
             {
-                // Si hay errores de validación, mostrar un mensaje y mantener el modal abierto.
+              
                 litMensajeModal.Text = "<div class='alert alert-warning'>⚠️ Por favor, corrige los errores en el formulario.</div>";
                 // Asegúrate de que la función JavaScript 'openModal()' exista y funcione correctamente.
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "openModalOnValidationFail",
@@ -188,7 +185,7 @@ namespace AutoServicioCineWeb
             producto prod = new producto
             {
                 // El hdnComidaId debe contener el ID del producto si es una edición, o 0 si es nuevo.
-                id = Convert.ToInt32(hdnComidaId.Value),
+                id = int.Parse(hdnComidaId.Value),
                 idSpecified = true,
 
                 nombre_es = txtNombre.Text.Trim(),
@@ -198,7 +195,8 @@ namespace AutoServicioCineWeb
                 descripcion_en = txtDescripcionEn.Text.Trim(), // NUEVO: Asumiendo que tienes un control txtDescripcionEn
 
                 precio = double.Parse(txtPrecio.Text.Trim()),
-                tipo = (tipoProducto)Enum.Parse(typeof(tipoProducto), ddlTipo.SelectedValue),
+                tipo = (tipoProducto)Enum.Parse(typeof(tipoProducto), ddlTipo.SelectedValue, ignoreCase: true),
+                tipoSpecified = true,
 
                 imagenUrl = txtImagenUrl.Text.Trim(), // CORREGIDO: Asumiendo que tienes un control txtImagenUrl
 
