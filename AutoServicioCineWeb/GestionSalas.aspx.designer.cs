@@ -114,13 +114,13 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.TextBox Capacidad;
 
         /// <summary>
-        /// Control rfvTituloEn.
+        /// Control rfvCapacidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTituloEn;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCapacidad;
 
         /// <summary>
         /// Control RangeValidator1.
