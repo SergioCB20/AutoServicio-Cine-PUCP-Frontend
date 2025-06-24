@@ -1,6 +1,81 @@
-﻿/* Estilos específicos para Gestión de Comidas */
+﻿/* Estilos generales (si no los tienes ya en tu master page o styles.css) */
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Un gris suave para el fondo */
+    color: #333;
+}
 
-/* Stats Grid */
+/* Page Title (reutilizado) */
+.page-title {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+    .page-title h1 {
+        font-size: 32px;
+        color: #2c3e50;
+        font-weight: 700;
+        margin: 0;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+        .page-title h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+/* Actions Section (reutilizado) */
+.actions {
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+/* Buttons (reutilizado y adaptado para btn-primary, btn-secondary del ASPX) */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex; /* Usar flex para centrar contenido si hay iconos */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre texto e icono */
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+    }
+
+.btn-secondary { /* Para el botón Cancelar en el modal */
+    background: #6c757d;
+    color: white;
+}
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+/* Stats Grid (reutilizado) */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -27,10 +102,10 @@
     font-size: 36px;
     font-weight: bold;
     color: #3498db;
-    margin-bottom: 5px;
     background: linear-gradient(135deg, #3498db, #2980b9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
 }
 
 .stat-label {
@@ -39,7 +114,7 @@
     font-weight: 500;
 }
 
-/* Table Container */
+/* Table Container (reutilizado) */
 .table-container {
     background: white;
     border-radius: 15px;
@@ -92,8 +167,46 @@
         border-color: #3498db;
     }
 
+/* Table Styles (data-table) - Adaptado */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0; /* Ya está dentro de table-container */
+}
 
-/* Category Badges */
+    .data-table th, .data-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+.data-table-header { /* Aplicado a HeaderStyle-CssClass */
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.data-table-row:nth-child(even) { /* Aplicado a AlternatingRowStyle-CssClass */
+    background-color: #fcfdff;
+}
+
+.data-table-row:hover {
+    background-color: #f0f8ff;
+}
+
+/* Imagen de comida en la tabla (ANTES movie-image) */
+.food-image { /* Nueva clase específica */
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* Category Badges (nuevas para comidas, en lugar de clasificación de películas) */
 .category-badge {
     padding: 6px 12px;
     border-radius: 20px;
@@ -101,33 +214,30 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: inline-block; /* Para que ocupe solo el ancho necesario */
 }
 
-.category-snacks {
-    background: rgba(241, 196, 15, 0.1);
-    color: #f39c12;
-    border: 1px solid rgba(241, 196, 15, 0.3);
+/* Colores para categorías comunes */
+.category-bebida { /* Verde */
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
 }
 
-.category-bebidas {
+.category-comida { /* Azul */
     background: rgba(52, 152, 219, 0.1);
     color: #3498db;
     border: 1px solid rgba(52, 152, 219, 0.3);
 }
 
-.category-dulces {
-    background: rgba(231, 76, 60, 0.1);
-    color: #e74c3c;
-    border: 1px solid rgba(231, 76, 60, 0.3);
+.category-combo { /* Amarillo/Naranja */
+    background: rgba(241, 196, 15, 0.1);
+    color: #f39c12;
+    border: 1px solid rgba(241, 196, 15, 0.3);
 }
 
-.category-combos {
-    background: rgba(155, 89, 182, 0.1);
-    color: #9b59b6;
-    border: 1px solid rgba(155, 89, 182, 0.3);
-}
 
-/* Status Badges */
+/* Status Badges (adaptado para activa/inactiva, se mantiene igual) */
 .status-badge {
     padding: 6px 12px;
     border-radius: 20px;
@@ -135,46 +245,48 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: inline-block;
 }
 
-.status-disponible {
-    background: rgba(39, 174, 96, 0.1);
+.status-activa {
+    background: rgba(39, 174, 96, 0.1); /* Verde */
     color: #27ae60;
     border: 1px solid rgba(39, 174, 96, 0.3);
 }
 
-.status-agotado {
-    background: rgba(231, 76, 60, 0.1);
+.status-inactiva { /* En lugar de 'agotado' */
+    background: rgba(231, 76, 60, 0.1); /* Rojo */
     color: #e74c3c;
     border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
-/* Action Buttons */
+/* Action Buttons (reutilizado, con ajustes de padding para LinkButton) */
 .action-buttons {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+}
+
+.btn-edit, .btn-delete { /* Aplica a LinkButton */
+    display: inline-flex; /* Permite alinear icono y texto */
+    align-items: center;
+    gap: 5px; /* Espacio entre icono y texto */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Quita el subrayado de LinkButton */
 }
 
 .btn-edit {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #f39c12, #e67e22); /* Naranja */
 }
 
 .btn-delete {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #e74c3c, #c0392b); /* Rojo */
 }
 
     .btn-edit:hover,
@@ -183,7 +295,50 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-/* Modal Styles */
+/* Paginación de GridView (reutilizado) */
+.gridview-pager {
+    background-color: #f8f9fa;
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+    .gridview-pager table {
+        margin: 0 auto;
+    }
+
+    .gridview-pager td {
+        padding: 5px 8px;
+    }
+
+    .gridview-pager a, .gridview-pager span {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 0 3px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #3498db;
+        border: 1px solid #ced4da;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+        .gridview-pager a:hover {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+    .gridview-pager span {
+        background-color: #3498db;
+        color: white;
+        border-color: #3498db;
+        font-weight: bold;
+        cursor: default;
+    }
+
+/* Modal Styles (reutilizado y adaptado) */
 .modal {
     display: none;
     position: fixed;
@@ -194,16 +349,16 @@
     background: rgba(0,0,0,0.5);
     backdrop-filter: blur(5px);
     z-index: 1000;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .modal-content {
     background: white;
-    padding: 0;
     border-radius: 20px;
     width: 90%;
-    max-width: 500px;
+    max-width: 650px; /* Un poco más ancho para el formulario de comida */
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -227,6 +382,7 @@
     border-bottom: 1px solid #f1f3f4;
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border-radius: 20px 20px 0 0;
+    position: relative;
 }
 
 .modal-title {
@@ -234,92 +390,232 @@
     font-weight: 600;
     color: #2c3e50;
     margin: 0;
+    padding-right: 40px;
 }
 
-#foodForm {
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #6c757d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    .close-button:hover {
+        color: #333;
+    }
+
+/* Formulario dentro del Modal */
+.form-grid { /* Contenedor para la cuadrícula de formulario */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 columnas en pantallas grandes */
+    gap: 20px;
     padding: 30px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-group.form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        grid-column: 1 / -1;
+    }
+
 .form-label {
-    display: block;
+    display: flex;
+    gap: 4px;
     margin-bottom: 8px;
     font-weight: 600;
     color: #2c3e50;
     font-size: 14px;
 }
 
-.form-input {
-    width: 100%;
+.form-control { /* Usado para asp:TextBox y asp:DropDownList */
+    width: calc(100% - 2px); /* Ancho 100% menos bordes */
     padding: 12px 15px;
     border: 2px solid #e9ecef;
     border-radius: 10px;
     font-size: 14px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    background-color: white; /* Asegura un fondo blanco para select */
 }
 
-    .form-input:focus {
+    .form-control:focus {
         outline: none;
         border-color: #3498db;
         box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
     }
 
-.form-buttons {
+.form-actions {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
     margin-top: 30px;
-    padding-top: 20px;
+    padding: 20px 30px;
     border-top: 1px solid #f1f3f4;
+    border-radius: 0 0 20px 20px;
 }
 
-.btn-secondary {
-    background: #6c757d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
+/* Estilos de los mensajes de validación (ASP.NET RequiredFieldValidator, RangeValidator) */
+span[role="alert"] {
+    display: block;
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Preview de imagen en el modal */
+.image-preview { /* Usado como CssClass para asp:Image */
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ddd;
+    padding: 5px;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    object-fit: contain;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: none; /* Por defecto oculto, JS lo muestra */
 }
 
-    .btn-secondary:hover {
-        background: #5a6268;
-        transform: translateY(-2px);
+/* Loading Indicator */
+#loadingIndicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    #loadingIndicator > div {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+.csv-help-box {
+    background-color: #eaf6ff; /* Fondo azul claro */
+    border: 1px solid #b3e0ff; /* Borde azul */
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    /* Animación y estado oculto */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out, margin-top 0.4s ease-out;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
+    .csv-help-box.visible {
+        max-height: 200px; /* Suficiente para mostrar el contenido. Ajusta si es necesario. */
+        opacity: 1;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-top: 15px;
+    }
+
+.csv-column-list {
+    list-style: disc; /* Vuelve a usar viñetas para la lista */
+    padding-left: 20px; /* Sangría para las viñetas */
+    margin-bottom: 10px;
+}
+
+    .csv-column-list li {
+        margin-bottom: 5px;
+        font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para los nombres de columna */
+        font-weight: bold;
+        color: #0056b3; /* Un poco más oscuro */
+    }
+
+/* Estilos para el texto pequeño dentro de la caja de ayuda */
+.csv-help-box p.small {
+    font-size: 0.8em; /* Más pequeño para los tips adicionales */
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Colores para mensajes de validación */
+span[role="alert"] {
+    display: block;
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+.help-button {
+    background-color: #007bff; /* Color azul */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Hace que sea circular */
+    width: 20px; /* Tamaño del botón */
+    height: 20px; /* Tamaño del botón */
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+    .help-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
     }
 
 /* Responsive Design */
+@media (max-width: 992px) { /* Tabletas grandes */
+    .form-grid {
+        grid-template-columns: 1fr; /* Una columna para el formulario en tabletas */
+    }
+}
+
 @media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+    .page-title h1 {
+        font-size: 28px;
     }
 
-    .search-bar {
-        flex-direction: column;
-        align-items: stretch;
+    .actions {
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    .search-input {
-        min-width: auto;
-        margin-bottom: 10px;
+    .btn.btn-primary { /* Botón de agregar ocupa todo el ancho */
+        width: 100%;
+        padding: 10px 20px;
     }
 
-    #foodTable {
-        font-size: 12px;
+    .data-table th, .data-table td {
+        padding: 10px;
+        font-size: 13px;
     }
 
-        #foodTable th,
-        #foodTable td {
-            padding: 8px;
-        }
-
-    .food-image {
+    .food-image { /* Cambio aquí también para móviles */
         width: 40px;
         height: 40px;
     }
@@ -329,21 +625,35 @@
         gap: 5px;
     }
 
+    .btn-edit, .btn-delete {
+        width: 100%; /* Botones de acción en la tabla ocupan todo el ancho */
+    }
+
     .modal-content {
         width: 95%;
         margin: 20px;
     }
 
-    #foodForm {
+    .modal-header,
+    .form-grid,
+    .form-actions {
         padding: 20px;
     }
 
-    .form-buttons {
+    .form-actions {
         flex-direction: column;
     }
 }
 
 @media (max-width: 480px) {
+    .page-title h1 {
+        font-size: 24px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
