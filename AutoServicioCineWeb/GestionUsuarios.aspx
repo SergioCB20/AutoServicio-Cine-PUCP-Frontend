@@ -54,10 +54,6 @@ Inherits="AutoServicioCineWeb.GestionUsuarios" %>
     Administra los usuarios del sistema
 </asp:Content>
 
-<asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server">
-    <asp:Button ID="btnOpenAddModal" runat="server" Text="➕ Agregar Nuevo Usuario" CssClass="btn btn-primary" OnClick="btnOpenAddModal_Click" />
-</asp:Content>
-
 <asp:Content ID="ContentMain" ContentPlaceHolderID="MainContent" runat="server">
     <div class="stats-grid">
         <div class="stat-card">
@@ -96,7 +92,6 @@ Inherits="AutoServicioCineWeb.GestionUsuarios" %>
                 </asp:DropDownList>
             </div>
         </div>
-
         <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False"
                       CssClass="data-table"
                       HeaderStyle-CssClass="data-table-header"
@@ -123,7 +118,6 @@ Inherits="AutoServicioCineWeb.GestionUsuarios" %>
                         </span>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="FechaRegistro" HeaderText="Registro" DataFormatString="{0:yyyy-MM-dd}" SortExpression="FechaRegistro" />
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <div class="action-buttons">
@@ -134,11 +128,11 @@ Inherits="AutoServicioCineWeb.GestionUsuarios" %>
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </asp:LinkButton>
                             <asp:LinkButton ID="btnToggleAdmin" runat="server"
-                                CssClass='<%# Eval("IsAdmin").ToString().ToLower() == "true" ? "btn-degradar-admin" : "btn-ascender-admin" %>'
+                                CssClass='<%# Eval("admin").ToString().ToLower() == "true" ? "btn-degradar-admin" : "btn-ascender-admin" %>'
                                 CommandName="ToggleAdmin" CommandArgument='<%# Eval("Id") %>'
-                                OnClientClick='<%# Eval("IsAdmin").ToString().ToLower() == "true" ? "return confirm(\"¿Estás seguro de que quieres degradar a este usuario a usuario regular?\");" : "return confirm(\"¿Estás seguro de que quieres ascender a este usuario a administrador?\");" %>'>
+                                OnClientClick='<%# Eval("admin").ToString().ToLower() == "true" ? "return confirm(\"¿Estás seguro de que quieres degradar a este usuario a usuario regular?\");" : "return confirm(\"¿Estás seguro de que quieres ascender a este usuario a administrador?\");" %>'>
                                 <i class="fas fa-user-shield"></i>
-                                <%# Eval("IsAdmin").ToString().ToLower() == "true" ? "Degradar" : "Ascender" %>
+                                <%# Eval("admin").ToString().ToLower() == "true" ? "Degradar" : "Ascender" %>
                             </asp:LinkButton>
                         </div>
                     </ItemTemplate>

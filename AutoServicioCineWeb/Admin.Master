@@ -54,9 +54,6 @@
                             <span>Admin</span>
                         </div>
                         <asp:ContentPlaceHolder ID="HeaderActions" runat="server">
-                            <a href="#" class="btn btn-primary">
-                                ⚙️ Configuración
-                            </a>
                         </asp:ContentPlaceHolder>
                     </div>
                 </div>
