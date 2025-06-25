@@ -16,11 +16,6 @@
         text-align: center;
     }
 
-body {
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
-}
-
 .qr-container {
     display: flex; /* Centrado del contenido interno */
     justify-content: center; /* Centra el QR dentro */
@@ -48,9 +43,42 @@ body {
     }
 }
 
-p {
-    color: rgb(107, 114, 128);
-    font-size: 15px;
-    margin-bottom: 10px;
-    margin-top: 5px;
+.codigo-promocional {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.codigo-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.button.aplicar {
+    padding: 10px 15px;
+    background-color: var(--color-azul-secundario);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button.generarqr {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[disabled], button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

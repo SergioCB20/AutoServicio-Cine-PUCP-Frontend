@@ -35,13 +35,13 @@
             </asp:Repeater>
         </div>
         <asp:Literal ID="litMensajeModal" runat="server"></asp:Literal>
-
         
 <%--        <div class="resumen-compra">
             <h3>Total de Compra:</h3>
             <span id="totalResumen">S/ 0.00</span>
         </div>--%>
     </div>
+    <asp:HiddenField ID="hfResumenComida" runat="server" ClientIDMode="Static" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="ActionButtons" runat="server">
     <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
@@ -53,7 +53,7 @@
         let precios = {};
         let total = 0.00;
 
-        // Esta función la debes llamar desde el code-behind para cada producto
+        
         function registrarPrecio(id, precio) {
             precios[id] = precio;
             cantidades[id] = 0;
@@ -82,8 +82,8 @@
             const baseAttr = document.getElementById("totalResumen").getAttribute("data-base");
             const baseClean = baseAttr.replace(/[^\d.]/g, '');
             const base = parseFloat(baseClean) || 0;
-            console.log("alo:", baseAttr);
-            console.log("alo:", base);
+            //console.log("valor:", baseAttr); //para imprimir el valor de los datos en la consola
+            //console.log("base:", base);
             const resumenDiv = document.getElementById("resumenCompraComida");
             if (!resumenDiv) return;
 
@@ -92,6 +92,8 @@
 
             resumenDiv.innerHTML = '';
             if (subtitulo) resumenDiv.appendChild(subtitulo);
+
+            let resumenStrings = []; //para guardar cada opción de comida
 
             for (let id in cantidades) {
                 const cantidad = cantidades[id];
@@ -105,53 +107,17 @@
                     const p = document.createElement("p");
                     p.textContent = `${nombre} x ${cantidad} = S/ ${subtotal.toFixed(2)}`;
                     resumenDiv.appendChild(p);
+
+                    resumenStrings.push(`${id};${nombre};${cantidad};${precioUnitario.toFixed(2)}`);//carga una línea detalle
                 }
             }
 
             const nuevoTotal = base + total;
             totalResumen.textContent = "S/ " + nuevoTotal.toFixed(2);
             document.getElementById("hfTotal").value = nuevoTotal.toFixed(2);
+
+            document.getElementById("hfResumenComida").value = resumenStrings.join("|"); //actualiza el valor del hiddenfield
         }
-        
-        
-        //function calcularTotal() {
-            //total = 0; // reiniciar el total
-            //for (let id in cantidades) {
-            //    total += cantidades[id] * precios[id];
-            //}
-
-            //// Mostrar total visible
-            //const spanTotal = document.getElementById("totalResumen");
-            //if (spanTotal) {
-            //    spanTotal.textContent = "S/ " + total.toFixed(2);
-            //}
-
-            //// Guardar en hidden field
-            //const hfTotal = document.getElementById("hfTotal");
-            //if (hfTotal) {
-            //    hfTotal.value = total.toFixed(2);
-            //}
-            //// Mostrar fecha y hora por separado
-            //const ahora = new Date();
-
-            //// Formatear fecha
-            //const fecha = ahora.toLocaleDateString("es-PE", {
-            //    day: "2-digit",
-            //    month: "2-digit",
-            //    year: "numeric"
-            //});
-
-            //// Formatear hora
-            //const hora = ahora.toLocaleTimeString("es-PE", {
-            //    hour: "2-digit",
-            //    minute: "2-digit",
-            //    hour12: false
-            //});
-
-            //document.getElementById("litFecha").textContent = fecha;
-            //document.getElementById("litHora").textContent = hora;
-        //}
-
         
     </script>
 </asp:Content>

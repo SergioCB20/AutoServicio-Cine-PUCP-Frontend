@@ -132,7 +132,8 @@ namespace AutoServicioCineWeb
                             precioSpecified = true,
                             asiento = new asiento
                             {
-                                id = numeroAsiento //se le asigna el número de asiento
+                                id = numeroAsiento, //se le asigna el número de asiento
+                                idSpecified = true
                             }
                         };
                         detalles.Add(detalle);
@@ -159,7 +160,8 @@ namespace AutoServicioCineWeb
                             tipoSpecified = true,
                             asiento = new asiento
                             {
-                                id = numeroAsiento
+                                id = numeroAsiento,
+                                idSpecified = true
                             }
                         };
                         detalles.Add(detalle);
@@ -186,7 +188,8 @@ namespace AutoServicioCineWeb
                             tipoSpecified = true,
                             asiento = new asiento
                             {
-                                id = numeroAsiento
+                                id = numeroAsiento,
+                                idSpecified = true,
                             }
                         };
                         detalles.Add(detalle);
@@ -195,7 +198,48 @@ namespace AutoServicioCineWeb
                 }
             }
 
-            Session["ListaBoletoDetalle"] = detalles;
+            Session["ListaBoletoDetalle"] = detalles; //Todas las entradas procesadas se guardan para la siguiente vista
+
+            string resumenComidaTexto = hfResumenComida.Value;
+            List<ventaProducto> listaVentaProducto = new List<ventaProducto>();
+            
+            //Procesando las líneas de comida
+            if (!string.IsNullOrEmpty(resumenComidaTexto))
+            {
+                var items = resumenComidaTexto.Split('|');
+                foreach (var item in items)
+                {
+                    var partes = item.Split(';');
+                    if (partes.Length == 4)
+                    {
+                        int productoId;
+                        string nombreComida = partes[1];
+                        int cantidad;
+                        double precioUnitario;
+
+                        if (int.TryParse(partes[0], out productoId) &&
+                            int.TryParse(partes[2], out cantidad) &&
+                            double.TryParse(partes[3], NumberStyles.Any, CultureInfo.InvariantCulture, out precioUnitario))
+                        {
+                            var ventaProd = new ventaProducto
+                            {
+                                cantidad = cantidad,
+                                cantidadSpecified = true,
+                                precioUnitario = precioUnitario,
+                                precioUnitarioSpecified = true,
+                                nombreProducto = nombreComida, //esta propiedad o atributo solo se usa en el frontend
+                                producto = new producto { id = productoId, idSpecified = true } // vinculación con el producto real
+                                // las demás asignaciones se realizarán en la siguiente vista
+                            };
+
+                            listaVentaProducto.Add(ventaProd);
+                        }
+                    }
+                }
+            }
+
+            // Se guarda la lista en Session para usarla en la vista de pago
+            Session["ListaVentaProducto"] = listaVentaProducto;
 
             Response.Redirect("Pago.aspx");
         }
