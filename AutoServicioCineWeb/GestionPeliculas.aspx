@@ -8,7 +8,7 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
 </asp:Content>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" href="./styles/GestionPeliculas.css">
+    <link rel="stylesheet" href="./styles/gestionPeliculas.css">
     <script type="text/javascript">
         // Función para previsualizar la imagen seleccionada desde la URL (SE MANTIENE)
         function previewImage(input) {
