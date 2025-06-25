@@ -75,21 +75,25 @@
             <main class="main-content">
                 <div class="search-bar-container">
                     <div class="search-bar">
-                        <input type="text" placeholder="Buscar película..." />
-                        <button aria-label="Buscar">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="hero-icon search-icon">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </button>
+                        <%-- Convertir a control de servidor y añadir ID --%>
+                        <asp:TextBox ID="txtBuscarPelicula" runat="server" CssClass="search-input" placeholder="Buscar película..."></asp:TextBox>
+
+                        <asp:LinkButton ID="btnBuscar" runat="server" CssClass="search-button" OnClick="btnBuscar_Click">
+    <span class="search-icon-wrapper">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="hero-icon search-icon">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+    </span>
+                        </asp:LinkButton>
                     </div>
                 </div>
                 <section class="peliculas-grid">
