@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,35 +13,87 @@ namespace AutoServicioCineWeb
 {
     public partial class PaginaUsuario : System.Web.UI.Page
     {
+        private readonly UsuarioWSClient usuarioServiceClient;
+        private List<cupon> _cachedCupones;
+        private readonly CuponWSClient cuponServiceClient;
 
+        public PaginaUsuario(){
+             usuarioServiceClient = new UsuarioWSClient() ;
+            cuponServiceClient = new CuponWSClient();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+            // Verificar si el usuario está autenticado
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
-                if (Session["Usuario"] != null)
-                {
-                    usuario usuario = (usuario)Session["Usuario"];
-                    CargarDatosUsuario(usuario);
-                    CargarHistorialCompras(usuario.id);
-                }
-                else
-                {
-                    // Redirigir a login si no hay sesión
-                    //Response.Redirect("~/Sigup.aspx");
-                }
+                CargarDatosUsuario();
             }
         }
 
-        private void CargarDatosUsuario(usuario usuario)
+        private void CargarDatosUsuario()
         {
-            lblNombre.Text = usuario.nombre;
-            lblEmail.Text = usuario.email;
-            lblTelefono.Text = usuario.telefono;
+            try
+            {
+                // Obtener el ticket de autenticación de la cookie
+                HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
 
-            // Cargar también en los campos de edición
-            txtNombreEdit.Text = usuario.nombre;
-            txtEmailEdit.Text = usuario.email;
-            txtTelefonoEdit.Text = usuario.telefono;
+                if (authCookie != null)
+                {
+                    // Desencriptar el ticket
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                    if (ticket != null && !ticket.Expired)
+                    {
+                        // Extraer los datos del userData (recuerda que guardaste: "id|email|tipoUsuario")
+                        string[] userData = ticket.UserData.Split('|');
+
+                        if (userData.Length >= 3)
+                        {
+                            string userId = userData[0];
+                            string userEmail = userData[1];
+                            string userTipoUsuario = userData[2];
+                            int userIdInt = int.Parse(userId);
+
+                            // Obtener el usuario desde el servicio web
+                            usuario usuarioData = usuarioServiceClient.buscarUsuarioPorId(userIdInt);
+
+                            // Mostrar los datos en tu página
+                            lblNombre.Text = usuarioData.nombre;
+                            lblEmail.Text = usuarioData.email;
+                            lblTelefono.Text = usuarioData.telefono;
+
+                            // También puedes usar el nombre del ticket
+                            // lblNombreUsuario.Text = ticket.Name; // Esto es el email que pusiste
+                        }
+                    }
+                }
+
+                // Llama al servicio web para obtener los cupones del usuario
+                _cachedCupones = cuponServiceClient.listarCupones().ToList();
+                List<cupon> cuponFiltrados = FiltrarCupones(_cachedCupones);
+                
+                gvCupones.DataSource = cuponFiltrados;
+                gvCupones.DataBind();
+            }
+            catch (System.Exception ex)
+            {
+                // Manejar errores
+                // lbl.Text = "Error al cargar datos del usuario: " + ex.Message;
+                // lblMessage.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        private List<cupon> FiltrarCupones(List<cupon> cupones)
+        {
+            // Filtrar cupones que no han sido utilizados y que no han expirado
+            return cupones.Where(c => !c.activo).ToList();
         }
 
         private void CargarHistorialCompras(int usuarioId)
@@ -81,55 +134,101 @@ namespace AutoServicioCineWeb
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            pnlEdicion.Visible = true;
+            // Mostrar el modal
+            pnlEdicion.Style["display"] = "flex";
+            // 2. Mostrar el modal mediante JavaScript
+            ScriptManager.RegisterStartupScript(this, GetType(), "mostrarModal",
+                "mostrarModal();", true);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Session["Usuario"] != null)
+            try
             {
-                usuario usuario = (usuario)Session["Usuario"];
-
-                // Actualizar datos del usuario
-                usuario.nombre = txtNombreEdit.Text;
-                usuario.email = txtEmailEdit.Text;
-                usuario.telefono = txtTelefonoEdit.Text;
-
-                // Si se proporcionó nueva contraseña, actualizarla
-                //if (!string.IsNullOrEmpty(txtPasswordEdit.Text))
-                //{
-                //    usuario.Password = PasswordHasher.HashPassword(txtPasswordEdit.Text);
-                //}
-
-                try
+                // Obtener el ID del usuario desde la cookie
+                HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (authCookie == null)
                 {
-                    // Llamar al servicio web para actualizar
-                    //var usuarioWS = new UsuarioWS();
-                    //usuarioWS.actualizarUsuario(usuario);
-
-                    // Actualizar sesión
-                    Session["Usuario"] = usuario;
-                    CargarDatosUsuario(usuario);
-
-                    // Ocultar panel de edición
-                    pnlEdicion.Visible = false;
-
-                    // Mostrar mensaje de éxito
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess",
-                        "alert('Perfil actualizado correctamente');", true);
+                    MostrarMensaje("No se pudo autenticar al usuario", true);
+                    return;
                 }
-                catch (System.Exception ex)
+
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (ticket == null || ticket.Expired)
                 {
-                    // Mostrar mensaje de error
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showError",
-                        $"alert('Error al actualizar perfil: {ex.Message}');", true);
+                    MostrarMensaje("La sesión ha expirado", true);
+                    return;
                 }
+
+                string[] userData = ticket.UserData.Split('|');
+                if (userData.Length < 3)
+                {
+                    MostrarMensaje("Datos de usuario inválidos", true);
+                    return;
+                }
+
+                int userId = int.Parse(userData[0]);
+
+                // Validar campos obligatorios
+                if (string.IsNullOrEmpty(txtNombreEdit.Text))
+                {
+                    //MostrarMensaje("El nombre es requerido", true);
+                    txtNombreEdit.Text = lblNombre.Text;
+                }
+
+                if (string.IsNullOrEmpty(txtEmailEdit.Text))
+                {
+                    //MostrarMensaje("El email es requerido", true);
+                    txtEmailEdit.Text = lblEmail.Text;
+                }
+
+                if(string.IsNullOrEmpty(txtTelefonoEdit.Text))
+                {
+                    //MostrarMensaje("El teléfono es requerido", true);
+                    txtTelefonoEdit.Text = lblTelefono.Text;
+                }
+
+                // Crear objeto con los datos actualizados
+                
+                usuario usuarioActualizado = usuarioServiceClient.buscarUsuarioPorId(userId);
+
+                usuarioActualizado.nombre = txtNombreEdit.Text;
+                usuarioActualizado.telefono = txtTelefonoEdit.Text;
+                usuarioActualizado.email = txtEmailEdit.Text;
+                
+
+                // Llamar al servicio web para actualizar
+                usuarioServiceClient.actualizarUsuario(usuarioActualizado);
+                pnlEdicion.Style["display"] = "none";
+                MostrarMensaje("Datos actualizados correctamente", false);
+                Response.Redirect(Request.Url.AbsoluteUri); // Recarga la misma página
+
+            }
+            catch (System.Exception ex)
+            {
+                MostrarMensaje("Error al actualizar: " + ex.Message, true);
             }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            pnlEdicion.Visible = false;
+            // Limpiar el contenido del TextBox correctamente
+            txtEmailEdit.Text = "";
+            txtNombreEdit.Text = "";
+            txtTelefonoEdit.Text = "";
+            // Cerrar el modal
+            pnlEdicion.Style["display"] = "none";
+        }
+
+        private void MostrarMensaje(string mensaje, bool esError)
+        {
+            // Puedes usar un control Label o un script para mostrar el mensaje
+            string script = $"alert('{mensaje}');";
+            if (esError)
+            {
+                script = $"alert('ERROR: {mensaje}');";
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
         }
     }
 
