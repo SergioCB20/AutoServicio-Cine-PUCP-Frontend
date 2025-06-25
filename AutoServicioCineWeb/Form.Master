@@ -54,7 +54,7 @@
                 </svg>
                 <asp:Label ID="lbUserName" runat="server" Text=""></asp:Label>
             </div>
-            <div class="logout-icon icon">
+            <asp:LinkButton runat="server" OnClick="lnkCerrarSesion_Click" class="logout-icon icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -67,7 +67,7 @@
                         stroke-linejoin="round"
                         d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                 </svg>
-            </div>
+            </asp:LinkButton>
         </div>
     </nav>
 </header>
