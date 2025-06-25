@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace AutoServicioCineWeb
 {
     public partial class GestionCupones : System.Web.UI.Page
@@ -70,10 +71,21 @@ namespace AutoServicioCineWeb
                 {
                     var cupon = CrearCuponDesdeFormulario();
 
+                    string stringIni = txtFechaInicio.Text;
+                    string stringFin = txtFechaFin.Text;
+                    usuario usu = new usuario {id = 11};
+                    cupon.modificadoPor = usu;
+                    cupon.cuponIdSpecified = true;
+                    cupon.descuentoTipoSpecified = true;
+                    cupon.descuentoValorSpecified = true;
+                    cupon.maxUsosSpecified = true;
+                    cupon.usosActualesSpecified = true;
+                    cupon.creadoPor = usu;
+
                     if (string.IsNullOrEmpty(hiddenCuponId.Value))
                     {
                         // Nuevo cupón
-                        cuponWS.registrarCupon(cupon);
+                        cuponWS.registrarCupon(cupon,stringIni,stringFin);
                         MostrarMensaje("Cupón registrado exitosamente", "success");
                     }
                     else
@@ -150,7 +162,7 @@ namespace AutoServicioCineWeb
 
         private cupon CrearCuponDesdeFormulario()
         {
-
+            
             return new cupon
             {
                 codigo = txtCodigo.Text.Trim(),
@@ -160,14 +172,18 @@ namespace AutoServicioCineWeb
                 descuentoTipoSpecified = true,
                 descuentoValor = double.Parse(txtPorcentajeDescuento.Text),
                 descuentoValorSpecified = true,
+                // Para localDate, necesitas crear objetos localDate
                 fechaInicio = null,
                 fechaFin = null,
                 maxUsos = int.Parse(txtCantidadMaxima.Text),
                 maxUsosSpecified = true,
-                activo = chkActivo.Checked
-            }; 
-
+                activo = chkActivo.Checked,
+                usosActuales=0
+             
+            };
         }
+
+
 
         private void CargarDatosEnFormulario(cupon cupon)
         {

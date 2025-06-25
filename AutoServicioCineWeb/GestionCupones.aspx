@@ -360,7 +360,7 @@
                     <th>Descripción</th>
                     <th>Descuento</th>
                     <th>Vigencia</th>
-                    <th>Uso</th>
+                    <%--<th>Uso</th>--%>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -372,17 +372,17 @@
                             <td>
                                 <strong><%# Eval("Codigo") %></strong>
                             </td>
-                            <td><%# Eval("Descripcion") %></td>
+                            <td><%# Eval("DescripcionEs") %></td>
                             <td>
-                                <span class="discount-badge"><%# Eval("PorcentajeDescuento") %>% OFF</span>
+                                <span class="discount-badge"><%# Eval("DescuentoValor") %>%</span>
                             </td>
                             <td>
                                 <div>
-                                    <small><%# Convert.ToDateTime(Eval("FechaInicio")).ToString("dd/MM/yyyy") %></small><br>
-                                    <small><%# Convert.ToDateTime(Eval("FechaFin")).ToString("dd/MM/yyyy") %></small>
+                                    <%--<small><%# Convert.ToDateTime(Eval("FechaInicio")).ToString("dd/MM/yyyy") %></small><br>
+                                    <small><%# Convert.ToDateTime(Eval("FechaFin")).ToString("dd/MM/yyyy") %></small>--%>
                                 </div>
                             </td>
-                            <td>
+                           <%-- <td>
                                 <div>
                                     <small><%# Eval("CantidadUsada") %> / <%# Eval("CantidadMaxima") %></small>
                                     <div class="usage-progress">
@@ -391,7 +391,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td>--%>
                             <td>
                                 <td>
                                     <asp:Label runat="server"

@@ -14,9 +14,12 @@ namespace AutoServicioCineWeb
     public partial class PaginaUsuario : System.Web.UI.Page
     {
         private readonly UsuarioWSClient usuarioServiceClient;
+        private List<cupon> _cachedCupones;
+        private readonly CuponWSClient cuponServiceClient;
 
         public PaginaUsuario(){
              usuarioServiceClient = new UsuarioWSClient() ;
+            cuponServiceClient = new CuponWSClient();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,7 +66,7 @@ namespace AutoServicioCineWeb
 
                             // Mostrar los datos en tu página
                             lblNombre.Text = usuarioData.nombre;
-                            lblEmail.Text = userEmail;
+                            lblEmail.Text = usuarioData.email;
                             lblTelefono.Text = usuarioData.telefono;
 
                             // También puedes usar el nombre del ticket
@@ -71,6 +74,13 @@ namespace AutoServicioCineWeb
                         }
                     }
                 }
+
+                // Llama al servicio web para obtener los cupones del usuario
+                _cachedCupones = cuponServiceClient.listarCupones().ToList();
+                List<cupon> cuponFiltrados = FiltrarCupones(_cachedCupones);
+                
+                gvCupones.DataSource = cuponFiltrados;
+                gvCupones.DataBind();
             }
             catch (System.Exception ex)
             {
@@ -78,6 +88,12 @@ namespace AutoServicioCineWeb
                 // lbl.Text = "Error al cargar datos del usuario: " + ex.Message;
                 // lblMessage.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        private List<cupon> FiltrarCupones(List<cupon> cupones)
+        {
+            // Filtrar cupones que no han sido utilizados y que no han expirado
+            return cupones.Where(c => !c.activo).ToList();
         }
 
         private void CargarHistorialCompras(int usuarioId)
@@ -156,34 +172,37 @@ namespace AutoServicioCineWeb
                 // Validar campos obligatorios
                 if (string.IsNullOrEmpty(txtNombreEdit.Text))
                 {
-                    MostrarMensaje("El nombre es requerido", true);
-                    return;
+                    //MostrarMensaje("El nombre es requerido", true);
+                    txtNombreEdit.Text = lblNombre.Text;
                 }
 
                 if (string.IsNullOrEmpty(txtEmailEdit.Text))
                 {
-                    MostrarMensaje("El email es requerido", true);
-                    return;
+                    //MostrarMensaje("El email es requerido", true);
+                    txtEmailEdit.Text = lblEmail.Text;
+                }
+
+                if(string.IsNullOrEmpty(txtTelefonoEdit.Text))
+                {
+                    //MostrarMensaje("El teléfono es requerido", true);
+                    txtTelefonoEdit.Text = lblTelefono.Text;
                 }
 
                 // Crear objeto con los datos actualizados
-                usuario usuarioActualizado = new usuario
-                {
-                    id = userId,
-                    nombre = txtNombreEdit.Text,
-                    telefono = txtTelefonoEdit.Text,
-                    // email no se actualiza aquí porque está en el ticket
-                };
+                
+                usuario usuarioActualizado = usuarioServiceClient.buscarUsuarioPorId(userId);
 
-                // Actualizar contraseña si se proporcionó
-                string nuevaPassword = txtPasswordEdit.Text;
-                bool actualizarPassword = !string.IsNullOrEmpty(nuevaPassword);
+                usuarioActualizado.nombre = txtNombreEdit.Text;
+                usuarioActualizado.telefono = txtTelefonoEdit.Text;
+                usuarioActualizado.email = txtEmailEdit.Text;
+                
 
                 // Llamar al servicio web para actualizar
                 usuarioServiceClient.actualizarUsuario(usuarioActualizado);
                 pnlEdicion.Style["display"] = "none";
                 MostrarMensaje("Datos actualizados correctamente", false);
-                
+                Response.Redirect(Request.Url.AbsoluteUri); // Recarga la misma página
+
             }
             catch (System.Exception ex)
             {
@@ -193,7 +212,11 @@ namespace AutoServicioCineWeb
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            // Simplemente cerrar el modal sin guardar cambios
+            // Limpiar el contenido del TextBox correctamente
+            txtEmailEdit.Text = "";
+            txtNombreEdit.Text = "";
+            txtTelefonoEdit.Text = "";
+            // Cerrar el modal
             pnlEdicion.Style["display"] = "none";
         }
 

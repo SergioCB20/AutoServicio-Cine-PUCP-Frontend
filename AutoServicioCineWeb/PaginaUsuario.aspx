@@ -31,7 +31,7 @@
             </div>
         </div>
         <%-- Espacio de las 2 columnas --%>
-        <div class="perfil-content">
+        <div class="perfil-content-top">
             <div class="perfil-section-left">
                 <h2>Información Personal</h2>
                 <div class="perfil-info">
@@ -52,10 +52,24 @@
 
             <!-- Sección de historial de compras (siempre visible) -->
             <div class="perfil-section-right">
+                <h2>Cupones disponibles</h2>
+                <asp:GridView ID="gvCupones" runat="server" AutoGenerateColumns="False" CssClass="table table-striped">
+                    <Columns>
+                        <asp:BoundField DataField="Codigo" HeaderText="Código" />
+                        <asp:BoundField DataField="DescuentoValor" HeaderText="Descuento (%)" DataFormatString="{0:P0}" />
+                        <%--<asp:BoundField DataField="fechaFin" HeaderText="Válido hasta" DataFormatString="{0:d}" />--%>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        No hay cupones disponibles.
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </div>
+        </div>
+        <div class="perfil-content-bottom">
+            <div class="perfil-section-full">
                 <h2>Historial de Compras</h2>
                 <asp:GridView ID="gvHistorial" runat="server" CssClass="historial-grid" AutoGenerateColumns="false">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="ID" />
                         <asp:BoundField DataField="Pelicula" HeaderText="Película" />
                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
                         <asp:BoundField DataField="Hora" HeaderText="Hora" />
@@ -68,6 +82,8 @@
                 </asp:GridView>
             </div>
         </div>
+
+
 
         <!-- Modal de edición -->
         <asp:Panel ID="pnlEdicion" runat="server" CssClass="modal-overlay" Style="display: none;">
@@ -89,10 +105,7 @@
                         <label for="txtTelefonoEdit">Teléfono:</label>
                         <asp:TextBox ID="txtTelefonoEdit" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="form-group">
-                        <label for="txtPasswordEdit">Nueva Contraseña (dejar en blanco para no cambiar):</label>
-                        <asp:TextBox ID="txtPasswordEdit" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                    </div>
+
                     <div class="form-actions">
                         <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" CssClass="boton-sesion"
                             OnClick="btnGuardar_Click" />
