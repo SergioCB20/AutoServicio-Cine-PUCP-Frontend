@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteWithHeader.master.cs" Inherits="AutoServicioCineWeb.SiteWithHeader" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder> - Mi Cine</title>
+    
+    <%-- Enlaces a tus hojas de estilo comunes que incluyen el navbar --%>
+    <link rel="stylesheet" href="<%= ResolveUrl("~/styles/base.css") %>" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/styles/navbar.css") %>" />
+    
+    <%-- Placeholder para estilos/scripts específicos de la página --%>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <%-- Aquí va el header que quieres reutilizar en Peliculas.aspx --%>
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-left">
+                    <div class="logo-navbar">
+                        <img src="<%= ResolveUrl("~/images/logo.png") %>" alt="Logo del cine" />
+                    </div>
+                    <div class="secciones-navbar">
+                        <span class="seccion-pagina active">Películas</span>
+                        <span class="seccion-pagina">Comida</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="cart-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <div class="user-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                        <asp:Label ID="lbUserName" runat="server" Text=""></asp:Label>
+                    </div>
+                    <div class="logout-icon icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="hero-icon">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                        </svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <%-- Placeholder para el contenido principal de la página --%>
+        <div class="container flex-column">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <%-- El contenido específico de cada página irá aquí --%>
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <%-- Placeholders para scripts o modales al final del body --%>
+        <asp:ContentPlaceHolder ID="Script" runat="server"></asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="modal" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

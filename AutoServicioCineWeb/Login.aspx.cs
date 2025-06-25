@@ -42,12 +42,12 @@ namespace AutoServicioCineWeb
                     if (loginResponse != null)
                     {
                         // Construye el userData para el ticket de FormsAuthentication
-                        string userData = $"{loginResponse.id}|{loginResponse.email}|{loginResponse.tipoUsuario}";
+                        string userData = $"{loginResponse.id}|{loginResponse.nombre}|{loginResponse.email}|{loginResponse.tipoUsuario}";
 
                         // Crea un ticket de FormsAuthentication
                         FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                             1, // Versión del ticket
-                            loginResponse.email, // Nombre de usuario para el ticket (puede ser el email)
+                            loginResponse.nombre,
                             DateTime.Now, // Hora de emisión
                             DateTime.Now.AddMinutes(FormsAuthentication.Timeout.TotalMinutes), // Hora de expiración (usa el timeout de Web.config)
                             true, // Persistente (la cookie se guarda en el navegador si es true)
