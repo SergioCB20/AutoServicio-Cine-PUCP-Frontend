@@ -163,11 +163,11 @@
                             <asp:Literal ID="litHora" runat="server" />
                         </div>
                     </div>
-                    <div class="cantidad-entradas-resumen">
-                        <p class="bold">Cantidad y tipo de entradas</p>
+                    <div class="cantidad-entradas-resumen" style="font-family: 'Times New Roman', serif !important; color: rgb(51, 51, 51) !important;">
+                        <p class="bold">Cantidad y tipo de entradas:</p>
                         <asp:ContentPlaceHolder ID="TicketsSummary" runat="server">
                         </asp:ContentPlaceHolder>
-                        <div id="resumenCompra" runat="server" ClientIDMode="Static">
+                        <div id="resumenCompra" runat="server" ClientIDMode="Static" style="font-family: 'Times New Roman', serif !important; color: rgb(51, 51, 51) !important;">
                             <!-- Campos visibles que muestran el texto -->
                             <p id="entradasAdultoTexto" runat="server" ClientIDMode="Static"></p>
                             <p id="entradasInfantilTexto" runat="server" ClientIDMode="Static"></p>
@@ -176,7 +176,7 @@
                             <asp:HiddenField ID="hfEntradasAdulto" runat="server" ClientIDMode="Static"/>
                             <asp:HiddenField ID="hfEntradasInfantil" runat="server" ClientIDMode="Static"/>
                             <asp:HiddenField ID="hfEntradasMayor" runat="server" ClientIDMode="Static"/>
-                            <div id="resumenCompraComida" runat="server" ClientIDMode="Static">
+                            <div id="resumenCompraComida" runat="server" ClientIDMode="Static" style="font-family: 'Times New Roman', serif !important; color: rgb(51, 51, 51) !important;">
                                 <p id="subtituloComida" class="bold">Añadidos de comida:</p>
                             </div>
                         </div>
