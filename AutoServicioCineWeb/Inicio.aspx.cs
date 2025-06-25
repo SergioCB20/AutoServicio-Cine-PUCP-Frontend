@@ -28,10 +28,10 @@ namespace AutoServicioCineWeb
                         string userData = ticket.UserData;
                         string[] userInfo = userData.Split('|');
 
-                        if (userInfo.Length >= 2) // Asumiendo que al menos el email (índice 1) siempre está
+                        if (userInfo.Length >= 3) 
                         {
-                            string userEmail = userInfo[1]; // El email es el segundo elemento (índice 1)
-                            lblBienvenida.Text = $"¡Hola, {userEmail}!";
+                            string userName = userInfo[1];
+                            lblBienvenida.Text = $"¡Hola, {userName}!";
                         }
                         else
                         {

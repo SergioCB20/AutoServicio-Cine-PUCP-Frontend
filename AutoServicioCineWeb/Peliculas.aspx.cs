@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -22,12 +23,12 @@ namespace AutoServicioCineWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) // Solo cargar en la primera carga de la página
+            if (!IsPostBack)
             {
-                // Carga todas las películas inicialmente (sin filtro)
-                CargarPeliculasDisponibles(string.Empty); //
+                CargarPeliculasDisponibles(string.Empty);
             }
         }
+
 
         // Modifica este método para aceptar un parámetro de búsqueda
         private void CargarPeliculasDisponibles(string searchTerm) //
@@ -83,5 +84,12 @@ namespace AutoServicioCineWeb
 
             Response.Redirect($"Tickets.aspx?peliculaId={peliculaId}");
         }
+
+        protected void lnkCerrarSesion_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect("Inicio.aspx");
+        }
+
     }
 }

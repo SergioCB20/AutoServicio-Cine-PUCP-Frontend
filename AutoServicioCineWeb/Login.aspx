@@ -48,7 +48,7 @@
             <asp:Button ID="btnLogin" runat="server" Text="Iniciar Sesión" CssClass="btn-submit" OnClick="btnLogin_Click" />
 
             <div class="form-links">
-                <p>¿No tienes cuenta? <a href="Registro.aspx">Regístrate aquí</a></p>
+                <p>¿No tienes cuenta? <a href="Signup.aspx">Regístrate aquí</a></p>
                 <p><a href="Inicio.aspx">Volver al inicio</a></p>
             </div>
         </div>

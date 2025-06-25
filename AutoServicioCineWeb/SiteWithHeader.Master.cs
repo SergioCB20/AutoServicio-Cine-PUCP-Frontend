@@ -4,20 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace AutoServicioCineWeb
 {
-    public partial class Form : System.Web.UI.MasterPage
+    public partial class SiteWithHeader : System.Web.UI.MasterPage
     {
-        public HtmlGenericControl TituloSpan => tituloSpan;
-        public HtmlImage ImgPoster => imgPoster;
-        public HtmlGenericControl EntradasAdultoTexto => entradasAdultoTexto;
-        public HtmlGenericControl EntradasInfantilTexto => entradasInfantilTexto;
-        public HtmlGenericControl EntradasMayorTexto => entradasMayorTexto;
-        public HtmlGenericControl TotalResumen => totalResumen;
-        public HiddenField HfTotal => hfTotal;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Context.User.Identity.IsAuthenticated)
@@ -44,6 +36,5 @@ namespace AutoServicioCineWeb
                 }
             }
         }
-        
     }
 }
