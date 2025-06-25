@@ -85,11 +85,5 @@ namespace AutoServicioCineWeb
             Response.Redirect($"Tickets.aspx?peliculaId={peliculaId}");
         }
 
-        protected void lnkCerrarSesion_Click(object sender, EventArgs e)
-        {
-            FormsAuthentication.SignOut();
-            Response.Redirect("Inicio.aspx");
-        }
-
     }
 }
