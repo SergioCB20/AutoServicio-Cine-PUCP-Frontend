@@ -51,6 +51,15 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.Label lblTelefono;
 
         /// <summary>
+        /// Control gvCupones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCupones;
+
+        /// <summary>
         /// Control gvHistorial.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoEdit;
-
-        /// <summary>
-        /// Control txtPasswordEdit.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPasswordEdit;
 
         /// <summary>
         /// Control btnGuardar.
