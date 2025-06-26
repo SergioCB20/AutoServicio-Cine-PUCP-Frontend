@@ -13,7 +13,6 @@ obj/
 [Rr]elease/
 
 # Archivos generados
-*.Designer.cs
 Generated_Code/
 
 # Archivos de paquetes
