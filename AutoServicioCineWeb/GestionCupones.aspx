@@ -176,6 +176,26 @@
             border-radius: 10px;
             transition: width 0.3s ease;
         }
+
+        .date-range {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .date-start {
+            color: #27ae60;
+            font-weight: 500;
+        }
+
+        .date-end {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .date-separator {
+            margin: 0 5px;
+            color: #bdc3c7;
+        }
     </style>
     <div class="stats-grid">
         <div class="stat-card">
@@ -215,32 +235,13 @@
                     ErrorMessage="El archivo debe ser un CSV (.csv)." OnServerValidate="cvCsvFileExtension_ServerValidate"
                     Display="Dynamic" ForeColor="Red" ValidationGroup="CsvUploadValidation"></asp:CustomValidator>
             </div>
-            <%--<div id="csvHelpBox" class="csv-help-box">
-                <p class="mb-2">El archivo CSV debe tener las siguientes columnas (el orden no importa):
-                </p>
-                <ul class="csv-column-list">
-                    <li>`TituloEs`</li>
-                    <li>`TituloEn`</li>
-                    <li>`DuracionMin`</li>
-                    <li>`Clasificacion`</li>
-                    <li>`SinopsisEs`</li>
-                    <li>`SinopsisEn`</li>
-                    <li>`EstaActiva` (TRUE/FALSE o 1/0)</li>
-                    <li>`ImagenUrl`</li>
-                </ul>
-                <p class="small text-muted">Asegúrate de que los valores booleanos para `EstaActiva`
-                    sean `TRUE` o `FALSE`, o `1` o `0`.</p>
-                <p class="small text-muted">Las URLs de imagen deben ser válidas y apuntar a imágenes
-                    en línea.</p>
-            </div>--%>
-
 
             <div class="form-actions">
-    <asp:HiddenField ID="hdnPeliculaId" runat="server" Value="0" />
-    <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelCsvModal_Click" CausesValidation="false" />
-    <asp:Button ID="btnGuardarCupones" runat="server" Text="Guardar Cupón" CssClass="btn btn-primary" OnClick="btnUploadCsv_Click" ValidationGroup="PeliculaValidation" />
-</div>
-<asp:Literal ID="litMensajeCsvModal" runat="server"></asp:Literal>
+                <asp:HiddenField ID="hdnPeliculaId" runat="server" Value="0" />
+                <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelCsvModal_Click" CausesValidation="false" />
+                <asp:Button ID="btnGuardarCupones" runat="server" Text="Guardar Cupón" CssClass="btn btn-primary" OnClick="btnUploadCsv_Click" ValidationGroup="PeliculaValidation" />
+            </div>
+            <asp:Literal ID="litMensajeCsvModal" runat="server"></asp:Literal>
         </div>
     </div>
 
@@ -285,20 +286,19 @@
                         InitialValue=""
                         ErrorMessage="El tipo de descuento es requerido"
                         ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <%-- Si añades un "Seleccione..." como primera opción, asegúrate de que su Value sea "" --%>
                 </div>
                 <div class="form-group">
-                    <label for="txtPorcentajeDescuento">Porcentaje de Descuento (%) *</label>
+                    <label for="txtPorcentajeDescuento">Valor de Descuento *</label>
                     <asp:TextBox ID="txtPorcentajeDescuento" runat="server" CssClass="form-control"
-                        placeholder="Ej: 15" TextMode="Number"></asp:TextBox>
+                        placeholder="Ej: 15 (para %) o 50 (para monto fijo)" TextMode="Number" step="0.01"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvPorcentaje" runat="server"
                         ControlToValidate="txtPorcentajeDescuento"
-                        ErrorMessage="El porcentaje es requerido"
+                        ErrorMessage="El valor del descuento es requerido"
                         ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RangeValidator ID="rvPorcentaje" runat="server"
                         ControlToValidate="txtPorcentajeDescuento"
-                        MinimumValue="1" MaximumValue="100" Type="Integer"
-                        ErrorMessage="El porcentaje debe estar entre 1 y 100"
+                        MinimumValue="0.01" MaximumValue="10000" Type="Double"
+                        ErrorMessage="El valor debe ser mayor a 0"
                         ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
                 </div>
 
@@ -360,7 +360,7 @@
                     <th>Descripción</th>
                     <th>Descuento</th>
                     <th>Vigencia</th>
-                    <%--<th>Uso</th>--%>
+                    <th>Uso</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -370,42 +370,42 @@
                     <ItemTemplate>
                         <tr>
                             <td>
-                                <strong><%# Eval("Codigo") %></strong>
+                                <strong><%# Eval("codigo") %></strong>
                             </td>
-                            <td><%# Eval("DescripcionEs") %></td>
+                            <td><%# Eval("descripcionEs") %></td>
                             <td>
-                                <span class="discount-badge"><%# Eval("DescuentoValor") %>%</span>
+                                <span class="discount-badge">
+                                    <%# FormatDiscount(Eval("descuentoTipo"), Eval("descuentoValor")) %>
+                                </span>
                             </td>
                             <td>
-                                <div>
-                                    <%--<small><%# Convert.ToDateTime(Eval("FechaInicio")).ToString("dd/MM/yyyy") %></small><br>
-                                    <small><%# Convert.ToDateTime(Eval("FechaFin")).ToString("dd/MM/yyyy") %></small>--%>
+                                <div class="date-range">
+                                    <span class="date-start"><%# FormatDateString(Eval("fechaInicio")) %></span>
+                                    <span class="date-separator">→</span>
+                                    <span class="date-end"><%# FormatDateString(Eval("fechaFin")) %></span>
                                 </div>
                             </td>
-                           <%-- <td>
+                            <td>
                                 <div>
-                                    <small><%# Eval("CantidadUsada") %> / <%# Eval("CantidadMaxima") %></small>
+                                    <small><%# GetUsageText(Eval("usosActuales"), Eval("maxUsos")) %></small>
                                     <div class="usage-progress">
-                                        <div class="usage-bar" style='<%# "width: " + GetUsagePercentage(Eval("CantidadUsada"), Eval("CantidadMaxima")) + "%" %>'>
-
+                                        <div class="usage-bar" style='<%# GetUsageProgressStyle(Eval("usosActuales"), Eval("maxUsos")) %>'>
                                         </div>
                                     </div>
                                 </div>
-                            </td>--%>
+                            </td>
                             <td>
-                                <td>
-                                    <asp:Label runat="server"
-                                        CssClass='<%# "status-badge " + GetStatusClass(Eval("Activo"), Eval("FechaFin")) %>'
-                                        Text='<%# GetStatusText(Eval("Activo"), Eval("FechaFin")) %>' />
-                                </td>
+                                <asp:Label runat="server"
+                                    CssClass='<%# GetStatusClass(Eval("activo"), Eval("fechaFin")) %>'
+                                    Text='<%# GetStatusText(Eval("activo"), Eval("fechaFin")) %>' />
                             </td>
                             <td>
                                 <asp:Button ID="btnEditar" runat="server" CssClass="btn btn-edit btn-small"
                                     Text="✏️ Editar" CommandName="Editar"
-                                    CommandArgument='<%# Eval("Id") %>' />
+                                    CommandArgument='<%# Eval("cuponId") %>' />
                                 <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-delete btn-small"
                                     Text="🗑️ Eliminar" CommandName="Eliminar"
-                                    CommandArgument='<%# Eval("Id") %>'
+                                    CommandArgument='<%# Eval("cuponId") %>'
                                     OnClientClick="return confirmDelete('¿Estás seguro de eliminar este cupón?');" />
                             </td>
                         </tr>
@@ -443,5 +443,39 @@
         function Page_ClientValidate() {
             return validateDates();
         }
+
+        // Función para confirmar eliminación
+        function confirmDelete(message) {
+            return confirm(message);
+        }
+
+        // Mostrar/ocultar ayuda CSV
+        function toggleCsvHelp() {
+            const helpBox = document.getElementById('csvHelpBox');
+            if (helpBox) {
+                helpBox.style.display = helpBox.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
+        // Actualizar etiqueta de valor según tipo de descuento
+        document.addEventListener('DOMContentLoaded', function() {
+            const ddlTipo = document.getElementById('<%= ddlDescuentoTipo.ClientID %>');
+            const lblValor = document.querySelector('label[for="<%= txtPorcentajeDescuento.ClientID %>"]');
+            const txtValor = document.getElementById('<%= txtPorcentajeDescuento.ClientID %>');
+
+            if (ddlTipo && lblValor && txtValor) {
+                ddlTipo.addEventListener('change', function () {
+                    if (this.value === 'porcentaje') {
+                        lblValor.textContent = 'Porcentaje de Descuento (%) *';
+                        txtValor.placeholder = 'Ej: 15';
+                        txtValor.max = '100';
+                    } else if (this.value === 'monto_fijo') {
+                        lblValor.textContent = 'Monto Fijo de Descuento *';
+                        txtValor.placeholder = 'Ej: 50.00';
+                        txtValor.max = '10000';
+                    }
+                });
+            }
+        });
     </script>
 </asp:Content>
