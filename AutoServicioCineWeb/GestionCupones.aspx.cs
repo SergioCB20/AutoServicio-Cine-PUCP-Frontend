@@ -8,14 +8,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
 namespace AutoServicioCineWeb
 {
     public partial class GestionCupones : System.Web.UI.Page
     {
         private readonly CuponWSClient cuponWS;
         private List<cupon> _cachedCupones;
-
 
         public GestionCupones()
         {
@@ -27,6 +25,7 @@ namespace AutoServicioCineWeb
             if (!IsPostBack)
             {
                 CargarCupones();
+                ActualizarEstadisticas();
             }
         }
 
@@ -35,12 +34,36 @@ namespace AutoServicioCineWeb
             try
             {
                 var cupones = cuponWS.listarCupones();
-                rptCupones.DataSource = cupones;
+                _cachedCupones = cupones?.ToList() ?? new List<cupon>();
+                rptCupones.DataSource = _cachedCupones;
                 rptCupones.DataBind();
             }
             catch (System.Exception ex)
             {
                 MostrarMensaje("Error al cargar cupones: " + ex.Message, "error");
+            }
+        }
+
+        private void ActualizarEstadisticas()
+        {
+            try
+            {
+                var cupones = GetCachedCupones();
+                int total = cupones.Count;
+                int activos = cupones.Count(c => c.activo && Convert.ToDateTime(c.fechaFin) >= DateTime.Now);
+                int inactivos = total - activos;
+
+                // Actualizar estadísticas via JavaScript
+                string script = $@"
+                    document.getElementById('totalProducts').textContent = '{total}';
+                    document.getElementById('availableProducts').textContent = '{activos}';
+                    document.getElementById('soldOutProducts').textContent = '{inactivos}';
+                ";
+                ScriptManager.RegisterStartupScript(this, GetType(), "updateStats", script, true);
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al actualizar estadísticas: " + ex.ToString());
             }
         }
 
@@ -73,8 +96,7 @@ namespace AutoServicioCineWeb
 
                     string stringIni = txtFechaInicio.Text;
                     string stringFin = txtFechaFin.Text;
-                    usuario usu = new usuario {id = 11};
-                    cupon.modificadoPor = usu;
+                    usuario usu = new usuario { id = 11 };
                     cupon.cuponIdSpecified = true;
                     cupon.descuentoTipoSpecified = true;
                     cupon.descuentoValorSpecified = true;
@@ -85,7 +107,7 @@ namespace AutoServicioCineWeb
                     if (string.IsNullOrEmpty(hiddenCuponId.Value))
                     {
                         // Nuevo cupón
-                        cuponWS.registrarCupon(cupon,stringIni,stringFin);
+                        cuponWS.registrarCupon(cupon, stringIni, stringFin);
                         MostrarMensaje("Cupón registrado exitosamente", "success");
                     }
                     else
@@ -97,7 +119,9 @@ namespace AutoServicioCineWeb
                     }
 
                     formContainer.Visible = false;
+                    _cachedCupones = null; // Invalidar caché
                     CargarCupones();
+                    ActualizarEstadisticas();
                 }
                 catch (System.Exception ex)
                 {
@@ -138,6 +162,7 @@ namespace AutoServicioCineWeb
                     lblFormTitle.Text = "Editar Cupón";
                     hiddenCuponId.Value = cupon.cuponId.ToString();
                     formContainer.Visible = true;
+                    MostrarModalCupon();
                 }
             }
             catch (System.Exception ex)
@@ -152,7 +177,9 @@ namespace AutoServicioCineWeb
             {
                 cuponWS.eliminarCupon(cuponId);
                 MostrarMensaje("Cupón eliminado exitosamente", "success");
+                _cachedCupones = null; // Invalidar caché
                 CargarCupones();
+                ActualizarEstadisticas();
             }
             catch (System.Exception ex)
             {
@@ -162,38 +189,61 @@ namespace AutoServicioCineWeb
 
         private cupon CrearCuponDesdeFormulario()
         {
-            
             return new cupon
             {
-                codigo = txtCodigo.Text.Trim(),
+                codigo = txtCodigo.Text.Trim().ToUpper(),
                 descripcionEs = txtDescripcion.Text.Trim(),
                 descripcionEn = txtDescripcion.Text.Trim(),
                 descuentoTipo = (tipoDescuento)Enum.Parse(typeof(tipoDescuento), ddlDescuentoTipo.SelectedValue, true),
                 descuentoTipoSpecified = true,
                 descuentoValor = double.Parse(txtPorcentajeDescuento.Text),
                 descuentoValorSpecified = true,
-                // Para localDate, necesitas crear objetos localDate
                 fechaInicio = null,
                 fechaFin = null,
                 maxUsos = int.Parse(txtCantidadMaxima.Text),
                 maxUsosSpecified = true,
                 activo = chkActivo.Checked,
-                usosActuales=0
-             
+                usosActuales = 0,
+                usosActualesSpecified = true
             };
         }
-
-
 
         private void CargarDatosEnFormulario(cupon cupon)
         {
             txtCodigo.Text = cupon.codigo;
             txtDescripcion.Text = cupon.descripcionEs;
+            ddlDescuentoTipo.SelectedValue = cupon.descuentoTipo.ToString().ToLower();
             txtPorcentajeDescuento.Text = cupon.descuentoValor.ToString();
             txtCantidadMaxima.Text = cupon.maxUsos.ToString();
-            //txtFechaInicio.Text = cupon.fechaInicio.ToString("yyyy-MM-dd");
-            //txtFechaFin.Text = cupon.fechaFin.ToString("yyyy-MM-dd");
-            //chkActivo.Checked = cupon.activo;
+
+            // Manejar fechas de manera segura
+            if (cupon.fechaInicio != null)
+            {
+                txtFechaInicio.Text = FormatDateForInput(cupon.fechaInicio);
+            }
+            if (cupon.fechaFin != null)
+            {
+                txtFechaFin.Text = FormatDateForInput(cupon.fechaFin);
+            }
+
+            chkActivo.Checked = cupon.activo;
+        }
+
+        private string FormatDateForInput(object date)
+        {
+            if (date == null) return "";
+
+            if (date is DateTime dateTime)
+            {
+                return dateTime.ToString("yyyy-MM-dd");
+            }
+
+            if (DateTime.TryParse(date.ToString(), out DateTime parsedDate))
+            {
+                return parsedDate.ToString("yyyy-MM-dd");
+            }
+
+            return "";
         }
 
         private void LimpiarFormulario()
@@ -205,12 +255,18 @@ namespace AutoServicioCineWeb
             txtFechaInicio.Text = "";
             txtFechaFin.Text = "";
             chkActivo.Checked = true;
+            ddlDescuentoTipo.SelectedIndex = 0;
+            hiddenCuponId.Value = "";
         }
 
         private bool ValidarFechas()
         {
-            DateTime fechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-            DateTime fechaFin = Convert.ToDateTime(txtFechaFin.Text);
+            if (!DateTime.TryParse(txtFechaInicio.Text, out DateTime fechaInicio) ||
+                !DateTime.TryParse(txtFechaFin.Text, out DateTime fechaFin))
+            {
+                MostrarMensaje("Formato de fecha inválido", "warning");
+                return false;
+            }
 
             if (fechaInicio >= fechaFin)
             {
@@ -227,63 +283,108 @@ namespace AutoServicioCineWeb
             return true;
         }
 
-        // Métodos para el Repeater - Helpers para mostrar datos
-        protected string GetUsagePercentage(object cantidadUsada, object cantidadMaxima)
+        // Métodos helper para el Repeater
+        protected string FormatDiscount(object tipo, object valor)
         {
-            if (cantidadUsada == null || cantidadMaxima == null) return "0";
+            if (tipo == null || valor == null) return "N/A";
 
-            int usada = Convert.ToInt32(cantidadUsada);
-            int maxima = Convert.ToInt32(cantidadMaxima);
+            string tipoStr = tipo.ToString().ToLower();
+            double valorNum = Convert.ToDouble(valor);
 
-            if (maxima == 0) return "0";
+            if (tipoStr == "porcentaje")
+            {
+                return $"{valorNum}%";
+            }
+            else
+            {
+                return $"S/ {valorNum:F2}";
+            }
+        }
 
-            return Math.Round((double)usada / maxima * 100, 1).ToString();
+        protected string FormatDateString(object date)
+        {
+            if (date == null) return "N/A";
+
+            if (DateTime.TryParse(date.ToString(), out DateTime parsedDate))
+            {
+                return parsedDate.ToString("dd/MM/yyyy");
+            }
+
+            return "N/A";
+        }
+
+        protected string GetUsageText(object usosActuales, object maxUsos)
+        {
+            if (usosActuales == null || maxUsos == null) return "0/0";
+
+            int actual = Convert.ToInt32(usosActuales);
+            int maximo = Convert.ToInt32(maxUsos);
+
+            return $"{actual}/{maximo}";
+        }
+
+        protected string GetUsageProgressStyle(object usosActuales, object maxUsos)
+        {
+            if (usosActuales == null || maxUsos == null) return "width: 0%";
+
+            int actual = Convert.ToInt32(usosActuales);
+            int maximo = Convert.ToInt32(maxUsos);
+
+            if (maximo == 0) return "width: 0%";
+
+            double porcentaje = (double)actual / maximo * 100;
+            return $"width: {Math.Min(porcentaje, 100)}%";
         }
 
         protected string GetStatusClass(object activo, object fechaFin)
         {
             bool esActivo = Convert.ToBoolean(activo);
-            DateTime fecha = Convert.ToDateTime(fechaFin);
 
             if (!esActivo)
-                return "status-inactive";
-            else if (fecha < DateTime.Now)
-                return "status-expired";
-            else
-                return "status-active";
+                return "status-badge status-inactive";
+
+            if (fechaFin != null && DateTime.TryParse(fechaFin.ToString(), out DateTime fecha))
+            {
+                if (fecha < DateTime.Now)
+                    return "status-badge status-expired";
+            }
+
+            return "status-badge status-active";
         }
 
         protected string GetStatusText(object activo, object fechaFin)
         {
             bool esActivo = Convert.ToBoolean(activo);
-            DateTime fecha = Convert.ToDateTime(fechaFin);
 
             if (!esActivo)
                 return "Inactivo";
-            else if (fecha < DateTime.Now)
-                return "Expirado";
-            else
-                return "Activo";
+
+            if (fechaFin != null && DateTime.TryParse(fechaFin.ToString(), out DateTime fecha))
+            {
+                if (fecha < DateTime.Now)
+                    return "Expirado";
+            }
+
+            return "Activo";
         }
 
         private void MostrarMensaje(string mensaje, string tipo)
         {
-            string script = $"showNotification('{mensaje}', '{tipo}');";
+            string script = $"showNotification('{mensaje.Replace("'", "\\'")}', '{tipo}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "notification", script, true);
         }
 
-        // --- NUEVOS Métodos para Carga de CSV ---
+        // --- Métodos para Carga de CSV ---
         private void MostrarModalCsv()
         {
             csvUploadModal.Style["display"] = "flex";
-            litMensajeCsvModal.Text = ""; // Limpiar mensajes previos al abrir
+            litMensajeCsvModal.Text = "";
         }
 
         private void OcultarModalCsv()
         {
             csvUploadModal.Style["display"] = "none";
-            litMensajeCsvModal.Text = ""; // Limpiar mensajes al cerrar
-            FileUploadCsv.Attributes.Remove("value"); // Limpiar el nombre del archivo seleccionado en el control FileUpload
+            litMensajeCsvModal.Text = "";
         }
 
         protected void btnOpenCsvImportModal_Click(object sender, EventArgs e)
@@ -301,7 +402,6 @@ namespace AutoServicioCineWeb
             OcultarModalCsv();
         }
 
-        // Validación personalizada del tipo de archivo
         protected void cvCsvFileExtension_ServerValidate(object source, ServerValidateEventArgs args)
         {
             if (FileUploadCsv.HasFile)
@@ -311,18 +411,18 @@ namespace AutoServicioCineWeb
             }
             else
             {
-                args.IsValid = false; // El RequiredFieldValidator ya debería manejar esto, pero por seguridad
+                args.IsValid = false;
             }
         }
 
         protected void btnUploadCsv_Click(object sender, EventArgs e)
         {
-            Page.Validate("CsvUploadValidation"); // Validar solo el grupo del CSV
+            Page.Validate("CsvUploadValidation");
 
             if (!Page.IsValid)
             {
                 litMensajeCsvModal.Text = "Por favor, corrige los errores en el formulario de carga CSV.";
-                MostrarModalCsv(); // Mantener modal abierto con errores
+                MostrarModalCsv();
                 return;
             }
 
@@ -333,7 +433,6 @@ namespace AutoServicioCineWeb
                 return;
             }
 
-            // Asegurarse de que sea un archivo CSV (ya validado por cvCsvFileExtension_ServerValidate, pero doble chequeo)
             string fileExtension = Path.GetExtension(FileUploadCsv.FileName).ToLower();
             if (fileExtension != ".csv")
             {
@@ -343,14 +442,14 @@ namespace AutoServicioCineWeb
             }
 
             int cuponesAgregados = 0;
-            int cuponesModificados = 0;
             int errores = 0;
+            List<string> mensajesError = new List<string>();
 
             try
             {
                 using (StreamReader reader = new StreamReader(FileUploadCsv.PostedFile.InputStream))
                 {
-                    string headerLine = reader.ReadLine(); // Leer la primera línea (cabecera)
+                    string headerLine = reader.ReadLine();
                     if (string.IsNullOrWhiteSpace(headerLine))
                     {
                         litMensajeCsvModal.Text = "El archivo CSV está vacío o no tiene cabecera.";
@@ -358,7 +457,6 @@ namespace AutoServicioCineWeb
                         return;
                     }
 
-                    // Convertir la cabecera a un diccionario para mapear nombres a índices
                     var headers = headerLine.Split(',').Select(h => h.Trim()).ToList();
                     var headerMap = new Dictionary<string, int>();
                     for (int i = 0; i < headers.Count; i++)
@@ -366,31 +464,25 @@ namespace AutoServicioCineWeb
                         headerMap[headers[i]] = i;
                     }
 
-                    // Verificar que las columnas mínimas existan para cupones
-                    string[] requiredCouponColumns = {
-                        "Codigo",
-                        "Descripcion",
-                        "TipoDescuento",
-                        "ValorDescuento",
-                        "CantidadMaxima",
-                        "FechaInicio",
-                        "FechaFin",
-                        "EstaActivo"
+                    string[] requiredColumns = {
+                        "Codigo", "Descripcion", "TipoDescuento", "ValorDescuento",
+                        "CantidadMaxima", "FechaInicio", "FechaFin", "EstaActivo"
                     };
 
-                    foreach (var col in requiredCouponColumns)
+                    foreach (var col in requiredColumns)
                     {
                         if (!headerMap.ContainsKey(col))
                         {
-                            litMensajeCsvModal.Text = $"Error: La columna '{col}' es requerida en el CSV para cupones.";
+                            litMensajeCsvModal.Text = $"Error: La columna '{col}' es requerida en el CSV.";
                             MostrarModalCsv();
                             return;
                         }
                     }
 
-                    // Procesar cada línea del CSV
+                    int lineNumber = 1; // Para tracking de errores
                     while (!reader.EndOfStream)
                     {
+                        lineNumber++;
                         string line = reader.ReadLine();
                         if (string.IsNullOrWhiteSpace(line)) continue;
 
@@ -398,97 +490,140 @@ namespace AutoServicioCineWeb
 
                         try
                         {
-                            // Validación adicional para el tipo de descuento
-                            var tipoDescuento = values[headerMap["TipoDescuento"]].Trim().ToLower();
-                            if (tipoDescuento != "porcentaje" && tipoDescuento != "monto_fijo")
+                            // Validar y crear cupón desde CSV
+                            var cupon = CrearCuponDesdeCsv(values, headerMap, lineNumber, mensajesError);
+                            if (cupon != null)
+                            {
+                                // Configurar campos requeridos
+                                usuario usu = new usuario { id = 11 };
+                                cupon.cuponIdSpecified = true;
+                                cupon.descuentoTipoSpecified = true;
+                                cupon.descuentoValorSpecified = true;
+                                cupon.maxUsosSpecified = true;
+                                cupon.usosActualesSpecified = true;
+                                cupon.creadoPor = usu;
+                                cupon.usosActuales = 0;
+
+                                // Obtener fechas como strings
+                                string fechaInicioStr = GetCsvValue(values, headerMap, "FechaInicio");
+                                string fechaFinStr = GetCsvValue(values, headerMap, "FechaFin");
+
+                                // Registrar cupón
+                                cuponWS.registrarCupon(cupon, fechaInicioStr, fechaFinStr);
+                                cuponesAgregados++;
+                            }
+                            else
                             {
                                 errores++;
-                                continue; // Saltar esta fila pero continuar con las demás
                             }
-
-                            // Validar que el valor de descuento sea adecuado según el tipo
-                            if (!decimal.TryParse(values[headerMap["ValorDescuento"]].Trim(), out decimal valor))
-                            {
-                                errores++;
-                                continue;
-                            }
-
-                            if (tipoDescuento == "porcentaje" && (valor <= 0 || valor > 100))
-                            {
-                                errores++;
-                                continue;
-                            }
-                            else if (tipoDescuento == "monto_fijo" && valor <= 0)
-                            {
-                                errores++;
-                                continue;
-                            }
-
-                            // Validación de fechas
-                            if (!DateTime.TryParse(values[headerMap["FechaInicio"]].Trim(), out DateTime fechaInicio) ||
-                                !DateTime.TryParse(values[headerMap["FechaFin"]].Trim(), out DateTime fechaFin))
-                            {
-                                errores++;
-                                continue;
-                            }
-
-                            if (fechaFin < fechaInicio)
-                            {
-                                errores++;
-                                continue;
-                            }
-
-                            // Validación de cantidad máxima
-                            if (!int.TryParse(values[headerMap["CantidadMaxima"]].Trim(), out int cantidad) || cantidad <= 0)
-                            {
-                                errores++;
-                                continue;
-                            }
-
-                            // Aquí iría la lógica para guardar/actualizar el cupón en la base de datos
-                            // Ejemplo:
-                            /*
-                            var cupon = new Cupon {
-                                Codigo = values[headerMap["Codigo"]].Trim(),
-                                Descripcion = values[headerMap["Descripcion"]].Trim(),
-                                TipoDescuento = tipoDescuento,
-                                ValorDescuento = valor,
-                                FechaInicio = fechaInicio,
-                                FechaFin = fechaFin,
-                                MaxUsos = cantidad,
-                                EstaActivo = bool.Parse(values[headerMap["EstaActivo"]].Trim())
-                            };
-
-                            bool resultado = CuponService.GuardarCupon(cupon);
-                            if (resultado) cuponesAgregados++;
-                            */
-
-                            // Simulación de éxito para el ejemplo
-                            cuponesAgregados++;
                         }
                         catch (System.Exception ex)
                         {
                             errores++;
-                            System.Diagnostics.Debug.WriteLine($"Error procesando fila: {ex.Message}");
+                            mensajesError.Add($"Línea {lineNumber}: {ex.Message}");
                         }
                     }
 
-                    _cachedCupones = null; // Invalida la caché
-                    CargarCupones(); // Recargar la tabla y estadísticas
+                    _cachedCupones = null; // Invalidar caché
+                    CargarCupones();
+                    ActualizarEstadisticas();
 
-                    litMensajeCsvModal.Text = $"Carga CSV completada: {cuponesAgregados} agregados, {cuponesModificados} actualizados, {errores} con errores.";
-                    OcultarModalCsv(); // Cerrar el modal después de la carga exitosa
+                    string mensaje = $"Carga CSV completada: {cuponesAgregados} cupones agregados";
+                    if (errores > 0)
+                    {
+                        mensaje += $", {errores} con errores";
+                    }
+
+                    MostrarMensaje(mensaje, cuponesAgregados > 0 ? "success" : "warning");
+                    OcultarModalCsv();
                 }
             }
             catch (System.Exception ex)
             {
-                litMensajeCsvModal.Text = $"Error general al procesar el archivo CSV: {ex.Message}";
-                System.Diagnostics.Debug.WriteLine("Error al procesar CSV: " + ex.ToString());
-                MostrarModalCsv(); // Mantener el modal abierto si hay un error grave
+                litMensajeCsvModal.Text = $"Error al procesar el archivo CSV: {ex.Message}";
+                MostrarModalCsv();
             }
         }
 
-        // Helper para obtener valor de CSV por nombre de columna
+        private cupon CrearCuponDesdeCsv(string[] values, Dictionary<string, int> headerMap, int lineNumber, List<string> errores)
+        {
+            try
+            {
+                // Validar tipo de descuento
+                var tipoDescuento = GetCsvValue(values, headerMap, "TipoDescuento").ToLower();
+                if (tipoDescuento != "porcentaje" && tipoDescuento != "monto_fijo")
+                {
+                    errores.Add($"Línea {lineNumber}: Tipo de descuento inválido. Use 'porcentaje' o 'monto_fijo'");
+                    return null;
+                }
+
+                // Validar valor de descuento
+                if (!double.TryParse(GetCsvValue(values, headerMap, "ValorDescuento"), out double valor))
+                {
+                    errores.Add($"Línea {lineNumber}: Valor de descuento inválido");
+                    return null;
+                }
+
+                if (tipoDescuento == "porcentaje" && (valor <= 0 || valor > 100))
+                {
+                    errores.Add($"Línea {lineNumber}: El porcentaje debe estar entre 0 y 100");
+                    return null;
+                }
+                else if (tipoDescuento == "monto_fijo" && valor <= 0)
+                {
+                    errores.Add($"Línea {lineNumber}: El monto fijo debe ser mayor a 0");
+                    return null;
+                }
+
+                // Validar fechas
+                if (!DateTime.TryParse(GetCsvValue(values, headerMap, "FechaInicio"), out DateTime fechaInicio) ||
+                    !DateTime.TryParse(GetCsvValue(values, headerMap, "FechaFin"), out DateTime fechaFin))
+                {
+                    errores.Add($"Línea {lineNumber}: Formato de fecha inválido");
+                    return null;
+                }
+
+                if (fechaFin <= fechaInicio)
+                {
+                    errores.Add($"Línea {lineNumber}: La fecha fin debe ser posterior a la fecha inicio");
+                    return null;
+                }
+
+                // Validar cantidad máxima
+                if (!int.TryParse(GetCsvValue(values, headerMap, "CantidadMaxima"), out int cantidad) || cantidad <= 0)
+                {
+                    errores.Add($"Línea {lineNumber}: Cantidad máxima inválida");
+                    return null;
+                }
+
+                // Validar estado activo
+                if (!bool.TryParse(GetCsvValue(values, headerMap, "EstaActivo"), out bool estaActivo))
+                {
+                    errores.Add($"Línea {lineNumber}: Estado activo inválido. Use true o false");
+                    return null;
+                }
+
+                // Crear y retornar cupón
+                return new cupon
+                {
+                    codigo = GetCsvValue(values, headerMap, "Codigo").ToUpper(),
+                    descripcionEs = GetCsvValue(values, headerMap, "Descripcion"),
+                    descripcionEn = GetCsvValue(values, headerMap, "Descripcion"),
+                    descuentoTipo = (tipoDescuento)Enum.Parse(typeof(tipoDescuento), tipoDescuento.Replace("_", ""), true),
+                    descuentoValor = valor,
+                    maxUsos = cantidad,
+                    activo = estaActivo,
+                    fechaInicio = null, // Se pasa como string separado
+                    fechaFin = null     // Se pasa como string separado
+                };
+            }
+            catch (System.Exception ex)
+            {
+                errores.Add($"Línea {lineNumber}: Error inesperado - {ex.Message}");
+                return null;
+            }
+        }
+
         private string GetCsvValue(string[] data, Dictionary<string, int> headerMap, string columnName)
         {
             if (headerMap.ContainsKey(columnName) && headerMap[columnName] < data.Length)
@@ -498,18 +633,17 @@ namespace AutoServicioCineWeb
             return string.Empty;
         }
 
-        // --- Métodos para estadísticas (optimizados para usar la caché) ---
         private List<cupon> GetCachedCupones()
         {
             if (_cachedCupones == null)
             {
                 try
                 {
-                    _cachedCupones = cuponWS.listarCupones().ToList();
+                    _cachedCupones = cuponWS.listarCupones()?.ToList() ?? new List<cupon>();
                 }
                 catch (System.Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error al obtener películas para estadísticas: " + ex.ToString());
+                    System.Diagnostics.Debug.WriteLine("Error al obtener cupones para estadísticas: " + ex.ToString());
                     _cachedCupones = new List<cupon>();
                 }
             }
@@ -520,6 +654,5 @@ namespace AutoServicioCineWeb
         {
             return GetCachedCupones().Count;
         }
-
     }
 }
