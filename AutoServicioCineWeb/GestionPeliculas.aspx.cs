@@ -5,7 +5,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AutoServicioCineWeb.AutoservicioCineWS;
 using System.IO; // Necesario para FileStream, StreamReader
-using System.Text.RegularExpressions; // Opcional, para validación avanzada
+using System.Text.RegularExpressions;
+using System.Web.Security; // Opcional, para validación avanzada
 
 namespace AutoServicioCineWeb
 {
@@ -13,6 +14,7 @@ namespace AutoServicioCineWeb
     {
         private readonly PeliculaWSClient peliculaServiceClient;
         private List<pelicula> _cachedPeliculas;
+        private int idUsuario = 34; //Por defecto
 
         public GestionPeliculas()
         {
@@ -24,6 +26,14 @@ namespace AutoServicioCineWeb
             if (!IsPostBack)
             {
                 CargarPeliculas();
+                if (Context.User.Identity.IsAuthenticated)
+                {
+                    FormsIdentity id = (FormsIdentity)Context.User.Identity;
+                    FormsAuthenticationTicket ticket = id.Ticket;
+                    string userData = ticket.UserData;
+                    string[] userInfo = userData.Split('|');
+                    idUsuario = int.Parse(userInfo[0]); // Asumiendo que el ID de usuario es el primer elemento
+                }
             }
             // Después de cualquier postback, asegurarnos de que la previsualización de imagen funcione
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ReapplyImagePreview",
@@ -164,7 +174,7 @@ namespace AutoServicioCineWeb
                 sinopsisEn = txtSinopsisEn.Text,
                 estaActiva = chkEstaActiva.Checked,
                 imagenUrl = txtImagenUrl.Text.Trim(),
-                usuarioModificacion = 4,
+                usuarioModificacion = idUsuario,
                 usuarioModificacionSpecified = true,
                 fechaModificacionSpecified=true
             };
@@ -392,7 +402,7 @@ namespace AutoServicioCineWeb
                             }
 
                             peli.imagenUrl = GetCsvValue(data, headerMap, "ImagenUrl");
-                            peli.usuarioModificacion = 4; // Usuario fijo para la carga
+                            peli.usuarioModificacion = idUsuario;
                             peli.usuarioModificacionSpecified = true;
 
                             if (peli.peliculaId == 0)

@@ -149,15 +149,24 @@ Inherits="AutoServicioCineWeb.GestionPeliculas" %>
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <div class="action-buttons">
-                            <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditPelicula" CommandArgument='<%# Eval("PeliculaId") %>'>
-                                <i class="fas fa-edit"></i> Editar
+                            <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn-edit" CommandName="EditPelicula"
+                                CommandArgument='<%# Eval("PeliculaId") %>'>
+                <i class="fas fa-edit"></i> Editar
                             </asp:LinkButton>
-                            <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeletePelicula" CommandArgument='<%# Eval("PeliculaId") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta película?');">
-                                <i class="fas fa-trash-alt"></i> Eliminar
+                            <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeletePelicula"
+                                CommandArgument='<%# Eval("PeliculaId") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta película?');">
+                <i class="fas fa-trash-alt"></i> Eliminar
                             </asp:LinkButton>
+                            <a class="btn-manage-funciones"
+                               href='<%# "/GestionFunciones.aspx?PeliculaId=" + Eval("PeliculaId") + "&NombrePelicula=" + Server.UrlEncode(Eval("TituloEs").ToString()) %>'
+                                style="margin-top: 5px; display: inline-block; color: white; background-color: #007BFF;
+                                padding: 4px 8px; border-radius: 4px; text-decoration: none;">
+                                <i class="fas fa-film"></i>Funciones
+                            </a>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
+
             </Columns>
             <EmptyDataTemplate>
                 No se encontraron películas.
