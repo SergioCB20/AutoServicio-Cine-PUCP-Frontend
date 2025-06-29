@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,6 +15,7 @@ namespace AutoServicioCineWeb
         private readonly AsientoWSClient asientoServiceClient;
         private List<asiento> _cachedAsientos;
         private int salaId;
+        private int idUsuario = 34;//base
         public GestionAsientos()
         {            
             asientoServiceClient = new AsientoWSClient();
@@ -28,8 +30,15 @@ namespace AutoServicioCineWeb
                     salaId = Convert.ToInt32(Request.QueryString["SalaId"]);
                     // Usar salaId para cargar asientos o lo que necesites
                     hfSalaId.Value = salaId.ToString();
-                    cargarAsientos(salaId);                  
-                     
+                    cargarAsientos(salaId);
+                    if (Context.User.Identity.IsAuthenticated)
+                    {
+                        FormsIdentity id = (FormsIdentity)Context.User.Identity;
+                        FormsAuthenticationTicket ticket = id.Ticket;
+                        string userData = ticket.UserData;
+                        string[] userInfo = userData.Split('|');
+                        idUsuario = int.Parse(userInfo[0]); // Asumiendo que el ID de usuario es el primer elemento
+                    }
                 }
                 else
                 {
@@ -119,7 +128,7 @@ namespace AutoServicioCineWeb
             {
                 try
                 {
-                    asientoServiceClient.eliminarAsiento(Convert.ToInt32(e.CommandArgument));
+                    asientoServiceClient.eliminarAsiento(Convert.ToInt32(e.CommandArgument), idUsuario);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "DeletionSuccess", "alert('Asiento eliminado exitosamente.');", true);
 
 
@@ -185,7 +194,7 @@ namespace AutoServicioCineWeb
                 tipo = (tipoAsiento)Enum.Parse(typeof(tipoAsiento), ddlTipoAsiento.SelectedValue, ignoreCase: true),
                 tipoSpecified = true,                
                 activo = chkEstaActiva.Checked,
-                usuarioModificacion = 4, // Asignar un usuario de modificación por defecto, esto debería ser dinámico en una aplicación real
+                usuarioModificacion = idUsuario, // Asignar un usuario de modificación por defecto, esto debería ser dinámico en una aplicación real
                 usuarioModificacionSpecified = true
 
             };

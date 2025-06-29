@@ -1,84 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportesAdmin.aspx.cs" Inherits="AutoServicioCineWeb.ReportesAdmin" MasterPageFile="~/Admin.master" %>
+﻿<%@ Page Title="Genera Reportes" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ReportesAdmin.aspx.cs" Inherits="AutoServicioCineWeb.ReportesAdmin" %>
 
 <asp:Content ID="ContentPageTitle" ContentPlaceHolderID="PageTitle" runat="server">
     Reportes
 </asp:Content>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" href="<%= ResolveUrl("~/styles/modal.css") %>" /> <%-- Asegúrate de tener este CSS para los modales --%>
-    <style>
-        /* Estilos específicos para esta página de reportes */
-        .report-options {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-            justify-content: center; /* Centrar los botones */
-        }
-
-        .report-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            text-align: center;
-            width: 300px;
-            transition: transform 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-        .report-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .report-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .report-card p {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-
-        .report-card .button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Estilos para el modal */
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-body label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .modal-body input[type="date"] {
-            width: calc(100% - 20px); /* Ajuste para padding */
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1em;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            padding: 15px 20px;
-            border-top: 1px solid #eee;
-            gap: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="<%= ResolveUrl("~/styles/modal.css") %>" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/styles/reportes.css") %>" />
 </asp:Content>
 
 <asp:Content ID="ContentPageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">
@@ -86,85 +14,209 @@
 </asp:Content>
 
 <asp:Content ID="ContentPageSubtitle" ContentPlaceHolderID="PageSubtitle" runat="server">
-    Genera informes y analiza datos del sistema.
+    Genera informes y analiza datos del sistema de cine.
 </asp:Content>
 
 <asp:Content ID="ContentMain" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="report-options">
-        <div class="report-card">
-            <h3>Reporte de Ventas</h3>
-            <p>Genera un informe detallado de las ventas de entradas y productos de comida.</p>
-            <button type="button" class="button primary" onclick="openModal('reporteVentasModal')">Generar Reporte</button>
-        </div>
-        <div class="report-card">
-            <h3>Reporte de Logs del Sistema</h3>
-            <p>Obtén un registro de las acciones y eventos importantes dentro del sistema.</p>
-            <button type="button" class="button primary" onclick="openModal('reporteLogsModal')">Generar Reporte</button>
+    <div class="reports-container">
+        <div class="reports-grid">
+            <!-- Tarjeta de Reporte de Ventas -->
+            <div class="report-card sales-card">
+                <div class="report-icon">
+                    <i class="icon-sales">💰</i>
+                </div>
+                <h3>Reporte de Ventas</h3>
+                <p>Genera un informe detallado de las ventas de entradas y productos de comida en un período específico.</p>
+           
+                <button type="button" class="btn btn-primary" onclick="openModal('reporteVentasModal')">
+                    <span class="btn-icon">📄</span>
+                    Generar Reporte
+                </button>
+            </div>
+
+            <!-- Tarjeta de Reporte de Logs -->
+            <div class="report-card logs-card">
+                <div class="report-icon">
+                    <i class="icon-logs">📝</i>
+                </div>
+                <h3>Reporte de Logs del Sistema</h3>
+                <p>Obtén un registro detallado de las acciones y eventos importantes dentro del sistema de administración.</p>
+               
+                <button type="button" class="btn btn-primary" onclick="openModal('reporteLogsModal')">
+                    <span class="btn-icon">📋</span>
+                    Generar Reporte
+                </button>
+            </div>
         </div>
     </div>
 
-    <%-- Modal para Reporte de Ventas (por ahora solo el esqueleto) --%>
+    <!-- Modal para Reporte de Ventas -->
     <div id="reporteVentasModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('reporteVentasModal')">&times;</span>
-            <h2>Generar Reporte de Ventas</h2>
+            <div class="modal-header">
+                <h2>
+                    <span class="modal-icon">💰</span>
+                    Generar Reporte de Ventas
+                </h2>
+                <span class="close-button" onclick="closeModal('reporteVentasModal')">&times;</span>
+            </div>
             <div class="modal-body">
-                <label for="txtVentasFechaInicio">Fecha de Inicio:</label>
-                <input type="date" id="txtVentasFechaInicio" runat="server" class="form-control" />
+                <div class="form-group">
+                    <label for="txtVentasFechaInicio">
+                        <span class="label-icon">📅</span>
+                        Fecha de Inicio:
+                    </label>
+                    <input type="date" id="txtVentasFechaInicio" runat="server" class="form-control" />
+                </div>
 
-                <label for="txtVentasFechaFin">Fecha de Fin:</label>
-                <input type="date" id="txtVentasFechaFin" runat="server" class="form-control" />
+                <div class="form-group">
+                    <label for="txtVentasFechaFin">
+                        <span class="label-icon">📅</span>
+                        Fecha de Fin:
+                    </label>
+                    <input type="date" id="txtVentasFechaFin" runat="server" class="form-control" />
+                </div>
+
+                <div class="info-box">
+                    <span class="info-icon">ℹ️</span>
+                    <p>El reporte incluirá todas las ventas realizadas en el período seleccionado, incluyendo entradas y productos de comida.</p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="button secondary" onclick="closeModal('reporteVentasModal')">Cancelar</button>
-                <asp:Button ID="btnGenerarVentasPdf" runat="server" Text="Generar PDF" CssClass="button primary" OnClick="btnGenerarVentasPdf_Click" />
+                <button type="button" class="btn btn-secondary" onclick="closeModal('reporteVentasModal')">
+                    <span class="btn-icon">❌</span>
+                    Cancelar
+                </button>
+                <asp:Button ID="btnGenerarVentasPdf" runat="server" Text="Generar PDF" CssClass="btn btn-success" 
+                    OnClick="btnGenerarVentasPdf_Click" OnClientClick="return validateDateRange('txtVentasFechaInicio', 'txtVentasFechaFin')" />
             </div>
         </div>
     </div>
 
-    <%-- Modal para Reporte de Logs del Sistema --%>
+    <!-- Modal para Reporte de Logs del Sistema -->
     <div id="reporteLogsModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('reporteLogsModal')">&times;</span>
-            <h2>Generar Reporte de Logs del Sistema</h2>
+            <div class="modal-header">
+                <h2>
+                    <span class="modal-icon">📝</span>
+                    Generar Reporte de Logs del Sistema
+                </h2>
+                <span class="close-button" onclick="closeModal('reporteLogsModal')">&times;</span>
+            </div>
             <div class="modal-body">
-                <label for="txtLogsFechaInicio">Fecha de Inicio:</label>
-                <input type="date" id="txtLogsFechaInicio" runat="server" class="form-control" />
+                <div class="form-group">
+                    <label for="txtLogsFechaInicio">
+                        <span class="label-icon">📅</span>
+                        Fecha de Inicio:
+                    </label>
+                    <input type="date" id="txtLogsFechaInicio" runat="server" class="form-control" />
+                </div>
 
-                <label for="txtLogsFechaFin">Fecha de Fin:</label>
-                <input type="date" id="txtLogsFechaFin" runat="server" class="form-control" />
+                <div class="form-group">
+                    <label for="txtLogsFechaFin">
+                        <span class="label-icon">📅</span>
+                        Fecha de Fin:
+                    </label>
+                    <input type="date" id="txtLogsFechaFin" runat="server" class="form-control" />
+                </div>
+
+                <div class="info-box">
+                    <span class="info-icon">ℹ️</span>
+                    <p>El reporte incluirá todos los logs de sistema registrados en el período seleccionado, mostrando acciones de usuarios y eventos del sistema.</p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="button secondary" onclick="closeModal('reporteLogsModal')">Cancelar</button>
-                <asp:Button ID="btnGenerarLogsPdf" runat="server" Text="Generar PDF" CssClass="button primary" OnClick="btnGenerarLogsPdf_Click" />
+                <button type="button" class="btn btn-secondary" onclick="closeModal('reporteLogsModal')">
+                    <span class="btn-icon">❌</span>
+                    Cancelar
+                </button>
+                <asp:Button ID="btnGenerarLogsPdf" runat="server" Text="Generar PDF" CssClass="btn btn-success" 
+                    OnClick="btnGenerarLogsPdf_Click" OnClientClick="return validateDateRange('txtLogsFechaInicio', 'txtLogsFechaFin')" />
             </div>
         </div>
     </div>
-
 </asp:Content>
 
 <asp:Content ID="ContentScript" ContentPlaceHolderID="ScriptContent" runat="server">
     <script>
         // Funciones para abrir y cerrar modales
         function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Validación de rango de fechas
+        function validateDateRange(startId, endId) {
+            const startInput = document.getElementById(startId);
+            const endInput = document.getElementById(endId);
+            
+            if (!startInput.value || !endInput.value) {
+                showNotification('Por favor, selecciona ambas fechas.', 'warning');
+                return false;
+            }
+            
+            const startDate = new Date(startInput.value);
+            const endDate = new Date(endInput.value);
+            
+            if (startDate > endDate) {
+                showNotification('La fecha de inicio no puede ser posterior a la fecha de fin.', 'error');
+                return false;
+            }
+            
+            const today = new Date();
+            if (startDate > today || endDate > today) {
+                showNotification('Las fechas no pueden ser futuras.', 'warning');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Función para mostrar notificaciones (asumiendo que existe)
+        function showNotification(message, type) {
+            // Esta función debe estar definida en tu sistema de notificaciones
+            console.log(`${type.toUpperCase()}: ${message}`);
+            alert(`${type.toUpperCase()}: ${message}`); // Fallback básico
         }
 
         // Cerrar modal al hacer clic fuera de él
         window.onclick = function (event) {
-            const ventasModal = document.getElementById('reporteVentasModal');
-            const logsModal = document.getElementById('reporteLogsModal');
-
-            if (event.target == ventasModal) {
-                closeModal('reporteVentasModal');
-            }
-            if (event.target == logsModal) {
-                closeModal('reporteLogsModal');
-            }
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
         }
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const openModals = document.querySelectorAll('.modal[style*="block"]');
+                openModals.forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+        });
+
+        // Establecer fecha máxima como hoy en los inputs de fecha
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => {
+                input.max = today;
+            });
+        });
     </script>
 </asp:Content>

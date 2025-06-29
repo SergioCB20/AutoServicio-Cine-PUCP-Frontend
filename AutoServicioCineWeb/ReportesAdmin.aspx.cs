@@ -1,95 +1,153 @@
-﻿using System;
+﻿using AutoServicioCineWeb.AutoservicioCineWS;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO; // Para MemoryStream
-using iTextSharp.text; // iTextSharp
-using iTextSharp.text.pdf;
-using AutoServicioCineWeb.AutoservicioCineWS; // iTextSharp
-
-// Asumiendo que tienes una referencia al servicio web o una clase que mapea el modelo Java
-// Si estás usando un servicio web, tendrías una referencia como:
-// using AutoServicioCineWeb.AutoservicioCineWS; // Sustituye por el nombre real de tu referencia de servicio
-// Si es un API REST, necesitarás tus clases de modelos C# equivalentes o usar dynamic/JObject
 
 namespace AutoServicioCineWeb
 {
-
     public partial class ReportesAdmin : System.Web.UI.Page
     {
-        private readonly LogWSClient logClient;
-
+        private readonly VentaWSClient ventaServiceCliente;
+        private readonly LogWSClient logServiceCliente;
+     
+        public ReportesAdmin()
+        {
+            // Inicializar los clientes de servicio web
+            ventaServiceCliente = new VentaWSClient();
+            logServiceCliente = new LogWSClient();
+            
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
-                // Configuración inicial si es necesario
+                // Inicializar fechas por defecto si es necesario
+                // Por ejemplo, último mes
+                DateTime fechaFin = DateTime.Today;
+                DateTime fechaInicio = fechaFin.AddDays(-30);
+
+                txtVentasFechaInicio.Value = fechaInicio.ToString("yyyy-MM-dd");
+                txtVentasFechaFin.Value = fechaFin.ToString("yyyy-MM-dd");
+
+                txtLogsFechaInicio.Value = fechaInicio.ToString("yyyy-MM-dd");
+                txtLogsFechaFin.Value = fechaFin.ToString("yyyy-MM-dd");
             }
         }
 
         protected void btnGenerarVentasPdf_Click(object sender, EventArgs e)
         {
-            // Lógica para generar reporte de ventas
-            // Por ahora, solo un mensaje de demostración
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowSalesNotification",
-                "showNotification('Reporte de Ventas en desarrollo.', 'info'); closeModal('reporteVentasModal');", true);
+            try
+            {
+                // Validar fechas del lado servidor
+                if (string.IsNullOrEmpty(txtVentasFechaInicio.Value) || string.IsNullOrEmpty(txtVentasFechaFin.Value))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('Por favor, selecciona ambas fechas.', 'error');", true);
+                    return;
+                }
+
+                DateTime fechaInicio, fechaFin;
+                if (!DateTime.TryParse(txtVentasFechaInicio.Value, out fechaInicio) ||
+                    !DateTime.TryParse(txtVentasFechaFin.Value, out fechaFin))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('Formato de fecha inválido.', 'error');", true);
+                    return;
+                }
+
+                if (fechaInicio > fechaFin)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('La fecha de inicio no puede ser posterior a la fecha de fin.', 'error');", true);
+                    return;
+                }
+
+                // Convertir fechas al formato requerido por las funciones (AAAA-MM-DD)
+                string fechaInicioStr = fechaInicio.ToString("yyyy-MM-dd");
+                string fechaFinStr = fechaFin.ToString("yyyy-MM-dd");
+
+                // Obtener datos del reporte de ventas
+                var datosVentas = ventaServiceCliente.listarVentasReporte(fechaInicioStr, fechaFinStr).ToList();
+
+                if (datosVentas == null || datosVentas.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "warning",
+                        "showNotification('No se encontraron datos de ventas para el período seleccionado.', 'warning');", true);
+                    return;
+                }
+
+                // Generar PDF
+                GenerarPDFVentas(datosVentas, fechaInicio, fechaFin);
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "success",
+                    "showNotification('Reporte de ventas generado exitosamente.', 'success'); closeModal('reporteVentasModal');", true);
+            }
+            catch (System.Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                    $"showNotification('Error al generar el reporte: {ex.Message}', 'error');", true);
+            }
         }
 
         protected void btnGenerarLogsPdf_Click(object sender, EventArgs e)
         {
-            DateTime fechaInicio;
-            DateTime fechaFin;
-
-            // Validar y obtener fechas del modal  
-            if (!DateTime.TryParse(txtLogsFechaInicio.Value, out fechaInicio))
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "ValidationFailed",
-                    "showNotification('Por favor, ingresa una fecha de inicio válida.', 'error');", true);
-                return;
-            }
-
-            if (!DateTime.TryParse(txtLogsFechaFin.Value, out fechaFin))
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "ValidationFailed",
-                    "showNotification('Por favor, ingresa una fecha de fin válida.', 'error');", true);
-                return;
-            }
-
-            if (fechaInicio > fechaFin)
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "ValidationFailed",
-                    "showNotification('La fecha de inicio no puede ser posterior a la fecha de fin.', 'error');", true);
-                return;
-            }
-
-
             try
             {
-                List<logSistema> logs = logClient.listarLogs().ToList();
-
-                // Filtrar logs por rango de fechas
-                logs = logs.Where(l => ConvertToDateTime(l.fecha) >= fechaInicio && ConvertToDateTime(l.fecha) <= fechaFin).ToList();
-
-                if (logs.Count == 0)
+                // Validar fechas del lado servidor
+                if (string.IsNullOrEmpty(txtLogsFechaInicio.Value) || string.IsNullOrEmpty(txtLogsFechaFin.Value))
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "NoData",
-                        "showNotification('No se encontraron logs para el rango de fechas seleccionado.', 'info');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('Por favor, selecciona ambas fechas.', 'error');", true);
                     return;
                 }
 
-                // Generar PDF con iTextSharp
-                GenerarPdfLogs(logs, fechaInicio, fechaFin);
+                DateTime fechaInicio, fechaFin;
+                if (!DateTime.TryParse(txtLogsFechaInicio.Value, out fechaInicio) ||
+                    !DateTime.TryParse(txtLogsFechaFin.Value, out fechaFin))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('Formato de fecha inválido.', 'error');", true);
+                    return;
+                }
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "ReportSuccess",
-                    "showNotification('Reporte de Logs generado exitosamente.', 'success'); closeModal('reporteLogsModal');", true);
+                if (fechaInicio > fechaFin)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "showNotification('La fecha de inicio no puede ser posterior a la fecha de fin.', 'error');", true);
+                    return;
+                }
+
+                // Convertir fechas al formato requerido por las funciones (AAAA-MM-DD)
+                string fechaInicioStr = fechaInicio.ToString("yyyy-MM-dd");
+                string fechaFinStr = fechaFin.ToString("yyyy-MM-dd");
+
+                // Obtener datos del reporte de logs
+                var datosLogs = logServiceCliente.listarLogs(fechaInicioStr, fechaFinStr).ToList();
+
+                if (datosLogs == null || datosLogs.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "warning",
+                        "showNotification('No se encontraron logs para el período seleccionado.', 'warning');", true);
+                    return;
+                }
+
+                // Generar PDF
+                GenerarPdfLogs(datosLogs, fechaInicio, fechaFin);
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "success",
+                    "showNotification('Reporte de logs generado exitosamente.', 'success'); closeModal('reporteLogsModal');", true);
             }
             catch (System.Exception ex)
             {
-                // Manejo de errores si la llamada al servicio falla
-                ScriptManager.RegisterStartupScript(this, GetType(), "ReportError",
-                    $"showNotification('Error al generar el reporte: {ex.Message.Replace("'", "")}', 'error');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                    $"showNotification('Error al generar el reporte: {ex.Message}', 'error');", true);
             }
         }
 
@@ -115,7 +173,98 @@ namespace AutoServicioCineWeb
                 throw new FormatException("El valor de localDate no se pudo convertir a DateTime.");
             }
         }
+        private void GenerarPDFVentas(List<venta> datos, DateTime fechaInicio, DateTime fechaFin)
+        {
+            // Crear documento PDF
+            Document documento = new Document(PageSize.A4, 50, 50, 25, 25);
 
+            // Crear el stream de memoria para el PDF
+            using (MemoryStream stream = new MemoryStream())
+            {
+                PdfWriter writer = PdfWriter.GetInstance(documento, stream);
+                documento.Open();
+
+                // Título del documento
+                Font tituloFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.DARK_GRAY);
+                Font subtituloFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.WHITE);
+                Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 9, BaseColor.BLACK);
+
+                // Agregar título
+                Paragraph titulo = new Paragraph("REPORTE DE VENTAS", tituloFont);
+                titulo.Alignment = Element.ALIGN_CENTER;
+                titulo.SpacingAfter = 10f;
+                documento.Add(titulo);
+
+                // Agregar período
+                Paragraph periodo = new Paragraph($"Período: {fechaInicio:dd/MM/yyyy} - {fechaFin:dd/MM/yyyy}", subtituloFont);
+                periodo.Alignment = Element.ALIGN_CENTER;
+                periodo.SpacingAfter = 20f;
+                documento.Add(periodo);
+
+                // Crear tabla
+                PdfPTable tabla = new PdfPTable(5); // Ajustar según las columnas de tu ReporteVenta
+                tabla.WidthPercentage = 100f;
+                tabla.SetWidths(new float[] { 15f, 20f, 15f, 25f, 25f }); // Ajustar según necesidades
+
+                // Headers de la tabla
+                string[] headers = { "Fecha", "Usuario", "Subtotal", "Impuesto", "Total" };
+                foreach (string header in headers)
+                {
+                    PdfPCell headerCell = new PdfPCell(new Phrase(header, headerFont));
+                    headerCell.BackgroundColor = BaseColor.DARK_GRAY;
+                    headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    headerCell.Padding = 8f;
+                    tabla.AddCell(headerCell);
+                }
+
+                // Agregar datos
+                double totalGeneral = 0;
+                foreach (var venta in datos)
+                {                    
+                    tabla.AddCell(new PdfPCell(new Phrase(venta.fechaHora, cellFont)) { Padding = 5f });
+                    tabla.AddCell(new PdfPCell(new Phrase(venta.usuario.id.ToString(), cellFont)) { Padding = 5f });
+                    tabla.AddCell(new PdfPCell(new Phrase(venta.subtotal.ToString("C"), cellFont)) { Padding = 5f, HorizontalAlignment = Element.ALIGN_RIGHT });
+                    tabla.AddCell(new PdfPCell(new Phrase(venta.impuestos.ToString("C"), cellFont)) { Padding = 5f, HorizontalAlignment = Element.ALIGN_RIGHT });
+                    tabla.AddCell(new PdfPCell(new Phrase(venta.total.ToString("C"), cellFont)) { Padding = 5f, HorizontalAlignment = Element.ALIGN_RIGHT });
+
+                    totalGeneral += venta.total;
+                }
+
+                // Fila de total
+                PdfPCell totalLabelCell = new PdfPCell(new Phrase("TOTAL GENERAL", headerFont));
+                totalLabelCell.Colspan = 4;
+                totalLabelCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                totalLabelCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                totalLabelCell.Padding = 8f;
+                tabla.AddCell(totalLabelCell);
+
+                PdfPCell totalValueCell = new PdfPCell(new Phrase(totalGeneral.ToString("C"), headerFont));
+                totalValueCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                totalValueCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                totalValueCell.Padding = 8f;
+                tabla.AddCell(totalValueCell);
+
+                documento.Add(tabla);
+
+                // Agregar información adicional
+                Paragraph info = new Paragraph($"\nReporte generado el {DateTime.Now:dd/MM/yyyy HH:mm:ss}", subtituloFont);
+                info.Alignment = Element.ALIGN_RIGHT;
+                info.SpacingBefore = 20f;
+                documento.Add(info);
+
+                documento.Close();
+                // Enviar el PDF al navegador
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-disposition", $"attachment;filename=ReporteVentas_{fechaInicio.ToString("yyyyMMdd")}_{fechaFin.ToString("yyyyMMdd")}.pdf");
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.BinaryWrite(stream.ToArray());
+                Response.End();
+
+            }
+        }
         private void GenerarPdfLogs(List<logSistema> logs, DateTime fechaInicio, DateTime fechaFin)
         {
             // Crear un nuevo documento PDF
@@ -180,7 +329,8 @@ namespace AutoServicioCineWeb
 
                 // Añadir filas de datos
                 foreach (var log in logs)
-                {
+                {  
+
                     cell = new PdfPCell(new Phrase(log.id.ToString(), cellFont));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     cell.Padding = 5;
@@ -191,13 +341,13 @@ namespace AutoServicioCineWeb
                     table.AddCell(cell);
 
                     // Convertir localDate a DateTime antes de usar ToShortDateString
-                    DateTime logFecha = ConvertToDateTime(log.fecha);
-                    cell = new PdfPCell(new Phrase(logFecha.ToShortDateString(), cellFont));
+                    
+                    cell = new PdfPCell(new Phrase(log.fecha, cellFont));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     cell.Padding = 5;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase(log.usuario.ToString(), cellFont));
+                    cell = new PdfPCell(new Phrase(log.id_usuario.ToString(), cellFont));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     cell.Padding = 5;
                     table.AddCell(cell);
@@ -224,5 +374,8 @@ namespace AutoServicioCineWeb
             Response.BinaryWrite(ms.ToArray());
             Response.End();
         }
+
+
     }
+    
 }

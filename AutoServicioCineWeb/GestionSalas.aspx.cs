@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +17,7 @@ namespace AutoServicioCineWeb
     {
         private readonly SalaWSClient salaServiceClient;
         private List<sala> _cachedSalas;
+        private int idUsuario = 34; //Por defecto
         public GestionSalas()
         {
             // Inicializa el cliente del servicio SOAP para interactuar con las salas
@@ -26,6 +28,14 @@ namespace AutoServicioCineWeb
             if (!IsPostBack)
             {
                 CargarSalas();
+                if (Context.User.Identity.IsAuthenticated)
+                {
+                    FormsIdentity id = (FormsIdentity)Context.User.Identity;
+                    FormsAuthenticationTicket ticket = id.Ticket;
+                    string userData = ticket.UserData;
+                    string[] userInfo = userData.Split('|');
+                    idUsuario = int.Parse(userInfo[0]); // Asumiendo que el ID de usuario es el primer elemento
+                }
             }
             /*ScriptManager.RegisterStartupScript(this, this.GetType(), "ReapplyImagePreview",
                 "const txtImageUrlElement = document.getElementById('" + txtImagenUrl.ClientID + "'); if (txtImageUrlElement && txtImageUrlElement.value) { previewImage(txtImageUrlElement); }", true);*/
@@ -87,7 +97,7 @@ namespace AutoServicioCineWeb
                     {
                         try
                         {
-                            salaServiceClient.eliminarSala(SalaId);
+                            salaServiceClient.eliminarSala(SalaId,idUsuario);
                             ScriptManager.RegisterStartupScript(this, GetType(), "DeletionSuccess", "alert('Sala eliminada exitosamente.');", true);
 
 
@@ -159,8 +169,9 @@ namespace AutoServicioCineWeb
                  tipoSala = (tipoSala)Enum.Parse(typeof(tipoSala), ddlTipoSala.SelectedValue, ignoreCase: true),
                  tipoSalaSpecified=true,
                  activa = chkEstaActiva.Checked,
-                 usuarioModificacion = 4, // Asignar un usuario de modificación por defecto, esto debería ser dinámico en una aplicación real
-                 usuarioModificacionSpecified = true
+                 usuarioModificacion = idUsuario,
+                 usuarioModificacionSpecified = true,
+                 fechaModificacionSpecified = true
 
             };
 
