@@ -203,6 +203,7 @@ namespace AutoServicioCineWeb
             {
                 if (asiento.id == 0)
                 {
+                    
                     asientoServiceClient.registrarAsiento(asiento);
                     litMensajeModal.Text = "asiento agregado exitosamente.";
                 }
@@ -380,6 +381,7 @@ namespace AutoServicioCineWeb
                             if (!string.IsNullOrEmpty(filaStr) && filaStr.Length == 1)
                             {
                                 asiento.fila = (ushort)filaStr[0]; // Convertir char a ushort
+                                
                             }
                             else
                             {
@@ -389,17 +391,28 @@ namespace AutoServicioCineWeb
                             if (int.TryParse(GetCsvValue(data, headerMap, "Numero"), out numero))
                             {
                                 asiento.numero = numero;
+                                asiento.numeroSpecified = true;
                             }
                             else
                             {
                                 throw new FormatException("Número no es un número válido.");
                             }
-                            asiento.tipo = (tipoAsiento)Enum.Parse(typeof(tipoAsiento), GetCsvValue(data, headerMap, "TipoAsiento"), ignoreCase: true);
+                            tipoAsiento tipoasiento;
+                            if(Enum.TryParse(GetCsvValue(data, headerMap, "TipoAsiento"), true, out tipoasiento))
+                            {
+                                asiento.tipo = tipoasiento;
+                                asiento.tipoSpecified = true; // Marcar como especificado para el servicio
+                            }
+                            else
+                            {
+                                throw new FormatException("TipoAsiento no es un valor válido.");
+                            }                            
 
                             bool activo;
                             if (bool.TryParse(GetCsvValue(data, headerMap, "Activo"), out activo))
                             {
                                 asiento.activo = activo;
+                                
                             }
                             else
                             {
@@ -409,7 +422,15 @@ namespace AutoServicioCineWeb
                                 else if (activeString == "false" || activeString == "0") asiento.activo = false;
                                 else throw new FormatException("Activo no es un valor booleano válido (TRUE/FALSE, 1/0).");
                             }
-                            asiento.usuarioModificacion = 4; //
+                            salaId = int.Parse(hfSalaId.Value);
+                            sala sal = new sala();                         
+                            {
+                                sal.id = salaId;
+                                sal.idSpecified = true;
+                            }
+                            
+                            asiento.sala = sal;
+                            asiento.usuarioModificacion = idUsuario; //
                             asiento.usuarioModificacionSpecified = true;
 
                             if (asiento.id == 0)
