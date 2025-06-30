@@ -1,15 +1,18 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AutoServicioCineWeb.AutoservicioCineWS;
+    
 
 namespace AutoServicioCineWeb
 {
     public partial class confirmacionDeCompra : System.Web.UI.Page
     {
+        private ventaProducto[] listaProducto;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,6 +29,8 @@ namespace AutoServicioCineWeb
             try
             {
                 var resumen = Session["ResumenCompra"] as ResumenCompra;
+                var listaDetalle = Session["ListaVentaProducto"] as List<ventaProducto>;
+               
                 if (resumen != null)
                 {
                     // Actualizar título de película directamente al control Label
@@ -50,17 +55,57 @@ namespace AutoServicioCineWeb
                     // Actualizar total directamente al Label
                     if (!string.IsNullOrEmpty(resumen.TotalTicket))
                     {
-                        totalAmount.Text = $"S/ {resumen.TotalTicket}";
+                        totalAmount.Text = $"{resumen.TotalTicket}";
                     }
 
-                    // Actualizar datos de comida
-                    ActualizarDatosComida(resumen);
+
+
+      
+                    if (listaDetalle != null && listaDetalle.Count > 0)
+                    {
+                        listaProducto = listaDetalle.ToArray();
+                       
+                        foodItems.Text = ConstruirInfoProductos(listaDetalle); 
+
+                        var foodItemsContainer = this.FindControl("foodItems") as HtmlGenericControl;
+                        if (foodItemsContainer != null)
+                        {
+                            foodItemsContainer.Controls.Clear(); // Limpiar contenido previo
+                            var p = new HtmlGenericControl("p"); // Usamos un <p> para el texto formateado
+                            p.InnerHtml = ConstruirInfoProductos(listaDetalle); // Usamos InnerHtml para interpretar <br>
+                            foodItemsContainer.Controls.Add(p);
+                        }
+                    }
+                    string numeroDeOrden = orderNumber.Text;
+                    string datosParaQR = $"CineAutoservicio-Compra-{numeroDeOrden}";
+                    string datosCodificados = Server.UrlEncode(datosParaQR);
+                    string qrCodeUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={datosCodificados}";
+                    qrCode.ImageUrl = qrCodeUrl;
+
+
+
+                    if (Session["Boleto"] is boleto boletoInicial) // Usar 'is' para verificar y castear de forma segura
+                    {
+                        orderStatus.Text = boletoInicial.estado.ToString(); // Convierte el enum a string para mostrarlo
+                                                                       // Opcional: Aplicar clase CSS según el estado inicial
+                        if (boletoInicial.estado == estadoBoleto.VALIDO)
+                        {
+                            orderStatus.CssClass = "status-badge status-valid";
+                        }
+                        else if (boletoInicial.estado == estadoBoleto.USADO)
+                        {
+                            orderStatus.CssClass = "status-badge status-used";
+                        }
+                        // Agrega más else if para otros estados si los tienes
+                    }
+
                 }
                 else
                 {
                     // Si no hay datos en sesión, redirigir
                     Response.Redirect("~/Pago.aspx");
                 }
+                
             }
             catch (System.Exception ex)
             {
@@ -70,6 +115,58 @@ namespace AutoServicioCineWeb
             }
         }
 
+
+        protected void qrCodeButton_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                // --- AJUSTE AQUÍ: Usar 'is' para verificar y castear de forma segura ---
+                if (Session["Boleto"] is boleto boletoRecibido)
+                {
+                    
+                    boletoRecibido.estado = estadoBoleto.USADO;
+                    boletoRecibido.estadoSpecified = true; // Mantener si el servicio web lo requiere explícitamente para enums
+
+                    // 2. Actualizar el boleto en la sesión
+                    Session["Boleto"] = boletoRecibido;
+
+                    // 3. (Opcional, pero vital para persistencia) Llamar al servicio para actualizar en la DB
+                    using (var boletoServiceClient = new BoletoWSClient())
+                    {
+                        boletoServiceClient.actualizarBoleto(boletoRecibido);
+                    }
+
+                    // 4. Actualizar la interfaz de usuario en el servidor usando el valor del enum convertido a string
+                    orderStatus.Text = "USADO";//boletoRecibido.estado.ToString()""; // O directamente "UTILIZADO" si lo prefieres literal
+                    orderStatus.CssClass = "status-badge status-used"; // Aplica la clase para el estado de utilizado
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "alertSuccess",
+                        "alert('¡Código QR escaneado exitosamente!\\nEstado cambiado a: UTILIZADO');", true);
+
+                }
+                else // Este bloque se ejecutará si Session["BoletoConfirmacion"] es null o no es un 'boleto'
+                {
+                    System.Diagnostics.Debug.WriteLine("Error: No se encontró o el objeto de boleto en la sesión no es válido al intentar actualizar.");
+                    ClientScript.RegisterStartupScript(this.GetType(), "errorUpdate", "alert('Error: La información del boleto no está disponible o no es válida.');", true);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Excepción al actualizar boleto: {ex.Message}");
+                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('Ocurrió un error inesperado al actualizar el boleto. Intente de nuevo.');", true);
+            }
+        }
+
+        private string ConstruirInfoProductos(List<ventaProducto> listaDetalle)
+        {
+            var productParts = new List<string>();
+            foreach (var item in listaDetalle)
+            {
+                productParts.Add($"{item.nombreProducto} x {item.cantidad} = S/ {(item.precioUnitario * item.cantidad).ToString("0.00")}");
+            }
+            return string.Join("<br>", productParts);
+        }
+      
         private string ConstruirInfoTickets(ResumenCompra resumen)
         {
             var ticketParts = new List<string>();
@@ -89,30 +186,10 @@ namespace AutoServicioCineWeb
 
             string ticketInfoString = string.Join("<br>", ticketParts);
 
-            // Asumiendo que Horario es una propiedad de ResumenCompra
-            /*
-             if (!string.IsNullOrEmpty(resumen.Horario)) // Si Horario es una propiedad directamente en ResumenCompra
-            {
-                ticketInfoString += $"<br>Función: {resumen.Horario}";
-            }
-            else
-            {
-                ticketInfoString += "<br>Función: 18:00 hrs"; // Valor por defecto si no hay horario
-            }
-            */
+            
             return ticketInfoString;
         }
 
-        private void ActualizarDatosComida(ResumenCompra resumen)
-        {
-            /*
-            // Asumiendo que ComidaItems es una propiedad de ResumenCompra
-            if (!string.IsNullOrEmpty(resumen.))
-            {
-                foodItems.Text = resumen.ListaVentaProducto;
-            }
-            */
-        }
 
         private void ActualizarFechaHora()
         {
@@ -121,9 +198,7 @@ namespace AutoServicioCineWeb
                 new System.Globalization.CultureInfo("es-ES"));
             purchaseDateTime.Text = fechaHora;
 
-            // Opcional: Si quieres que el JavaScript del cliente también actualice,
-            // podrías mantener la llamada a updateDateTime() en el cliente
-            // pero el valor inicial lo asigna C# al cargar la página.
+    
         }
 
         // Método para generar número de orden único (opcional)
@@ -141,14 +216,6 @@ namespace AutoServicioCineWeb
             }
         }
 
-        // Ya no es necesario un override de Render para los scripts de actualización de contenido
-        // porque estamos manipulando directamente los controles de servidor.
-        // Si necesitas registrar scripts para otras cosas, puedes mantenerlo.
-        // protected override void Render(HtmlTextWriter writer)
-        // {
-        //     ClientScript.RegisterStartupScript(this.GetType(), "initPage",
-        //         "console.log('Página de confirmación cargada exitosamente');", true);
-        //     base.Render(writer);
-        // }
+        
     }
 }

@@ -189,6 +189,7 @@ namespace AutoServicioCineWeb
                 estadoSpecified = true,
                 detalles = listaBoletoDetalle
             };
+            Session["Boleto"] = nuevoBoleto;
             boletoServiceClient.registrarBoleto(nuevoBoleto);
             System.Diagnostics.Debug.WriteLine("Ejecutando btnContinuar_Click a las: " + DateTime.Now); //Línea para verificar los llamados
             Response.Redirect("confirmacionDeCompra.aspx");

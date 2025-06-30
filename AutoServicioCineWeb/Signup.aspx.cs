@@ -44,6 +44,8 @@ namespace AutoServicioCineWeb
                     txtTelefono.Text = "";
                     txtPassword.Text = "";
                     txtConfirmPassword.Text = "";
+
+                    Response.Redirect("Login.aspx");
                 }
                 catch (System.ServiceModel.FaultException faultEx)
                 {
