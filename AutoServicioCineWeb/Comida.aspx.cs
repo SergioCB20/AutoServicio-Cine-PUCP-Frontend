@@ -41,6 +41,23 @@ namespace AutoServicioCineWeb
                         master.TotalResumen.Attributes["data-base"] = resumen.TotalTicket;
                     }
                 }
+                funcion funcionSeleccionada = Session["FuncionSeleccionada"] as funcion;
+                if (funcionSeleccionada != null)
+                {
+                    var master = this.Master as Form;
+
+                    if (DateTime.TryParseExact(funcionSeleccionada.fechaHora, "yyyy-MM-dd HH:mm",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaHora))
+                    {
+                        master.FechaSpan.InnerText = fechaHora.ToString("dddd, dd MMMM yyyy", new CultureInfo("es-PE"));
+                        master.HoraSpan.InnerText = fechaHora.ToString("hh:mm tt", new CultureInfo("es-PE"));
+                    }
+                    else
+                    {
+                        master.HoraSpan.InnerText = funcionSeleccionada.fechaHora;
+                        master.FechaSpan.InnerText = "";
+                    }
+                }
             }
         }
         private void cargarProductos()
@@ -113,7 +130,7 @@ namespace AutoServicioCineWeb
             double precioInfantil = 7.0;
             double precioMayor = 7.0;
             // Contador para el número de asiento (cuando se tenga una sala de la base de datos en butaca esto se cambiará)
-            int numeroAsiento = 1; //el máximo número es 10 porque hay 1-11 asientos en la base de datos (id)
+            int numeroAsiento = 22; //el máximo número es 31 porque hay 22-31 asientos en la base de datos (id)
             // Procesar entrada adulto
             if (!string.IsNullOrWhiteSpace(master.EntradasAdultoTexto.InnerText))
             {

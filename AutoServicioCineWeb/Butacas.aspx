@@ -36,6 +36,13 @@
     <asp:Button id="btnContinuar" CssClass="button primary continuar" OnClick="btnContinuar_Click" runat="server" Text="Continuar"/>
     <button class="button secondary cancelar">Cancelar compra</button>
     <script>
+        const asientos = [
+            // ejemplo: { id: 1, fila: 65, numero: 3 }
+        ];
+
+        const asientosFuncion = [
+            // ejemplo: { asiento: { id: 1 }, estado: "OCUPADO" }
+        ];
         // El script JavaScript original para la generación de butacas puede ir aquí
         // o ser referenciado desde un archivo .js externo.
         // Para ASP.NET, este script aún sería de lado del cliente.
@@ -54,6 +61,11 @@
                 identificadorDiv.classList.add('identificador-fila');
                 identificadorDiv.textContent = String.fromCharCode(65 + i);
                 identificadoresFilasDiv.appendChild(identificadorDiv);
+                //const letra = String.fromCharCode(65 + i);
+                //const div = document.createElement('div');
+                //div.classList.add('identificador-fila');
+                //div.textContent = letra;
+                //identificadoresFilasDiv.appendChild(div);
             }
 
             // Generar identificadores de columnas (1, 2, 3, ...)
@@ -63,6 +75,10 @@
                 identificadorDiv.classList.add('identificador-columna');
                 identificadorDiv.textContent = j + 1;
                 identificadoresColumnasDiv.appendChild(identificadorDiv);
+                //const div = document.createElement('div');
+                //div.classList.add('identificador-columna');
+                //div.textContent = j + 1;
+                //identificadoresColumnasDiv.appendChild(div);
             }
         }
 
@@ -126,6 +142,8 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             calcularCantEntradas();
+            //const filasMax = Math.max(...asientos.map(a => a.fila)) - 65 + 1;
+            //const columnasMax = Math.max(...asientos.map(a => a.numero));
             generarSala(10, 12);  // valores de prueba
             ajustarPantallaDinamico(); // ajuste dinámico en el tamaño
         });

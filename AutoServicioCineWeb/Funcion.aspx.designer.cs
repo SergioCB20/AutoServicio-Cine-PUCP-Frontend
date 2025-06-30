@@ -11,34 +11,34 @@ namespace AutoServicioCineWeb
 {
 
 
-    public partial class Peliculas
+    public partial class Funcion
     {
 
         /// <summary>
-        /// Control form1.
+        /// Control rptFunciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Repeater rptFunciones;
 
         /// <summary>
-        /// Control rptPeliculas.
+        /// Control litMensajeModal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPeliculas;
+        protected global::System.Web.UI.WebControls.Literal litMensajeModal;
 
         /// <summary>
-        /// Control litMensaje.
+        /// Control btnContinuar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litMensaje;
+        protected global::System.Web.UI.WebControls.Button btnContinuar;
     }
 }
