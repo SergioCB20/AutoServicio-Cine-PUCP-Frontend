@@ -51,22 +51,40 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.Label lblTelefono;
 
         /// <summary>
-        /// Control gvCupones.
+        /// Control rptCupones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCupones;
+        protected global::System.Web.UI.WebControls.Repeater rptCupones;
 
         /// <summary>
-        /// Control gvHistorial.
+        /// Control pnlEmptyState.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvHistorial;
+        protected global::System.Web.UI.WebControls.Panel pnlEmptyState;
+
+        /// <summary>
+        /// Control rptHistorial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptHistorial;
+
+        /// <summary>
+        /// Control pnlNoCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNoCompras;
 
         /// <summary>
         /// Control pnlEdicion.

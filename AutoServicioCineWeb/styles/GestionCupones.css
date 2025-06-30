@@ -543,7 +543,7 @@ span[role="alert"] {
 }
 
     .csv-help-box.visible {
-        max-height: 200px; /* Suficiente para mostrar el contenido. Ajusta si es necesario. */
+        max-height: 350px; /* Suficiente para mostrar el contenido. Ajusta si es necesario. */
         opacity: 1;
         padding-top: 15px;
         padding-bottom: 15px;

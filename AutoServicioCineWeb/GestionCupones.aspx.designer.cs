@@ -78,13 +78,13 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.CustomValidator cvCsvFileExtension;
 
         /// <summary>
-        /// Control hdnPeliculaId.
+        /// Control hdnCuponId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnPeliculaId;
+        protected global::System.Web.UI.WebControls.HiddenField hdnCuponId;
 
         /// <summary>
         /// Control btnCancelModal.
@@ -150,13 +150,13 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCodigo;
 
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control txtDescripcionEn.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEn;
 
         /// <summary>
         /// Control rfvDescripcion.
@@ -166,6 +166,24 @@ namespace AutoServicioCineWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescripcion;
+
+        /// <summary>
+        /// Control txtDescripcionEs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEs;
+
+        /// <summary>
+        /// Control RequiredFieldValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
         /// Control ddlDescuentoTipo.
