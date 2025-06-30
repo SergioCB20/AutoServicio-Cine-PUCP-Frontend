@@ -1,4 +1,5 @@
-﻿* {
+﻿/* Restablecimiento básico */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,10 +10,14 @@ body {
     background: linear-gradient(135deg, white 0%, white 100%);
     min-height: 100vh;
     padding: 20px;
+    display: flex; /* Para centrar el contenedor principal */
+    justify-content: center; /* Para centrar el contenedor principal */
+    align-items: center; /* Para centrar el contenedor principal verticalmente si el contenido es corto */
 }
 
 .container {
     max-width: 800px;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible hasta el max-width */
     margin: 0 auto;
     background: white;
     border-radius: 20px;
@@ -23,36 +28,43 @@ body {
 .header {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
-    padding: 30px;
+    padding: 60px 30px 30px; /* Aumentamos el padding superior para dar espacio al check */
     text-align: center;
     position: relative;
+    overflow: hidden; /* Asegura que cualquier elemento que sobresalga sea recortado */
 }
 
     .header::before {
         content: '✓';
+        font-family: Arial, sans-serif; /* Aseguramos una fuente que muestre bien el check */
         font-size: 60px;
         position: absolute;
-        top: -10px;
+        top: 20px; /* Bajamos el check un poco para que no sea tapado */
         left: 50%;
         transform: translateX(-50%);
         background: rgba(255,255,255,0.2);
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 1; /* Aseguramos que esté por encima de otros elementos si los hubiera */
     }
 
     .header h1 {
-        margin-top: 40px;
+        margin-top: 20px; /* Ajustamos el margen superior del título para estar debajo del check */
         font-size: 2.2em;
         margin-bottom: 10px;
+        position: relative; /* Para asegurar que el h1 esté por encima del fondo del header */
+        z-index: 2;
     }
 
     .header p {
         font-size: 1.1em;
         opacity: 0.9;
+        position: relative; /* Para asegurar que el p esté por encima del fondo del header */
+        z-index: 2;
     }
 
 .content {
@@ -63,23 +75,32 @@ body {
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
-    align-items: flex-start;
+    align-items: flex-start; /* Alinea al inicio si los elementos tienen diferentes alturas */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: center; /* Centra los elementos si se envuelven */
 }
 
 .movie-poster {
     flex-shrink: 0;
+    width: 200px; /* Fija un ancho para el contenedor del póster */
+    height: 300px; /* Fija una altura para el contenedor del póster */
+    overflow: hidden; /* Importante para que la imagen no sobresalga del contenedor */
+    border-radius: 15px; /* Aplica el border-radius al contenedor para que la imagen se recorte bien */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
     .movie-poster img {
-        width: 200px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        width: 100%; /* La imagen ocupa el 100% del ancho de su contenedor */
+        height: 100%; /* La imagen ocupa el 100% de la altura de su contenedor */
+        object-fit: cover; /* Recorta la imagen para cubrir el área sin distorsionarla */
+        display: block; /* Elimina cualquier espacio extra que pueda añadir el navegador */
+        border-radius: 0; /* Ya que el border-radius está en el contenedor */
     }
 
 .movie-info {
     flex: 1;
+    min-width: 250px; /* Asegura que el info-box no se haga demasiado pequeño */
+    text-align: center; /* Centra el texto del título en móviles */
 }
 
 .movie-title {
@@ -102,6 +123,7 @@ body {
     padding: 25px;
     border-radius: 15px;
     border-left: 4px solid #4CAF50;
+    word-wrap: break-word; /* Evita que el texto largo desborde el contenedor */
 }
 
 .detail-label {
@@ -196,6 +218,7 @@ body {
     }
 
 .qr-pattern {
+    /* Este es solo un patrón simulado, si usas una imagen real de QR, la pondrías aquí */
     width: 160px;
     height: 160px;
     background: repeating-linear-gradient(0deg, #333 0px, #333 8px, transparent 8px, transparent 16px), repeating-linear-gradient(90deg, #333 0px, #333 8px, transparent 8px, transparent 16px);
@@ -237,26 +260,73 @@ body {
     border-radius: 10px;
 }
 
+/* Media Queries para Responsividad */
 @media (max-width: 768px) {
     .movie-section {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: column; /* Apila elementos en pantallas pequeñas */
+        text-align: center; /* Centra el texto en la sección de la película */
+        align-items: center; /* Centra el póster y la info verticalmente */
     }
 
-    .movie-poster img {
-        width: 150px;
-        height: 225px;
+    .movie-poster {
+        width: 150px; /* Ajusta el ancho del póster en móviles */
+        height: 225px; /* Ajusta la altura del póster en móviles */
+        margin-bottom: 20px; /* Añade espacio entre el póster y el título en móviles */
+    }
+
+    .movie-info {
+        min-width: unset; /* Deshace el min-width para que se ajuste mejor */
     }
 
     .details-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
     }
 
     .container {
         margin: 10px;
+        border-radius: 10px; /* Un poco menos redondeado en móviles */
     }
 
     .content {
         padding: 20px;
+    }
+
+    .header {
+        padding: 50px 20px 20px; /* Ajusta el padding del header en móviles */
+    }
+
+        .header::before {
+            font-size: 50px; /* Ajusta el tamaño del check en móviles */
+            width: 70px;
+            height: 70px;
+        }
+
+        .header h1 {
+            font-size: 1.8em; /* Ajusta el tamaño del título del header en móviles */
+        }
+
+    .qr-code {
+        width: 150px;
+        height: 150px;
+    }
+
+    .qr-pattern {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Pequeños ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 1.6em;
     }
 }

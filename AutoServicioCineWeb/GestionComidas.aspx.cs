@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using AutoServicioCineWeb.AutoservicioCineWS; // Asegúrate de que este namespace sea correcto para tu referencia de servicio
 using System.Diagnostics; // Para Debug.WriteLine
 using System.IO;
+using System.Web.Security;
 
 namespace AutoServicioCineWeb
 {
@@ -14,7 +15,7 @@ namespace AutoServicioCineWeb
         private readonly ProductoWSClient comidaServiceClient;
         // Caché para las estadísticas y evitar múltiples llamadas al listar en la misma petición
         private List<producto> _cachedComidas;
-
+        private int idUsuario = 34; // ID del usuario que está haciendo las modificaciones, ajusta según tu lógica de autenticación
         public GestionComidas()
         {
             comidaServiceClient = new ProductoWSClient();
@@ -26,6 +27,15 @@ namespace AutoServicioCineWeb
             {
                 // Solo cargar comidas la primera vez que se carga la página
                 CargarComidas();
+                if (Context.User.Identity.IsAuthenticated)
+                {
+                    FormsIdentity id = (FormsIdentity)Context.User.Identity;
+                    FormsAuthenticationTicket ticket = id.Ticket;
+                    string userData = ticket.UserData;
+                    string[] userInfo = userData.Split('|');
+                    idUsuario = int.Parse(userInfo[0]); // Asumiendo que el ID de usuario es el primer elemento
+                }
+
             }
             // Registrar script para asegurar que la previsualización de imagen se muestre
             // incluso después de PostBacks (por ejemplo, si hay errores de validación)
@@ -202,7 +212,7 @@ namespace AutoServicioCineWeb
 
                 estaActivo = chkActivo.Checked,
 
-                usuarioModificacion = 4, // AJUSTADO: Se recomienda que este ID provenga de una variable global o sesión.
+                usuarioModificacion = idUsuario, // AJUSTADO: Se recomienda que este ID provenga de una variable global o sesión.
                 usuarioModificacionSpecified = true,
 
                 fechaModificacion = DateTime.Now,
@@ -415,9 +425,10 @@ namespace AutoServicioCineWeb
                                 throw new FormatException("Precio no es un número válido.");
                             }
                             tipoProducto tipoprod;
-                            if (Enum.TryParse(GetCsvValue(data, headerMap, "precio"), out tipoprod))
+                            if (Enum.TryParse(GetCsvValue(data, headerMap, "tipo"), out tipoprod))
                             {
                                 prod.tipo = tipoprod;
+                                prod.tipoSpecified = true; // Marcar como especificado para el servicio
                             }
                             else
                             {
@@ -425,21 +436,22 @@ namespace AutoServicioCineWeb
                             }
 
                             bool estaActiva;
-                            if (bool.TryParse(GetCsvValue(data, headerMap, "EstaActiva"), out estaActiva))
+                            if (bool.TryParse(GetCsvValue(data, headerMap, "esta_Activo"), out estaActiva))
                             {
                                 prod.estaActivo = estaActiva;
+                                
                             }
                             else
                             {
                                 // Intentar parsear "TRUE"/"FALSE" o "1"/"0" si bool.TryParse falla directamente
-                                string activeString = GetCsvValue(data, headerMap, "EstaActiva").ToLower().Trim();
+                                string activeString = GetCsvValue(data, headerMap, "esta_Activo").ToLower().Trim();
                                 if (activeString == "true" || activeString == "1") prod.estaActivo = true;
                                 else if (activeString == "false" || activeString == "0") prod.estaActivo = false;
                                 else throw new FormatException("EstaActiva no es un valor booleano válido (TRUE/FALSE, 1/0).");
                             }
 
                             prod.imagenUrl = GetCsvValue(data, headerMap, "ImagenUrl");
-                            prod.usuarioModificacion = 4; // Usuario fijo para la carga
+                            prod.usuarioModificacion = idUsuario; // Usuario fijo para la carga
                             prod.usuarioModificacionSpecified = true;
 
                             if (prod.id == 0)

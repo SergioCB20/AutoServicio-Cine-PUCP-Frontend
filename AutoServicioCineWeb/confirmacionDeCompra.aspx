@@ -26,7 +26,7 @@
                     </div>
                     <div class="movie-info">
                         <%-- Usamos un Label para el título de la película --%>
-                        <asp:Label ID="movieTitle" runat="server" CssClass="movie-title">Una película de objetos flotantes</asp:Label>
+                        <asp:Label ID="movieTitle" runat="server" CssClass="movie-title">Error al seleccionar la película</asp:Label>
                     </div>
                 </div>
 
@@ -34,15 +34,14 @@
                     <div class="detail-card">
                         <div class="detail-label">Fecha y Hora de Compra</div>
                         <%-- Usamos un Label para la fecha y hora de compra --%>
-                        <asp:Label ID="purchaseDateTime" runat="server" CssClass="detail-value">25 de Junio, 2025 - 14:32</asp:Label>
+                        <asp:Label ID="purchaseDateTime" runat="server" CssClass="detail-value"></asp:Label>
                     </div>
 
                     <div class="detail-card">
                         <div class="detail-label">Cantidad y Tipo de Entradas</div>
                         <%-- Usamos un Label para la información de tickets --%>
                         <asp:Label ID="ticketInfo" runat="server" CssClass="detail-value">
-                            2 Adultos<br />
-                            Función: 18:00 hrs
+                            No se han seleccionado entradas.
                         </asp:Label>
                     </div>
 
@@ -50,8 +49,7 @@
                         <div class="detail-label">Añadidos de Comida</div>
                         <%-- Usamos un Label para los ítems de comida --%>
                         <asp:Label ID="foodItems" runat="server" CssClass="detail-value">
-                            2x Combo Grande<br />
-                            1x Nachos con Queso
+                            No se han seleccionado ítems de comida.
                         </asp:Label>
                     </div>
 
@@ -59,70 +57,52 @@
                         <div class="detail-label">Estado del Pedido</div>
                         <div class="detail-value">
                             <%-- Usamos un Label para el estado del pedido, la clase CSS se puede asignar desde C# si es dinámico --%>
-                            <asp:Label ID="orderStatus" runat="server" CssClass="status-badge status-paid">Pagado</asp:Label>
+                            <asp:Label ID="orderStatus" runat="server" CssClass="status-badge status-paid">VÁLIDO</asp:Label>
                         </div>
                     </div>
                 </div>
 
                 <div class="total-section">
                     <%-- Usamos un Label para el total pagado --%>
-                    <asp:Label ID="totalAmount" runat="server" CssClass="total-amount">S/ 85.50</asp:Label>
+                    <asp:Label ID="totalAmount" runat="server" CssClass="total-amount"> 0.00</asp:Label>
                     <div class="total-label">Total Pagado</div>
                 </div>
 
                 <div class="qr-section">
                     <div class="qr-title">Código QR de Entrada</div>
                     <div class="qr-instruction">Escanea este código en el cine para validar tu entrada</div>
-                    
+
                     <%-- El QR se mantiene como div para la animación JavaScript --%>
-                    <div class="qr-code" onclick="scanQR()" id="qrCode">
-                        <div class="qr-pattern"></div>
-                        <div class="scan-animation" id="scanAnimation" style="display: none;"></div>
-                    </div>
-                    
+
+                    <%-- Reemplazamos el div con onclick por un asp:ImageButton --%>
+                    <asp:ImageButton ID="qrCode" runat="server"
+                        ImageUrl="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CineAutoservicio-Pago-123456"
+                        AlternateText="QR de Pago"
+                        CssClass="w-48 h-48 block items-center"
+                        OnClick="qrCodeButton_Click" />
+
+                    <%-- Mantenemos la animación si aún quieres simularla, pero la activaríamos desde C# si es necesario --%>
+                    <div class="scan-animation" id="scanAnimation" style="display: none;"></div>
+
+
                     <div style="font-size: 0.9em; color: #888; margin-top: 10px;">
                         Haz clic en el código QR para simular el escaneo
                     </div>
                 </div>
+
 
                 <div class="footer-note">
                     <strong>¡Disfruta tu película!</strong><br>
                     Presenta este código QR en el mostrador del cine 15 minutos antes de la función.
                     <br><br>
                     <%-- Usamos un Label para el número de orden --%>
-                    <small>Número de orden: <asp:Label ID="orderNumber" runat="server">#CP-2025-001847</asp:Label></small>
+                    <small>Número de orden: <asp:Label ID="orderNumber" runat="server"></asp:Label></small>
                 </div>
             </div>
         </div>
 
         <script>
-            function scanQR() {
-                const qrCode = document.getElementById('qrCode');
-                const scanAnimation = document.getElementById('scanAnimation');
-                const orderStatus = document.getElementById('<%= orderStatus.ClientID %>'); // Accede al ID del control de servidor
-
-                // Mostrar animación de escaneo
-                scanAnimation.style.display = 'block';
-                qrCode.style.pointerEvents = 'none';
-
-                // Simular proceso de escaneo
-                setTimeout(() => {
-                    // Cambiar estado a "Utilizado"
-                    orderStatus.textContent = 'Utilizado';
-                    orderStatus.className = 'status-badge status-used'; // Actualiza la clase CSS
-
-                    // Ocultar animación
-                    scanAnimation.style.display = 'none';
-
-                    // Cambiar apariencia del QR para indicar que fue usado
-                    qrCode.style.opacity = '0.6';
-                    qrCode.style.pointerEvents = 'auto';
-
-                    // Mostrar mensaje de confirmación
-                    alert('¡Código QR escaneado exitosamente!\nEstado cambiado a: UTILIZADO');
-
-                }, 2000);
-            }
+           
 
             // La función updateDateTime ya no es necesaria aquí si la manejas en el code-behind
             // pero la dejo si quieres que el cliente la actualice de forma inicial
