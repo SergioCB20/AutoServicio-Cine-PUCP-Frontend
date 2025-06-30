@@ -67,11 +67,15 @@ namespace AutoServicioCineWeb
                     p.nombre.ToLower().Contains(searchTerm)                    
                 ).ToList();
             }
-
+            
+             
             if (!string.IsNullOrEmpty(ddlTipoFilter.SelectedValue))
-            {
+            { 
                 string classificationFilter = ddlTipoFilter.SelectedValue;
-                salas = salas.Where(p => p.tipoSala.ToString() == classificationFilter).ToList();
+                if (Enum.TryParse(classificationFilter, out tipoSala classificationFilterEnum))
+                {
+                    salas = salas.Where(p => p.tipoSala == classificationFilterEnum).ToList();
+                }
             }
             return salas;
         }
@@ -361,8 +365,26 @@ namespace AutoServicioCineWeb
                             {
                                 throw new FormatException("Capacidad no es un número válido.");
                             }
-                            // sala.tipoSala = GetCsvValue(data, headerMap, "TipoSala");
-
+                            /*
+                            tipoProducto tipoprod;
+                            if (Enum.TryParse(GetCsvValue(data, headerMap, "precio"), out tipoprod))
+                            {
+                                prod.tipo = tipoprod;
+                            }
+                            else
+                            {
+                                throw new FormatException("Tipo no es válido.");
+                            }
+                             */
+                            tipoSala tiposala;
+                            if (Enum.TryParse(GetCsvValue(data, headerMap, "TipoSala"), out tiposala))
+                            {                                
+                                sala.tipoSala = tiposala;
+                            }
+                            else
+                            {
+                                 throw new FormatException("TipoSala no es válido.");
+                            }                              
                             bool estaActiva;
                             if (bool.TryParse(GetCsvValue(data, headerMap, "EstaActiva"), out estaActiva))
                             {
@@ -376,7 +398,7 @@ namespace AutoServicioCineWeb
                                 else if (activeString == "false" || activeString == "0") sala.activa = false;
                                 else throw new FormatException("EstaActiva no es un valor booleano válido (TRUE/FALSE, 1/0).");
                             }
-                            sala.usuarioModificacion = 4; //
+                            sala.usuarioModificacion = idUsuario; //
                             sala.usuarioModificacionSpecified = true; 
 
                             if (sala.id == 0)

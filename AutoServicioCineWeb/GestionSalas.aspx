@@ -129,7 +129,7 @@
                         <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn-delete" CommandName="DeleteSala" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Estás seguro de que quieres eliminar esta sala?');">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnEditAsiento" runat="server" CssClass="btn_edit_asiento" CommandName="EditAsiento" CommandArgument='<%# Eval("Id") %>'>
+                        <asp:LinkButton ID="btnEditAsiento" runat="server" CssClass="btn-edit-asiento" CommandName="EditAsiento" CommandArgument='<%# Eval("Id") %>'>
                             <i class="fas fa-edit"></i> EditarAsientos
                         </asp:LinkButton>
                     </div>

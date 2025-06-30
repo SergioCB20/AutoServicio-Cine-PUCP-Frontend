@@ -265,7 +265,7 @@ body {
     flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
 }
 
-.btn-edit, .btn-delete { /* Aplica a LinkButton */
+.btn-edit, .btn-delete, .btn-edit-asiento { /* Aplica a LinkButton */
     display: inline-flex; /* Permite alinear icono y texto */
     align-items: center;
     gap: 5px; /* Espacio entre icono y texto */
@@ -286,12 +286,13 @@ body {
 .btn-delete {
     background: linear-gradient(135deg, #e74c3c, #c0392b); /* Rojo */
 }
-
-    .btn-edit:hover,
-    .btn-delete:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+.btn-edit-asiento {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+.btn-edit:hover, .btn-delete:hover, .btn-edit-asiento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
 /* Paginación de GridView (reutilizado) */
 .gridview-pager {
@@ -623,7 +624,7 @@ span[role="alert"] {
         gap: 5px;
     }
 
-    .btn-edit, .btn-delete {
+    .btn-edit, .btn-delete, .btn-edit-asiento {
         width: 100%; /* Botones de acción en la tabla ocupan todo el ancho */
     }
 
