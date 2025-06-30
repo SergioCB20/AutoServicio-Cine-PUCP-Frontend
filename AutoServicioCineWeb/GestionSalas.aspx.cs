@@ -174,8 +174,7 @@ namespace AutoServicioCineWeb
                  tipoSalaSpecified=true,
                  activa = chkEstaActiva.Checked,
                  usuarioModificacion = idUsuario,
-                 usuarioModificacionSpecified = true,
-                 fechaModificacionSpecified = true
+                 usuarioModificacionSpecified = true                
 
             };
 
@@ -355,10 +354,12 @@ namespace AutoServicioCineWeb
                         try
                         {
                             sala.nombre = GetCsvValue(data, headerMap, "Nombre");
+                            
                             int capacidad;
                             if (int.TryParse(GetCsvValue(data, headerMap, "Capacidad"), out capacidad))
                             {
                                 sala.capacidad = capacidad;
+                                sala.capacidadSpecified = true;
                                 ;
                             }
                             else
@@ -380,6 +381,7 @@ namespace AutoServicioCineWeb
                             if (Enum.TryParse(GetCsvValue(data, headerMap, "TipoSala"), out tiposala))
                             {                                
                                 sala.tipoSala = tiposala;
+                                sala.tipoSalaSpecified = true; // Marcar como especificado para el servicio
                             }
                             else
                             {
@@ -389,6 +391,7 @@ namespace AutoServicioCineWeb
                             if (bool.TryParse(GetCsvValue(data, headerMap, "EstaActiva"), out estaActiva))
                             {
                                 sala.activa = estaActiva;
+                                                               
                             }
                             else
                             {
