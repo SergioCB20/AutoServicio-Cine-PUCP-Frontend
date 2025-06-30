@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.Security;
+using System.Linq; // Necesario para .ToList()
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.UI.WebControls; // Necesario para el Repeater y Button
 
 // Asegúrate de que este namespace sea correcto para tu referencia de servicio
 using AutoServicioCineWeb.AutoservicioCineWS;
@@ -23,67 +22,62 @@ namespace AutoServicioCineWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!IsPostBack) // Solo cargar en la primera carga de la página
             {
-                CargarPeliculasDisponibles(string.Empty);
+                CargarPeliculasDisponibles(); // Llama al nuevo método para cargar las películas
             }
         }
 
-
-        // Modifica este método para aceptar un parámetro de búsqueda
-        private void CargarPeliculasDisponibles(string searchTerm) //
+        private void CargarPeliculasDisponibles()
         {
             try
             {
-                List<pelicula> peliculas = peliculaServiceClient.listarPeliculas().ToList(); //
+                // Llama al servicio web para obtener la lista de películas activas
+                // Asumo que listarPeliculas(false) trae solo las activas
+                List<pelicula> peliculas = peliculaServiceClient.listarPeliculas().ToList();
 
-                // Aplica el filtro de búsqueda si searchTerm no está vacío
-                if (!string.IsNullOrWhiteSpace(searchTerm)) //
-                {
-                    // Filtra por tituloEs o tituloEn, según lo que quieras buscar
-                    peliculas = peliculas.Where(p =>
-                        p.tituloEs != null && p.tituloEs.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0 || //
-                        p.tituloEn != null && p.tituloEn.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0
-                    ).ToList(); //
-                }
-
-                rptPeliculas.DataSource = peliculas; //
-                rptPeliculas.DataBind(); //
+                // Asigna la lista de películas al Repeater
+                rptPeliculas.DataSource = peliculas;
+                rptPeliculas.DataBind();
 
                 // Mostrar el mensaje de "No hay películas" si la lista está vacía
-                if (peliculas == null || peliculas.Count == 0) //
+                // Esto es manejado por el FooterTemplate del Repeater, pero a veces necesitas un control extra
+                if (peliculas == null || peliculas.Count == 0)
                 {
-                    litMensaje.Text = "No se encontraron películas que coincidan con su búsqueda."; //
-                    litMensaje.Visible = true; //
+                    litMensaje.Text = "No hay películas disponibles en este momento.";
+                    litMensaje.Visible = true; // Asegúrate de que el Literal esté visible
                 }
                 else
                 {
-                    litMensaje.Visible = false; //
+                    litMensaje.Visible = false; // Oculta el mensaje si hay películas
                 }
 
             }
             catch (System.Exception ex)
             {
-                litMensaje.Text = "Error al cargar las películas: " + ex.Message; //
-                litMensaje.Visible = true; //
-                System.Diagnostics.Debug.WriteLine("Error al cargar películas en la vista principal: " + ex.ToString()); //
+                litMensaje.Text = "Error al cargar las películas: " + ex.Message;
+                litMensaje.Visible = true;
+                // Loguea el error para depuración
+                System.Diagnostics.Debug.WriteLine("Error al cargar películas en la vista principal: " + ex.ToString());
             }
         }
 
-        // Nuevo evento Click para el botón de búsqueda
-        protected void btnBuscar_Click(object sender, EventArgs e) //
-        {
-            string searchTerm = txtBuscarPelicula.Text.Trim();
-            CargarPeliculasDisponibles(searchTerm); 
-        }
-
+        // Evento para el botón "Comprar" dentro del Repeater (opcional, para futuras funcionalidades)
         protected void btnComprar_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             int peliculaId = Convert.ToInt32(btn.CommandArgument);
 
-            Response.Redirect($"Tickets.aspx?peliculaId={peliculaId}");
+            // Aquí puedes redirigir al usuario a una página de selección de funciones/horarios
+            // o añadir la película al carrito de compras, etc.
+            //Response.Redirect($"SeleccionarFunciones.aspx?peliculaId={peliculaId}");
+            Response.Redirect($"Funcion.aspx?peliculaId={peliculaId}");
         }
 
+        // NOTA: Si tenías otros métodos como PageIndexChanging o eventos de GridView en esta página,
+        // ya no serán necesarios si solo usas el Repeater para la visualización.
+        // Asegúrate de que la página Peliculas.aspx no esté mezclando GridView y Repeater para la misma data.
+        // Si tienes una página de "Gestión de Películas" con GridView y esta es solo la "Vista de Cliente",
+        // entonces el GridView de Gestión de Películas es diferente.
     }
 }

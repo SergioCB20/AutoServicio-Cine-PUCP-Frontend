@@ -20,6 +20,7 @@ namespace AutoServicioCineWeb
         private boletoDetalle[] listaBoletoDetalle;
         private ventaProducto[] listaProducto;
         private List<cupon> listaCupon;
+        int funcionGuardada = 0;
         public Pago()
         {
             boletoServiceClient = new BoletoWSClient();
@@ -71,6 +72,23 @@ namespace AutoServicioCineWeb
             }
 
             listaCupon = cuponServiceClient.listarCupones().ToList();
+            funcion funcionSeleccionada = Session["FuncionSeleccionada"] as funcion;
+            if (funcionSeleccionada != null)
+            {
+                var master = this.Master as Form;
+                funcionGuardada = funcionSeleccionada.funcionId;
+                if (DateTime.TryParseExact(funcionSeleccionada.fechaHora, "yyyy-MM-dd HH:mm",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaHora))
+                {
+                    master.FechaSpan.InnerText = fechaHora.ToString("dddd, dd MMMM yyyy", new CultureInfo("es-PE"));
+                    master.HoraSpan.InnerText = fechaHora.ToString("hh:mm tt", new CultureInfo("es-PE"));
+                }
+                else
+                {
+                    master.HoraSpan.InnerText = funcionSeleccionada.fechaHora;
+                    master.FechaSpan.InnerText = "";
+                }
+            }
         }
 
         protected void btnAplicarCodigo_Click(object sender, EventArgs e)
@@ -159,7 +177,7 @@ namespace AutoServicioCineWeb
                 ventaIdSpecified = true,
                 usuario = new usuario
                 {
-                    id = 13 //usuario disponible de la base de datos
+                    id = 32 //usuario disponible de la base de datos
                 },
                 fechaHora = null, //la fecha se asignará en el backend
                 total = asignar,
@@ -182,18 +200,16 @@ namespace AutoServicioCineWeb
                 venta = nuevaVenta, //se le asigna la venta relacionada
                 funcion = new funcion
                 {
-                    funcionId = 4, //es la única función disponible de momento /////// CAMBIAR CUANDO SE TENGA LA VISTA DE FUNCIONES
+                    funcionId = funcionGuardada, //se le asigna la función elegida en la vista de Funcion
                     funcionIdSpecified = true
                 },
                 estado = estadoBoleto.VALIDO,
                 estadoSpecified = true,
                 detalles = listaBoletoDetalle
             };
-            Session["Boleto"] = nuevoBoleto;
             boletoServiceClient.registrarBoleto(nuevoBoleto);
             System.Diagnostics.Debug.WriteLine("Ejecutando btnContinuar_Click a las: " + DateTime.Now); //Línea para verificar los llamados
             Response.Redirect("confirmacionDeCompra.aspx");
         }
-
     }
 }

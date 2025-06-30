@@ -1,0 +1,77 @@
+﻿.middle-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    background-color: var(--color-blanco);
+}
+
+.right-section {
+    width: 300px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 300px !important;
+}
+
+.funciones-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Hace que los productos se acomoden horizontalmente */
+#rptFunciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Tarjeta individual */
+.funcion {
+    all: unset;
+    background-color: #f3f4f6; /* gris claro */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 16px;
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    transition: background-color 0.3s, box-shadow 0.3s ease, transform 0.3s ease;
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+}
+    .funcion:hover {
+        background-color: #e0f2ff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.3s, box-shadow 0.3s;
+        transform: translateY(-4px);
+    }
+
+.formato-proyeccion {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #15889b;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+}
+
+.funcion-detalle {
+    padding-top: 28px; /* O un valor que se vea bien con el tamaño del span */
+    text-align: center;
+}

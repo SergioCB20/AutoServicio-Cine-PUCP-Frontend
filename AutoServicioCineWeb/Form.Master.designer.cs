@@ -42,15 +42,6 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control lbUserName.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbUserName;
-
-        /// <summary>
         /// Control MainContent.
         /// </summary>
         /// <remarks>
@@ -78,22 +69,22 @@ namespace AutoServicioCineWeb
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tituloSpan;
 
         /// <summary>
-        /// Control litFecha.
+        /// Control fechaSpan.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFecha;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fechaSpan;
 
         /// <summary>
-        /// Control litHora.
+        /// Control horaSpan.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litHora;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl horaSpan;
 
         /// <summary>
         /// Control TicketsSummary.

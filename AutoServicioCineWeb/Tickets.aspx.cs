@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
@@ -40,8 +41,10 @@ namespace AutoServicioCineWeb
                 }
                 else //para que se aprecie la vista sin pasar por Película.aspx, mostrará la película con id=10 (Spiderman)
                 {
-                    CargarDatosPelicula(10);
+                    CargarDatosPelicula(42);
                 }
+
+                CargarFechaHoraFuncion();
             }
             
         }
@@ -59,17 +62,29 @@ namespace AutoServicioCineWeb
                 // Imagen
                 master.ImgPoster.Src = peliculaElegida.imagenUrl;
                 tituloPelicula.InnerText = peliculaElegida.tituloEs;
-
-                // Buscar la primera función (para cuando se tenga datos de funciones relacionadas a una película)
-                /*if (peliculaElegida.funciones != null && peliculaElegida.funciones.Length > 0)
-                {
-                    var primeraFuncion = peliculaElegida.funciones[0];
-
-                    fechaSpan.InnerText = primeraFuncion.fechaHora.ToString("dd/MM/yy");
-                    horaSpan.InnerText = primeraFuncion.fechaHora.ToString("hh:mm tt");
-                }*/
             }
 
+        }
+
+        private void CargarFechaHoraFuncion()
+        {
+            funcion funcionSeleccionada = Session["FuncionSeleccionada"] as funcion;
+            if (funcionSeleccionada != null)
+            {
+                var master = this.Master as Form;
+
+                if (DateTime.TryParseExact(funcionSeleccionada.fechaHora, "yyyy-MM-dd HH:mm",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaHora))
+                {
+                    master.FechaSpan.InnerText = fechaHora.ToString("dddd, dd MMMM yyyy", new CultureInfo("es-PE"));
+                    master.HoraSpan.InnerText = fechaHora.ToString("hh:mm tt", new CultureInfo("es-PE"));
+                }
+                else
+                {
+                    master.HoraSpan.InnerText = funcionSeleccionada.fechaHora;
+                    master.FechaSpan.InnerText = "";
+                }
+            }
         }
 
         protected void btnContinuar_Click(object sender, EventArgs e)
