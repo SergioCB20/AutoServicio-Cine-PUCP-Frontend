@@ -292,3 +292,212 @@
         margin-right: 0;
     }
 }
+
+.cupon-card {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    border: 2px dashed rgba(255,255,255,0.3);
+}
+
+    .cupon-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(116, 185, 255, 0.4);
+    }
+
+    .cupon-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -20px;
+        width: 40px;
+        height: 100%;
+        background: repeating-linear-gradient( to bottom, transparent 0px, transparent 8px, white 8px, white 16px );
+    }
+
+./*cupon-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cupon-codigo {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    border: 2px dashed rgba(255,255,255,0.5);
+}
+
+.cupon-descuento {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffeaa7;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+.cupon-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.cupon-fecha {
+    background: rgba(255,255,255,0.15);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.cupon-status {
+    background: #00b894;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #74b9ff;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.empty-message {
+    font-size: 1.1rem;
+    opacity: 0.7;
+}
+
+.scissors-icon {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    font-size: 1.5rem;
+    opacity: 0.3;
+    transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+    .cupon-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cupon-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}*/
+.cupon-minimalista {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.9em;
+    background-color: #fff;
+}
+
+.cupon-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.cupon-codigo {
+    font-weight: 600;
+    color: #333;
+}
+
+.cupon-separador {
+    color: #999;
+    font-size: 0.8em;
+}
+
+.cupon-valor {
+    font-weight: 500;
+}
+
+    .cupon-valor.porcentaje {
+        color: #2e7d32; /* Verde para porcentaje */
+    }
+
+    .cupon-valor.monto-fijo {
+        color: #1565c0; /* Azul para monto fijo */
+    }
+
+.cupon-footer {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 16px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.cupon-container {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: block;
+}
+
+.cupon-linea-superior {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    white-space: nowrap; /* Esto evita saltos de línea */
+}
+
+.cupon-codigo {
+    font-weight: bold;
+    color: #333;
+}
+
+
+.cupon-fecha {
+    font-size: 0.85em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icono-calendario {
+    font-size: 0.9em;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}

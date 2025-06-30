@@ -16,6 +16,30 @@
         .MainContent .perfil-container {
             justify-content: center;
         }
+
+        .cupon-container {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: block;
+        }
+
+        .historial-container {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: block;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
     </style>
 
 </asp:Content>
@@ -50,36 +74,53 @@
                 </div>
             </div>
 
-            <!-- Sección de historial de compras (siempre visible) -->
+            <!-- Sección de historial de cupones (siempre visible) -->
             <div class="perfil-section-right">
                 <h2>Cupones disponibles</h2>
-                <asp:GridView ID="gvCupones" runat="server" AutoGenerateColumns="False" CssClass="table table-striped">
-                    <Columns>
-                        <asp:BoundField DataField="Codigo" HeaderText="Código" />
-                        <asp:BoundField DataField="DescuentoValor" HeaderText="Descuento (%)" DataFormatString="{0:P0}" />
-                        <%--<asp:BoundField DataField="fechaFin" HeaderText="Válido hasta" DataFormatString="{0:d}" />--%>
-                    </Columns>
-                    <EmptyDataTemplate>
-                        No hay cupones disponibles.
-                    </EmptyDataTemplate>
-                </asp:GridView>
+
+                <asp:Repeater ID="rptCupones" runat="server" OnItemDataBound="rptCupones_ItemDataBound">
+                    <ItemTemplate>
+                        <div class="cupon-container">
+                            <div class="cupon-linea-superior">
+                                <span class="cupon-codigo"><%# Eval("Codigo") %></span>
+                                <span class="cupon-valor">
+                                    <asp:Literal ID="litDescuento" runat="server"></asp:Literal>
+                                </span>
+                            </div>
+                            <div class="cupon-fecha">
+                                <span class="icono-calendario">📅</span>
+                                Válido hasta <%# Eval("fechaFin", "{0:dd/MM/yyyy}") %>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+
+                <asp:Panel ID="pnlEmptyState" runat="server" CssClass="empty-state" Visible="false">
+                    <div class="empty-icon">🎫</div>
+                    <div class="empty-title">No hay cupones disponibles</div>
+                    <div class="empty-message">
+                        ¡Mantente atento! Pronto tendremos nuevas ofertas para ti
+                    </div>
+                </asp:Panel>
             </div>
         </div>
+        <%--HISTORIAL DE COMPRAS--%>
         <div class="perfil-content-bottom">
             <div class="perfil-section-full">
                 <h2>Historial de Compras</h2>
-                <asp:GridView ID="gvHistorial" runat="server" CssClass="historial-grid" AutoGenerateColumns="false">
-                    <Columns>
-                        <asp:BoundField DataField="Pelicula" HeaderText="Película" />
-                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
-                        <asp:BoundField DataField="Hora" HeaderText="Hora" />
-                        <asp:BoundField DataField="Cantidad" HeaderText="Entradas" />
-                        <asp:BoundField DataField="Total" HeaderText="Total" DataFormatString="{0:C}" />
-                    </Columns>
-                    <EmptyDataTemplate>
-                        <p class="no-compras">No hay compras registradas.</p>
-                    </EmptyDataTemplate>
-                </asp:GridView>
+                <asp:Repeater ID="rptHistorial" runat="server" OnItemDataBound="rptHistorial_ItemDataBound">
+                    <ItemTemplate>
+                        <div class="historial-container">
+                            <div class="historial-linea-superior">
+                                <span class="historial-fecha"><%# Eval("fechaHora") %></span>
+                                <span class="historial-total"><%# Eval("total", "{0:C}") %></span>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <asp:Panel ID="pnlNoCompras" runat="server" Visible="false" CssClass="empty-state">
+                    <p class="no-compras">No hay compras registradas.</p>
+                </asp:Panel>
             </div>
         </div>
 

@@ -19,7 +19,7 @@
     Administra los cupones de descuento del sistema
 </asp:Content>
 
-<asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server"> 
+<asp:Content ID="ContentHeaderActions" ContentPlaceHolderID="HeaderActions" runat="server">
     <asp:Button ID="btnOpenModal" runat="server" Text="➕ Agregar Nuevo Cupón"
         CssClass="btn btn-primary" BackColor="ForestGreen" OnClick="btnNuevoCupon_Click" />
     <%-- NUEVO Botón para importar CSV --%>
@@ -199,16 +199,16 @@
     </style>
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number" id="totalProducts">0</div>
+            <div class="stat-number" id="totalProducts"><%=GetTotalCupones() %></div>
             <div class="stat-label">Total Cupones</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="availableProducts">0</div>
+            <div class="stat-number" id="availableProducts"><%=GetCuponesActivos() %></div>
             <div class="stat-label">Activos</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="soldOutProducts">0</div>
-            <div class="stat-label">Agotados</div>
+            <div class="stat-number" id="soldOutProducts"><%=GetCuponesAgotados() %></div>
+            <div class="stat-label">Inactivos</div>
         </div>
     </div>
 
@@ -227,7 +227,7 @@
                     <button type="button" class="help-button" onclick="toggleCsvHelp();">?</button>
                     </label>
                 </div>
-                <asp:FileUpload ID="FileUploadCsv" runat="server" CssClass="form-control" />
+                <asp:FileUpload ID="FileUploadCsv" runat="server" CssClass="form-control" enctype="multipart/form-data" />
                 <asp:RequiredFieldValidator ID="rfvFileUploadCsv" runat="server" ControlToValidate="FileUploadCsv"
                     ErrorMessage="Por favor, selecciona un archivo CSV." Display="Dynamic" ForeColor="Red"
                     ValidationGroup="CsvUploadValidation"></asp:RequiredFieldValidator>
@@ -235,11 +235,35 @@
                     ErrorMessage="El archivo debe ser un CSV (.csv)." OnServerValidate="cvCsvFileExtension_ServerValidate"
                     Display="Dynamic" ForeColor="Red" ValidationGroup="CsvUploadValidation"></asp:CustomValidator>
             </div>
+            <div id="csvHelpBox" class="csv-help-box">
+                <p class="mb-2">
+                    El archivo CSV debe tener las siguientes columnas (el orden no importa):
+                </p>
+                <ul class="csv-column-list">
+                    <li>`codigo`</li>
+                    <li>`descripcionEn`</li>
+                    <li>`descripcionEs`</li>
+                    <li>`descuentoTipo`</li>
+                    <li>`descuentoValor`</li>
+                    <li>`maxUsos`</li>
+                    <li>`fechaInicio`</li>
+                    <li>`fechaFin`</li>
+                    <li>`activo` (TRUE/FALSE o 1/0)</li>
+
+                </ul>
+                <p class="small text-muted">
+                    Asegúrate de que los valores booleanos para `EstaActiva`
+                    sean `TRUE` o `FALSE`, o `1` o `0`.
+                </p>
+
+            </div>
 
             <div class="form-actions">
-                <asp:HiddenField ID="hdnPeliculaId" runat="server" Value="0" />
-                <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelCsvModal_Click" CausesValidation="false" />
-                <asp:Button ID="btnGuardarCupones" runat="server" Text="Guardar Cupón" CssClass="btn btn-primary" OnClick="btnUploadCsv_Click" ValidationGroup="PeliculaValidation" />
+                <asp:HiddenField ID="hdnCuponId" runat="server" Value="0" />
+                <asp:Button ID="btnCancelModal" runat="server" Text="Cancelar" CssClass="btn btn-secondary"
+                    OnClick="btnCancelCsvModal_Click" CausesValidation="false" />
+                <asp:Button ID="btnGuardarCupones" runat="server" Text="Subir CSV" CssClass="btn btn-primary"
+                    OnClick="btnUploadCsv_Click" ValidationGroup="CsvUploadValidation" />
             </div>
             <asp:Literal ID="litMensajeCsvModal" runat="server"></asp:Literal>
         </div>
@@ -264,11 +288,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="txtDescripcion">Descripción *</label>
-                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"
-                        placeholder="Descripción del cupón" MaxLength="100"></asp:TextBox>
+                    <label for="txtDescripcionEn">Descripción en Inglés *</label>
+                    <asp:TextBox ID="txtDescripcionEn" runat="server" CssClass="form-control"
+                        placeholder="Descripción del cupón en Inglés" MaxLength="100"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server"
-                        ControlToValidate="txtDescripcion"
+                        ControlToValidate="txtDescripcionEn"
+                        ErrorMessage="La descripción es requerida"
+                        ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDescripcionEs">Descripción en Español *</label>
+                    <asp:TextBox ID="txtDescripcionEs" runat="server" CssClass="form-control"
+                        placeholder="Descripción del cupón en español" MaxLength="100"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                        ControlToValidate="txtDescripcionEs"
                         ErrorMessage="La descripción es requerida"
                         ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                 </div>
@@ -449,16 +483,26 @@
             return confirm(message);
         }
 
-        // Mostrar/ocultar ayuda CSV
+        // NUEVA FUNCIÓN para el botón de ayuda del CSV
         function toggleCsvHelp() {
-            const helpBox = document.getElementById('csvHelpBox');
-            if (helpBox) {
-                helpBox.style.display = helpBox.style.display === 'none' ? 'block' : 'none';
+            const csvHelpBox = document.getElementById('csvHelpBox');
+            if (csvHelpBox) {
+                csvHelpBox.classList.toggle('visible');
             }
         }
-
+        //document.addEventListener('DOMContentLoaded', function () {
+        //    const currentPath = window.location.pathname;
+        //    const navLinks = document.querySelectorAll('.sidebar ul li a');
+        //    navLinks.forEach(link => {
+        //        if (link.href && link.href.includes(currentPath)) {
+        //            link.parentElement.classList.add('active');
+        //        } else {
+        //            link.parentElement.classList.remove('active');
+        //        }
+        //    });
+        //});
         // Actualizar etiqueta de valor según tipo de descuento
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const ddlTipo = document.getElementById('<%= ddlDescuentoTipo.ClientID %>');
             const lblValor = document.querySelector('label[for="<%= txtPorcentajeDescuento.ClientID %>"]');
             const txtValor = document.getElementById('<%= txtPorcentajeDescuento.ClientID %>');

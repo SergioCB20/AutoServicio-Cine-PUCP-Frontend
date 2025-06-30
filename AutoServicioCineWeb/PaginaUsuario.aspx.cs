@@ -1,4 +1,5 @@
-﻿using AutoServicioCineWeb.AutoservicioCineWS;
+﻿using Antlr.Runtime.Tree;
+using AutoServicioCineWeb.AutoservicioCineWS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,10 +17,14 @@ namespace AutoServicioCineWeb
         private readonly UsuarioWSClient usuarioServiceClient;
         private List<cupon> _cachedCupones;
         private readonly CuponWSClient cuponServiceClient;
+        private List<venta> _cachedCompras;
+        private readonly VentaWSClient historialServiceClient;
+        private int idUsuario;
 
         public PaginaUsuario(){
              usuarioServiceClient = new UsuarioWSClient() ;
             cuponServiceClient = new CuponWSClient();
+            historialServiceClient = new VentaWSClient() ;
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +39,32 @@ namespace AutoServicioCineWeb
             if (!IsPostBack)
             {
                 CargarDatosUsuario();
+            }
+        }
+
+        // Método para obtener diferentes estilos de colores para las tarjetas
+        protected string GetCuponStyle(int index)
+        {
+            return string.Empty; // O podrías devolver algún estilo mínimo si lo necesitas
+        }
+
+        protected void rptCupones_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var cupon = e.Item.DataItem as cupon;
+                if (cupon == null) return;
+
+                var litDescuento = (Literal)e.Item.FindControl("litDescuento");
+
+                if (cupon.descuentoTipo   == tipoDescuento.PORCENTAJE)
+                {
+                    litDescuento.Text = $"• {cupon.descuentoValor}%";
+                }
+                else if (cupon.descuentoTipo == tipoDescuento.MONTO_FIJO)
+                {
+                    litDescuento.Text = $"• S/. {cupon.descuentoValor.ToString("N0")}";
+                }
             }
         }
 
@@ -54,15 +85,16 @@ namespace AutoServicioCineWeb
                         // Extraer los datos del userData (recuerda que guardaste: "id|email|tipoUsuario")
                         string[] userData = ticket.UserData.Split('|');
 
-                        if (userData.Length >= 3)
+                        if (userData.Length >= 4)
                         {
                             string userId = userData[0];
-                            string userEmail = userData[1];
-                            string userTipoUsuario = userData[2];
-                            int userIdInt = int.Parse(userId);
+                            string userName = userData[1];
+                            string userEmail = userData[2];
+                            string userTipoUsuario = userData[3];
+                            idUsuario = int.Parse(userId);
 
                             // Obtener el usuario desde el servicio web
-                            usuario usuarioData = usuarioServiceClient.buscarUsuarioPorId(userIdInt);
+                            usuario usuarioData = usuarioServiceClient.buscarUsuarioPorId(idUsuario);
 
                             // Mostrar los datos en tu página
                             lblNombre.Text = usuarioData.nombre;
@@ -78,58 +110,88 @@ namespace AutoServicioCineWeb
                 // Llama al servicio web para obtener los cupones del usuario
                 _cachedCupones = cuponServiceClient.listarCupones().ToList();
                 List<cupon> cuponFiltrados = FiltrarCupones(_cachedCupones);
-                
-                gvCupones.DataSource = cuponFiltrados;
-                gvCupones.DataBind();
+
+                if (cuponFiltrados.Any())
+                {
+                    // Enlazar directamente la lista de cupones, no crear objetos anónimos
+                    rptCupones.DataSource = cuponFiltrados;
+                    rptCupones.DataBind();
+                    pnlEmptyState.Visible = false;
+                }
+                else
+                {
+                    pnlEmptyState.Visible = true;
+                }
+
+                var resultado = historialServiceClient.listarVentasPorUsuario(idUsuario);
+
+                if (resultado != null)
+                {
+                    _cachedCompras = resultado.ToList();
+
+                    if (_cachedCompras.Any())
+                    {
+                        rptHistorial.DataSource = _cachedCompras;
+                        rptHistorial.DataBind();
+                        pnlNoCompras.Visible = false;
+                    }
+                    else
+                    {
+                        pnlNoCompras.Visible = true;
+                    }
+                }
+                else
+                {
+                    // El servicio devolvió null
+                    pnlNoCompras.Visible = true;
+                }
+
             }
             catch (System.Exception ex)
             {
                 // Manejar errores
-                // lbl.Text = "Error al cargar datos del usuario: " + ex.Message;
-                // lblMessage.ForeColor = System.Drawing.Color.Red;
+                MostrarMensaje("Ocurrió un error al cargar los datos. Por favor intenta nuevamente.",true);
+            }
+        }
+
+        protected void rptHistorial_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                // Obtener el objeto de datos
+                var compra = (venta)e.Item.DataItem; // Cambia 'venta' por tu tipo correcto
+
+                // Encontrar los controles Literal
+                Literal litFecha = (Literal)e.Item.FindControl("litFecha");
+                Literal litTotal = (Literal)e.Item.FindControl("litTotal");
+
+                // Asignar la fecha (string)
+                if (litFecha != null && !string.IsNullOrEmpty(compra.fechaHora))
+                {
+                    // Si quieres formatear la fecha string
+                    DateTime fecha;
+                    if (DateTime.TryParse(compra.fechaHora, out fecha))
+                    {
+                        litFecha.Text = fecha.ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        litFecha.Text = compra.fechaHora; // Mostrar como string si no se puede parsear
+                    }
+                }
+
+                // Asignar el total
+                if (litTotal != null)
+                {
+                    litTotal.Text = compra.total.ToString("C");
+                }
             }
         }
 
         private List<cupon> FiltrarCupones(List<cupon> cupones)
         {
             // Filtrar cupones que no han sido utilizados y que no han expirado
-            return cupones.Where(c => !c.activo).ToList();
-        }
-
-        private void CargarHistorialCompras(int usuarioId)
-        {
-            // Obtener historial de compras del usuario
-            var historial = ObtenerHistorialCompras(usuarioId);
-
-            gvHistorial.DataSource = historial;
-            gvHistorial.DataBind();
-        }
-
-        private List<CompraHistorial> ObtenerHistorialCompras(int usuarioId)
-        {
-            // Aquí implementarías la lógica para obtener el historial de compras
-            // desde tu servicio web o base de datos
-            // Esto es un ejemplo con datos dummy
-
-            return new List<CompraHistorial>
-            {
-                new CompraHistorial {
-                    Id = 1,
-                    Pelicula = "Avengers: Endgame",
-                    Fecha = DateTime.Now.AddDays(-10),
-                    Hora = "15:30",
-                    Cantidad = 2,
-                    Total = 35.00m
-                },
-                new CompraHistorial {
-                    Id = 2,
-                    Pelicula = "Spider-Man: No Way Home",
-                    Fecha = DateTime.Now.AddDays(-30),
-                    Hora = "18:45",
-                    Cantidad = 3,
-                    Total = 52.50m
-                }
-            };
+            return cupones.Where(c => c.activo).ToList();
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -230,16 +292,7 @@ namespace AutoServicioCineWeb
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
         }
+
     }
 
-    // Clase auxiliar para el historial de compras
-    public class CompraHistorial
-    {
-        public int Id { get; set; }
-        public string Pelicula { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Hora { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Total { get; set; }
-    }
 }
